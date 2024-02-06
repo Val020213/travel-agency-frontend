@@ -1,7 +1,7 @@
 "use client";
 import { useFetch } from "../hooks/useFetch";
 
-const temporalComponent = (url: string) => {
+const UseFetchComponent = (url: string) => {
   const { data, error, loading } = useFetch(url);
   return (
     <div>
@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       <div>
-        {temporalComponent("https://jsonplaceholder.typicode.com/posts")}
+        {UseFetchComponent("https://jsonplaceholder.typicode.com/posts")}
       </div>
     </>
   );
