@@ -13,6 +13,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      dropShadow: {
+        'white' : '0 0 10px white',
+      },
       colors: {
         extends: {
           "purpleG": "7A16F9",
@@ -279,14 +282,11 @@ const config: Config = {
             "800": "#9f1239",
             "900": "#881337"
           },
-
-
         }
+
       }
     },
-    boxShadow: {
-      'custom-shadow': '0 0px 12px 0 rgba(255, 255, 255, 1)',
-    },
+
   },
   plugins: [],
 };
