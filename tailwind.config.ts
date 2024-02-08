@@ -14,11 +14,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       dropShadow: {
-        'white' : '0 0 10px white',
+        'white': '0 0 10px white',
       },
       colors: {
         extends: {
-          "purpleG": "7A16F9",
           "blue-gray": {
             "50": "#f8fafc",
             "100": "#f1f5f9",
