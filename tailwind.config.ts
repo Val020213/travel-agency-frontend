@@ -12,6 +12,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "darkPurple": "linear-gradient(90deg, #000000 0%, #7A16F9 100%)"
       },
       dropShadow: {
         'white': '0 0 10px white',
