@@ -1,7 +1,7 @@
 'use client';
 import { useFetch } from '../hooks/useFetch';
 import clsx from 'clsx';
-import { MoonSwitch } from '@/components/Switch';
+import { MoonSwitch, SunSwitch } from '@/components/Switch';
 const UseFetchComponent = (url: string) => {
   const { data, error, loading } = useFetch(url);
   return (
@@ -15,6 +15,7 @@ const UseFetchComponent = (url: string) => {
       )}
     >
       <MoonSwitch />
+      <SunSwitch />
     </div>
   );
 };
