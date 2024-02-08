@@ -11,7 +11,7 @@ const UseFetchComponent = (url: string) => {
         'justify-center items-center',
         'gap-4',
         'p-72',
-        'dark:bg-extends-blue-gray-500'
+        'dark:bg-extends-blue-gray-200'
       )}
     >
       <MoonSwitch />

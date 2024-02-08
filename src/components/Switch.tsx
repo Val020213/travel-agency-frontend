@@ -7,9 +7,9 @@ export const MoonSwitch = () => {
     <button
       className={clsx(
         'flex flex-row justify-start items-center',
-        'w-14 h-9',
+        'w-14 h-9 px-0.5',
         'bg-gradient-to-r',
-        'from-extends-blue-gray-300',
+        'from-extends-violet-600',
         'to-black',
         'rounded-full'
       )}
