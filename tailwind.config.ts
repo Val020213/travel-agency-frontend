@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         extends: {
+          "purpleG": "7A16F9",
           "blue-gray": {
             "50": "#f8fafc",
             "100": "#f1f5f9",
@@ -277,14 +278,14 @@ const config: Config = {
             "700": "#be123c",
             "800": "#9f1239",
             "900": "#881337"
-          }
+          },
+
+
         }
       }
     },
-    BoxShadow: {
-      extends: {
-        "shadow-md": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-      }
+    boxShadow: {
+      'custom-shadow': '0 0px 12px 0 rgba(255, 255, 255, 1)',
     },
   },
   plugins: [],
