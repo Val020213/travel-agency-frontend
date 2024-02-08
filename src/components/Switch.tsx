@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconMoonFilled } from '@tabler/icons-react';
+import { IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import clsx from 'clsx';
 
 export const MoonSwitch = () => {
@@ -13,6 +13,23 @@ export const MoonSwitch = () => {
       )}
     >
       <IconMoonFilled className='hover:drop-shadow-white' size={30} />
+    </button>
+  );
+};
+
+
+export const SunSwitch = () => {
+  return (
+    <button
+      className={clsx(
+        'flex flex-row justify-start items-center',
+        'w-14 h-9',
+        'bg-gradient-orange-pink',
+        'to-black',
+        'rounded-full'
+      )}
+    >
+      <IconSunFilled className='hover:drop-shadow-white' size={30} />
     </button>
   );
 };
