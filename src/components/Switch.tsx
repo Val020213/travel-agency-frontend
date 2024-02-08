@@ -22,8 +22,8 @@ export const SunSwitch = () => {
   return (
     <button
       className={clsx(
-        'flex flex-row justify-start items-center',
-        'w-14 h-9',
+        'flex flex-row justify-end items-center',
+        'w-[58px] h-9 px-1 py-0.5',
         'bg-gradient-orange-pink',
         'to-black',
         'rounded-full'
