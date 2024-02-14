@@ -1,0 +1,43 @@
+.accessControlIcon {
+  color: rgb(0, 128, 255);
+}
+
+html[data-theme="dark"] .accessControlIcon {
+  color: rgb(110, 179, 247);
+}
+
+.blackBoxIcon {
+  color: rgb(128, 0, 255);
+}
+
+html[data-theme="dark"] .blackBoxIcon {
+  color: rgb(179, 102, 255);
+}
+
+.identityIcon {
+  color: rgb(15, 138, 138);
+}
+
+html[data-theme="dark"] .identityIcon {
+  color: rgb(71, 235, 235);
+}
+
+.monitorIcon {
+  color: rgb(255, 76, 77);
+}
+
+.selfHostedIcon {
+  color: rgb(31, 173, 102);
+}
+
+html[data-theme="dark"] .selfHostedIcon {
+  color: rgb(38, 217, 127);
+}
+
+.supportIcon {
+  color: rgb(255, 153, 51);
+}
+
+html[data-theme="dark"] .supportIcon {
+  color: rgb(255, 191, 0);
+}

@@ -6,17 +6,19 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: ['class'],
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-orange-pink": "linear-gradient(90deg, orange, pink)",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "darkPurple": "linear-gradient(90deg, #000000 0%, #7A16F9 100%)"
+        "darkPurple": "linear-gradient(90deg, #000000 0%, #7A16F9 100%)",
+        "orangePinkLeft": "linear-gradient(to left, #EA0B74 0%, #F4373E 25%, #FF6703 100%);",
+        "orangePinkRight": "linear-gradient(to right, #EA0B74 0%, #F4373E 25%, #FF6703 100%);",
       },
       dropShadow: {
-        'white': '0 0 10px white',
+        'white': '0 0 12px white',
       },
       colors: {
         extends: {
@@ -284,7 +286,6 @@ const config: Config = {
             "900": "#881337"
           },
         }
-
       }
     },
 

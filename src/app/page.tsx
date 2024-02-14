@@ -1,31 +1,23 @@
 'use client';
-import { useFetch } from '../hooks/useFetch';
-import clsx from 'clsx';
-import { MoonSwitch, SunSwitch } from '@/components/Switch';
-const UseFetchComponent = (url: string) => {
-  const { data, error, loading } = useFetch(url);
-  return (
-    <div
-      className={clsx(
-        'flex flex-col md:flex-row w-full h-full',
-        'justify-center items-center',
-        'gap-4',
-        'p-72',
-        'dark:bg-extends-blue-gray-200'
-      )}
-    >
-      <MoonSwitch />
-      <SunSwitch />
-    </div>
-  );
-};
+import { Switch } from '@/components/atoms/Switch';
+import { useTheme } from '@/hooks/useTheme';
+import { useEffect } from 'react';
+
+function UpdateTheme() {
+  const theme = useTheme();
+  document.documentElement.setAttribute('data-theme', theme);
+  console.log(theme)
+}//f5 fix bug
 
 export default function Home() {
+
+  useEffect(() => {
+    UpdateTheme();
+  }, [])
+
   return (
-    <>
-      <div>
-        {UseFetchComponent('https://jsonplaceholder.typicode.com/posts')}
-      </div>
-    </>
+    <div>
+      <Switch />
+    </div>
   );
 }
