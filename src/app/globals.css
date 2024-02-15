@@ -1,11 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html {
-  @apply bg-white dark:bg-slate-500;
-}
-
-html[data-theme='dark'] {
-  @apply bg-[#14141F];
-}

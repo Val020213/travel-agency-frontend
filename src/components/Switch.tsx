@@ -17,7 +17,6 @@ export const MoonSwitch = () => {
   );
 };
 
-
 export const SunSwitch = () => {
   return (
     <button

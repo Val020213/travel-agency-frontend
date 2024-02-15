@@ -11,7 +11,7 @@ export function IconFactory(
       height={size}
       viewBox={`0 0 ${size} ${size}`}
       fill="none"
-      className={clsx(className)}
+      className={clsx(className, 'flex flex-col items-center justify-center *:items-center *:justify-center *:flex')}
     >
       <rect
         width={size}

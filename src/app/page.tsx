@@ -1,23 +1,17 @@
 'use client';
-import { Switch } from '@/components/atoms/Switch';
-import { useTheme } from '@/hooks/useTheme';
+import { ThemeProvider } from 'next-themes';
+import { Switch } from '@/components/atoms/ThemeSwitch';
+import { CategorySection } from '@/components/organism/Categories/Categories';
 import { useEffect } from 'react';
 
-function UpdateTheme() {
-  const theme = useTheme();
-  document.documentElement.setAttribute('data-theme', theme);
-  console.log(theme)
-}//f5 fix bug
-
 export default function Home() {
-
-  useEffect(() => {
-    UpdateTheme();
-  }, [])
-
   return (
-    <div>
-      <Switch />
-    </div>
+    <ThemeProvider>
+      <div className='flex flex-col gap-24 w-full'>
+        <Switch />
+        <span className='text-blue-500 dark:text-red-500'>Hello World</span>
+        <CategorySection />
+      </div>
+    </ThemeProvider>
   );
 }

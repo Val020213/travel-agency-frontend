@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import clsx from 'clsx';
-import { useTheme } from '@/hooks/useTheme';
-import { ChangeTheme } from '@/scripts/changeTheme';
+import { useTheme } from 'next-themes';
 // import { Transition } from '@headlessui/react';
 
 const MoonSwitch = () => {
@@ -15,7 +14,10 @@ const MoonSwitch = () => {
         'rounded-full'
       )}
     >
-      <IconMoonFilled className='hover:drop-shadow-white text-white' size={30} />
+      <IconMoonFilled
+        className='hover:drop-shadow-white text-white'
+        size={30}
+      />
     </div>
   );
 };
@@ -52,11 +54,15 @@ const SunSwitch = () => {
 // };
 
 export const Switch = () => {
-  const [theme, setTheme] = useState<string>(useTheme());
+  const { theme, setTheme } = useTheme();
 
   return (
-    <button onClick={() => { ChangeTheme(); setTheme(useTheme) }}>
-      {(theme === 'dark') ? <MoonSwitch /> : <SunSwitch />}
+    <button
+      onClick={() => {
+        setTheme(theme === 'dark' ? 'light' : 'dark');
+      }}
+    >
+      {theme === 'dark' ? <MoonSwitch /> : <SunSwitch />}
     </button>
   );
 };
