@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import React, { FC } from "react";
+import clsx from 'clsx';
+import React, { FC } from 'react';
 import {
   AccessControlIcon,
   BlackBoxIcon,
@@ -7,47 +7,47 @@ import {
   MonitorIcon,
   SelfHostedIcon,
   SupportIcon,
-} from "./landing";
+} from './landing';
 
-import { LandingSectionCtaButtonAlt } from "./landing-section-cta-button";
-import styles from "./styles.module.css";
+// import { LandingSectionCtaButtonAlt } from "./landing-section-cta-button";
+import styles from './styles.module.css';
 
 const list = [
   {
     icon: <SelfHostedIcon />,
-    title: "Self-host for compliance",
+    title: 'Self-host for compliance',
     description:
-      "Deploy to your own infrastructure without worrying about regulations, performance, and stability. Maintain your current security best practices with no compromises.",
+      'Deploy to your own infrastructure without worrying about regulations, performance, and stability. Maintain your current security best practices with no compromises.',
   },
   {
     icon: <IdentityIcon />,
-    title: "Leverage the power of your existing Identity Provider",
+    title: 'Leverage the power of your existing Identity Provider',
     description:
-      "Native support for Okta, Azure AD, Amazon Cognito & Google Cloud Identity.",
+      'Native support for Okta, Azure AD, Amazon Cognito & Google Cloud Identity.',
   },
   {
     icon: <AccessControlIcon />,
-    title: "Achieve fine-grained access control",
+    title: 'Achieve fine-grained access control',
     description:
-      "Out-of-the-box support for widely accepted authorization models including ACL, RBAC & ABAC.",
+      'Out-of-the-box support for widely accepted authorization models including ACL, RBAC & ABAC.',
   },
   {
     icon: <BlackBoxIcon />,
-    title: "Unlock the black box",
+    title: 'Unlock the black box',
     description:
-      "Implement an open-source solution with an open architecture. Save yourself from the hassle of adding another proprietary component to your stack.",
+      'Implement an open-source solution with an open architecture. Save yourself from the hassle of adding another proprietary component to your stack.',
   },
   {
     icon: <MonitorIcon />,
-    title: "Effortlessly monitor your application",
+    title: 'Effortlessly monitor your application',
     description:
-      "Ready-made providers and components for audit logging and usage analytics.",
+      'Ready-made providers and components for audit logging and usage analytics.',
   },
   {
     icon: <SupportIcon />,
-    title: "Get supported by the experts",
+    title: 'Get supported by the experts',
     description:
-      "Enroll in plans that provide priority support, trainings and consulting.",
+      'Enroll in plans that provide priority support, trainings and consulting.',
   },
 ];
 
@@ -57,31 +57,12 @@ type Props = {
 
 export const LandingEnterpriseDevelopers: FC<Props> = ({ className }) => {
   return (
-    <div className="w-full gap-4 flex flex-col">
-      <div className="w-full px-4 md:px-10">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-900 dark:text-gray-50">
-          Enterprise developers <span className="">❤️</span>{" "}
-          <span
-            className={
-              "font-semibold dark:text-cyan-400 dark:drop-shadow-[0_0_30px_rgba(71,235,235,0.25)]  text-blue-500 drop-shadow-[0_0_30px_rgba(0,128,255,0.3)]"
-            }
-          >
-            Refine
-          </span>
-          .
-        </h2>
-        <p className="mt-4 sm:mt-6 max-w-md text-base text-gray-600 dark:text-gray-400">
-          Refine is designed to target the specific pain points of larger
-          organizations by giving top priority to{" "}
-          <span className="font-semibold">security</span>.
-        </p>
-      </div>
-
+    <div className='w-full gap-4 flex flex-col'>
       <div
         className={clsx(
-          "mt-8 sm:mt-12 lg:mt-20",
-          "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
-          "gap-4 sm:gap-12 md:gap-6"
+          'mt-8 sm:mt-12 lg:mt-20',
+          'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+          'gap-4 sm:gap-12 md:gap-6'
         )}
       >
         {list.map((item, index) => {
@@ -89,16 +70,16 @@ export const LandingEnterpriseDevelopers: FC<Props> = ({ className }) => {
             <div
               key={index}
               className={clsx(
-                "flex flex-col sm:flex-row md:flex-col items-start",
-                "items-start gap-6 p-4 sm:p-10",
-                "rounded-2xl sm:rounded-3xl",
-                "bg-gray-50 dark:bg-[#1d1e30]"
+                'flex flex-col sm:flex-row md:flex-col items-start',
+                'items-start gap-6 p-4 sm:p-10',
+                'rounded-2xl sm:rounded-3xl',
+                'bg-gray-50 dark:bg-[#1d1e30]'
               )}
             >
               <div>{item.icon}</div>
-              <div className="flex flex-col gap-4">
-                <div className="text-xl font-semibold">{item.title}</div>
-                <div className="text-gray-600 dark:text-gray-400">
+              <div className='flex flex-col gap-4'>
+                <div className='text-xl font-semibold'>{item.title}</div>
+                <div className='text-gray-600 dark:text-gray-400'>
                   {item.description}
                 </div>
               </div>
@@ -106,9 +87,6 @@ export const LandingEnterpriseDevelopers: FC<Props> = ({ className }) => {
           );
         })}
       </div>
-      <LandingSectionCtaButtonAlt to="/enterprise">
-        Check out Enterprise Edition
-      </LandingSectionCtaButtonAlt>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes';
 import { Switch } from '@/components/atoms/ThemeSwitch';
 import { CategorySection } from '@/components/organism/Categories/Categories';
 import { useEffect } from 'react';
+import { LandingEnterpriseDevelopers } from '@/components/molecules/EnterpriseDevelopersCards/landing-enterprise-developers';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <Switch />
         <span className='text-blue-500 dark:text-red-500'>Hello World</span>
         <CategorySection />
+        <LandingEnterpriseDevelopers />
       </div>
     </ThemeProvider>
   );

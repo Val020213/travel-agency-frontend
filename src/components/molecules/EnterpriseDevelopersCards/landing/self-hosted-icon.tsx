@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import * as React from "react";
 import { SVGProps } from "react";
-import styles from "./iconStyles.modules.css";
+import styles from "./iconStyles.module.css";
 
 export const SelfHostedIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg

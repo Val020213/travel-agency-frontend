@@ -19,9 +19,11 @@ export const categoriesData: ICategory[] = [
       <IconCategory2
         size={defaultSize}
         stroke={defaultStrokeWidth}
-        className='text-current'
+        color='currentColor'
+        className='text-rose-600 dark:text-rose-900'
       />
     ),
+    iconClassName: 'bg-gradient-to-tr from-rose-300 to-rose-200',
   },
   {
     shortName: 'Excursiones',
@@ -35,6 +37,7 @@ export const categoriesData: ICategory[] = [
         className='text-current'
       />
     ),
+    iconClassName: 'text-green-300 dar',
   },
   {
     shortName: 'Agencias',
@@ -48,6 +51,7 @@ export const categoriesData: ICategory[] = [
         className='text-current'
       />
     ),
+    iconClassName: 'text-green-300 dar',
   },
   {
     shortName: 'Paquetes',
@@ -61,5 +65,6 @@ export const categoriesData: ICategory[] = [
         className='text-current'
       />
     ),
+    iconClassName: 'text-green-300 dar',
   },
 ];

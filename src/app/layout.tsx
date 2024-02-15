@@ -15,9 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      suppressHydrationWarning
-    >
+    <html suppressHydrationWarning>
       <head />
       <body className='bg-white  dark:bg-extends-darker-blue-950'>
         <Providers>{children}</Providers>
