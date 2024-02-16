@@ -3,6 +3,8 @@ import { ThemeProvider } from 'next-themes';
 import { Switch } from '@/components/atoms/ThemeSwitch';
 import { CategorySection } from '@/components/organism/Categories/Categories';
 import clsx from 'clsx';
+import { CategoryMenu } from '@/components/atoms/CategoriesMenu';
+import { SearchBar } from '@/components/molecules/SearchBar/SearchBar';
 export default function Home() {
   return (
     <ThemeProvider>
@@ -13,6 +15,8 @@ export default function Home() {
           'text-gray-800 dark:text-gray-50'
         )}
       >
+        <CategoryMenu />
+        <SearchBar />
         <Switch />
         <div className='mx-auto container px-4 md:px-6 lg:px-0 flex flex-col justify-between'>
           <div className='flex flex-col gap-24 w-full'>
