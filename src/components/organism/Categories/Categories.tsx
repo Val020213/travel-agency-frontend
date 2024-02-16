@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { categoriesData } from './categoriesData';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
 import clsx from 'clsx';
+import { IconFactory } from './IconFactory';
 
 export const CategorySection = () => {
+  const [currentCategory, setCurrentCategory] = useState<number>(1); //TODO
   const [sm, setSm] = React.useState(true);
   const breakpoints = useBreakpoints();
   useEffect(() => {
@@ -11,32 +13,43 @@ export const CategorySection = () => {
   }, [breakpoints.sm]);
 
   return (
-    <section className='flex flex-row overflow-x-hidden md:w-full md:*:w-full py-8 gap-12'>
-      {categoriesData.map((category, index) => (
-        <button
-          key={index}
-          className={clsx(
-            'flex flex-col justify-start items-start p-4 sm:p-8 gap-6 *:text-left *:line-clamp-3',
-            'rounded-2xl sm:rounded-3xl',
-            'bg-extends-blue-gray-50 dark:bg-extends-darker-blue-900'
-          )}
-        >
-          <div
-            className={clsx(
-              'w-16 h-16 relative rounded-2xl flex justify-center items-center',
-              category.iconClassName
-            )}
-          >
-            {category.icon}
-          </div>
-          <div className='text-2xl font-semibold'>
-            {sm ? category.name : category.shortName}
-          </div>
-          <div className='text-gray-600 dark:text-gray-400'>
-            {category.description}
-          </div>
-        </button>
-      ))}
+    <section className={clsx('flex flex-row w-full', 'gap-8')}>
+      {categoriesData.map(
+        (category, index) =>
+          index !== currentCategory && (
+            <button
+              key={index}
+              className={clsx(
+                'flex flex-col justify-start items-start p-4 sm:p-8 gap-2 *:text-left *:line-clamp-3',
+                'rounded-2xl sm:rounded-3xl',
+                'bg-extends-blue-gray-50 dark:bg-extends-darker-blue-900',
+                'w-full min-w-64 md:min-w-96',
+                'hover:shadow-2xl' //TODO make shadow colors factory
+              )}
+            >
+              <div
+                onClick={() => {
+                  console.log(category.iconClassName);
+                }}
+                className={clsx(
+                  'w-16 h-16 relative rounded-2xl',
+                  category.iconClassName
+                )}
+              >
+                <IconFactory></IconFactory>
+                <span className='absolute left-[14px] top-[14px]'>
+                  {category.icon}
+                </span>
+              </div>
+              <div className='text-lg md:text-xl leading-7 font-medium'>
+                {sm ? category.name : category.shortName}
+              </div>
+              <div className='text-gray-600 dark:text-gray-400 text-base leading-6'>
+                {category.description}
+              </div>
+            </button>
+          )
+      )}
     </section>
   );
 };

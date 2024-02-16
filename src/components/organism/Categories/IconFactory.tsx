@@ -1,10 +1,8 @@
-import clsx from 'clsx';
-import * as React from 'react';
 import { SVGProps } from 'react';
-import styles from './iconStyles.module.css';
-import { IconApiApp } from '@tabler/icons-react';
+import clsx from 'clsx';
+// import { IconApiApp } from "@tabler/icons-react";
 
-export const AccessControlIcon = (props: SVGProps<SVGSVGElement>) => (
+export const IconFactory = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={64}
@@ -12,7 +10,7 @@ export const AccessControlIcon = (props: SVGProps<SVGSVGElement>) => (
     viewBox='0 0 64 64'
     fill='none'
     {...props}
-    className={clsx(props.className, styles.accessControlIcon)}
+    className={clsx(props.className)}
   >
     <rect
       width={64}
@@ -30,11 +28,11 @@ export const AccessControlIcon = (props: SVGProps<SVGSVGElement>) => (
       strokeOpacity={0.5}
       rx={15.5}
     />
-    <IconApiApp
+    {/* <IconApiApp
       color='currentColor'
       className='text-current flex justify-center items-center w-16 h-16'
       size={48}
-    />
+    /> */}
     <defs>
       <radialGradient
         id='access-control-a'

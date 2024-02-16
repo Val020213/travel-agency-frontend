@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <head />
-      <body className='bg-white  dark:bg-extends-darker-blue-950'>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>

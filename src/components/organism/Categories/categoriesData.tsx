@@ -6,7 +6,7 @@ import {
   IconBackpack,
 } from '@tabler/icons-react';
 
-const defaultSize = 24;
+const defaultSize = 35;
 const defaultStrokeWidth = 1.5;
 
 export const categoriesData: ICategory[] = [
@@ -20,10 +20,10 @@ export const categoriesData: ICategory[] = [
         size={defaultSize}
         stroke={defaultStrokeWidth}
         color='currentColor'
-        className='text-rose-600 dark:text-rose-900'
+        className='text-rose-500 '
       />
     ),
-    iconClassName: 'bg-gradient-to-tr from-rose-300 to-rose-200',
+    iconClassName: 'text-extends-rose-500',
   },
   {
     shortName: 'Excursiones',
@@ -34,10 +34,10 @@ export const categoriesData: ICategory[] = [
       <IconBus
         size={defaultSize}
         stroke={defaultStrokeWidth}
-        className='text-current'
+        className='text-green-500'
       />
     ),
-    iconClassName: 'text-green-300 dar',
+    iconClassName: 'text-green-500',
   },
   {
     shortName: 'Agencias',
@@ -48,10 +48,10 @@ export const categoriesData: ICategory[] = [
       <IconPlane
         size={defaultSize}
         stroke={defaultStrokeWidth}
-        className='text-current'
+        className='text-blue-500'
       />
     ),
-    iconClassName: 'text-green-300 dar',
+    iconClassName: 'text-blue-500',
   },
   {
     shortName: 'Paquetes',
@@ -62,9 +62,9 @@ export const categoriesData: ICategory[] = [
       <IconBackpack
         size={defaultSize}
         stroke={defaultStrokeWidth}
-        className='text-current'
+        className='text-orange-500'
       />
     ),
-    iconClassName: 'text-green-300 dar',
+    iconClassName: 'text-orange-500',
   },
 ];
