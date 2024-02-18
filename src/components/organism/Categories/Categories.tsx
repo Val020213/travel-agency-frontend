@@ -13,17 +13,22 @@ export const CategorySection = () => {
   }, [breakpoints.sm]);
 
   return (
-    <section className={clsx('flex flex-row w-full', 'gap-8')}>
+    <section
+      className={clsx(
+        'flex flex-row w-full justify-start items-start lg:justify-center md:overflow-x-auto',
+        'gap-8 md:*:w-full min-h-max lg:overflow-visible'
+      )}
+    >
       {categoriesData.map(
         (category, index) =>
           index !== currentCategory && (
             <button
               key={index}
               className={clsx(
-                'flex flex-col justify-start items-start p-4 sm:p-8 gap-2 *:text-left *:line-clamp-3',
+                'block justify-start items-start p-4 sm:p-8 gap-2 *:text-left *:line-clamp-3',
                 'rounded-2xl sm:rounded-3xl',
                 'bg-extends-blue-gray-50 dark:bg-extends-darker-blue-900',
-                'w-full min-w-64 md:min-w-96',
+                'w-full min-w-64 md:min-w-96 h-60',
                 'hover:shadow-2xl' //TODO make shadow colors factory
               )}
             >

@@ -30,7 +30,7 @@ export const CategoryMenu = () => {
   return (
     <div
       className={clsx(
-        'flex flex-col *:p-2 justify-start items-center pl-1 w-36 relative',
+        'flex flex-col justify-start items-center w-28 relative',
         'font-bold text-base leading-6',
         'text-gray-500 dark:text-gray-50'
       )}
@@ -38,7 +38,7 @@ export const CategoryMenu = () => {
       onMouseLeave={() => setOpen(false)}
     >
       <button
-        className='flex flex-row justify-end w-full md:gap-1'
+        className='flex flex-row justify-end items-center w-full md:gap-1'
         onClick={() => setOpen(!open)}
       >
         {categoriesData[currentCategory].shortName} <IconChevronDown />
@@ -49,7 +49,7 @@ export const CategoryMenu = () => {
       <div
         className={clsx(
           'flex flex-col justify-start items-start',
-          'absolute w-full min-w-max mt-10 z-10 gap-2 bg-white dark:bg-extends-darker-blue-900 rounded-b-xl shadow-lg',
+          'absolute w-full min-w-max mt-6 py-1 *:px-1 z-10 gap-2 bg-white dark:bg-extends-darker-blue-900 rounded-b-xl shadow-lg',
           { hidden: !open }
         )}
       >
