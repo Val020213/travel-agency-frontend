@@ -13,9 +13,10 @@ export const CategoryButton = ({
   return (
     <div
       className={clsx(
-        'text-gray-800 dark:bg-extends-darker-blue-300 gap-2 text-base leading-7 font-medium',
+        'text-gray-800 dark:text-white gap-2 text-base leading-7 font-medium',
         { 'text-blue-500': isActive },
-        'flex flex-row justify-start items-center gap-2'
+        'flex flex-row justify-start items-center gap-2',
+        'opacity-75 hover:opacity-100'
       )}
     >
       {icon}

@@ -12,7 +12,11 @@
   display: none;
 }
 
+input {
+  outline: none;
+  background: none;
+}
 
 html {
-
+  @apply dark:bg-extends-darker-blue-950;
 }

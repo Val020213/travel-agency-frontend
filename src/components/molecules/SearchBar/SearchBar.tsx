@@ -26,7 +26,7 @@ export const SearchBar = () => {
       className={clsx(
         'flex flex-row justify-end items-center',
         'rounded-full h-[45] md:h-max pl-2 gap-2',
-        'bg-white dark:bg-slate-950 ',
+        'bg-white dark:bg-black overflow-visible',
         'border rounded-full border-[#F4373F] md:border-gray-600 dark:border-blue-600',
         'hover:shadow-xl dark:hover://TODO Blue Shadow Hover'
       )}
@@ -36,8 +36,8 @@ export const SearchBar = () => {
       </div>
       <input
         className={clsx(
-          'text-gray-800 bg-transparent border-none decoration-transparent',
-          'text-base text-left leading-6 w-full outline-none font-medium'
+          'text-gray-800 dark:text-gray-50',
+          'text-base text-left leading-6 w-full font-normal'
         )}
         ref={inputRef}
         placeholder='Search in Travelix'

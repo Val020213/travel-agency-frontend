@@ -1,10 +1,15 @@
 import { LoginRegisterButton } from '@/components/atoms/LoginRegister';
 import { LogedUserButton } from '@/components/atoms/logedUserButton';
 import Image from 'next/image';
+import React, { useState } from 'react';
+import { LoginPopUp } from './LoginRegisterPopUp/Login';
+import { useBreakpoints } from '@/hooks/useBreakpoint';
 
 // TODO AUTH
 export const UserSection = () => {
   const userState: boolean = false;
+  const [popUpOpen, setPopUpOpen] = useState<boolean>(false);
+  const bp = useBreakpoints();
 
   return userState ? (
     <div>
@@ -24,14 +29,15 @@ export const UserSection = () => {
         alt=''
         height={64}
         width={250}
-        className='absolute top-5 left-4 z-0'
+        className='hidden md:block absolute top-5 left-4 z-0'
       />
       <span className='z-10'>
-      <LoginRegisterButton
-        title={'Unirse a Travelix'}
-        onClick={() => console.log('Welcome')}
-      />
+        <LoginRegisterButton
+          title={!bp.md ? 'Unirse' : 'Unirse a Travelix'}
+          onClick={() => setPopUpOpen(!popUpOpen)}
+        />
       </span>
+      {popUpOpen && <LoginPopUp open={popUpOpen} setOpen={setPopUpOpen} />}
     </div>
   );
 };

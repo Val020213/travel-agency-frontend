@@ -15,7 +15,7 @@ export const CategorySection = () => {
   return (
     <section
       className={clsx(
-        'flex flex-row w-full justify-start items-start lg:justify-center md:overflow-x-auto',
+        'flex flex-row w-full justify-start items-start lg:justify-center overflow-x-auto',
         'gap-8 md:*:w-full min-h-max lg:overflow-visible'
       )}
     >

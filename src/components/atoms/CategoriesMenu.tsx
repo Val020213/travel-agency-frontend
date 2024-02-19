@@ -13,7 +13,7 @@ const Separator = () => {
       xmlns='http://www.w3.org/2000/svg'
       color='currentColor'
     >
-      <path d='M1 1.25V13.75' stroke='currentColor' stroke-linecap='round' />
+      <path d='M1 1.25V13.75' stroke='currentColor' strokeLinecap='round' />
     </svg>
   );
 };
@@ -59,7 +59,7 @@ export const CategoryMenu = () => {
               <button
                 key={index}
                 onClick={() => handleButtonClick(index)}
-                className='hover:text-orange-500 w-full flex'
+                className='hover:text-orange-500 dark:hover:text-blue-500 w-full flex'
               >
                 {category.shortName}
               </button>

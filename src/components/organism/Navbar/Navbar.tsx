@@ -1,11 +1,10 @@
 import { Logo } from '@/components/atoms/Logo';
 import { SearchBar } from '@/components/molecules/SearchBar/SearchBar';
 import { UserSection } from '@/components/molecules/UserSection';
-import { Switch } from '@headlessui/react';
 import React, { useEffect } from 'react';
 import { categoriesData } from '../Categories/categoriesData';
 import { CategoryButton } from '@/components/atoms/CategoryButton';
-
+import { Switch } from '@/components/atoms/ThemeSwitch';
 import { Icon360View } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
@@ -33,14 +32,14 @@ export const Navbar = () => {
         'absolute top-0'
       )}
     >
-      <div className='flex flex-row justify-between items-center w-full'>
-        <div className=''>
+      <div className='flex flex-row gap-8 justify-between items-center w-full'>
+        <div className='basis-1/4'>
           <Logo />
         </div>
-        <div className={clsx('w-1/2', { hidden: !useDesktop() })}>
+        <div className={clsx('basis-1/2', { hidden: !useDesktop() })}>
           <SearchBar />
         </div>
-        <div className='flex flex-row md:gap-1'>
+        <div className='flex flex-row gap-1 md:gap-3 basis-1/4'>
           <UserSection />
           <Switch />
         </div>
