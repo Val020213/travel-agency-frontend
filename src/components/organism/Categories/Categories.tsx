@@ -16,7 +16,7 @@ export const CategorySection = () => {
     <section
       className={clsx(
         'flex flex-row w-full justify-start items-start lg:justify-center overflow-x-auto',
-        'gap-8 md:*:w-full min-h-max lg:overflow-visible'
+        'gap-8 md:*:w-full cursor-grab dragscroll'
       )}
     >
       {categoriesData.map(

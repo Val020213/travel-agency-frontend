@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Providers } from './providers';
 import { inter } from '../components/fonts';
 import './globals.css';
+import 'dragscroll';
 
 export const metadata: Metadata = {
   title: 'Travelix',
@@ -13,6 +14,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html suppressHydrationWarning>
       <head />
