@@ -31,7 +31,7 @@ export const CategoryMenu = () => {
     <div
       className={clsx(
         'flex flex-col justify-start items-center w-28 relative',
-        'font-bold text-base leading-6',
+        'font-medium text-base leading-6',
         'text-gray-500 dark:text-gray-50'
       )}
       onMouseEnter={() => setOpen(true)}
@@ -49,7 +49,8 @@ export const CategoryMenu = () => {
       <div
         className={clsx(
           'flex flex-col justify-start items-start',
-          'absolute w-full min-w-max mt-6 py-1 *:px-1 z-10 gap-2 bg-white dark:bg-extends-darker-blue-900 rounded-b-xl shadow-lg',
+          'absolute w-full min-w-max mt-6 py-1 *:px-1 z-10 gap-2 bg-white dark:bg-extends-darker-blue-900',
+          'rounded-xl shadow-lg',
           { hidden: !open }
         )}
       >
