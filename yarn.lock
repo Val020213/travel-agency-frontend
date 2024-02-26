@@ -748,11 +748,6 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-dragscroll@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/dragscroll/-/dragscroll-0.0.8.tgz#de4771e5f3a14d77b583ecef5d38bd9618f27563"
-  integrity sha512-nMrx/KErHpEkiKZlrghcT/nLWCj8vEJgv6s6TF84gmgn6uROPx2wRvClkcnjSEyvppYY9okOI1DIv573Toql1w==
-
 eastasianwidth@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/eastasianwidth/-/eastasianwidth-0.2.0.tgz"

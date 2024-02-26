@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Providers } from './providers';
 import { inter } from '../components/fonts';
 import './globals.css';
-import 'dragscroll';
 
 export const metadata: Metadata = {
   title: 'Travelix',
