@@ -25,13 +25,13 @@ export const Menu = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
   const [indexCategory, setIndexCategory] = useState<number>(
-    categories.findIndex((category) => category.href === pathname) ?? 0
+    categories.findIndex((category) => category?.href === pathname) ?? 0
   );
 
   useEffect(() => {
     // ver si es mas optimo un handler click
     setIndexCategory(
-      categories.findIndex((category) => category.href === pathname)
+      categories.findIndex((category) => category?.href === pathname)
     );
   }, [pathname]);
 
@@ -62,7 +62,7 @@ export const Menu = () => {
       >
         {categories.map(
           (category, index) =>
-            category.href != categories[indexCategory].href && (
+            category.href != categories[indexCategory]?.href && (
               <Link
                 key={index}
                 href={category.href}

@@ -6,15 +6,6 @@ import { usePathname } from 'next/navigation';
 
 export const Categories = () => {
   const currentPath = usePathname();
-  const [indexCategory, setIndexCategory] = useState<number>(
-    categories.findIndex((category) => category.href === currentPath)
-  );
-
-  useEffect(() => {
-    setIndexCategory(
-      categories.findIndex((category) => category.href === currentPath)
-    );
-  }, [currentPath]);
 
   return (
     <div
