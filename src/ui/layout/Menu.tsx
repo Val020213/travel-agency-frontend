@@ -25,7 +25,7 @@ export const Menu = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
   const [indexCategory, setIndexCategory] = useState<number>(
-    categories.findIndex((category) => category.href === pathname)
+    categories.findIndex((category) => category.href === pathname) ?? 0
   );
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export const Menu = () => {
       onMouseLeave={() => setOpen(false)}
     >
       <div className='flex flex-row justify-end items-center w-full md:gap-1 cursor'>
-        {categories[indexCategory].name}
+        {categories[indexCategory]?.name}
         <IconChevronDown className='block' size={24} />
         <span className='text-gray-500 dark:text-gray-300'>
           <Separator />
@@ -68,7 +68,7 @@ export const Menu = () => {
                 href={category.href}
                 className='hover:text-orange-500 dark:hover:text-blue-500 w-full flex'
               >
-                {category.name}
+                {category?.name}
               </Link>
             )
         )}
