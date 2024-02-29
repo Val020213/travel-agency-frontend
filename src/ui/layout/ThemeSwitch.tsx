@@ -1,7 +1,12 @@
-import React from 'react';
-import { IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
+'use client';
+import {
+  IconMoonFilled,
+  IconSunFilled,
+  IconCircle0Filled,
+} from '@tabler/icons-react';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
+import { Suspense, useEffect, useState } from 'react';
 
 const MoonSwitch = () => {
   return (
@@ -36,8 +41,33 @@ const SunSwitch = () => {
   );
 };
 
+const SwitchSkeleton = () => {
+  return (
+    <button>
+      <div
+        className={clsx(
+          'flex flex-row justify-end items-center',
+          'w-[58px] h-9 px-1 py-0.5',
+          'bg-white dark:bg-extends-darker-blue-900',
+          'rounded-full'
+        )}
+      >
+      </div>
+    </button>
+  );
+};
+
 export const Switch = () => {
   const { theme, setTheme } = useTheme();
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) {
+    return <SwitchSkeleton />; 
+  }
 
   return (
     <button

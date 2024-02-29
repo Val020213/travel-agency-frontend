@@ -1,3 +1,4 @@
+'use client';
 import { Login } from './buttons/Login';
 import { Loged } from './buttons/Loged';
 import Image from 'next/image';

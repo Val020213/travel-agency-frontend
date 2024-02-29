@@ -11,7 +11,7 @@ export const Login = ({
     <button
       onClick={() => onClick()}
       className={clsx(
-        'text-gray-800 dark:text-gray-50 hover:text-blue-500 dark:hover:text-white font-semibold',
+        'text-gray-800 dark:text-gray-50 hover:text-blue-500 font-semibold',
         'leading-7 text-xl'
       )}
     >
