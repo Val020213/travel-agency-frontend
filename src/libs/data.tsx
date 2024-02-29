@@ -26,7 +26,7 @@ export const categories: category[] = [
   },
   {
     name: 'Paquetes',
-    href: '/touristPackage',
+    href: '/packages',
     icon: <IconBackpack size={24} strokeWidth={1.5} />,
   },
 ];
