@@ -18,13 +18,10 @@ export const Categories = () => {
         <Link
           href={category.href}
           key={index}
-          className={clsx(
-            'gap-2 flex flex-row items-center',
-            'text-gray-500 dark:text-gray-300',
-            {
-              'text-blue-500': category.href === currentPath,
-            }
-          )}
+          className={clsx('gap-2 flex flex-row items-center', {
+            'text-blue-500': category.href === currentPath,
+            'text-gray-500 dark:text-gray-300': category.href !== currentPath,
+          })}
         >
           {category.icon}
           {category.name}
