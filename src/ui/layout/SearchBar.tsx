@@ -6,8 +6,6 @@ import { SearchSubmit } from '@/libs/actions';
 import { Menu } from '@/ui/layout/Menu';
 
 export const SearchBar = () => {
-  const [open, setOpen] = React.useState<boolean>(true);
-
   return (
     <form action={SearchSubmit}>
       <div

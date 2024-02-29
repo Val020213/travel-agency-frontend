@@ -34,6 +34,9 @@ export const categories: category[] = [
 export async function FetchTourists(): Promise<tourist[]> {
   noStore();
   const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  if (!res.ok) {
+    throw new Error('Failed to fetch tourists');
+  }
   const data = await res.json();
   return data;
 }
