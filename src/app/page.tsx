@@ -14,7 +14,7 @@ export default function Home() {
   // }, []);
 
   return (
-    <div>
+    <>
       <h1>Home</h1>
       <button className='rounded-lg bg-blue-500 text-white p-4 w-fit h-fit'>
         Reload Here!!!
