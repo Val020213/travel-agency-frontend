@@ -6,11 +6,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider
       themes={['light', 'dark']}
-      defaultTheme={
-        window?.matchMedia('(prefers-color-scheme: dark)')?.matches
-          ? 'dark'
-          : 'light'
-      }
+      defaultTheme={'light'}
       enableSystem={true}
       attribute='class'
     >
