@@ -1,26 +1,28 @@
 'use client';
-import { ThemeProvider } from 'next-themes';
-import { CategorySection } from '@/components/organism/Categories/Categories';
-import clsx from 'clsx';
-import { Navbar } from '@/components/organism/Navbar/Navbar';
+import { FetchTourists } from '@/libs/data';
+import { tourist } from '@/libs/definitions';
+import { Tourist } from '@/ui/tmp/tourist';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [touristData, setTouristData] = useState<tourist[]>([]);
+  useEffect(() => {
+    FetchTourists().then((data) => {
+      setTouristData(data);
+    });
+  }, []);
+
   return (
-    <ThemeProvider>
-      <Navbar />
-      <main
-        className={clsx(
-          'flex flex-col w-screen h-screen pt-[170px] sm:pt-[200px] md:pt-[250px] lg:pt-[180px]',
-          'bg-white dark:bg-extends-darker-blue-950',
-          'text-gray-800 dark:text-gray-50'
-        )}
-      >
-        <div className='w-full lg:mx-auto px-4 md:px-6 flex flex-col justify-between'>
-          <div className='flex flex-col gap-24 w-full'>
-            <CategorySection />
-          </div>
-        </div>
-      </main>
-    </ThemeProvider>
+    <>
+      <h1>Home</h1>
+      <button className='rounded-lg bg-blue-500 text-white p-4 w-fit h-fit'>
+        Reload Here!!!
+      </button>
+      <div className='flex flex-wrap items-start h-full w-full gap-8 *:border *:border-gray-200 *:dark:border-gray-700'>
+        {touristData.map((tourist: tourist, index: number) => {
+          return <Tourist key={index} tourist={tourist} />;
+        })}
+      </div>
+    </>
   );
 }

@@ -2,13 +2,9 @@
 const config = {
   darkMode: ['class'],
   content: [
-    // "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    // "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    // "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  purge: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/ui/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/libs/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/hooks/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {

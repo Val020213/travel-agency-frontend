@@ -7,8 +7,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider
       themes={['light', 'dark']}
       defaultTheme={
-        typeof window !== 'undefined' &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches
+        window?.matchMedia('(prefers-color-scheme: dark)')?.matches
           ? 'dark'
           : 'light'
       }
