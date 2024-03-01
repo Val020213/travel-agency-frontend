@@ -14,17 +14,16 @@ export const InfoCard = ({
       className={clsx(
         "flex flex-col",
         " justify-start",
-        "items-start",
+        "items-center",
         "rounded-[36px]",
         "shadow-xl",
         "bg-white dark:bg-extends-darker-blue-900",
-        " gap-9 p-9",
-        "w-[800px]",
-        "h-80"
+        " gap-9 p-9 pb-12",
+        "md:w-[700px] w-[250px]",
       )}
     >
-      <h1 className="text-5xl text-gray-900 dark:text-white">{name}</h1>
-      <div className=" flex flex-col gap-4 *:flex *:flex-row *:gap-2 text-gray-500 dark:text-extends-darker-blue-200">
+      <h1 className="text-4xl font-medium text-gray-900 dark:text-white">{name}</h1>
+      <div className="flex w-full flex-col gap-4 *:flex *:flex-row *:gap-2 text-gray-500 dark:text-extends-darker-blue-200 text-lg">
         <div>
           <IconMapPin />
           {address}
