@@ -4,6 +4,7 @@ import { tourist } from '@/libs/definitions';
 import { Tourist } from '@/ui/tmp/tourist';
 import { useState, useEffect } from 'react';
 import { InfoCard } from '@/ui/cards/InfoCard';
+import { Logo } from '@/ui/layout/Logo';
 
 export default function Home() {
   // const [touristData, setTouristData] = useState<tourist[]>([]);
