@@ -1,12 +1,11 @@
 'use client';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Login } from './buttons/Login';
 import { Loged } from './buttons/Loged';
-import Image from 'next/image';
-import React, { useState } from 'react';
-import { SignIn } from './modal/SignIn';
-import { useBreakpoints } from '@/hooks/useBreakpoint';
+import { Manager } from './modal/Manager';
 
-// TODO AUTH
 export const UserSection = () => {
   const userState: boolean = false;
   const [popUpOpen, setPopUpOpen] = useState<boolean>(false);
@@ -38,7 +37,7 @@ export const UserSection = () => {
           onClick={() => setPopUpOpen(!popUpOpen)}
         />
       </span>
-      {popUpOpen && <SignIn open={popUpOpen} setOpen={setPopUpOpen} />}
+      {popUpOpen && <Manager open={popUpOpen} setOpen={setPopUpOpen} />}
     </div>
   );
 };
