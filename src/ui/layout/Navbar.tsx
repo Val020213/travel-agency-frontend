@@ -7,6 +7,7 @@ import { Switch } from '@/ui/layout/ThemeSwitch';
 import clsx from 'clsx';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Categories } from './Categories';
+import { SearchBarMobile } from './SearchBarMobile';
 
 export const Navbar = () => {
   function useDesktop(): boolean {
@@ -31,7 +32,7 @@ export const Navbar = () => {
         'absolute top-0'
       )}
     >
-      <div className='flex flex-row gap-8 justify-between items-center w-full'>
+      <div className='flex flex-row md:gap-8 justify-between items-center w-full'>
         <div className='lg:basis-1/4'>
           <Logo />
         </div>
@@ -46,11 +47,9 @@ export const Navbar = () => {
       <div className={clsx('w-full p-1', { hidden: !useTablet() })}>
         <SearchBar />
       </div>
-      <div className='flex flex-row gap-2 justify-between items-center w-full'>
+      <div className='flex flex-row gap-1 justify-between items-center w-full'>
         <Categories />
-        <div className={clsx({ hidden: !useMobile() })}>
-          <SearchBar />
-        </div>
+        {useMobile() && <SearchBarMobile />}
       </div>
     </div>
   );

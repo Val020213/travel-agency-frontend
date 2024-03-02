@@ -5,7 +5,7 @@ export const Logo = () => {
   return (
     <Link
       href={'/'}
-      className='flex items-center justify-start md:flex-row lg:flex-col w-fit'
+      className='flex items-center justify-start md:flex-row lg:flex-col w-fit h-fit min-w-6'
     >
       <Image
         src={require('@/ui/assets/logo.png')}

@@ -9,7 +9,7 @@ export const Categories = () => {
   return (
     <div
       className={clsx(
-        'flex flex-row justify-start min-w-7 md:justify-center items-center w-full gap-4 md:gap-16',
+        'flex flex-row flex-1 min-w-6 w-full justify-start md:justify-center items-center gap-4 md:gap-16',
         'overflow-x-auto'
       )}
     >
@@ -17,10 +17,13 @@ export const Categories = () => {
         <Link
           href={category.href}
           key={index}
-          className={clsx('gap-2 flex flex-row items-center', {
-            'text-blue-500': category.href === currentPath,
-            'text-gray-500 dark:text-gray-300': category.href !== currentPath,
-          })}
+          className={clsx(
+            'gap-1 md:gap-2 flex flex-row justify-start items-center',
+            {
+              'text-blue-500': category.href === currentPath,
+              'text-gray-500 dark:text-gray-300': category.href !== currentPath,
+            }
+          )}
         >
           {category.icon}
           {category.name}
