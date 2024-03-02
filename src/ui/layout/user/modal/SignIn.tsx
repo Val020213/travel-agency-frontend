@@ -17,7 +17,7 @@ export const SignIn = ({
       className={clsx(
         'flex flex-col rounded-[32px] fixed enter',
         'bg-white dark:bg-extends-darker-blue-900',
-        'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] z-40 top-4 md:top-16 lg:top-20',
+        'shadow-2xl px-8 pt-6 pb-12  sm:w-[480px] z-40 top-8 md:top-16 lg:top-20',
         'overflow-y-auto'
       )}
     >
