@@ -25,7 +25,7 @@ export const SearchBarMobile = () => {
               'rounded-full',
               'h-[45px] w-[45px] lg:h-12 lg:w-12',
               'p-3 text-white',
-              'bg-orangePinkLeft dark:bg-blue-500'
+              'bg-orangePinkLeft dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-600 '
             )}
           />
         </button>
