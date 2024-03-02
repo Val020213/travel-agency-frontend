@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 
 /**
@@ -70,7 +71,7 @@ export const useBreakpoints = (
         xxlQuery.removeEventListener('change', xxlHandler);
       };
     }
-  }, []);
+  },[props.variant]);
 
   return {
     sm,

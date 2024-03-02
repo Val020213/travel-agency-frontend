@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { categories } from '@/libs/data';
