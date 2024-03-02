@@ -25,7 +25,9 @@ export default function Home() {
           return <Tourist key={index} tourist={tourist} />;
         })}
       </div> */}
-    <InfoCard name='Hotel Iberostar Grand Packard' address='Paseo de Prado y Capdevila, Parque de los Enamorados, La Habana, Cuba' phone='55591702'/>
+      <InfoCard name='Hotel Iberostar Grand Packard' address='Paseo de Prado y Capdevila, Parque de los Enamorados, La Habana, Cuba' phone='55591702' />
+      <div className='este div es fantasma h-24' />
     </>
+
   );
 }
