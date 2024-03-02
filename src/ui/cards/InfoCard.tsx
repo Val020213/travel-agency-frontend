@@ -19,7 +19,7 @@ export const InfoCard = ({
         "shadow-xl",
         "bg-white dark:bg-extends-darker-blue-900",
         " gap-9 p-9 pb-12",
-        "md:w-[700px] w-[250px]",
+        "md:w-[700px] w-[300px]",
       )}
     >
       <h1 className="text-4xl font-medium text-gray-900 dark:text-white">{name}</h1>
