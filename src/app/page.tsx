@@ -5,6 +5,7 @@ import { Tourist } from '@/ui/tmp/tourist';
 import { useState, useEffect } from 'react';
 import { InfoCard } from '@/ui/cards/InfoCard';
 import { Logo } from '@/ui/layout/Logo';
+import { CategoryCard } from '@/ui/cards/CategoryCard';
 
 export default function Home() {
   // const [touristData, setTouristData] = useState<tourist[]>([]);
@@ -27,6 +28,7 @@ export default function Home() {
       </div> */}
       <InfoCard name='Hotel Iberostar Grand Packard' address='Paseo de Prado y Capdevila, Parque de los Enamorados, La Habana, Cuba' phone='55591702' />
       <div className='este div es fantasma h-24' />
+      <CategoryCard messageUp='Fortalece tus lazos familiares con nuestras excursiones' messageDown='Regalales a tus familiares un recuerdo unico con nuestras excursiones, tenemos excursiones para todas las edades'/>
     </>
 
   );
