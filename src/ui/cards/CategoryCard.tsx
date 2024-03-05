@@ -43,7 +43,7 @@ export const CategoryCard = ({messageUp, messageDown}: {messageUp: string, messa
             // "bg-green-600"
         )}
         >
-        <IconBus size={35} className=""  />
+        <IconBus size={35} className="text-color-600"  />
         </div>
       </div>
       <div>
