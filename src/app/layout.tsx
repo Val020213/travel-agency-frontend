@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <Providers>
           <Navbar />
-          <div className='flex flex-col w-full h-full mt-[160px] md:mt-[200px] lg:mt-[150px] mx-4 lg:mx-48'>
+          <div className='flex flex-col mt-[160px] md:mt-[220px] lg:mt-[200px] mx-4 lg:mx-24'>
             {children}
           </div>
         </Providers>

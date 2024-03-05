@@ -16,48 +16,62 @@ export const CategoryCard = ({messageUp, messageDown}: {messageUp: string, messa
         "relative",
         "flex flex-col",
         "justify-start",
-        "items-center",
+        "items-start",
         "rounded-3xl md:rounded-[36px]",
         "shadow-xl",
         "bg-white dark:bg-extends-darker-blue-900",
-        ' gap-2 md:p-9 md:pb-12',
-        "w-[369px] md:w-[296px]"
+        ' gap-2 p-4',
+        " w-[266px] md:w-[296px]"
       )}
     >
+    
       <div className={clsx(
         "rounded-[20px]",
-       "border-r-extends-green-600",
+        "bg-green-300",
         "relative",
         "flex flex-col",
         "justify-start",
         "items-center",
-        "rounded-[12px]",
+        // "rounded-[12px]",
         "shadow-xl",
         " bg-green-300 dark:bg-extends-darker-blue-900",
         ' gap-0 p-7',
         )}> 
-        <div className={clsx(
-            "flex-auto",
-            "self-center",
-            "justify-center",
-            // "bg-green-600"
-        )}
-        >
-        <IconBus size={35} className="text-color-600"  />
-        </div>
+        <IconBus size={35} className="text-green-600"  />
+        
       </div>
+
+    
+    
+
+    <div
+    className={clsx(
+          'flex w-full flex-col',
+          'md:gap-4 *:flex *:flex-row *:gap-2',
+
+        )}
+    >
+
       <div>
         <h1 className={clsx(
-          'w-full',
-          'text-xl text-left font-semibold',
+          ' w-full ',
+          ' line-clamp-2',
+          'hover:line-clamp-none',
+          'text-xl font-semibold',
           'text-gray-800 dark:text-white'
-        )}>
+          )}>
         {messageUp}
         </h1>
       </div>
+
       <div className="text-base">
         {messageDown}
       </div>
+    
+    </div>
+
+
+
     </div>
   );
 };

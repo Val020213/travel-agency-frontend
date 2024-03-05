@@ -7,9 +7,11 @@ import { IconX, IconBrandInstagram } from '@tabler/icons-react';
 export const SignIn = ({
   open,
   setOpen,
+  setOpenMaster,
 }: {
   open: boolean;
   setOpen: (value: boolean) => void;
+  setOpenMaster: (value: boolean) => void;
 }) => {
   return (
     <dialog
@@ -26,7 +28,7 @@ export const SignIn = ({
           <span className='text-lg leading-7 md:text-2xl font-medium w-full text-center'>
             Iniciar Sección
           </span>
-          <button onClick={() => setOpen(!open)} className='float-right'>
+          <button onClick={() => setOpenMaster(false)} className='float-right'>
             <IconX stroke={1.5} className='h-6 w-6' color='currentColor' />
           </button>
         </div>
@@ -76,6 +78,8 @@ export const SignIn = ({
             ¿Aún no tienes cuenta? Unete aqui
           </div>
           <button
+          // formAction={}
+            type='submit'
             className={clsx(
               'flex items-center justify-center',
               'bg-orangePinkRight text-white text-opacity-100 md:text-xl leading-7',

@@ -7,9 +7,11 @@ import { IconX, IconBrandInstagram } from '@tabler/icons-react';
 export const SignUp = ({
   open,
   setOpen,
+  setOpenMaster,
 }: {
   open: boolean;
   setOpen: (value: boolean) => void;
+  setOpenMaster: (value: boolean) => void;
 }) => {
   return (
     <dialog
@@ -17,7 +19,7 @@ export const SignUp = ({
       className={clsx(
         'flex flex-col rounded-[32px] fixed enter',
         'bg-white dark:bg-extends-darker-blue-900',
-        'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px] z-40 top-8 md:top-16 lg:top-20',
+        'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px] z-40 top-8 md:top-16 lg:top-4',
         'overflow-y-auto'
       )}
     >
@@ -26,7 +28,7 @@ export const SignUp = ({
           <span className='text-lg leading-7 md:text-2xl font-medium w-full text-center'>
             Registrarse
           </span>
-          <button onClick={() => setOpen(!open)} className='float-right'>
+          <button onClick={() => setOpenMaster(false)} className='float-right'>
             <IconX stroke={1.5} className='h-6 w-6' color='currentColor' />
           </button>
         </div>
@@ -39,13 +41,43 @@ export const SignUp = ({
               className='text-gray-600 dark:text-extends-darker-blue-200'
               htmlFor='name'
             >
-              nombre de usuario o gmail
+              nombre de usuario
+            </label>
+            <input
+              className='md:text-xl border-b border-gray-300 dark:border-gray-400'
+              type='text'
+              id='username'
+              placeholder='travelilero123'
+              required
+            />
+          </div>
+          <div className='flex flex-col text-base leading-6 gap-2'>
+            <label
+              className='text-gray-600 dark:text-extends-darker-blue-200'
+              htmlFor='name'
+            >
+              nombre completo
             </label>
             <input
               className='md:text-xl border-b border-gray-300 dark:border-gray-400'
               type='text'
               id='name'
-              placeholder='travelilero@gmail.com'
+              placeholder='Juan de la Torre'
+              required
+            />
+          </div>
+          <div className='flex flex-col text-base leading-6 gap-2'>
+            <label
+              className='text-gray-600 dark:text-extends-darker-blue-200'
+              htmlFor='name'
+            >
+              nacionalidad
+            </label>
+            <input
+              className='md:text-xl border-b border-gray-300 dark:border-gray-400'
+              type='text'
+              id='nationality'
+              placeholder='mi nacionalidad'
               required
             />
           </div>

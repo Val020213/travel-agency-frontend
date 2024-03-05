@@ -13,3 +13,12 @@ export type tourist = {
     name: string,
     nationality: string,
 }
+
+export type user = {
+    name: string,
+    username: string,
+    nationality: string,
+    email: string,
+    // password: string,
+    telefono: string,
+}
