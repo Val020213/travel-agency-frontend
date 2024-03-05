@@ -78,6 +78,8 @@ export const SignIn = ({
             ¿Aún no tienes cuenta? Unete aqui
           </div>
           <button
+          // formAction={}
+            type='submit'
             className={clsx(
               'flex items-center justify-center',
               'bg-orangePinkRight text-white text-opacity-100 md:text-xl leading-7',
