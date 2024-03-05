@@ -22,3 +22,9 @@ export type user = {
     // password: string,
     telefono: string,
 }
+
+export type categoryData = {
+    name:string,
+    shortName: string,
+    description: string
+}

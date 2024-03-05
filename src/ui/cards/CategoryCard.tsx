@@ -25,20 +25,33 @@ export const CategoryCard = ({messageUp, messageDown}: {messageUp: string, messa
       )}
     >
     
-      <div className={clsx(
-        "rounded-[20px]",
-        "bg-green-300",
-        "relative",
-        "flex flex-col",
-        "justify-start",
-        "items-center",
-        // "rounded-[12px]",
-        "shadow-xl",
-        " bg-green-300 dark:bg-extends-darker-blue-900",
-        ' gap-0 p-7',
-        )}> 
-        <IconBus size={35} className="text-green-600"  />
+      <div className=
+        // {
+        // clsx(
+        // "rounded-[20px]",
+        // "relative",
+        // "flex flex-col",
+        // "justify-start",
+        // "items-center",
+        // "shadow-xl",
+        // " bg-green-300 ",
+        // ' gap-0 p-7',
+        // )}
+        // <IconBus size={35} className="text-green-600"  />
+         {
+           clsx(
+             "rounded-[20px]",
+             "relative",
+             "flex flex-col",
+             "justify-start",
+             "items-center",
+             "shadow-xl",
+             " bg-blue-300",
+             ' gap-0 p-7',
+             )}
+        > 
         
+        <IconPlane size={35} className="text-blue-600"  />
       </div>
 
     
@@ -55,7 +68,7 @@ export const CategoryCard = ({messageUp, messageDown}: {messageUp: string, messa
       <div>
         <h1 className={clsx(
           ' w-full ',
-          ' line-clamp-2',
+          ' line-clamp-3',
           'hover:line-clamp-none',
           'text-xl font-semibold',
           'text-gray-800 dark:text-white'
