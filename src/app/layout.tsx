@@ -1,8 +1,8 @@
+import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Providers } from '@/libs/providers';
 import { inter } from '@/ui/fonts';
 import { Navbar } from '@/ui/layout/Navbar';
-import './globals.css';
 import { Footer } from '@/ui/layout/Footer';
 
 export const metadata: Metadata = {
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html suppressHydrationWarning>
       <head />
@@ -22,7 +22,7 @@ export default function RootLayout({
         <Providers>
           <div>
             <Navbar />
-            <div className='flex flex-col h-screen mt-[160px] md:mt-[220px] lg:mt-[200px] mx-4 lg:mx-24'>
+            <div className='container grid col-span-1 h-screen mx-auto'>
               {children}
             </div>
           </div>

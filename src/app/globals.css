@@ -10,3 +10,7 @@ input {
 html {
   @apply dark:bg-extends-darker-blue-950;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+}
