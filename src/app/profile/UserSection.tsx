@@ -8,7 +8,7 @@ export const UserSection = ({ userData }: { userData: user }) => {
       <div
         className={clsx(
           'hidden',
-          'md:flex justify-center items-center shrink-0',
+          'md:flex justify-center items-center shrink-0'
         )}
       >
         <Image

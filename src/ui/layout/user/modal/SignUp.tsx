@@ -28,7 +28,7 @@ export const SignUp = ({
     <dialog
       open={open}
       className={clsx(
-        'flex flex-col rounded-[32px] fixed enter',
+        'flex flex-col rounded-[32px] fixed center',
         'bg-white dark:bg-extends-darker-blue-900',
         'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px] z-40 top-8 md:top-16 lg:top-4',
         'overflow-y-auto'

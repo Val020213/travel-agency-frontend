@@ -37,7 +37,7 @@ export const Menu = () => {
   return (
     <nav
       className={clsx(
-        'flex flex-col justify-start items-center w-28 relative',
+        'flex flex-col justify-start items-center w-36 relative',
         'font-medium text-base leading-6',
         'text-gray-500 dark:text-gray-50'
       )}
@@ -46,7 +46,7 @@ export const Menu = () => {
     >
       <div className='flex flex-row justify-end items-center w-full md:gap-1 cursor'>
         {categories[indexCategory]?.name}
-        <IconChevronDown className='block' size={24} />
+        <IconChevronDown size={24} />
         <span className='text-gray-500 dark:text-gray-300'>
           <Separator />
         </span>

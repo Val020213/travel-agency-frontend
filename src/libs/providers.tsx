@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
+    // <NextUIProvider>
     <ThemeProvider
       enableSystem={true}
       themes={['light', 'dark']}
@@ -11,5 +12,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
     >
       {children}
     </ThemeProvider>
+    // </NextUIProvider>
   );
 }

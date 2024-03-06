@@ -28,8 +28,8 @@ export const Navbar = () => {
       className={clsx(
         'flex flex-col items-center justify-center',
         'p-4 md:px-12 lg:px-16 xl:px-24 w-full gap-2',
-        'bg-white dark:bg-extends-darker-blue-950 shadow-xl',
-        'absolute top-0'
+        'bg-white dark:bg-extends-darker-blue-950 bg-opacity-80 dark:bg-opacity-100 shadow-lg',
+        'sticky top-0'
       )}
     >
       <div className='flex flex-row md:gap-8 justify-between items-center w-full'>
