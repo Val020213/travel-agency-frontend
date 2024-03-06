@@ -1,13 +1,12 @@
 'use client';
 import clsx from 'clsx';
 import { IconSearch } from '@tabler/icons-react';
-import { SearchSubmit } from '@/libs/actions';
+
 import { Menu } from '@/ui/layout/Menu';
 
 export const SearchBar = () => {
   return (
     <form
-      action={SearchSubmit}
       className={clsx(
         'flex flex-row justify-end items-center',
         'rounded-full h-[45] md:h-max pl-2 gap-2',

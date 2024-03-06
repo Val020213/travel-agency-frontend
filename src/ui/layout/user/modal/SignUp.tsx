@@ -1,8 +1,12 @@
 'use client';
-import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { IconX, IconBrandInstagram } from '@tabler/icons-react';
+import { useFormState, useFormStatus } from 'react-dom';
+import { createUser } from '@/libs/actions/signUp';
+import { SignUpState } from '@/libs/actions/signUp';
+import { error } from 'console';
+import { stat } from 'fs';
 
 export const SignUp = ({
   open,
@@ -13,6 +17,13 @@ export const SignUp = ({
   setOpen: (value: boolean) => void;
   setOpenMaster: (value: boolean) => void;
 }) => {
+  const initialState = {};
+
+  const [state, dispatch] = useFormState<SignUpState, FormData>(
+    createUser,
+    initialState
+  );
+
   return (
     <dialog
       open={open}
@@ -23,7 +34,10 @@ export const SignUp = ({
         'overflow-y-auto'
       )}
     >
-      <form className='flex flex-col gap-4 md:gap-8 w-full *:w-full'>
+      <form
+        className='flex flex-col gap-4 md:gap-8 w-full *:w-full'
+        action={dispatch}
+      >
         <div className='flex justify-start items-center flex-row text-gray-500 dark:text-extends-darker-blue-300'>
           <span className='text-lg leading-7 md:text-2xl font-medium w-full text-center'>
             Registrarse
@@ -39,13 +53,13 @@ export const SignUp = ({
           <div className='flex flex-col text-base leading-6 gap-2'>
             <label
               className='text-gray-600 dark:text-extends-darker-blue-200'
-              htmlFor='name'
+              htmlFor='username'
             >
               nombre de usuario
             </label>
             <input
               className='md:text-xl border-b border-gray-300 dark:border-gray-400'
-              type='text'
+              type='name'
               id='username'
               placeholder='travelilero123'
               required
@@ -60,7 +74,7 @@ export const SignUp = ({
             </label>
             <input
               className='md:text-xl border-b border-gray-300 dark:border-gray-400'
-              type='text'
+              type='name'
               id='name'
               placeholder='Juan de la Torre'
               required
@@ -69,13 +83,13 @@ export const SignUp = ({
           <div className='flex flex-col text-base leading-6 gap-2'>
             <label
               className='text-gray-600 dark:text-extends-darker-blue-200'
-              htmlFor='name'
+              htmlFor='nationality'
             >
               nacionalidad
             </label>
             <input
               className='md:text-xl border-b border-gray-300 dark:border-gray-400'
-              type='text'
+              type='natinality'
               id='nationality'
               placeholder='mi nacionalidad'
               required
@@ -99,14 +113,14 @@ export const SignUp = ({
           <div className='flex flex-col text-base leading-6 gap-2'>
             <label
               className='text-gray-600 dark:text-extends-darker-blue-200 '
-              htmlFor='password'
+              htmlFor='confirmPassword'
             >
               confirme su contraseña
             </label>
             <input
               className='md:text-xl border-b border-gray-300  dark:border-gray-400'
               type='password'
-              id='confirm_password'
+              id='confirmPassword'
               placeholder='********'
               required
             />

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { IconSearch } from '@tabler/icons-react';
-import { SearchSubmit } from '@/libs/actions';
+// import { SearchSubmit } from '@/libs/actions';
 import { useState } from 'react';
 
 export const SearchBarMobile = () => {
@@ -11,7 +11,7 @@ export const SearchBarMobile = () => {
       setOpen(false);
     } else {
       setOpen(true);
-      SearchSubmit(formData);
+      console.log("Searching...")
     }
   }
 
