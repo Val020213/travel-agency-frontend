@@ -29,7 +29,7 @@ export const UserSection = () => {
         alt=''
         height={64}
         width={250}
-        className='hidden md:block absolute top-5 left-4 z-0'
+        className='hidden md:block absolute top-5 left-4 z-0 w-auto h-auto'
       />
       <span className='z-10'>
         <Login

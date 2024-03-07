@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { set } from 'zod';
-import { Airplane } from './Airplane';
-import { AirplaneHover } from './AirplaneHover';
+import { Airplane } from './tokens/Airplane';
+import { AirplaneHover } from './tokens/AirplaneHover';
 import clsx from 'clsx';
 
 export const ContinueCard = ({ action }: { action: () => void }) => {

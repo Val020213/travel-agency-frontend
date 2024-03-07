@@ -17,7 +17,7 @@ export default function Card(cardData: CardData): JSX.Element {
         src={cardData.imageSrc}
         width={300}
         height={300}
-        className='w-full'
+        className='h-auto w-auto'
       />
       <div className='flex flex-col pt-2 pb-4 *:leading-7'>
         <div className='text-xl text-gray-800 dark:text-gray-50 line-clamp-2'>

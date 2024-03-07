@@ -6,6 +6,9 @@ import { useState, useEffect } from 'react';
 import { InfoCard } from '@/ui/cards/InfoCard';
 import { Logo } from '@/ui/layout/Logo';
 import { ContinueCard } from '@/ui/products/ContinueCard';
+import LoginVariant from '@/ui/tmp/tmp';
+import HeroCarousel from '@/ui/headersComponents/Hero';
+import Component from '@/ui/tmp/grid';
 
 export default function Home() {
   // const [touristData, setTouristData] = useState<tourist[]>([]);
@@ -33,6 +36,13 @@ export default function Home() {
       />
 
       <ContinueCard action={() => console.log('hello world, pagination :(')} />
+      {/* <LoginVariant /> */}
+      <div>
+        {' '}
+        <HeroCarousel />
+      </div>
+
+      <Component />
     </>
   );
 }

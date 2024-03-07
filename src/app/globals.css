@@ -1,16 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-input {
-  outline: none;
-  background: none;
-}
-
-html {
-  @apply dark:bg-extends-darker-blue-950;
-}
-
-::-webkit-scrollbar {
-  width: 0;
-}

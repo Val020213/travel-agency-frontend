@@ -164,7 +164,7 @@ export const SignUp = ({
                 width={48}
                 height={48}
                 alt='google'
-                className='h-12 w-12'
+                className='h-auto w-auto'
               />
             </button>
             <button
@@ -180,7 +180,7 @@ export const SignUp = ({
                 width={24}
                 height={48}
                 alt='facebook'
-                className='h-12 w-6'
+                className='h-auto w-auto'
               />
             </button>
             <button

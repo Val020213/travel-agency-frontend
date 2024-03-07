@@ -1,15 +1,20 @@
-import clsx from 'clsx';
-import Link from 'next/link';
-import { categories } from '@/libs/data';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import clsx from 'clsx';
+import { category } from '@/libs/definitions';
+import { categories, enterpriseCategories } from '@/libs/data';
 
-export const Categories = () => {
-  const currentPath = usePathname();
-
+const CategoriesFactory = ({
+  categories,
+  triggerCls,
+}: {
+  categories: category[];
+  triggerCls: (href: string) => string;
+}) => {
   return (
     <div
       className={clsx(
-        'flex flex-row flex-1 min-w-6 w-full justify-start md:justify-center items-center gap-4 md:gap-16',
+        'flex flex-row flex-1 min-w-6 w-full justify-start md:justify-center items-center gap-4 md:gap-8',
         'overflow-x-auto'
       )}
     >
@@ -18,11 +23,8 @@ export const Categories = () => {
           href={category.href}
           key={index}
           className={clsx(
-            'gap-1 md:gap-2 flex flex-row justify-start items-center',
-            {
-              'text-blue-500': category.href === currentPath,
-              'text-gray-500 dark:text-gray-300': category.href !== currentPath,
-            }
+            'gap-1 flex flex-row justify-start items-center',
+            triggerCls(category.href)
           )}
         >
           {category.icon}
@@ -30,5 +32,29 @@ export const Categories = () => {
         </Link>
       ))}
     </div>
+  );
+};
+
+export const Categories = () => {
+  function Trigger(href: string) {
+    const currentPath = usePathname();
+    return currentPath === href
+      ? 'text-blue-500'
+      : 'text-gray-500 dark:text-gray-300';
+  }
+
+  return <CategoriesFactory categories={categories} triggerCls={Trigger} />;
+};
+
+export const EnterpriseCategories = () => {
+  function Trigger(href: string) {
+    const currentPath = usePathname();
+    return currentPath === href
+      ? 'text-orange-500'
+      : 'text-gray-500 dark:text-gray-300';
+  }
+
+  return (
+    <CategoriesFactory categories={enterpriseCategories} triggerCls={Trigger} />
   );
 };
