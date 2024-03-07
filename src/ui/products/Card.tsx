@@ -1,38 +1,62 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { Tag } from '../tokens/Tag';
+import clsx from 'clsx';
 
-export type CardData = {
-  imageSrc: string;
+type Props = {
   title: string;
+  imageSrc: string;
   description: string;
   href: string;
-  caracterist: number;
-  caracteristType: string;
+  metaData1: string;
+  metaData2: string;
+  tag: string;
 };
 
-export default function Card(cardData: CardData): JSX.Element {
+export const ProductCard = ({
+  title,
+  imageSrc,
+  description,
+  href,
+  metaData1,
+  metaData2,
+  tag,
+}: Props) => {
   return (
-    <div className='flex flex-col'>
+    <Link
+      href={href}
+      className={clsx(
+        'rounded-lg shadow-sm',
+        'hover:shadow-md hover:scale-105',
+        'transition-transform duration-300 ease-in-out',
+        'overflow-clip',
+        'dark:hover:bg-extends-darker-blue-900'
+      )}
+    >
       <Image
-        alt='image_not_found'
-        src={cardData.imageSrc}
-        width={300}
-        height={300}
-        className='h-auto w-auto'
+        alt='product image'
+        className='object-cover w-auto h-auto'
+        height={600}
+        width={800}
+        src={imageSrc}
+        style={{
+          aspectRatio: '800/600',
+          objectFit: 'cover',
+        }}
       />
-      <div className='flex flex-col pt-2 pb-4 *:leading-7'>
-        <div className='text-xl text-gray-800 dark:text-gray-50 line-clamp-2'>
-          {cardData.title}
+      <div className='grid gap-2 p-4'>
+        <div className='flex flex-row items-center justify-between'>
+          <h3 className='font-semibold text-xl line-clamp-1'>{title}</h3>
+          {tag && <Tag text={tag} className='h-8' />}
         </div>
-        <div className='text-lg line-clamp-3 text-gray-500 dark:to-extends-darker-blue-300'>
-          {cardData.description}
-        </div>
-        <div className='text-lg text-gray-500 dark:text-gray-300'>
-          {cardData.caracterist}
-          <span className='text-[#DB115A]'> {cardData.caracteristType}</span>
+        <p className='text-sm text-gray-500 dark:text-gray-400 line-clamp-3'>
+          {description}
+        </p>
+        <div className='flex flex-row font-medium text-lg gap-0.5'>
+          <h4>{metaData1}</h4>
+          <h4 className='text-[#DB115A]'>{metaData2}</h4>
         </div>
       </div>
-    </div>
+    </Link>
   );
-}
-
-const CardFactory = {};
+};

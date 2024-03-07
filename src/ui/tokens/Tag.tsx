@@ -2,17 +2,18 @@ import clsx from 'clsx';
 
 export const Tag = ({
   text,
-  icon = undefined,
-  className = '',
+  icon,
+  className,
 }: {
   text: string;
-  icon: React.ReactNode | undefined;
-  className: string | undefined;
+  icon?: React.ReactNode;
+  className?: string;
 }) => {
+  console.log(className);
   return (
     <div
       className={clsx(
-        { className },
+        className,
         'flex flex-row w-fit items-center justify-center',
         'bg-orangePinkRight gap-0 md:gap-2',
         'text-white',
@@ -21,8 +22,8 @@ export const Tag = ({
         'text-base leading-6'
       )}
     >
-      {text}
       {icon}
+      {text}
     </div>
   );
 };

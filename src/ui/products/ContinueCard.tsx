@@ -11,12 +11,19 @@ export const ContinueCard = ({ action }: { action: () => void }) => {
       onMouseLeave={() => setHover(false)}
       onClick={action}
       className={clsx(
-        'bg-[#1E62DA] flex flex-col items-center justify-between',
-        'hover:drop-shadow-blue rounded-2xl w-max',
-        'py-6'
+        'rounded-lg shadow-sm',
+        'flex flex-col items-center justify-between',
+        'hover:shadow-md hover:scale-105',
+        'transition-transform duration-300 ease-in-out',
+        'overflow-clip',
+        'bg-[#1E62DA]',
+        'hover:drop-shadow-blue',
+        'py-2 md:py-4 px-4 md:px-6',
+        'relative',
+        'min-h-[300px]'
       )}
     >
-      <div className='text-gray-50 font-semibold text-3xl'>
+      <div className='text-gray-50 font-semibold text-3xl text-left'>
         Seguir Explorando
       </div>
       <div className='flex justify-center items-center w-[300px] h-[335px]'>

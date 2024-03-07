@@ -16,7 +16,9 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <head />
-      <body className={`${inter.className} antialiased`}>
+      <body
+        className={`${inter.className} antialiased dark:bg-extends-darker-blue-950`}
+      >
         <Layout>{children}</Layout>
       </body>
     </html>
