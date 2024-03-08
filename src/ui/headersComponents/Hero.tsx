@@ -101,7 +101,7 @@ export function Hero() {
                 'dark:bg-gradient-radial dark:from-black/90 dark:via-black/10 dark:to-transparent'
               )}
             >
-              <span className='text-white font-bold text-xl md:text-4xl whitespace-nowrap'>
+              <span className='text-white font-bold text-2xl md:text-4xl whitespace-nowrap'>
                 {HeroData[index].title}
               </span>
               {HeroData[index].button}
