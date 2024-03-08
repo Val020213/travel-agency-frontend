@@ -10,11 +10,11 @@ export const Logo = () => {
       <Image
         src={require('@/ui/assets/logo.png')}
         alt='logo of travelix'
-        width={100}
-        height={30}
+        width={68}
+        height={16}
         className='w-auto h-auto'
       />
-      <span className='text-blue-500 font-bold leading-10 text-4xl hidden md:flex'>
+      <span className='text-blue-500 font-bold  text-3xl hidden md:flex'>
         Travelix
       </span>
     </Link>

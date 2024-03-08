@@ -18,7 +18,10 @@ export const Button = ({
     <Link
       href={href}
       onClick={action}
-      className={clsx(className, 'flex flex-row py-16 px-24 hover:opacity-60')}
+      className={clsx(
+        className,
+        'flex flex-row justify-center items-center w-fit px-8 py-3 rounded-lg hover:bg-black transition-all duration-300 ease-in-out text-white font-medium text-lg gap-1'
+      )}
     >
       {title}
       {icon}

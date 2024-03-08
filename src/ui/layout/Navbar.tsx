@@ -30,10 +30,10 @@ const NavbarContainer = ({ children }: { children: ReactNode }) => {
     <div
       className={clsx(
         'flex flex-col items-center justify-center',
-        'p-4 md:px-12 lg:px-16 xl:px-24 w-full gap-2',
-        'bg-white dark:bg-extends-darker-blue-950',
+        'p-4 pb-2 md:px-12 lg:px-16 xl:px-24 w-full gap-2',
+        'bg-white dark:bg-extends-darker-blue-900',
         'bg-opacity-80 bg-blend-color-burn dark:bg-opacity-100 shadow-lg',
-        'backdrop-filter backdrop-blur-md',
+        'backdrop-filter backdrop-blur-xl dark:backdrop-blur-lg',
         'sticky z-10 top-0'
       )}
     >

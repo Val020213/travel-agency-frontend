@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -11,13 +11,21 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Button } from '../tokens/Button';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 
 const heroImages = [
   require('@/ui/assets/hero1.jpg'),
   require('@/ui/assets/hero2.jpg'),
   require('@/ui/assets/hero3.jpg'),
 ];
+
+const darkHeroImages = [
+  require('@/ui/assets/darkhero.jpg'),
+  require('@/ui/assets/darkhero2.jpg'),
+  require('@/ui/assets/darkhero3.jpg'),
+];
+
+type heroImages = (typeof heroImages)[number];
 
 const HeroData = [
   {
@@ -35,11 +43,7 @@ const HeroData = [
     ),
   },
   {
-    title: (
-      <p>
-        Conoce los mejores <br /> destinos
-      </p>
-    ),
+    title: <p>Conoce los mejores destinos</p>,
     button: (
       <Button
         title='Paquetes'
@@ -49,11 +53,7 @@ const HeroData = [
     ),
   },
   {
-    title: (
-      <p>
-        Vive la experiencia <br /> de tu vida
-      </p>
-    ),
+    title: <p>Vive la experiencia de tu vida</p>,
     button: (
       <Button
         title='Agencias'
@@ -64,22 +64,21 @@ const HeroData = [
   },
 ];
 
-const darkHeroImages = [
-  require('@/ui/assets/darkhero.jpg'),
-  require('@/ui/assets/darkhero2.jpg'),
-  require('@/ui/assets/darkhero3.jpg'),
-];
-
-function GetImages() {
-  const { theme } = useTheme();
-  return theme === 'dark' ? darkHeroImages : heroImages;
-}
-
 export function Hero() {
   const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: true })
   );
-  const imagesSrc = GetImages();
+
+  const [imagesSrc, setImagesSrc] = React.useState<heroImages[]>([]);
+  const { theme } = useTheme();
+
+  React.useEffect(() => {
+    if (theme === 'dark') {
+      setImagesSrc(darkHeroImages);
+    } else {
+      setImagesSrc(heroImages);
+    }
+  }, [theme]);
 
   return (
     <Carousel
@@ -94,17 +93,27 @@ export function Hero() {
       <CarouselContent>
         {imagesSrc.map((_, index) => (
           <CarouselItem key={index} className='relative h-[560px] w-screen'>
+            <div
+              className={clsx(
+                'container mx-4 sm:mx-12 md:mx-24 lg:mx-32',
+                'flex flex-col gap-6 justify-center items-start',
+                'z-10 fixed top-1/3 w-auto py-4',
+                'dark:bg-gradient-radial dark:from-black/90 dark:via-black/10 dark:to-transparent'
+              )}
+            >
+              <span className='text-white font-bold text-xl md:text-4xl whitespace-nowrap'>
+                {HeroData[index].title}
+              </span>
+              {HeroData[index].button}
+            </div>
             <Image
               src={imagesSrc[index]}
               alt='hero image'
               objectFit='cover'
               quality={100}
+              layout='fill'
               fill={true}
             />
-            <div className='container mx-auto text-lg md:text-2xl'>
-              {HeroData[index].title}
-              {HeroData[index].button}
-            </div>
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -22,7 +22,7 @@ const config = {
       },
       dropShadow: {
         white: '0 0 12px white',
-        blue: '0px 8px 32px #0912E7',
+        blue: '0px 8px 24px #0912E7',
       },
       colors: {
         extends: {
