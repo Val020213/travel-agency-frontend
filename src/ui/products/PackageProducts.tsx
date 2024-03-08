@@ -1,6 +1,8 @@
-import LayoutGrid from './components/grid';
+import LayoutGrid from './components/LayoutGrid';
 import { ContinueCard } from './components/ContinueCard';
 import { ProductCard } from './components/Card';
+import { productsData } from '@/libs/mapData';
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -27,78 +29,17 @@ export const PackageProducts = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <LayoutGrid>
-        <ProductCard
-          href='#'
-          tag='Alojamiento'
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='a'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
+        {productsData.map((product, index) => (
+          <ProductCard
+            key={index}
+            title={product.name}
+            description={product.description}
+            imageSrc={product.image}
+            href={''}
+            metaData1={product.price}
+            metaData2='CUP'
+          />
+        ))}
         <ContinueCard action={() => {}} />
       </LayoutGrid>
     </div>

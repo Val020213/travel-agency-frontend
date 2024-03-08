@@ -1,4 +1,4 @@
-import LayoutGrid from './components/grid';
+import LayoutGrid from './components/LayoutGrid';
 import { ContinueCard } from './components/ContinueCard';
 import { ProductCard } from './components/Card';
 import {

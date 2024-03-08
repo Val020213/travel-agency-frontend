@@ -8,9 +8,9 @@ type Props = {
   imageSrc: string;
   description: string;
   href: string;
-  metaData1: string;
+  metaData1: string | number;
   metaData2: string;
-  tag: string;
+  tag?: string;
 };
 
 export const ProductCard = ({
