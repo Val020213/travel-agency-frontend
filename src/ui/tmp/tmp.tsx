@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
-export default function Component() {
+export default function ModalVariant() {
   return (
     <div
       key='1'

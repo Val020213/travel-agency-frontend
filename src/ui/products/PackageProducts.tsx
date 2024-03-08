@@ -29,17 +29,7 @@ export const PackageProducts = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <LayoutGrid>
-        {productsData.map((product, index) => (
-          <ProductCard
-            key={index}
-            title={product.name}
-            description={product.description}
-            imageSrc={product.image}
-            href={''}
-            metaData1={product.price}
-            metaData2='CUP'
-          />
-        ))}
+        {productsData}
         <ContinueCard action={() => {}} />
       </LayoutGrid>
     </div>
