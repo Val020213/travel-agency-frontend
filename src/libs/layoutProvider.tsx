@@ -35,10 +35,12 @@ function MainLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   return (
     <div>
-      <Navbar />
-      {pathname === '/' && <Hero />}
-      <div className='container flex flex-col py-4 sm:py-6 lg:py-16 min-h-dvh mx-auto'>
-        {children}
+      <div>
+        <Navbar />
+        {pathname === '/' && <Hero />}
+        <div className='container flex flex-col py-4 sm:py-6 lg:py-16 min-h-dvh mx-auto'>
+          {children}
+        </div>
       </div>
       <Footer />
     </div>

@@ -33,8 +33,8 @@ const NavbarContainer = ({ children }: { children: ReactNode }) => {
         'p-4 md:px-12 lg:px-16 xl:px-24 w-full gap-2',
         'bg-white dark:bg-extends-darker-blue-950',
         'bg-opacity-80 bg-blend-color-burn dark:bg-opacity-100 shadow-lg',
-        'sticky z-10 top-0',
-        'backdrop-filter backdrop-blur-md'
+        'backdrop-filter backdrop-blur-md',
+        'sticky z-10 top-0'
       )}
     >
       {children}
