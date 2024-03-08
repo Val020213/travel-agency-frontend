@@ -1,7 +1,7 @@
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { inter } from '@/ui/fonts';
-import { Layout } from '@/libs/providers';
+import { Layout } from '@/libs/layoutProvider';
 
 export const metadata: Metadata = {
   title: 'Travelix',

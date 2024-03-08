@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Airplane } from './tokens/Airplane';
-import { AirplaneHover } from './tokens/AirplaneHover';
+import { Airplane } from '../tokens/Airplane';
+import { AirplaneHover } from '../tokens/AirplaneHover';
 import clsx from 'clsx';
 
 export const ContinueCard = ({ action }: { action: () => void }) => {
