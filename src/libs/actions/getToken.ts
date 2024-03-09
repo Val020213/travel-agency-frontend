@@ -1,7 +1,5 @@
 export type TokenState = {
-    message?: string
-}
+  message?: string;
+};
 
-export async function getToken(prevState : TokenState) {
-    
-} 
+export async function getToken(prevState: TokenState) {}

@@ -1,21 +1,16 @@
+import Link from 'next/link';
 import clsx from 'clsx';
 
-export const Login = ({
-  title,
-  onClick,
-}: {
-  title: string;
-  onClick: () => void;
-}) => {
+export const Login = ({ title }: { title: string }) => {
   return (
-    <button
-      onClick={() => onClick()}
+    <Link
+      href='?login=true'
       className={clsx(
         'text-gray-800 dark:text-gray-50 hover:text-blue-500 font-semibold',
         'leading-7 text-xl'
       )}
     >
       {title}
-    </button>
+    </Link>
   );
 };

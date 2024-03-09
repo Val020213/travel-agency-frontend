@@ -19,6 +19,10 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased dark:bg-extends-darker-blue-950`}
       >
+        <div
+          id='modal-root'
+          className='flex flex-col overflow-auto fixed top-0'
+        ></div>
         <Layout>{children}</Layout>
       </body>
     </html>

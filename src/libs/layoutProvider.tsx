@@ -5,6 +5,8 @@ import { Footer } from '@/ui/layout/Footer';
 import { ThemeProvider } from 'next-themes';
 import { ReactNode } from 'react';
 import { Hero } from '@/ui/headersComponents/Hero';
+import { SignIn } from '@/ui/layout/user/modal/SignIn';
+import { SignUp } from '@/ui/layout/user/modal/SignUp';
 
 function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -18,15 +20,30 @@ function Providers({ children }: { children: React.ReactNode }) {
   );
 }
 
+export const Modals = ({ children }: { children: ReactNode }) => {
+  return (
+    <>
+      <div className='z-40 fixed inset-0 min-h-screen w-screen backdrop-brightness-75 overflow-auto pt-4'>
+        <SignIn />
+        <SignUp />
+      </div>
+      {children}
+    </>
+  );
+};
+
 export const Layout = ({ children }: { children: ReactNode }) => {
   const currentPath = usePathname();
+
   return (
     <Providers>
-      {currentPath.startsWith('/dashboard') ? (
-        <EnterpriseLayout>{children}</EnterpriseLayout>
-      ) : (
-        <MainLayout>{children}</MainLayout>
-      )}
+      <Modals>
+        {currentPath.startsWith('/dashboard') ? (
+          <EnterpriseLayout>{children}</EnterpriseLayout>
+        ) : (
+          <MainLayout>{children}</MainLayout>
+        )}
+      </Modals>
     </Providers>
   );
 };
