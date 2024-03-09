@@ -37,4 +37,4 @@ yarn-error.log*
 next-env.d.ts
 
 # assets
-/src/ui/assets/products
+# /src/ui/assets/products
