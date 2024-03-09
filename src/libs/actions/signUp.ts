@@ -74,18 +74,14 @@ export async function createUser(prevState: SignUpState, formData: FormData) {
     };
   }
 
-  console.log('las passwords no son las mismas');
-
   // POST /tourist/create, http://127.0.0.1:8000/tourist/create
 
   const data = {
-    username: 'Toleod',
-    full_name: 'tpledo loa hace',
+    username: username,
+    full_name: name,
     email: 'probando@gmail.com',
-    hashed_password: '2121',
+    hashed_password: password,
   };
-
-  console.log('haciendo post...');
 
   try {
     const resp = await fetch('http://127.0.0.1:8000/create', {
@@ -95,9 +91,6 @@ export async function createUser(prevState: SignUpState, formData: FormData) {
       },
       body: JSON.stringify(data),
     });
-
-    console.log('Ya se termino el response con Status ok? :');
-    console.log(resp.ok);
 
     const tmpMessage = resp.ok ? 'Success' : 'Error';
 
@@ -115,47 +108,4 @@ export async function createUser(prevState: SignUpState, formData: FormData) {
       message: 'False',
     };
   }
-}
-
-type State = {};
-
-const FormSchema2 = z.object({
-  id: z.string(),
-  customerId: z.string({
-    invalid_type_error: 'Please select a customer',
-    required_error: 'Please select a customer',
-  }),
-  amount: z.coerce.number().gt(0, 'Amount must be greater than 0'),
-  status: z.enum(['pending', 'paid'], {
-    invalid_type_error: 'Please select a status',
-    required_error: 'Please select a status',
-  }),
-  date: z.string(),
-});
-
-const CreateInvoice = FormSchema2.omit({ id: true, date: true });
-
-export async function createInvoice(prevState: State, formData: FormData) {
-  // Validate form using Zod
-  const validatedFields = CreateInvoice.safeParse({
-    customerId: formData.get('customerId'),
-    amount: formData.get('amount'),
-    status: formData.get('status'),
-  });
-
-  // If form validation fails, return errors early. Otherwise, continue.
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Create Invoice.',
-    };
-  }
-
-  // Prepare data for insertion into the database
-  const { customerId, amount, status } = validatedFields.data;
-
-  const amountInCents = amount * 100;
-  const date = new Date().toISOString().split('T')[0];
-
-  console.log('GOOD');
 }

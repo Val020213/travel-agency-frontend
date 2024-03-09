@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { categories } from '@/libs/data';
 import { IconChevronDown } from '@tabler/icons-react';
+import { set } from 'zod';
+import path from 'path';
 
 const Separator = () => {
   return (
@@ -24,15 +26,12 @@ const Separator = () => {
 export const Menu = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
-  const [indexCategory, setIndexCategory] = useState<number>(
-    categories.findIndex((category) => category.href === pathname) ?? 0
+  const indexMatch = categories.findIndex(
+    (category) => category.href === pathname
   );
-
-  useEffect(() => {
-    setIndexCategory(
-      categories.findIndex((category) => category.href === pathname) ?? 0
-    );
-  }, [pathname]);
+  const [indexCategory, setIndexCategory] = useState<number>(
+    indexMatch >= 0 ? indexMatch : 0
+  );
 
   return (
     <nav
@@ -65,6 +64,7 @@ export const Menu = () => {
               <Link
                 key={index}
                 href={category.href}
+                onClick={() => setIndexCategory(index)}
                 className='hover:text-orange-500 dark:hover:text-blue-500 w-full flex'
               >
                 {category.name}

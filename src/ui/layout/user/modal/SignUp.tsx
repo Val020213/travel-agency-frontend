@@ -5,6 +5,7 @@ import { IconX, IconBrandInstagram } from '@tabler/icons-react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { createUser } from '@/libs/actions/signUp';
 import { SignUpState } from '@/libs/actions/signUp';
+import { stat } from 'fs';
 
 export const SignUp = ({
   open,
@@ -59,6 +60,7 @@ export const SignUp = ({
               className='md:text-xl border-b border-gray-300 dark:border-gray-400'
               type='name'
               id='username'
+              name='username'
               placeholder='travelilero123'
               required
             />
@@ -74,6 +76,7 @@ export const SignUp = ({
               className='md:text-xl border-b border-gray-300 dark:border-gray-400'
               type='name'
               id='name'
+              name='name'
               placeholder='Juan de la Torre'
               required
             />
@@ -89,6 +92,7 @@ export const SignUp = ({
               className='md:text-xl border-b border-gray-300 dark:border-gray-400'
               type='natinality'
               id='nationality'
+              name='nationality'
               placeholder='mi nacionalidad'
               required
             />
@@ -104,6 +108,7 @@ export const SignUp = ({
               className='md:text-xl border-b border-gray-300  dark:border-gray-400'
               type='password'
               id='password'
+              name='password'
               placeholder='********'
               required
             />
@@ -119,12 +124,16 @@ export const SignUp = ({
               className='md:text-xl border-b border-gray-300  dark:border-gray-400'
               type='password'
               id='confirmPassword'
+              name='confirmPassword'
               placeholder='********'
               required
             />
           </div>
         </div>
         <div className='flex flex-col *:w-full gap-4'>
+          <div>
+            {state.errors && <p className='text-[#e11d48]'>{state.message}</p>}
+          </div>
           <div
             onClick={() => setOpen(!open)}
             className={clsx(
@@ -202,141 +211,3 @@ export const SignUp = ({
     </dialog>
   );
 };
-
-import { Input } from '@/components/ui/input';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-
-export default function ModalSignUpVariant({
-  open,
-  setOpen,
-  setOpenMaster,
-}: {
-  open: boolean;
-  setOpen: (value: boolean) => void;
-  setOpenMaster: (value: boolean) => void;
-}) {
-  const initialState = {};
-
-  const [state, dispatch] = useFormState<SignUpState, FormData>(
-    createUser,
-    initialState
-  );
-  return (
-    <dialog
-      open={open}
-      className={clsx(
-        'flex flex-col rounded-[32px] fixed center',
-        'bg-white dark:bg-extends-darker-blue-900',
-        'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px] z-40 top-8 md:top-16 lg:top-4',
-        'overflow-y-auto'
-      )}
-    >
-      <div className='bg-white rounded-lg max-w-md w-full mx-4'>
-        <div className='flex justify-between items-center border-b border-gray-200 p-6'>
-          <h3 className='text-lg font-medium leading-6 text-gray-900'>
-            Registrarse
-          </h3>
-          <button className='text-gray-500 hover:text-gray-800'>
-            <PanelTopCloseIcon className='h-6 w-6' />
-          </button>
-        </div>
-        <div className='p-6'>
-          <h2 className='text-2xl font-semibold mb-4'>Bienvenido a Travelix</h2>
-          <form action={dispatch}>
-            <div className='space-y-6'>
-              <div>
-                <label
-                  className='block text-sm font-medium text-gray-700'
-                  htmlFor='username'
-                >
-                  nombre de usuario
-                </label>
-                <Input id='username' placeholder='travellero123' />
-              </div>
-              <div>
-                <label
-                  className='block text-sm font-medium text-gray-700'
-                  htmlFor='fullname'
-                >
-                  nombre completo
-                </label>
-                <Input id='fullname' placeholder='Juan de la Torre' />
-              </div>
-              <div>
-                <label
-                  className='block text-sm font-medium text-gray-700'
-                  htmlFor='nationality'
-                >
-                  nacionalidad
-                </label>
-                <Input placeholder='Select your nationality' type='select'>
-                  <option value='usa'>USA</option>
-                  <option value='uk'>UK</option>
-                  <option value='france'>France</option>
-                  <option value='germany'>Germany</option>
-                </Input>
-              </div>
-              <div>
-                <label
-                  className='block text-sm font-medium text-gray-700'
-                  htmlFor='password'
-                >
-                  contraseña
-                </label>
-                <Input id='password' placeholder='********' type='password' />
-              </div>
-              <div>
-                <label
-                  className='block text-sm font-medium text-gray-700'
-                  htmlFor='confirm-password'
-                >
-                  confirme su contraseña
-                </label>
-                <Input
-                  id='confirm-password'
-                  placeholder='********'
-                  type='password'
-                />
-              </div>
-            </div>
-            <div className='mt-6'>
-              <Button className='w-full bg-[#e11d48] text-white'>
-                Continuar
-              </Button>
-            </div>
-          </form>
-        </div>
-        <div className='border-t border-gray-200 p-6 text-center'>
-          <p className='text-sm text-gray-600'>
-            ¿Tienes cuenta?
-            <Link className='text-[#e11d48] hover:underline' href='#'>
-              Inicia sesión aquí
-            </Link>
-          </p>
-        </div>
-      </div>
-    </dialog>
-  );
-}
-
-function PanelTopCloseIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    >
-      <rect width='18' height='18' x='3' y='3' rx='2' ry='2' />
-      <line x1='3' x2='21' y1='9' y2='9' />
-      <path d='m9 16 3-3 3 3' />
-    </svg>
-  );
-}

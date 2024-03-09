@@ -3,24 +3,25 @@ import { IconPlane, IconTicket, IconCreditCard } from '@tabler/icons-react';
 import clsx from 'clsx';
 
 export const PlaneIcon = ({
-  isActive,
+  isActive = false,
   props,
 }: {
-  isActive: boolean;
-  props: React.SVGProps<SVGSVGElement>;
+  isActive?: boolean;
+  props?: React.SVGProps<SVGSVGElement>;
 }) => {
   return (
     <div className='flex flex-col justify-center items-center'>
       <IconPlane
         {...props}
+        size={24}
         stroke={1.5}
         className={clsx(
-          'h-16 w-16 rounded-xl text-white',
+          'h-16 w-16 p-3.5 rounded-xl text-white',
           {
             'bg-gray-400 dark:bg-extends-darker-blue-900': !isActive,
           },
           {
-            'bg-orangePinkRigth': isActive,
+            'bg-orangePinkRight': isActive,
           }
         )}
       />
@@ -29,24 +30,25 @@ export const PlaneIcon = ({
 };
 
 export const TicketIcon = ({
-  isActive,
+  isActive = false,
   props,
 }: {
-  isActive: boolean;
-  props: React.SVGProps<SVGSVGElement>;
+  isActive?: boolean;
+  props?: React.SVGProps<SVGSVGElement>;
 }) => {
   return (
     <div className='flex flex-col justify-center items-center'>
       <IconTicket
         {...props}
+        size={24}
         stroke={1.5}
         className={clsx(
-          'h-16 w-16 rounded-xl text-white',
+          'h-16 w-16 p-3.5 rounded-xl text-white',
           {
             'bg-gray-400 dark:bg-extends-darker-blue-900': !isActive,
           },
           {
-            'bg-orangePinkRigth': isActive,
+            'bg-orangePinkRight': isActive,
           }
         )}
       />
@@ -55,27 +57,32 @@ export const TicketIcon = ({
 };
 
 export const CreditCardIcon = ({
-  isActive,
+  isActive = false,
   props,
 }: {
-  isActive: boolean;
-  props: React.SVGProps<SVGSVGElement>;
+  isActive?: boolean;
+  props?: React.SVGProps<SVGSVGElement>;
 }) => {
   return (
     <div className='flex flex-col justify-center items-center'>
       <IconCreditCard
         {...props}
+        size={24}
         stroke={1.5}
         className={clsx(
-          'h-16 w-16 rounded-xl text-white',
+          'h-16 w-16 p-3.5 rounded-xl text-white',
           {
             'bg-gray-400 dark:bg-extends-darker-blue-900': !isActive,
           },
           {
-            'bg-orangePinkRigth': isActive,
+            'bg-orangePinkRight': isActive,
           }
         )}
       />
     </div>
   );
+};
+
+export const ProgressLine = (isActive = false) => {
+  return <p>Sola linea cuchao</p>;
 };

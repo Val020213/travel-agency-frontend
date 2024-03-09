@@ -1,8 +1,10 @@
 'use client';
-import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { IconX, IconBrandInstagram } from '@tabler/icons-react';
+import { useFormState, useFormStatus } from 'react-dom';
+import { createUser } from '@/libs/actions/signUp';
+import { SignInState } from '@/libs/actions';
 
 export const SignIn = ({
   open,
@@ -13,17 +15,27 @@ export const SignIn = ({
   setOpen: (value: boolean) => void;
   setOpenMaster: (value: boolean) => void;
 }) => {
+  const initialState = {};
+
+  const [state, dispatch] = useFormState<SignInState, FormData>(
+    createUser,
+    initialState
+  );
+
   return (
     <dialog
       open={open}
       className={clsx(
-        'flex flex-col rounded-[32px] fixed enter',
+        'flex flex-col rounded-[32px] fixed center',
         'bg-white dark:bg-extends-darker-blue-900',
-        'shadow-2xl px-8 pt-6 pb-12  sm:w-[480px] z-40 top-8 md:top-16 lg:top-20',
+        'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px] z-40 top-8 md:top-16 lg:top-4',
         'overflow-y-auto'
       )}
     >
-      <form className='flex flex-col gap-4 md:gap-8 w-full *:w-full'>
+      <form
+        className='flex flex-col gap-4 md:gap-8 w-full *:w-full'
+        action={dispatch}
+      >
         <div className='flex justify-start items-center flex-row text-gray-500 dark:text-extends-darker-blue-300'>
           <span className='text-lg leading-7 md:text-2xl font-medium w-full text-center'>
             Iniciar Sección
@@ -39,15 +51,16 @@ export const SignIn = ({
           <div className='flex flex-col text-base leading-6 gap-2'>
             <label
               className='text-gray-600 dark:text-extends-darker-blue-200'
-              htmlFor='name'
+              htmlFor='username'
             >
-              nombre de usuario o gmail
+              nombre de usuario
             </label>
             <input
               className='md:text-xl border-b border-gray-300 dark:border-gray-400'
-              type='text'
-              id='name'
-              placeholder='travelilero@gmail.com'
+              type='name'
+              id='username'
+              name='username'
+              placeholder='travelilero123'
               required
             />
           </div>
@@ -62,12 +75,16 @@ export const SignIn = ({
               className='md:text-xl border-b border-gray-300  dark:border-gray-400'
               type='password'
               id='password'
+              name='password'
               placeholder='********'
               required
             />
           </div>
         </div>
         <div className='flex flex-col *:w-full gap-4'>
+          <div>
+            {state.errors && <p className='text-[#e11d48]'>{state.message}</p>}
+          </div>
           <div
             onClick={() => setOpen(!open)}
             className={clsx(
@@ -75,10 +92,9 @@ export const SignIn = ({
               'cursor-pointer text-right text-[15px] px-1'
             )}
           >
-            ¿Aún no tienes cuenta? Unete aqui
+            ¿No tienes cuenta? Registrate
           </div>
           <button
-          // formAction={}
             type='submit'
             className={clsx(
               'flex items-center justify-center',

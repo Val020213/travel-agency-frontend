@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { SignIn } from './SignIn';
 import { SignUp } from './SignUp';
-import ModalSignUpVariant from './SignUp';
 
 export const Manager = ({
   open,
