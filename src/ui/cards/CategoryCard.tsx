@@ -9,6 +9,8 @@ import {
 //aqui podria importar todos los iconos para hacerlo dry
 //en dependencia de la instancia printear uno u otro
 
+
+
 export const CategoryCard = ({messageUp, messageDown}: {messageUp: string, messageDown:string}) => {
   return (
     <div
