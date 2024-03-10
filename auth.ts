@@ -18,28 +18,27 @@ import { use } from 'react';
 // }
 
 export const { auth, signIn, signOut } = NextAuth({
-    ...authConfig,
-    providers: [
-        Credentials({
-            async authorize(credentials) {
-                const parsedCredentials = z
-                    .object({ username: z.string(), password: z.string() })
-                    .safeParse(credentials);
+  ...authConfig,
+  providers: [
+    Credentials({
+      async authorize(credentials) {
+        const parsedCredentials = z
+          .object({ username: z.string(), password: z.string() })
+          .safeParse(credentials);
 
-                if (parsedCredentials.success) {
-                    const { username, password } = parsedCredentials.data;
-                    // const user = await getUser(email);
-                    // if (!user) return null;
-                    // const passwordMatches = await bcrypt.compare(password, user.password);
-                    // if (passwordMatches) {
-                    //     return user;
-                    // }
-                }
+        if (parsedCredentials.success) {
+          const { username, password } = parsedCredentials.data;
+          const user = username;
+          // const user = await getUser(email);
+          // if (!user) return null;
+          // const passwordMatches = await bcrypt.compare(password, user.password);
+          // if (passwordMatches) {
+          //     return user;
+          // }
+        }
 
-                return null;
-            },
-        }),
-    ],
+        return null;
+      },
+    }),
+  ],
 });
-
-

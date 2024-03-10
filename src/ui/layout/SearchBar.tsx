@@ -1,25 +1,24 @@
 'use client';
 import clsx from 'clsx';
 import { IconSearch } from '@tabler/icons-react';
-import { SearchSubmit } from '@/libs/actions';
+
 import { Menu } from '@/ui/layout/Menu';
 
 export const SearchBar = () => {
   return (
     <form
-      action={SearchSubmit}
       className={clsx(
         'flex flex-row justify-end items-center',
         'rounded-full h-[45] md:h-max pl-2 gap-2',
         'bg-white dark:bg-black overflow-visible',
         'border rounded-full border-[#F4373F] md:border-gray-600 dark:border-blue-600',
-        'hover:shadow-xl dark:hover://TODO Blue Shadow Hover'
+        'hover:shadow-md focus:shadow-md dark:focus:drop-shadow-blue dark:hover:drop-shadow-blue'
       )}
     >
       <Menu />
       <input
         className={clsx(
-          'text-gray-800 dark:text-gray-50',
+          'text-gray-800 dark:text-gray-50 bg-transparent',
           'text-base text-left leading-6 w-full font-normal'
         )}
         placeholder='Search in Travelix'

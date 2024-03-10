@@ -4,7 +4,9 @@ import Image from 'next/image';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Login } from './buttons/Login';
 import { Loged } from './buttons/Loged';
-import { Manager } from './modal/Manager';
+import { SignIn } from './modal/SignIn';
+import { SignUp } from './modal/SignUp';
+// import { Manager } from './modal/Manager';
 
 export const UserSection = () => {
   const userState: boolean = false;
@@ -29,15 +31,11 @@ export const UserSection = () => {
         alt=''
         height={64}
         width={250}
-        className='hidden md:block absolute top-5 left-4 z-0'
+        className='hidden md:block absolute top-5 left-4 z-0 w-auto h-auto'
       />
       <span className='z-10'>
-        <Login
-          title={!bp.md ? 'Unirse' : 'Unirse a Travelix'}
-          onClick={() => setPopUpOpen(!popUpOpen)}
-        />
+        <Login title={!bp.md ? 'Unirse' : 'Unirse a Travelix'} />
       </span>
-      {popUpOpen && <Manager open={popUpOpen} setOpen={setPopUpOpen} />}
     </div>
   );
 };

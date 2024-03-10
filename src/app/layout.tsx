@@ -1,8 +1,7 @@
+import '@/app/globals.css';
 import type { Metadata } from 'next';
-import { Providers } from '@/libs/providers';
 import { inter } from '@/ui/fonts';
-import { Navbar } from '@/ui/layout/Navbar';
-import './globals.css';
+import { Layout } from '@/libs/layoutProvider';
 
 export const metadata: Metadata = {
   title: 'Travelix',
@@ -11,19 +10,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html suppressHydrationWarning>
       <head />
-      <body className={`${inter.className} antialiased`}>
-        <Providers>
-          <Navbar />
-          <div className='flex flex-col mt-[160px] md:mt-[220px] lg:mt-[200px] mx-4 lg:mx-24'>
-            {children}
-          </div>
-        </Providers>
+      <body
+        className={`${inter.className} antialiased dark:bg-extends-darker-blue-950`}
+      >
+        <div
+          id='modal-root'
+          className='flex flex-col overflow-auto fixed top-0'
+        ></div>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );

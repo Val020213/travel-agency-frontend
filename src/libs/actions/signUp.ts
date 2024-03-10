@@ -1,64 +1,102 @@
+'use server';
+import { redirect, usePathname } from 'next/navigation';
 import { z } from 'zod';
 
-const FormSignInSchema = z.object({
-    username: z.string(),
-    name: z.string(),
-    nationality: z.string(),
-    password: z.string(),
-    confirmPassword: z.string(),
+const FormSchema = z.object({
+  id: z.string(),
+  username: z.string({
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduce un nombre de perfil',
+  }),
+  name: z.string({
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduzca su nombre completo',
+  }),
+  nationality: z.string({
+    invalid_type_error: 'Seleccione su nacionalidad',
+    required_error: 'Selecione su nacionalidad',
+  }),
+  password: z.string({
+    invalid_type_error: 'Introduzca una contraseña',
+    required_error: 'Introduzca una contraseña',
+  }),
+  confirmPassword: z.string({
+    invalid_type_error: 'Confirme su contraseña',
+    required_error: 'Confirme su contraseña',
+  }),
+  date: z.string(),
 });
 
 export type SignUpState = {
-    errors?: {
-        username?: string;
-        name?: string
-        password?: string;
-        confirmPassword?: string;
-    };
-    message?: string | null;
+  message?: string;
+  errors?: {
+    username?: string[];
+    name?: string[];
+    nationality?: string[];
+    password?: string[];
+    confirmPassword?: string[];
+  };
 };
 
-export async function createUser(prevState: SignUpState, formData: FormData) {
+const CreateUser = FormSchema.omit({ id: true, date: true });
 
-    const validatedData = FormSignInSchema.safeParse({
-        username: formData.get('username') as string,
-        name: formData.get('name') as string,
-        nationality: formData.get('nationality') as string,
-        password: formData.get('password') as string,
-        confirmPassword: formData.get('confirmPassword') as string,
+export async function CreateUserAction(
+  prevState: SignUpState,
+  formData: FormData
+) {
+  const validatedFields = CreateUser.safeParse({
+    username: formData.get('username') as string,
+    name: formData.get('name') as string,
+    nationality: formData.get('nationality') as string,
+    password: formData.get('password') as string,
+    confirmPassword: formData.get('confirmPassword') as string,
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Invalid Fields. Failed to Create User.',
+    };
+  }
+
+  const { username, name, nationality, password, confirmPassword } =
+    validatedFields.data;
+
+  if (password !== confirmPassword) {
+    return {
+      errors: {},
+      message: 'Password does not match',
+    };
+  }
+
+  // POST /tourist/create, http://127.0.0.1:8000/tourist/create
+
+  const data = {
+    username: username,
+    name: name,
+    nationality: nationality,
+    password: password,
+  };
+
+  try {
+    const resp = await fetch('http://127.0.0.1:8000/tourist/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     });
-
-    if (!validatedData.success) {
-        return {
-            errors: validatedData.error.flatten().fieldErrors,
-            message: 'Invalid Fields. Failed to Create User.',
-        };
+    if (!resp.ok) {
+      return {
+        errors: {},
+        message: 'Error Response from Server. Failed to Create User.',
+      };
     }
-
-    const { username, name, nationality, password, confirmPassword } =
-        validatedData.data;
-
-    if (password !== confirmPassword) {
-        return {
-            errors: { password: 'Password does not match' },
-            message: 'Password does not match',
-        };
-    }
-
-    // POST /tourist/create, http://127.0.0.1:8000/tourist/create
-
-    const data = {
-        username: username,
-        name: name,
-        nationality: nationality,
-        password: password,
+  } catch (error) {
+    return {
+      errors: {},
+      message: 'Database Connection error.',
     };
-
-    await fetch('http://127.0.0.1:8000/tourist/create'), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    };
+  }
+  redirect('?registerSuccess=true');
 }

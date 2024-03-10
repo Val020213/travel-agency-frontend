@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input {
-  outline: none;
-  background: none;
-}
-
-html {
-  @apply dark:bg-extends-darker-blue-950;
+::-webkit-scrollbar {
+  @apply w-0;
 }

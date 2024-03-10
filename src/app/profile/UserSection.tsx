@@ -8,7 +8,7 @@ export const UserSection = ({ userData }: { userData: user }) => {
       <div
         className={clsx(
           'hidden',
-          'md:flex justify-center items-center shrink-0',
+          'md:flex justify-center items-center shrink-0'
         )}
       >
         <Image
@@ -16,7 +16,7 @@ export const UserSection = ({ userData }: { userData: user }) => {
           width={230}
           height={230}
           alt='google'
-          className='h-60 w-60'
+          className='h-auto w-auto'
         />
       </div>
       <div className='flex md:py-4 flex-col gap-4 md:gap-6 lg:gap-8 w-full'>

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 // import { user } from '@/libs/definitions';
 import { UserSection } from '@/app/profile/UserSection';
 import { ReservationSection } from './ReservationSection';
+import { Tag } from '@/ui/tokens/Tag';
 
 export default function Page() {
   const isAgencyTourist = true; // TODO: get from user data
@@ -28,19 +29,7 @@ export default function Page() {
       >
         Cuenta de usuario
         {isAgencyTourist && (
-          <div
-            className={clsx(
-              'flex flex-row w-fit items-center justify-center',
-              'bg-orangePinkRight gap-0 md:gap-2',
-              'text-white',
-              'px-4 py-2',
-              'rounded-full',
-              'text-base leading-6'
-            )}
-          >
-            Turista de Agencia
-            <IconVip />
-          </div>
+          <Tag text='turista de agencia' className='' icon={<IconVip />} />
         )}
       </div>
       <UserSection userData={userData} />

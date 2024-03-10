@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { IconSearch } from '@tabler/icons-react';
-import { SearchSubmit } from '@/libs/actions';
+// import { SearchSubmit } from '@/libs/actions';
 import { useState } from 'react';
 
 export const SearchBarMobile = () => {
@@ -11,7 +11,7 @@ export const SearchBarMobile = () => {
       setOpen(false);
     } else {
       setOpen(true);
-      SearchSubmit(formData);
+      console.log("Searching...")
     }
   }
 
@@ -34,7 +34,7 @@ export const SearchBarMobile = () => {
           action={preAction}
           className={clsx(
             'flex flex-row justify-end items-center',
-            'rounded-full h-[45] md:h-max pl-2 gap-2',
+            'rounded-full h-[45] md:h-max pl-2 gap-2 w-full',
             'bg-white dark:bg-black overflow-visible',
             'border rounded-full border-[#F4373F] md:border-gray-600 dark:border-blue-600',
             'hover:shadow-xl dark:hover://TODO Blue Shadow Hover'

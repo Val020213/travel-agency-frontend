@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { categories } from '@/libs/data';
 import { IconChevronDown } from '@tabler/icons-react';
+import { set } from 'zod';
+import path from 'path';
 
 const Separator = () => {
   return (
@@ -24,20 +26,17 @@ const Separator = () => {
 export const Menu = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
-  const [indexCategory, setIndexCategory] = useState<number>(
-    categories.findIndex((category) => category.href === pathname) ?? 0
+  const indexMatch = categories.findIndex(
+    (category) => category.href === pathname
   );
-
-  useEffect(() => {
-    setIndexCategory(
-      categories.findIndex((category) => category.href === pathname) ?? 0
-    );
-  }, [pathname]);
+  const [indexCategory, setIndexCategory] = useState<number>(
+    indexMatch >= 0 ? indexMatch : 0
+  );
 
   return (
     <nav
       className={clsx(
-        'flex flex-col justify-start items-center w-28 relative',
+        'flex flex-col justify-start items-center w-36 relative',
         'font-medium text-base leading-6',
         'text-gray-500 dark:text-gray-50'
       )}
@@ -46,7 +45,7 @@ export const Menu = () => {
     >
       <div className='flex flex-row justify-end items-center w-full md:gap-1 cursor'>
         {categories[indexCategory]?.name}
-        <IconChevronDown className='block' size={24} />
+        <IconChevronDown size={24} />
         <span className='text-gray-500 dark:text-gray-300'>
           <Separator />
         </span>
@@ -65,6 +64,7 @@ export const Menu = () => {
               <Link
                 key={index}
                 href={category.href}
+                onClick={() => setIndexCategory(index)}
                 className='hover:text-orange-500 dark:hover:text-blue-500 w-full flex'
               >
                 {category.name}

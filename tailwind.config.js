@@ -6,6 +6,7 @@ const config = {
     './src/libs/**/*.{js,ts,jsx,tsx,mdx}',
     './src/hooks/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -21,6 +22,7 @@ const config = {
       },
       dropShadow: {
         white: '0 0 12px white',
+        blue: '0px 8px 24px #0912E7',
       },
       colors: {
         extends: {
