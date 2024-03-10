@@ -1,6 +1,6 @@
-import LayoutGrid from './components/LayoutGrid';
+import { LayoutGrid } from './components/LayoutGrid';
 import { ContinueCard } from './components/ContinueCard';
-import { ProductCard } from './components/Card';
+import { ProductCard } from './components/ProductCard';
 import {
   Breadcrumb,
   BreadcrumbItem,

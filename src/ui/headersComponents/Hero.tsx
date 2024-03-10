@@ -109,9 +109,7 @@ export function Hero() {
             <Image
               src={imagesSrc[index]}
               alt='hero image'
-              objectFit='cover'
               quality={100}
-              layout='fill'
               fill={true}
             />
           </CarouselItem>

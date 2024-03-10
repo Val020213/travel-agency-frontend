@@ -24,7 +24,7 @@ export type SignInState = {
 
 const ValidateUser = FormSchema.omit({ id: true, date: true });
 
-export async function createUser(prevState: SignInState, formData: FormData) {
+export async function validateUser(prevState: SignInState, formData: FormData) {
   console.log(formData);
 
   const validatedFields = ValidateUser.safeParse({

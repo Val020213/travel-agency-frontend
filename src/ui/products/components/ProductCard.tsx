@@ -41,11 +41,10 @@ export const ProductCard = ({
         src={imageSrc}
         style={{
           aspectRatio: '800/600',
-          objectFit: 'cover',
         }}
       />
-      <div className='grid gap-2 p-4'>
-        <div className='flex flex-row items-center justify-between'>
+      <div className='flex flex-col gap-2 p-4'>
+        <div className='flex flex-wrap items-center justify-between gap-1'>
           <h3 className='font-semibold text-xl line-clamp-1'>{title}</h3>
           {tag && <Tag text={tag} className='h-8' />}
         </div>

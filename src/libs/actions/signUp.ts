@@ -1,4 +1,5 @@
 'use server';
+import { redirect, usePathname } from 'next/navigation';
 import { z } from 'zod';
 
 const FormSchema = z.object({
@@ -39,9 +40,10 @@ export type SignUpState = {
 
 const CreateUser = FormSchema.omit({ id: true, date: true });
 
-export async function createUser(prevState: SignUpState, formData: FormData) {
-  console.log(formData);
-
+export async function CreateUserAction(
+  prevState: SignUpState,
+  formData: FormData
+) {
   const validatedFields = CreateUser.safeParse({
     username: formData.get('username') as string,
     name: formData.get('name') as string,
@@ -51,8 +53,6 @@ export async function createUser(prevState: SignUpState, formData: FormData) {
   });
 
   if (!validatedFields.success) {
-    console.log(prevState.message);
-    console.log(prevState.errors);
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Invalid Fields. Failed to Create User.',
@@ -61,11 +61,6 @@ export async function createUser(prevState: SignUpState, formData: FormData) {
 
   const { username, name, nationality, password, confirmPassword } =
     validatedFields.data;
-
-  console.log('Hello world');
-
-  console.log(validatedFields);
-  console.log('gello');
 
   if (password !== confirmPassword) {
     return {
@@ -78,34 +73,30 @@ export async function createUser(prevState: SignUpState, formData: FormData) {
 
   const data = {
     username: username,
-    full_name: name,
-    email: 'probando@gmail.com',
-    hashed_password: password,
+    name: name,
+    nationality: nationality,
+    password: password,
   };
 
   try {
-    const resp = await fetch('http://127.0.0.1:8000/create', {
+    const resp = await fetch('http://127.0.0.1:8000/tourist/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-
-    const tmpMessage = resp.ok ? 'Success' : 'Error';
-
-    console.log(tmpMessage);
-
-    return {
-      errors: {},
-      message: tmpMessage,
-    };
+    if (!resp.ok) {
+      return {
+        errors: {},
+        message: 'Error Response from Server. Failed to Create User.',
+      };
+    }
   } catch (error) {
-    console.log('Ya se termino el response con Status ok? : False');
-
     return {
       errors: {},
-      message: 'False',
+      message: 'Database Connection error.',
     };
   }
+  redirect('?registerSuccess=true');
 }

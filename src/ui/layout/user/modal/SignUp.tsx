@@ -6,14 +6,14 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { IconX, IconBrandInstagram } from '@tabler/icons-react';
 import { useFormState } from 'react-dom';
-import { createUser } from '@/libs/actions/signUp';
+import { CreateUserAction } from '@/libs/actions/signUp';
 import { SignUpState } from '@/libs/actions/signUp';
 
 export const SignUp = () => {
   const initialState = {};
 
   const [state, dispatch] = useFormState<SignUpState, FormData>(
-    createUser,
+    CreateUserAction,
     initialState
   );
 
