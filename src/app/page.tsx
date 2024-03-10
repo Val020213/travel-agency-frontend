@@ -32,7 +32,10 @@ export default function Home() {
         phone='55591702'
       />
       <div className='este div es fantasma h-24' />
-      <CategoryCard messageUp='Fortalece tus lazos familiares con nuestras excursiones' messageDown='Regalales a tus familiares un recuerdo unico con nuestras excursiones, tenemos excursiones para todas las edades'/>
+      <CategoryCard categoryType={2} />
+      <CategoryCard categoryType={1} />
+      <CategoryCard categoryType={3} />
+      <CategoryCard categoryType={4} />
     </>
   );
 }
