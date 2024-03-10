@@ -1,7 +1,7 @@
 'use client';
 import { FetchTourists } from '@/libs/data';
 import { tourist } from '@/libs/definitions';
-import { Tourist } from '@/ui/tmp/tourist';
+// import { Tourist } from '@/ui/tmp/tourist';
 import { useState, useEffect } from 'react';
 import { InfoCard } from '@/ui/cards/InfoCard';
 import { Logo } from '@/ui/layout/Logo';
@@ -31,7 +31,7 @@ export default function Home() {
         address='Paseo de Prado y Capdevila, Parque de los Enamorados, La Habana, Cuba'
         phone='55591702'
       />
-      <div className='este div es fantasma h-24' />
+      {/* <div className='este div es fantasma h-24' /> */}
       <CategoryCard categoryType={2} />
       <CategoryCard categoryType={1} />
       <CategoryCard categoryType={3} />
