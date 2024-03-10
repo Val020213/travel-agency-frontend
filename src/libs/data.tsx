@@ -33,6 +33,8 @@ export const categories: category[] = [
   },
 ];
 
+export const categoriesNames = categories.map((category) => category.name);
+
 export const enterpriseCategories: category[] = [
   {
     name: 'Estadísticas',
