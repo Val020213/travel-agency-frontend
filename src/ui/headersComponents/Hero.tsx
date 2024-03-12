@@ -111,6 +111,12 @@ export function Hero() {
               alt='hero image'
               quality={100}
               fill={true}
+              priority
+              style={
+                {
+                  aspectRatio: '950/560',
+                }
+              }
             />
           </CarouselItem>
         ))}

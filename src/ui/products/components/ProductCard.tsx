@@ -35,9 +35,9 @@ export const ProductCard = ({
     >
       <Image
         alt='product image'
-        className='object-cover w-auto h-auto'
         height={600}
         width={800}
+        quality={100}
         src={imageSrc}
         style={{
           aspectRatio: '800/600',

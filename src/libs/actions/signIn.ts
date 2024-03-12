@@ -1,5 +1,8 @@
 'use server';
 import { z } from 'zod';
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
+import { encrypt } from './secure';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -24,17 +27,18 @@ export type SignInState = {
 
 const ValidateUser = FormSchema.omit({ id: true, date: true });
 
-export async function validateUser(prevState: SignInState, formData: FormData) {
-  console.log(formData);
-
+export async function ValidateUserAction(
+  prevState: SignInState,
+  formData: FormData
+) {
   const validatedFields = ValidateUser.safeParse({
     username: formData.get('username') as string,
     password: formData.get('password') as string,
   });
 
+  console.log(prevState);
+
   if (!validatedFields.success) {
-    console.log(prevState.message);
-    console.log(prevState.errors);
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Invalid Fields. Failed to Create User.',
@@ -43,39 +47,54 @@ export async function validateUser(prevState: SignInState, formData: FormData) {
 
   const { username, password } = validatedFields.data;
 
+  // POST /tourist/create, http://127.0.0.1:8000/tourist/create
+
   const data = {
     username: username,
     password: password,
   };
 
-  console.log('haciendo post...');
+  // const response = signIn('credentials', {
+  //   username: username,
+  //   password: password,
+  // });
 
-  try {
-    const resp = await fetch('http://127.0.0.1:8000/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+  if (!(username in AdminPatch)) {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/tourist/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    console.log('Ya se termino el response con Status ok? :');
-    console.log(resp.ok);
-
-    const tmpMessage = resp.ok ? 'Success' : 'Error';
-
-    console.log(tmpMessage);
-
-    return {
-      errors: {},
-      message: tmpMessage,
-    };
-  } catch (error) {
-    console.log('Ya se termino el response con Status ok? : False');
-
-    return {
-      errors: {},
-      message: 'False',
-    };
+      if (!response.ok) {
+        return {
+          message: 'Failed to create user, Bad Request',
+        };
+      }
+    } catch (error) {
+      return {
+        message: 'Failed to create user, DB Error Connection',
+      };
+    }
   }
+
+  const expires = new Date(Date.now() + 1000 * 10);
+  const session = await encrypt({ username, expires });
+
+  cookies().set('session', session, {
+    expires,
+    httpOnly: true,
+  });
+
+  localStorage.setItem('username', username);
+
+  redirect('?loginSuccess=true');
 }
+
+const AdminPatch: { [key: string]: string | undefined } = {
+  Osvaldo: 'admin',
+  admin: 'admin',
+};

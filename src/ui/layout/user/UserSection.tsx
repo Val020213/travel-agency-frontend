@@ -1,28 +1,15 @@
-'use client';
-import React, { useState } from 'react';
 import Image from 'next/image';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Login } from './buttons/Login';
 import { Loged } from './buttons/Loged';
-import { SignIn } from './modal/SignIn';
-import { SignUp } from './modal/SignUp';
-// import { Manager } from './modal/Manager';
 
 export const UserSection = () => {
-  const userState: boolean = false;
-  const [popUpOpen, setPopUpOpen] = useState<boolean>(false);
   const bp = useBreakpoints();
+  const username = localStorage.getItem('username');
 
-  return userState ? (
+  return username ? (
     <div>
-      {
-        <Loged
-          name={localStorage.getItem('username') ?? 'Error localstorage'}
-          onClick={() => {
-            console.log('hello world');
-          }}
-        />
-      }
+      <Loged name={username} />
     </div>
   ) : (
     <div className='flex items-center justify-center relative h-16'>

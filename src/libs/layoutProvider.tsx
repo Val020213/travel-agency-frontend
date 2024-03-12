@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { EnterpriseNavbar, Navbar } from '@/ui/layout/Navbar';
 import { Footer } from '@/ui/layout/Footer';
 import { ThemeProvider } from 'next-themes';
-import { ReactNode } from 'react';
+import { ReactNode, use } from 'react';
 import { Hero } from '@/ui/headersComponents/Hero';
 import { SignIn } from '@/ui/layout/user/modal/SignIn';
 import { SignUp } from '@/ui/layout/user/modal/SignUp';
@@ -23,23 +23,23 @@ function Providers({ children }: { children: React.ReactNode }) {
 }
 
 export const Modals = ({ children }: { children: ReactNode }) => {
-
   const modalsParams = ['login', 'register'];
   const searchParams = useSearchParams();
 
   return (
     <>
-      {modalsParams.some((param) => searchParams.has(param)) &&
-        < div
+      {modalsParams.some((param) => searchParams.has(param)) && (
+        <div
           className={clsx(
             'z-40 fixed flex flex-col items-center justify-start',
             'backdrop-brightness-75 overflow-auto py-4',
-            'w-full h-full',
+            'w-full h-full'
           )}
         >
           <SignIn />
           <SignUp />
-        </div >}
+        </div>
+      )}
       {children}
     </>
   );

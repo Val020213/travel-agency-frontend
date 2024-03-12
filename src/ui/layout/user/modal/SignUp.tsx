@@ -5,9 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { IconX, IconBrandInstagram } from '@tabler/icons-react';
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 import { CreateUserAction } from '@/libs/actions/signUp';
 import { SignUpState } from '@/libs/actions/signUp';
+import { ContinueButton } from './ContinueButton';
 
 export const SignUp = () => {
   const initialState = {};
@@ -142,17 +143,7 @@ export const SignUp = () => {
             >
               ¿Tienes cuenta? Inicia sección aqui
             </Link>
-            <button
-              type='submit'
-              className={clsx(
-                'flex items-center justify-center',
-                'bg-orangePinkRight text-white text-opacity-100 md:text-xl leading-7',
-                'rounded-lg py-4 px-4 font-medium',
-                ' hover:ring-4 hover:ring-rose-500 '
-              )}
-            >
-              Continuar
-            </button>
+            <ContinueButton />
           </div>
           <div className='flex flex-col md:flex-row justify-start items-center gap-4'>
             <div className='text-gray-600 dark:text-extends-darker-blue-200 min-w-max'>

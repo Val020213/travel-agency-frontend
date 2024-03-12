@@ -5,13 +5,14 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { IconX, IconBrandInstagram } from '@tabler/icons-react';
 import { useFormState, useFormStatus } from 'react-dom';
-import { SignInState, validateUser } from '@/libs/actions';
+import { SignInState, ValidateUserAction } from '@/libs/actions/signIn';
 import Link from 'next/link';
+import { ContinueButton } from './ContinueButton';
 
 export const SignIn = () => {
   const initialState = {};
   const [state, dispatch] = useFormState<SignInState, FormData>(
-    validateUser,
+    ValidateUserAction,
     initialState
   );
 
@@ -92,17 +93,7 @@ export const SignIn = () => {
             >
               ¿No tienes cuenta? Registrate
             </Link>
-            <button
-              type='submit'
-              className={clsx(
-                'flex items-center justify-center',
-                'bg-orangePinkRight text-white text-opacity-100 md:text-xl leading-7',
-                'rounded-lg py-4 px-4 font-medium',
-                ' hover:ring-4 hover:ring-rose-500 '
-              )}
-            >
-              Continuar
-            </button>
+            <ContinueButton />
           </div>
           <div className='flex flex-col md:flex-row justify-start items-center gap-4'>
             <div className='text-gray-600 dark:text-extends-darker-blue-200 min-w-max'>

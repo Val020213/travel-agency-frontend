@@ -9,7 +9,6 @@ export const Tag = ({
   icon?: React.ReactNode;
   className?: string;
 }) => {
-  console.log(className);
   return (
     <div
       className={clsx(

@@ -1,5 +1,7 @@
-// define all types and interfaces here
-import { ReactElement } from 'react';
+export type Session = {
+  username: string;
+  expires: Date;
+};
 
 // hint: prisma
 export type category = {
@@ -8,13 +10,7 @@ export type category = {
   icon: React.ReactNode;
 };
 
-export type tourist = {
-  id: number;
-  name: string;
-  nationality: string;
-};
-
-export type user = {
+export type User = {
   name: string;
   username: string;
   nationality: string;

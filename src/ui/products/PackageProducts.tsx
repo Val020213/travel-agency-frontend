@@ -15,7 +15,6 @@ import {
 import { product } from '@/libs/definitions';
 
 export const PackageProducts = () => {
-
   const [data, setData] = useState<product[]>([]);
 
   useEffect(() => {
@@ -38,21 +37,19 @@ export const PackageProducts = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <LayoutGrid>
-        {
-          data.map((product: product) => (
-            <ProductCard
-              key={product.id}
-              href="#"
-              tag={product.tag}
-              imageSrc={require('@/ui/assets/products/' + product.image)}
-              title={product.name}
-              description={product.description}
-              metaData1={product.price}
-              metaData2="cup"
-            />
-          ))
-        }
-        <ContinueCard action={() => { }} />
+        {data.map((product: product, index) => (
+          <ProductCard
+            key={index}
+            href='#'
+            tag={product.tag}
+            imageSrc={require('@/ui/assets/products/' + product.image)}
+            title={product.name}
+            description={product.description}
+            metaData1={product.price}
+            metaData2='cup'
+          />
+        ))}
+        <ContinueCard action={() => {}} />
       </LayoutGrid>
     </div>
   );

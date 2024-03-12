@@ -1,4 +1,4 @@
-import { category } from './definitions';
+import { category, product } from './definitions';
 import {
   IconHome,
   IconBus,
@@ -8,7 +8,6 @@ import {
   IconSquareRoundedPlus,
 } from '@tabler/icons-react';
 import { unstable_noStore as noStore } from 'next/cache';
-import { tourist } from './definitions';
 
 export const categories: category[] = [
   {
@@ -46,12 +45,33 @@ export const enterpriseCategories: category[] = [
   },
 ];
 
-export async function FetchTourists(): Promise<tourist[]> {
+const EndpointsGET: { [key: string]: string } = {
+  excursions: '',
+  agencies: '',
+  packages: '',
+};
+
+export async function FetchProduct(type: string): Promise<product[]> {
   noStore();
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  if (!res.ok) {
-    throw new Error('Failed to fetch tourists');
+  const response = await fetch(EndpointsGET[type]);
+  if (!response.ok) {
+    console.log('Failed to fetch products');
+    return [];
   }
-  const data = await res.json();
+
+  const data = await response.json();
   return data;
+}
+
+// Hacer estos metodos para cada tipo de producto luego
+export async function FetchExcursions(): Promise<product[]> {
+  return FetchProduct('excursions');
+}
+
+export async function FetchAgencies(): Promise<product[]> {
+  return FetchProduct('agencies');
+}
+
+export async function FetchPackages(): Promise<product[]> {
+  return FetchProduct('packages');
 }

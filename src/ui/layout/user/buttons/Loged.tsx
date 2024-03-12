@@ -1,16 +1,12 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import { IconUserCircle } from '@tabler/icons-react';
+import { useContext } from 'react';
 
-export const Loged = ({
-  name,
-  onClick,
-}: {
-  name: string;
-  onClick: () => void;
-}) => {
+export const Loged = ({ name }: { name: string }) => {
   return (
-    <button
-      onClick={() => onClick()}
+    <Link
+      href='/profile'
       className={clsx(
         'text-gray-800',
         'opacity-80',
@@ -27,6 +23,6 @@ export const Loged = ({
     >
       <span className='hidden sm:block'>{name}</span>
       <IconUserCircle size={36} stroke={1.5} />
-    </button>
+    </Link>
   );
 };
