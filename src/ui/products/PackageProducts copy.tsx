@@ -13,16 +13,14 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { product } from '@/libs/definitions';
-import { FetchPackages } from '@/libs/data';
 
-export const PackageProducts = () => {
+export const CompomenteDePrueba = () => {
+
   const [data, setData] = useState<product[]>([]);
 
   useEffect(() => {
-    FetchPackages().then((data) => {
-      setData(data);
-    });
-  });
+    seedData().then((data) => setData(data));
+  }, []);
 
   return (
     <div className='flex flex-col gap-8'>
@@ -40,19 +38,21 @@ export const PackageProducts = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <LayoutGrid>
-        {data.map((product) => (
-          <ProductCard
-            key={product.id}
-            href={`/packages/${product.id}`}
-            tag={product.tag}
-            imageSrc={product.image}
-            title={product.name}
-            description={product.description}
-            metaData1={product.price}
-            metaData2={'cup'}
-          />
-        ))}
-        <ContinueCard action={() => {}} />
+        {
+          data.map((product: product, index : number) => (
+            <ProductCard
+              key={index}
+              href="#"
+              tag={product.tag}
+              imageSrc={require('@/ui/assets/products/' + product.image)}
+              title={product.name}
+              description={product.description}
+              metaData1={product.price}
+              metaData2="cup"
+            />
+          ))
+        }
+        <ContinueCard action={() => { }} />
       </LayoutGrid>
     </div>
   );

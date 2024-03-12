@@ -9,8 +9,19 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
+import { useEffect, useState } from 'react';
+import { product } from '@/libs/definitions';
+import { FetchAgencies } from '@/libs/data';
 
 export const AgencyProducts = () => {
+  const [data, setData] = useState<product[]>([]);
+
+  useEffect(() => {
+    FetchAgencies().then((data) => {
+      setData(data);
+    });
+  });
+
   return (
     <div className='flex flex-col gap-4'>
       <Breadcrumb>
@@ -25,78 +36,18 @@ export const AgencyProducts = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <LayoutGrid>
-        <ProductCard
-          href='#'
-          tag='Alojamiento'
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='a'
-          metaData1='2000'
-          metaData2='cup'
-        />
-        <ProductCard
-          href='#'
-          tag=''
-          imageSrc={require('@/ui/assets/products/IMG_20220825_101112.jpg')}
-          title='Canasi Cuba'
-          description='A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua A beutiful place con agua'
-          metaData1='2000'
-          metaData2='cup'
-        />
+        {data.map((product) => (
+          <ProductCard
+            key={product.id}
+            href={`/packages/${product.id}`}
+            tag={product.tag}
+            imageSrc={product.image}
+            title={product.name}
+            description={product.description}
+            metaData1={product.price}
+            metaData2={'offer'}
+          />
+        ))}
         <ContinueCard action={() => {}} />
       </LayoutGrid>
     </div>

@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { encrypt } from './secure';
+import { AddItemLocalStorage, GetItemLocalStorage } from './Storage';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -89,12 +90,9 @@ export async function ValidateUserAction(
     httpOnly: true,
   });
 
-  localStorage.setItem('username', username);
-
   redirect('?loginSuccess=true');
 }
 
 const AdminPatch: { [key: string]: string | undefined } = {
-  Osvaldo: 'admin',
   admin: 'admin',
 };

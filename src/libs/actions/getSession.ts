@@ -1,10 +1,9 @@
 import { decrypt } from './secure';
 import { Session } from '../definitions';
-import { useCookies } from 'next-client-cookies';
+import { cookies } from 'next/headers';
 
-export async function GetSession(): Promise<Session | undefined> {
-  // const session = cookies().get('session')?.value;
-  const session = useCookies().get('session');
+export async function getSession(): Promise<Session | undefined> {
+  const session = cookies().get('session')?.value;
   if (!session) return undefined;
   return await decrypt(session);
 }

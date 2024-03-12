@@ -2,10 +2,12 @@ import Image from 'next/image';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Login } from './buttons/Login';
 import { Loged } from './buttons/Loged';
+import { useEffect, useState } from 'react';
 
 export const UserSection = () => {
   const bp = useBreakpoints();
-  const username = localStorage.getItem('username');
+
+  const [username, setUsername] = useState<string | undefined>(undefined);
 
   return username ? (
     <div>

@@ -1,6 +1,7 @@
 import { useCookies } from 'next-client-cookies';
+import { RemoveItemLocalStorage } from './Storage';
 
 export function LogOutAction() {
-  localStorage.removeItem('session');
+  RemoveItemLocalStorage('username');
   useCookies().set('session', '', { expires: new Date(0) });
 }

@@ -45,33 +45,72 @@ export const enterpriseCategories: category[] = [
   },
 ];
 
-const EndpointsGET: { [key: string]: string } = {
-  excursions: '',
-  agencies: '',
-  packages: '',
-};
+// Hacer estos metodos para cada tipo de producto luego
+export async function FetchExcursions(): Promise<product[]> {
+  const response = await fetch('http://127.0.0.1:8000/excursion/list');
 
-export async function FetchProduct(type: string): Promise<product[]> {
-  noStore();
-  const response = await fetch(EndpointsGET[type]);
   if (!response.ok) {
     console.log('Failed to fetch products');
     return [];
   }
 
   const data = await response.json();
-  return data;
-}
 
-// Hacer estos metodos para cada tipo de producto luego
-export async function FetchExcursions(): Promise<product[]> {
-  return FetchProduct('excursions');
+  const excursionsAsProduct: product[] = data.map((excursion: any) => {
+    return {
+      id: excursion.id,
+      name: excursion.name,
+      description: excursion.description,
+      price: excursion.price,
+      image: '',
+    };
+  });
+
+  return excursionsAsProduct;
 }
 
 export async function FetchAgencies(): Promise<product[]> {
-  return FetchProduct('agencies');
+  const response = await fetch('http://127.0.0.1:8000/agency/list');
+
+  if (!response.ok) {
+    console.log('Failed to fetch products');
+    return [];
+  }
+
+  const data = await response.json();
+
+  const agencyAsProduct: product[] = data.map((agency: any) => {
+    return {
+      id: agency.id,
+      name: agency.name,
+      description: agency.address,
+      price: 0,
+      image: '',
+    };
+  });
+
+  return agencyAsProduct;
 }
 
 export async function FetchPackages(): Promise<product[]> {
-  return FetchProduct('packages');
+  const response = await fetch('http://127.0.0.1:8000/offer/list');
+
+  if (!response.ok) {
+    console.log('Failed to fetch products');
+    return [];
+  }
+
+  const data = await response.json();
+
+  const packageAsProduct: product[] = data.map((offer: any) => {
+    return {
+      id: offer.id,
+      name: offer.name,
+      description: offer.description,
+      price: offer.price,
+      image: '',
+    };
+  });
+
+  return packageAsProduct;
 }

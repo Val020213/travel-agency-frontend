@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { decrypt, encrypt } from './secure';
+import { RemoveItemLocalStorage } from './Storage';
 
 export async function updateSession(request: NextRequest) {
   const session = request.cookies.get('session')?.value;
-  if (!session) return;
+  if (!session) {
+    RemoveItemLocalStorage('username');
+    return;
+  }
 
   // Refresh the session so it doesn't expire
   const parsed = await decrypt(session);
