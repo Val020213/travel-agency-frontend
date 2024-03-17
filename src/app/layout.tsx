@@ -2,14 +2,13 @@ import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { inter } from '@/ui/fonts';
 import { Layout } from '@/libs/layoutProvider';
-
 export const metadata: Metadata = {
   title: 'Travelix',
   description: 'Travelix - Your travel partner',
 };
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
@@ -18,11 +17,11 @@ export default function RootLayout({
       <head />
       <body
         className={`${inter.className} antialiased dark:bg-extends-darker-blue-950`}
-      >
+        >
         <div
           id='modal-root'
           className='flex flex-col overflow-auto fixed top-0'
-        ></div>
+          ></div>     
         <Layout>{children}</Layout>
       </body>
     </html>

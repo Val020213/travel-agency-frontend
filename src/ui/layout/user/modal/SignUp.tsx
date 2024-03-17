@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { IconX, IconBrandInstagram } from '@tabler/icons-react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
 import { CreateUserAction } from '@/libs/actions/signUp';
 import { SignUpState } from '@/libs/actions/signUp';
 import { ContinueButton } from './ContinueButton';
@@ -49,7 +49,7 @@ export const SignUp = () => {
           <div className='flex flex-col *:w-full gap-6'>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
-                className='text-gray-600 dark:text-extends-darker-blue-200'
+                className='text-gray-300 dark:text-extends-darker-blue-300'
                 htmlFor='username'
               >
                 nombre de usuario
@@ -65,7 +65,7 @@ export const SignUp = () => {
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
-                className='text-gray-600 dark:text-extends-darker-blue-200'
+                className='text-gray-300 dark:text-extends-darker-blue-300'
                 htmlFor='name'
               >
                 nombre completo
@@ -81,7 +81,7 @@ export const SignUp = () => {
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
-                className='text-gray-600 dark:text-extends-darker-blue-200'
+                className='text-gray-300 dark:text-extends-darker-blue-300'
                 htmlFor='nationality'
               >
                 nacionalidad
@@ -97,7 +97,7 @@ export const SignUp = () => {
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
-                className='text-gray-600 dark:text-extends-darker-blue-200 '
+                className='text-gray-300 dark:text-extends-darker-blue-300 '
                 htmlFor='password'
               >
                 contraseña
@@ -113,7 +113,7 @@ export const SignUp = () => {
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
-                className='text-gray-600 dark:text-extends-darker-blue-200 '
+                className='text-gray-300 dark:text-extends-darker-blue-300 '
                 htmlFor='confirmPassword'
               >
                 confirme su contraseña
@@ -141,12 +141,12 @@ export const SignUp = () => {
                 'cursor-pointer text-right text-[15px] px-1'
               )}
             >
-              ¿Tienes cuenta? Inicia sección aqui
+              ¿Tienes cuenta? Inicia aquí
             </Link>
             <ContinueButton />
           </div>
           <div className='flex flex-col md:flex-row justify-start items-center gap-4'>
-            <div className='text-gray-600 dark:text-extends-darker-blue-200 min-w-max'>
+            <div className='text-gray-300 dark:text-extends-darker-blue-300 min-w-max'>
               continuar con
             </div>
             <div className='flex flex-row gap-2 w-full *:w-full'>

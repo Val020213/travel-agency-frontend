@@ -3469,7 +3469,7 @@ js-cookie@^3.0.5:
 
 js-cookies@^1.0.4:
   version "1.0.4"
-  resolved "https://registry.yarnpkg.com/js-cookies/-/js-cookies-1.0.4.tgz#d46e576c420ff6d5542c0f52b6d4ef7d637e754e"
+  resolved "https://registry.npmjs.org/js-cookies/-/js-cookies-1.0.4.tgz"
   integrity sha512-cO1SHDH7zJsi8FihHmDtcWx90mWmrfGOrcLKPeaEX6tLyuTK2wnzgdmNa34Q6rNAd6VhQUgjDt5Eyl90VI/Fpg==
 
 "js-tokens@^3.0.0 || ^4.0.0":
@@ -3684,7 +3684,7 @@ natural-compare@^1.4.0:
 
 next-auth@^5.0.0-beta.15:
   version "5.0.0-beta.15"
-  resolved "https://registry.npmjs.org/next-auth/-/next-auth-5.0.0-beta.15.tgz"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-5.0.0-beta.15.tgz#28dbb0b70141eb7d6186334a8ee6ec6b929381c1"
   integrity sha512-UQggNq8CDu3/w8CYkihKLLnRPNXel98K0j7mtjj9a6XTNYo4Hni8xg/2h1YhElW6vXE8mgtvmH11rU8NKw86jQ==
   dependencies:
     "@auth/core" "0.28.0"

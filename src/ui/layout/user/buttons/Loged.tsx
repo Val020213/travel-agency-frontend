@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { IconUserCircle } from '@tabler/icons-react';
-import { useContext } from 'react';
 
 export const Loged = ({ name }: { name: string }) => {
   return (

@@ -35,7 +35,7 @@ export const SignIn = () => {
         >
           <div className='flex justify-start items-center flex-row text-gray-500 dark:text-extends-darker-blue-300'>
             <span className='text-lg leading-7 md:text-2xl font-medium w-full text-center'>
-              Iniciar Sección
+              Iniciar Sesión
             </span>
             <Link href={pathname} className='float-right'>
               <IconX stroke={1.5} className='h-6 w-6' color='currentColor' />

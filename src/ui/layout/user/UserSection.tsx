@@ -2,16 +2,28 @@ import Image from 'next/image';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Login } from './buttons/Login';
 import { Loged } from './buttons/Loged';
+import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { Session } from 'next-auth';
+
 
 export const UserSection = () => {
   const bp = useBreakpoints();
 
-  const [username, setUsername] = useState<string | undefined>(undefined);
+  const [session, setSession] = useState<Session | undefined>(undefined);
 
-  return username ? (
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getSession();
+      setSession(session ?? undefined);
+    };
+
+    fetchSession();
+  }, []);
+
+  return session?.user?.name  ? (
     <div>
-      <Loged name={username} />
+      <Loged name={ session.user.name ?? 'Turista'} />
     </div>
   ) : (
     <div className='flex items-center justify-center relative h-16'>

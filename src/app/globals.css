@@ -5,3 +5,7 @@
 ::-webkit-scrollbar {
   @apply w-0;
 }
+
+input{
+  @apply bg-inherit hover:bg-inherit focus:bg-inherit hover:outline-none focus:outline-none;
+}

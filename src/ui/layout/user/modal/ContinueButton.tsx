@@ -10,7 +10,7 @@ export const ContinueButton = () => {
         'flex items-center justify-center',
         'bg-orangePinkRight text-white text-opacity-100 md:text-xl leading-7',
         'rounded-lg py-4 px-4 font-medium',
-        'hover:bg-orangePinkLeft transition-all duration-300 ease-in-out',
+        ' hover:filter hover:brightness-75',
         {
           'bg-none bg-gray-300 text-gray-500': pending,
         }

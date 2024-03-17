@@ -1,33 +1,35 @@
 import type { NextAuthConfig } from 'next-auth';
-import credentials from 'next-auth/providers/credentials';
-
-const unauthorizedPages: string[] = ['/profile', 'profile', '/'];
+import { redirect } from 'next/navigation';
 
 export const authConfig = {
   pages: {
-    signIn: '/',
+    signIn: '/?login=true',
   },
+  providers: [],
+  
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
+      
+      const Error404Pages: string[] = [
+        '/dashboard',
+        '/profile',
+      ];
+
       const isLoggedIn = !!auth?.user;
+      const isOnProhibitedPage = Error404Pages.some((page) => nextUrl.toString().startsWith(page));
 
-      console.log('isLoggedIn', isLoggedIn);
-      console.log('nextUrl', nextUrl);
-      console.log('nextUrl.pathname', nextUrl.pathname);
-      console.log('unauthorizedPages', unauthorizedPages);
-
-      const isOnUnauthorizedPage = unauthorizedPages.find((page) =>
-        nextUrl.pathname.startsWith(page)
-      );
-      console.log('isOnUnauthorizedPage', isOnUnauthorizedPage);
-
-      if (isOnUnauthorizedPage) {
+      if (isOnProhibitedPage) {
+        console.log('isOnProhibitedPage');
         if (isLoggedIn) return true;
+        console.log('Is not logged in');
         return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL(isOnUnauthorizedPage || '', nextUrl));
+      } 
+      else {
+        return Response.redirect(new URL("/", nextUrl));
       }
+      return true;
     },
   },
-  providers: [credentials], // Add providers with an empty array for now
 } satisfies NextAuthConfig;
+
+

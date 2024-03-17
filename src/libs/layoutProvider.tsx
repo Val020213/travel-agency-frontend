@@ -12,6 +12,7 @@ import clsx from 'clsx';
 
 function Providers({ children }: { children: React.ReactNode }) {
   return (
+
     <ThemeProvider
       enableSystem={true}
       themes={['light', 'dark']}
@@ -19,6 +20,7 @@ function Providers({ children }: { children: React.ReactNode }) {
     >
       {children}
     </ThemeProvider>
+
   );
 }
 

@@ -1,9 +1,3 @@
-export type Session = {
-  username: string;
-  expires: Date;
-};
-
-// hint: prisma
 export type category = {
   name: string;
   href: string;
@@ -19,6 +13,7 @@ export type User = {
   telefono: string;
 };
 
+
 export type product = {
   id: number;
   name: string;
@@ -28,3 +23,59 @@ export type product = {
   tag?: string;
   category: string;
 };
+
+
+const Countries : string[] = [
+  'Cuba',
+  'México',
+  'España',
+  'Estados Unidos',
+  'Venezuela',
+  'Argentina',
+  'Colombia',
+  'Perú',
+  'Chile',
+  'Ecuador',
+  'Bolivia',
+  'Uruguay',
+  'Paraguay',
+  'Brasil',
+  'Canadá',
+  'Francia',
+  'Italia',
+  'Alemania',
+  'Reino Unido',
+  'Australia',
+  'Japón',
+  'China',
+  'India',
+  'Rusia',
+  'Corea del Sur',
+  'Indonesia',
+  'Malasia',
+  'Tailandia',
+  'Singapur',
+  'Filipinas',
+  'Vietnam',
+  'Nueva Zelanda',
+  'Sudáfrica',
+  'Egipto',
+  'Marruecos',
+  'Nigeria',
+  'Kenia',
+  'Ghana',
+  'Tanzania',
+  'Emiratos Árabes Unidos',
+  'Arabia Saudita',
+  'Qatar',
+  'Kuwait',
+  'Turquía',
+  'Grecia',
+  'Portugal',
+  'Holanda',
+  'Bélgica',
+  'Suiza',
+  'Suecia',
+  'Noruega',
+  'Dinamarca'
+];

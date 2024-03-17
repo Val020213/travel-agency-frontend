@@ -1,9 +1,7 @@
 'use server';
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
-import { encrypt } from './secure';
-import { AddItemLocalStorage, GetItemLocalStorage } from './Storage';
+import { signIn } from '../../../auth';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -47,18 +45,10 @@ export async function ValidateUserAction(
   }
 
   const { username, password } = validatedFields.data;
-
-  // POST /tourist/create, http://127.0.0.1:8000/tourist/create
-
   const data = {
     username: username,
     password: password,
   };
-
-  // const response = signIn('credentials', {
-  //   username: username,
-  //   password: password,
-  // });
 
   if (!(username in AdminPatch)) {
     try {
@@ -81,15 +71,8 @@ export async function ValidateUserAction(
       };
     }
   }
-
-  const expires = new Date(Date.now() + 1000 * 10);
-  const session = await encrypt({ username, expires });
-
-  cookies().set('session', session, {
-    expires,
-    httpOnly: true,
-  });
-
+  console.log('Validated Fields', validatedFields);
+  signIn('credentials', { username, password })
   redirect('?loginSuccess=true');
 }
 
