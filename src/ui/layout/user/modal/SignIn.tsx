@@ -27,7 +27,7 @@ export const SignIn = () => {
         className={clsx(
           'flex flex-col rounded-[32px]',
           'bg-white dark:bg-extends-darker-blue-900',
-          'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px]'
+          'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px] lg:w-[480px]'
         )}
       >
         <form
@@ -96,58 +96,7 @@ export const SignIn = () => {
             </Link>
             <ContinueButton />
           </div>
-          <div className='flex flex-col md:flex-row justify-start items-center gap-4'>
-            <div className='text-gray-600 dark:text-extends-darker-blue-200 min-w-max'>
-              continuar con
-            </div>
-            <div className='flex flex-row gap-2 w-full *:w-full'>
-              <button
-                className={clsx(
-                  'flex justify-center items-center py-1',
-                  'rounded-lg',
-                  'bg-slate-50 hover:bg-slate-200'
-                )}
-              >
-                <Image
-                  src={require('@/ui/assets/google.png')}
-                  width={48}
-                  height={48}
-                  alt='google'
-                  className='h-auto w-auto'
-                />
-              </button>
-              <button
-                className={clsx(
-                  'flex justify-center items-center py-1',
-                  'rounded-lg',
-                  'bg-gradient-to-t from-blue-600 to-blue-400',
-                  'hover:bg-gradient-to-t hover:from-blue-700 hover:to-blue-500'
-                )}
-              >
-                <Image
-                  src={require('@/ui/assets/facebook.png')}
-                  width={24}
-                  height={48}
-                  alt='facebook'
-                  className='h-auto w-auto'
-                />
-              </button>
-              <button
-                className={clsx(
-                  'flex justify-center items-center py-1',
-                  'rounded-xl',
-                  'bg-gradient-to-b from-pink-600 via-rose-600 to-rose-500',
-                  'hover:bg-gradient-to-b hover:from-pink-700 hover:via-rose-700 hover:to-rose-600'
-                )}
-              >
-                <IconBrandInstagram
-                  stroke={2}
-                  className='h-12 w-12'
-                  color='white'
-                />
-              </button>
-            </div>
-          </div>
+          
         </form>
       </dialog>
     )

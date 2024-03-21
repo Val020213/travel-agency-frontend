@@ -6,18 +6,18 @@ export type visual = {
     image: string;
 }
 
-export type agency  = entity & visual &{
+export type agency = entity & visual & {
     name: string;
     address: string;
     email: string;
     fax: number;
 }
 
-export type offer = entity &{
+export type offer = entity & {
     price: number;
 }
 
-export type excursion = entity & offer & visual &{
+export type excursion = entity & offer & visual & {
     departureLocation: string;
     arrivalLocation: string;
     departureDate: Date;
@@ -27,20 +27,20 @@ export type excursion = entity & offer & visual &{
     hotelID?: number;
 }
 
-export type hotel = entity &{
+export type hotel = entity & visual & {
     name: string;
     address: string;
     category: number;
 }
 
 
-export type facility = entity &{
+export type facility = entity & {
     description: string;
 }
 
 export type rol = 'admin' | 'tourist' | 'marketing' | 'agent';
 
-export type user = entity &{
+export type user = entity & {
     username: string;
     // password: string;
     // email: string;
@@ -48,7 +48,7 @@ export type user = entity &{
     rol: rol;
 }
 
-export type touristPackage = entity & offer & visual &{
+export type touristPackage = entity & offer & visual & {
     agencyID: number;
     excursionID: number;
     facilities: facility[];
