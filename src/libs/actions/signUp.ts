@@ -1,4 +1,3 @@
-'use server';
 import { redirect, usePathname } from 'next/navigation';
 import { z } from 'zod';
 

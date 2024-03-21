@@ -86,14 +86,18 @@ export const SignUp = () => {
               >
                 nacionalidad
               </label>
-              <input
+              <select
                 className='md:text-xl border-b border-gray-300 dark:border-gray-400'
-                type='natinality'
                 id='nationality'
                 name='nationality'
-                placeholder='mi nacionalidad'
                 required
-              />
+              >
+                <option value=''>Selecciona tu nacionalidad</option>
+                <option value='Argentina'>Argentina</option>
+                <option value='Brasil'>Brasil</option>
+                <option value='Chile'>Chile</option>
+                {/* Agrega más opciones de nacionalidades aquí */}
+              </select>
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label

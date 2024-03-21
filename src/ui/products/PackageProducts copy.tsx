@@ -1,7 +1,7 @@
 import { LayoutGrid } from './components/LayoutGrid';
 import { ContinueCard } from './components/ContinueCard';
 import { ProductCard } from './components/ProductCard';
-import { seedData } from '@/libs/seedData';
+import { seedData } from '@/libs/data/seedData';
 import { useEffect, useState } from 'react';
 
 import {

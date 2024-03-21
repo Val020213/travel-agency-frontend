@@ -1,7 +1,7 @@
 import { LayoutGrid } from './components/LayoutGrid';
 import { ContinueCard } from './components/ContinueCard';
 import { ProductCard } from './components/ProductCard';
-import { seedData } from '@/libs/seedData';
+import { seedData } from '@/libs/data/seedData';
 import { useEffect, useState } from 'react';
 
 import {
@@ -13,7 +13,7 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { product } from '@/libs/definitions';
-import { FetchPackages } from '@/libs/data';
+import { FetchPackages } from '@/libs/data/data';
 
 export const PackageProducts = () => {
   const [data, setData] = useState<product[]>([]);

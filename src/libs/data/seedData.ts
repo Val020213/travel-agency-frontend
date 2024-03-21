@@ -1,7 +1,7 @@
 'use server';
 import fs from 'fs';
 import path from 'path';
-import { product } from './definitions';
+import { product } from '../definitions';
 import { randomInt } from 'crypto';
 
 export async function seedData(): Promise<product[]> {

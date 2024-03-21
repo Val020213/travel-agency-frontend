@@ -1,7 +1,6 @@
-'use server';
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
-import { signIn } from '../../../auth';
+import { write } from '../utils/write';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -38,9 +37,10 @@ export async function ValidateUserAction(
   console.log(prevState);
 
   if (!validatedFields.success) {
+    console.log(validatedFields.error.message)
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Invalid Fields. Failed to Create User.',
+      message: validatedFields.error.message,
     };
   }
 
@@ -67,12 +67,12 @@ export async function ValidateUserAction(
       }
     } catch (error) {
       return {
-        message: 'Failed to create user, DB Error Connection',
+        message: 'Failed to create user, DataBase Error Connection',
       };
     }
   }
   console.log('Validated Fields', validatedFields);
-  signIn('credentials', { username, password })
+  write({username : username})
   redirect('?loginSuccess=true');
 }
 

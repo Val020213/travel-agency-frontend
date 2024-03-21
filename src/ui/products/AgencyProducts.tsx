@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import { useEffect, useState } from 'react';
 import { product } from '@/libs/definitions';
-import { FetchAgencies } from '@/libs/data';
+import { FetchAgencies } from '@/libs/data/data';
 
 export const AgencyProducts = () => {
   const [data, setData] = useState<product[]>([]);

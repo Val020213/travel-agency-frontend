@@ -2,7 +2,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { category } from '@/libs/definitions';
-import { categories, enterpriseCategories } from '@/libs/data';
+import { categories, enterpriseCategories } from '@/libs/data/data';
 
 const CategoriesFactory = ({
   categories,

@@ -10,7 +10,7 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { useEffect, useState } from 'react';
-import { FetchExcursions } from '@/libs/data';
+import { FetchExcursions } from '@/libs/data/data';
 import { product } from '@/libs/definitions';
 
 export const ExcursionProducts = () => {

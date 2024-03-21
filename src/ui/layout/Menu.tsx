@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
-import { categories } from '@/libs/data';
+import { categories } from '@/libs/data/data';
 import { IconChevronDown } from '@tabler/icons-react';
 import { set } from 'zod';
 import path from 'path';

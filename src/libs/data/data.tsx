@@ -1,4 +1,4 @@
-import { category, product } from './definitions';
+import { category, product } from '../definitions';
 import {
   IconHome,
   IconBus,
