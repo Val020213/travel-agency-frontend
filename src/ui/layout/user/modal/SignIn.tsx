@@ -8,6 +8,7 @@ import { useFormState, useFormStatus } from 'react-dom';
 import { SignInState, ValidateUserAction } from '@/libs/actions/signIn';
 import Link from 'next/link';
 import { ContinueButton } from './ContinueButton';
+import { othersLinks } from '@/libs/data/data';
 
 export const SignIn = () => {
   const initialState = {};
@@ -85,7 +86,7 @@ export const SignIn = () => {
               )}
             </div>
             <Link
-              href={'?register=true'}
+              href={othersLinks.openRegister}
               className={clsx(
                 'text-blue-500 hover:text-blue-600',
                 'cursor-pointer text-right text-[15px] px-1'

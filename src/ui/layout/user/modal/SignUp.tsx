@@ -9,6 +9,7 @@ import { useFormState } from 'react-dom';
 import { CreateUserAction } from '@/libs/actions/signUp';
 import { SignUpState } from '@/libs/actions/signUp';
 import { ContinueButton } from './ContinueButton';
+import { othersLinks } from '@/libs/data/data';
 
 export const SignUp = () => {
   const initialState = {};
@@ -139,7 +140,7 @@ export const SignUp = () => {
               )}
             </div>
             <Link
-              href={'?login=true'}
+              href={othersLinks.openLogin}
               className={clsx(
                 'text-blue-500 hover:text-blue-600',
                 'cursor-pointer text-right text-[15px] px-1'

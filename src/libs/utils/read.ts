@@ -1,10 +1,13 @@
-'use client'
-export function read(): Record<string, string>  {
-    // @ts-ignore 
-    const cookieData = document?.cookie;
-    if (cookieData) {
-        return JSON.parse(cookieData);
-    } else {
-        return {};
-    }
+import { useState, useEffect } from 'react';
+
+export function Read(): Record<string, string>  {
+    const [cookieData, setCookieData] = useState<Record<string, string>>({});
+    useEffect(() => {
+        const cookies = document?.cookie;
+        if (cookies) {
+            setCookieData(JSON.parse(cookies));
+        }
+    }, []);
+
+    return cookieData;
 }

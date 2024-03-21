@@ -7,8 +7,17 @@ import {
   IconReportAnalytics,
   IconSquareRoundedPlus,
 } from '@tabler/icons-react';
-import { unstable_noStore as noStore } from 'next/cache';
 import { agency, excursion, touristPackage } from '../entities';
+
+
+export const othersLinks: Record<string, string> = {
+  profile: '/tourist/profile',
+  dashboardProfile: '/profile',
+  payment: '/tourist/payment',
+  openRegister: '?register=true',
+  openLogin: '?login=true',
+}
+
 
 export const categories: category[] = [
   {
@@ -18,17 +27,17 @@ export const categories: category[] = [
   },
   {
     name: 'Excursiones',
-    href: '/excursions',
+    href: '/tourist/excursions',
     icon: <IconBus size={24} strokeWidth={1.5} />,
   },
   {
     name: 'Agencias',
-    href: '/agencies',
+    href: '/tourist/agencies',
     icon: <IconPlane size={24} strokeWidth={1.5} />,
   },
   {
     name: 'Paquetes',
-    href: '/packages',
+    href: '/tourist/packages',
     icon: <IconBackpack size={24} strokeWidth={1.5} />,
   },
 ];

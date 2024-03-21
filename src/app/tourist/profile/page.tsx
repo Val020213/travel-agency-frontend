@@ -1,7 +1,7 @@
 'use client';
 import { IconVip } from '@tabler/icons-react';
 import clsx from 'clsx';
-import { UserSection } from '@/app/profile/UserSection';
+import { UserSection } from '@/app/tourist/profile/UserSection';
 import { ReservationSection } from './ReservationSection';
 import { Tag } from '@/ui/tokens/Tag';
 

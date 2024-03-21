@@ -39,12 +39,12 @@ export const CompomenteDePrueba = () => {
       </Breadcrumb>
       <LayoutGrid>
         {
-          data.map((product: product, index : number) => (
+          data.map((product: product, index: number) => (
             <ProductCard
               key={index}
               href="#"
               tag={product.tag}
-              imageSrc={require('@/ui/assets/products/' + product.image)}
+              image={product.image}
               title={product.name}
               description={product.description}
               metaData1={product.price}
@@ -52,15 +52,15 @@ export const CompomenteDePrueba = () => {
             />
           ))
         }
-        <ProductCard 
-        key={10000}
-        href="#"
-        tag="Oferta"
-        imageSrc='https://th.bing.com/th/id/R.4c450d5ebdff00ef23ee46dc663b7163?rik=Xy1kCYGwuLXd%2bA&pid=ImgRaw&r=0'
-        title="Welcome to italy"
-        description="Conoce los mejores destinos de italia"
-        metaData1={100}
-        metaData2="cup"
+        <ProductCard
+          key={10000}
+          href="#"
+          tag="Oferta"
+          image='https://th.bing.com/th/id/R.4c450d5ebdff00ef23ee46dc663b7163?rik=Xy1kCYGwuLXd%2bA&pid=ImgRaw&r=0'
+          title="Welcome to italy"
+          description="Conoce los mejores destinos de italia"
+          metaData1={100}
+          metaData2="cup"
         />
         <ContinueCard action={() => { }} />
       </LayoutGrid>

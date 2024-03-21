@@ -2,15 +2,15 @@ import Image from 'next/image';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Login } from './buttons/Login';
 import { Loged } from './buttons/Loged';
-import { read } from '@/libs/utils/read';
+import { Read } from '@/libs/utils/read';
 
 export const UserSection = () => {
   const bp = useBreakpoints();
-  const userData = read()
+  const userData = Read()
 
-  return  userData.username? (
+  return userData.username ? (
     <div>
-      <Loged name={ userData.username  ?? 'Turista'} />
+      <Loged name={userData.username ?? 'Turista'} />
     </div>
   ) : (
     <div className='flex items-center justify-center relative h-16'>

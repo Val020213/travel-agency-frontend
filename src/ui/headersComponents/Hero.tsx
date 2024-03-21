@@ -2,6 +2,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
+import { categories } from '@/libs/data/data';
 import Autoplay from 'embla-carousel-autoplay';
 import {
   Carousel,
@@ -38,7 +39,7 @@ const HeroData = [
       <Button
         title='Excursiones'
         icon={<ChevronRightIcon stroke='1.5' />}
-        href='/excursions'
+        href={categories[1].href}
       />
     ),
   },
@@ -48,7 +49,7 @@ const HeroData = [
       <Button
         title='Paquetes'
         icon={<ChevronRightIcon stroke='1.5' />}
-        href='/packages'
+        href={categories[3].href}
       />
     ),
   },
@@ -58,7 +59,7 @@ const HeroData = [
       <Button
         title='Agencias'
         icon={<ChevronRightIcon stroke='1.5' />}
-        href='/agencies'
+        href={categories[2].href}
       />
     ),
   },
@@ -113,7 +114,7 @@ export function Hero() {
               layout='fill'
               fill={true}
               priority
-              />
+            />
           </CarouselItem>
         ))}
       </CarouselContent>

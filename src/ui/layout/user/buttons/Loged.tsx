@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { IconUserCircle } from '@tabler/icons-react';
+import { othersLinks } from '@/libs/data/data';
+import { usePathname } from 'next/navigation';
 
 export const Loged = ({ name }: { name: string }) => {
   return (
     <Link
-      href='/profile'
+      href={othersLinks.profile}
       className={clsx(
         'text-gray-800',
         'opacity-80',
