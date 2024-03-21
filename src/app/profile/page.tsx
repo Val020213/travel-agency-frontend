@@ -1,21 +1,12 @@
 'use client';
 import { IconVip } from '@tabler/icons-react';
 import clsx from 'clsx';
-// import { user } from '@/libs/definitions';
 import { UserSection } from '@/app/profile/UserSection';
 import { ReservationSection } from './ReservationSection';
 import { Tag } from '@/ui/tokens/Tag';
 
 export default function Page() {
   const isAgencyTourist = true; // TODO: get from user data
-  const userData = {
-    name: 'John Doe',
-    username: 'johndoe',
-    nationality: 'Peruano',
-    email: 'sin proporcionar',
-    password: '*********',
-    telefono: 'sin proporcionar',
-  };
 
   return (
     <div className='flex flex-col gap-4 md:gap-16 w-full'>
@@ -32,7 +23,7 @@ export default function Page() {
           <Tag text='turista de agencia' className='' icon={<IconVip />} />
         )}
       </div>
-      <UserSection userData={userData} />
+      <UserSection />
       <ReservationSection />
     </div>
   );

@@ -30,11 +30,11 @@ const NavbarContainer = ({ children }: { children: ReactNode }) => {
     <div
       className={clsx(
         'flex flex-col items-center justify-center',
-        'p-4 pb-2 md:px-12 lg:px-16 xl:px-24 w-full gap-2',
+        'p-4 pb-2 md:px-12 lg:px-16 xl:px-24 w-full md:pb-4 md:gap-2 lg:gap-1',
         'bg-white dark:bg-extends-darker-blue-900',
         'bg-opacity-80 bg-blend-color-burn dark:bg-opacity-100 shadow-lg',
         'backdrop-filter backdrop-blur-xl dark:backdrop-blur-lg',
-        'sticky z-10 top-0'
+        'sticky z-10 top-0',
       )}
     >
       {children}
@@ -87,7 +87,7 @@ export const EnterpriseNavbar = () => {
         </div>
         <div className='flex flex-row justify-end gap-1 md:gap-3'>
           <Link href='/dashboard/profile'>
-            <Loged name='Testing' onClick={() => {}} />
+            <UserSection />
           </Link>
           <Switch />
         </div>

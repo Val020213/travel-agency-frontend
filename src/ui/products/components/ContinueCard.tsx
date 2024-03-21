@@ -20,13 +20,12 @@ export const ContinueCard = ({ action }: { action: () => void }) => {
         'hover:drop-shadow-blue',
         'py-2 md:py-4 px-4 md:px-6',
         'relative',
-        'min-h-[300px]'
       )}
     >
       <div className='text-gray-50 font-semibold text-3xl text-left'>
         Seguir Explorando
       </div>
-      <div className='flex justify-center items-center w-[300px] h-[335px]'>
+      <div className='flex justify-center items-center overflow-visible'>
         {hover ? <AirplaneHover /> : <Airplane />}
       </div>
       <div className='text-gray-50 text-xl font-medium'>Ver más</div>

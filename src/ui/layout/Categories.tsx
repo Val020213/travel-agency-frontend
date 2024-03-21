@@ -40,7 +40,7 @@ export const Categories = () => {
     const currentPath = usePathname();
     return currentPath === href
       ? 'text-blue-500'
-      : 'text-gray-500 dark:text-gray-300';
+      : 'text-gray-500 dark:text-gray-300 opacity-80 hover:opacity-100';
   }
 
   return <CategoriesFactory categories={categories} triggerCls={Trigger} />;

@@ -12,9 +12,10 @@ import {
 import { useEffect, useState } from 'react';
 import { FetchExcursions } from '@/libs/data/data';
 import { product } from '@/libs/definitions';
+import { excursion } from '@/libs/entities';
 
 export const ExcursionProducts = () => {
-  const [data, setData] = useState<product[]>([]);
+  const [data, setData] = useState<excursion[]>([]);
   useEffect(() => {
     FetchExcursions().then((data) => {
       setData(data);
@@ -35,19 +36,16 @@ export const ExcursionProducts = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <LayoutGrid>
-        {data.map((product) => (
+        {data.map((excursion: excursion) => (
           <ProductCard
-            key={product.id}
-            href={`/packages/${product.id}`}
-            tag={product.tag}
-            imageSrc={product.image}
-            title={product.name}
-            description={product.description}
-            metaData1={product.price}
-            metaData2={'cup'}
+            key={excursion.id}
+            title={'Excursion a ' + excursion.arrivalLocation}
+            description={'Salida desde ' + excursion.departureLocation + ' a las ' + excursion.departureTime + '. Llegada a ' + excursion.arrivalLocation + ' a las ' + excursion.arrivalTime + '.'}
+            image={excursion.image}
+            href={'/excursion/' + excursion.id}
           />
         ))}
-        <ContinueCard action={() => {}} />
+        <ContinueCard action={() => { }} />
       </LayoutGrid>
     </div>
   );

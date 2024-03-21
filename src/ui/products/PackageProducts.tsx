@@ -1,7 +1,6 @@
 import { LayoutGrid } from './components/LayoutGrid';
 import { ContinueCard } from './components/ContinueCard';
 import { ProductCard } from './components/ProductCard';
-import { seedData } from '@/libs/data/seedData';
 import { useEffect, useState } from 'react';
 
 import {
@@ -12,11 +11,11 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
-import { product } from '@/libs/definitions';
 import { FetchPackages } from '@/libs/data/data';
+import { touristPackage } from '@/libs/entities';
 
 export const PackageProducts = () => {
-  const [data, setData] = useState<product[]>([]);
+  const [data, setData] = useState<touristPackage[]>([]);
 
   useEffect(() => {
     FetchPackages().then((data) => {
@@ -40,19 +39,18 @@ export const PackageProducts = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <LayoutGrid>
-        {data.map((product) => (
+        {data.map((touristPackage: touristPackage) => (
           <ProductCard
-            key={product.id}
-            href={`/packages/${product.id}`}
-            tag={product.tag}
-            imageSrc={product.image}
-            title={product.name}
-            description={product.description}
-            metaData1={product.price}
-            metaData2={'cup'}
+            key={touristPackage.id}
+            title={'Paquete turístico de ' + touristPackage.duration + ' días'}
+            description={
+              touristPackage.description
+            }
+            image={touristPackage.image}
+            href={'/package/' + touristPackage.id}
           />
         ))}
-        <ContinueCard action={() => {}} />
+        <ContinueCard action={() => { }} />
       </LayoutGrid>
     </div>
   );

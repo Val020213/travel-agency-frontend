@@ -5,17 +5,17 @@ import clsx from 'clsx';
 
 type Props = {
   title: string;
-  imageSrc: string;
+  image: string;
   description: string;
   href: string;
-  metaData1: string | number;
-  metaData2: string;
+  metaData1?: string | number;
+  metaData2?: string;
   tag?: string;
 };
 
 export const ProductCard = ({
   title,
-  imageSrc,
+  image,
   description,
   href,
   metaData1,
@@ -38,7 +38,7 @@ export const ProductCard = ({
         height={600}
         width={800}
         quality={100}
-        src={imageSrc}
+        src={image}
         style={{
           aspectRatio: '800/600',
         }}

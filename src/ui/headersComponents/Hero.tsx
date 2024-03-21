@@ -92,7 +92,7 @@ export function Hero() {
     >
       <CarouselContent>
         {imagesSrc.map((_, index) => (
-          <CarouselItem key={index} className='relative h-[560px] w-screen'>
+          <CarouselItem key={index} className='relative h-[280px] sm:h-[500px] md:h-[620px] lg:h-[680px] w-screen'>
             <div
               className={clsx(
                 'container mx-4 sm:mx-12 md:mx-24 lg:mx-32',
@@ -110,14 +110,10 @@ export function Hero() {
               src={imagesSrc[index]}
               alt='hero image'
               quality={100}
+              layout='fill'
               fill={true}
               priority
-              style={
-                {
-                  aspectRatio: '950/560',
-                }
-              }
-            />
+              />
           </CarouselItem>
         ))}
       </CarouselContent>

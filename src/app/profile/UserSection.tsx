@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import clsx from 'clsx';
-import { user } from '@/libs/definitions';
 
-export const UserSection = ({ userData }: { userData: user }) => {
+export const UserSection = () => {
   return (
     <div className='flex flex-col md:flex-row gap-8 md:gap-6 lg:gap-8 w-full'>
       <div
@@ -31,7 +30,7 @@ export const UserSection = ({ userData }: { userData: user }) => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='name'
-            placeholder={userData.name}
+            // placeholder={userData.name}
             disabled
           />
         </div>
@@ -43,7 +42,7 @@ export const UserSection = ({ userData }: { userData: user }) => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='username'
-            placeholder={userData.username}
+            // placeholder={userData.username}
             disabled
           />
         </div>
@@ -55,7 +54,7 @@ export const UserSection = ({ userData }: { userData: user }) => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='nacionality'
-            placeholder={userData.nationality}
+            // placeholder={userData.nationality}
             disabled
           />
         </div>
@@ -72,7 +71,7 @@ export const UserSection = ({ userData }: { userData: user }) => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='email'
-            placeholder={userData.email}
+            // placeholder={userData.email}
             disabled
           />
         </div>
@@ -96,7 +95,7 @@ export const UserSection = ({ userData }: { userData: user }) => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='telefono'
-            placeholder={userData.telefono}
+            // placeholder={userData.telefono}
             disabled
           />
         </div>

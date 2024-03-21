@@ -2,7 +2,11 @@ export type entity = {
     id: number;
 }
 
-export type agency  = entity &{
+export type visual = {
+    image: string;
+}
+
+export type agency  = entity & visual &{
     name: string;
     address: string;
     email: string;
@@ -13,7 +17,7 @@ export type offer = entity &{
     price: number;
 }
 
-export type excursion = entity & offer &{
+export type excursion = entity & offer & visual &{
     departureLocation: string;
     arrivalLocation: string;
     departureDate: Date;
@@ -42,4 +46,12 @@ export type user = entity &{
     // email: string;
     webToken: string;
     rol: rol;
+}
+
+export type touristPackage = entity & offer & visual &{
+    agencyID: number;
+    excursionID: number;
+    facilities: facility[];
+    description: string;
+    duration: number;
 }

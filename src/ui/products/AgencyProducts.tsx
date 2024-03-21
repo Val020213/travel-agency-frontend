@@ -10,11 +10,11 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { useEffect, useState } from 'react';
-import { product } from '@/libs/definitions';
 import { FetchAgencies } from '@/libs/data/data';
+import { agency } from '@/libs/entities';
 
 export const AgencyProducts = () => {
-  const [data, setData] = useState<product[]>([]);
+  const [data, setData] = useState<agency[]>([]);
 
   useEffect(() => {
     FetchAgencies().then((data) => {
@@ -36,19 +36,16 @@ export const AgencyProducts = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <LayoutGrid>
-        {data.map((product) => (
+        {data.map((agency: agency) => (
           <ProductCard
-            key={product.id}
-            href={`/packages/${product.id}`}
-            tag={product.tag}
-            imageSrc={product.image}
-            title={product.name}
-            description={product.description}
-            metaData1={product.price}
-            metaData2={'offer'}
+            key={agency.id}
+            title={agency.name}
+            description={'Agencia de viajes ubicada en ' + agency.address + '. Puede localizarnos en ' + agency.email + '.'}
+            image={agency.image}
+            href={'/agency/' + agency.id}
           />
         ))}
-        <ContinueCard action={() => {}} />
+        <ContinueCard action={() => { }} />
       </LayoutGrid>
     </div>
   );

@@ -1,8 +1,8 @@
 export const AirplaneHover = () => {
   return (
     <svg
-      width='300'
-      height='335'
+      width='290'
+      height='305'
       viewBox='0 0 300 335'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

@@ -52,6 +52,16 @@ export const CompomenteDePrueba = () => {
             />
           ))
         }
+        <ProductCard 
+        key={10000}
+        href="#"
+        tag="Oferta"
+        imageSrc='https://th.bing.com/th/id/R.4c450d5ebdff00ef23ee46dc663b7163?rik=Xy1kCYGwuLXd%2bA&pid=ImgRaw&r=0'
+        title="Welcome to italy"
+        description="Conoce los mejores destinos de italia"
+        metaData1={100}
+        metaData2="cup"
+        />
         <ContinueCard action={() => { }} />
       </LayoutGrid>
     </div>

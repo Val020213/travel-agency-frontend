@@ -8,6 +8,7 @@ import {
   IconSquareRoundedPlus,
 } from '@tabler/icons-react';
 import { unstable_noStore as noStore } from 'next/cache';
+import { agency, excursion, touristPackage } from '../entities';
 
 export const categories: category[] = [
   {
@@ -45,8 +46,8 @@ export const enterpriseCategories: category[] = [
   },
 ];
 
-// Hacer estos metodos para cada tipo de producto luego
-export async function FetchExcursions(): Promise<product[]> {
+
+export async function FetchExcursions(): Promise<excursion[]> {
   const response = await fetch('http://127.0.0.1:8000/excursion/list');
 
   if (!response.ok) {
@@ -56,7 +57,7 @@ export async function FetchExcursions(): Promise<product[]> {
 
   const data = await response.json();
 
-  const excursionsAsProduct: product[] = data.map((excursion: any) => {
+  const excursionsAsProduct: excursion[] = data.map((excursion: any) => {
     return {
       id: excursion.id,
       name: excursion.name,
@@ -69,7 +70,7 @@ export async function FetchExcursions(): Promise<product[]> {
   return excursionsAsProduct;
 }
 
-export async function FetchAgencies(): Promise<product[]> {
+export async function FetchAgencies(): Promise<agency[]> {
   const response = await fetch('http://127.0.0.1:8000/agency/list');
 
   if (!response.ok) {
@@ -79,7 +80,7 @@ export async function FetchAgencies(): Promise<product[]> {
 
   const data = await response.json();
 
-  const agencyAsProduct: product[] = data.map((agency: any) => {
+  const agencies: agency[] = data.map((agency: any) => {
     return {
       id: agency.id,
       name: agency.name,
@@ -89,10 +90,10 @@ export async function FetchAgencies(): Promise<product[]> {
     };
   });
 
-  return agencyAsProduct;
+  return agencies;
 }
 
-export async function FetchPackages(): Promise<product[]> {
+export async function FetchPackages(): Promise<touristPackage[]> {
   const response = await fetch('http://127.0.0.1:8000/offer/list');
 
   if (!response.ok) {
@@ -102,13 +103,18 @@ export async function FetchPackages(): Promise<product[]> {
 
   const data = await response.json();
 
-  const packageAsProduct: product[] = data.map((offer: any) => {
+  const packageAsProduct: touristPackage[] = data.map((offer: any) => {
     return {
       id: offer.id,
       name: offer.name,
       description: offer.description,
       price: offer.price,
       image: '',
+      agencyID: offer.agencyID ?? 0,
+      excursionID: offer.excursionID ?? 0,
+      facilities: [],
+      duration: 0,
+
     };
   });
 

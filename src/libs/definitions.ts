@@ -4,15 +4,6 @@ export type category = {
   icon: React.ReactNode;
 };
 
-export type User = {
-  name: string;
-  username: string;
-  nationality: string;
-  email: string;
-  // password: string,
-  telefono: string;
-};
-
 
 export type product = {
   id: number;
