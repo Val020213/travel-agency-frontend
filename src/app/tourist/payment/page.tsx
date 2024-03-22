@@ -1,6 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { ProgressManager } from '@/ui/payment/ProgressManager';
+import { ProgressManager } from '@/components/app/tourist/payment/ProgressManager';
 
 export default function Page() {
   const searchParams = useSearchParams();

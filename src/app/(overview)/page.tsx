@@ -1,10 +1,10 @@
 'use client';
 
-import { ExcursionProducts } from '@/ui/products/ExcursionsProducts';
-import { PackageProducts } from '@/ui/products/PackageProducts';
-import { AgencyProducts } from '@/ui/products/AgencyProducts';
+import { ExcursionProducts } from '@/components/app/tourist/excursions/ExcursionsProducts';
+import { PackageProducts } from '@/components/app/tourist/packages/PackageProducts';
+import { AgencyProducts } from '@/components/app/tourist/agencies/AgencyProducts';
 import { Suspense } from 'react';
-import { CompomenteDePrueba } from '@/ui/products/PackageProducts copy';
+import { CompomenteDePrueba } from '@/components/ui/PackageProducts copy';
 
 export default function Home() {
   return (
