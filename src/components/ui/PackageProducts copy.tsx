@@ -1,4 +1,3 @@
-'use client';
 import { LayoutGrid } from '../app/layout/LayoutGrid';
 import { ContinueCard } from './ContinueCard';
 import { ProductCard } from './ProductCard';
@@ -16,7 +15,7 @@ import { product } from '@/lib/definitions';
 
 export async function CompomenteDePrueba() {
 
-  const data : product[] = await seedData()
+  const data: product[] = await seedData()
 
   return (
     <div className='flex flex-col gap-8'>
@@ -58,7 +57,7 @@ export async function CompomenteDePrueba() {
           metaData1={100}
           metaData2="cup"
         />
-        <ContinueCard action={() => { }} />
+        <ContinueCard />
       </LayoutGrid>
     </div>
   );

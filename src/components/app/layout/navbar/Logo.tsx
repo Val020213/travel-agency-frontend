@@ -34,10 +34,10 @@ export const LogoEnterprise = () => {
         height={30}
         className='w-auto h-auto'
       />
-      <div className='font-bold justify-center hidden md:flex md:flex-col'>
+      <span className='font-bold justify-center hidden md:flex md:flex-col'>
         <p className='text-gray-900 dark:text-gray-50 text-2xl'>Travelix</p>
         <p className='text-orange-500 text-xl italic'>Enterprise</p>
-      </div>
+      </span>
     </Link>
   );
 };

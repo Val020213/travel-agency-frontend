@@ -3,25 +3,14 @@ import { useState } from 'react';
 import { Airplane } from './tokens/Airplane';
 import { AirplaneHover } from './tokens/AirplaneHover';
 import clsx from 'clsx';
-import { useSearchParams } from 'next/navigation';
 
-export const example = () => {
-  function MyAction() {
-    const current_page = useSearchParams().get('page');
-  }
-
-  return (
-    <ContinueCard action={MyAction} />
-  )
-}
-
-export function ContinueCard ({ action }: { action: () => void }){
+export function ContinueCard() {
   const [hover, setHover] = useState(false);
   return (
     <button
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={action}
+      onClick={() => { }}
       className={clsx(
         'rounded-lg shadow-sm',
         'flex flex-col items-center justify-between',

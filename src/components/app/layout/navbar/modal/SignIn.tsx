@@ -7,6 +7,19 @@ import { SignInState, ValidateUserAction } from '@/lib/actions/signIn';
 import Link from 'next/link';
 import { ContinueButton } from './ContinueButton';
 import { othersLinks } from '@/lib/definitions';
+import { ReactNode, Suspense } from 'react';
+
+const SignInTrigger = ({ children }: { children: ReactNode }) => {
+  const searchParams = useSearchParams();
+  const login = searchParams.get('login');
+
+  return (
+    <Suspense>
+      {login && children}
+    </Suspense>
+  );
+}
+
 
 export const SignIn = () => {
   const initialState = {};
@@ -15,11 +28,9 @@ export const SignIn = () => {
     initialState
   );
 
-  const searchParams = useSearchParams();
-  const login = searchParams.get('login');
 
   return (
-    login && (
+    <SignInTrigger>
       <dialog
         className={clsx(
           'flex flex-col rounded-3xl',
@@ -102,6 +113,6 @@ export const SignIn = () => {
 
         </form>
       </dialog>
-    )
-  );
+    </SignInTrigger>
+  )
 };

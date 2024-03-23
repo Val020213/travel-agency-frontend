@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { write } from '../utils/write';
 import { user } from '../entities';
+import { useToast } from '@/components/ui/use-toast';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -34,8 +35,6 @@ export async function ValidateUserAction(
     username: formData.get('username') as string,
     password: formData.get('password') as string,
   });
-
-  console.log(prevState);
 
   if (!validatedFields.success) {
 
@@ -72,11 +71,22 @@ export async function ValidateUserAction(
       };
     }
   }
-  // console.log('Validated Fields', validatedFields);
   write({ username: username })
-  redirectRole({ user: AdminPatch[username] });
-  redirect('?loginSuccess=true');
+  redirect('?')
+  // redirectRole({ user: AdminPatch[username] });
+  // SuccessMsg();
 }
+
+// function SuccessMsg() {
+//   const { toast } = useToast();
+//   toast({
+//     title: 'Bienvenido',
+//     description: 'Hay nuevas ofertas esperando por ti',
+//     status: 'success',
+//     duration: 9000,
+//     isClosable: true,
+//   });
+// }
 
 const AdminPatch: { [key: string]: user } = {
   admin: {
@@ -111,6 +121,6 @@ const AdminPatch: { [key: string]: user } = {
 
 function redirectRole({ user }: { user: user }) {
   if (user.rol === 'agent' || user.rol === 'admin') {
-    redirect('/dashboad')
+    redirect('/dashboard')
   }
 }

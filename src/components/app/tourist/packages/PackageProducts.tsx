@@ -1,4 +1,3 @@
-'use client'
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '../../../ui/ContinueCard';
 import { ProductCard } from '../../../ui/ProductCard';
@@ -44,7 +43,7 @@ export async function PackageProducts() {
             href={'/package/' + touristPackage.id}
           />
         ))}
-        <ContinueCard action={() => { }} />
+        <ContinueCard />
       </LayoutGrid>
     </div>
   );

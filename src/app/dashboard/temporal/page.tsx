@@ -9,6 +9,7 @@ import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/com
 import { Input } from "@/components/ui/input"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
+import Image from "next/image"
 
 export default function Page() {
   return (
@@ -95,7 +96,7 @@ export default function Page() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button className="rounded-full" size="icon" variant="ghost">
-                  <img
+                  <Image
                     alt="Avatar"
                     className="rounded-full"
                     height="32"

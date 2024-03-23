@@ -5,7 +5,7 @@ import {
 } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const MoonSwitch = () => {
   return (
@@ -65,7 +65,7 @@ export const Switch = () => {
   }, []);
 
   if (!isHydrated) {
-    return <SwitchSkeleton />; 
+    return <SwitchSkeleton />;
   }
 
   return (

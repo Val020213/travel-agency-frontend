@@ -1,6 +1,7 @@
-import { redirect, usePathname } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { z } from 'zod';
-import { FetchCountries, TemporalCountries } from '../data/data';
+import { TemporalCountries } from '../data/data';
+
 
 const FormSchema = z.object({
   id: z.string(),
@@ -111,5 +112,5 @@ export async function CreateUserAction(
       message: 'Database Connection error.',
     };
   }
-  redirect('?registerSuccess=true');
+  redirect('?')
 }

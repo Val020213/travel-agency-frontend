@@ -1,4 +1,3 @@
-'use client'
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '../../../ui/ContinueCard';
 import { ProductCard } from '../../../ui/ProductCard';
@@ -13,7 +12,7 @@ import {
 import { FetchExcursions } from '@/lib/data/data';
 import { excursion } from '@/lib/entities';
 
-export async function ExcursionProducts (){
+export async function ExcursionProducts() {
   const data = await FetchExcursions()
 
   return (
@@ -39,7 +38,7 @@ export async function ExcursionProducts (){
             href={'/excursion/' + excursion.id}
           />
         ))}
-        <ContinueCard action={() => { }} />
+        <ContinueCard />
       </LayoutGrid>
     </div>
   );

@@ -71,7 +71,7 @@ export const useBreakpoints = (
         xxlQuery.removeEventListener('change', xxlHandler);
       };
     }
-  },[props.variant]);
+  }, [props.variant]);
 
   return {
     sm,

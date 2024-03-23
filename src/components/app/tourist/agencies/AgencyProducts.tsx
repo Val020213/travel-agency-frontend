@@ -1,4 +1,3 @@
-'use client'
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '../../../ui/ContinueCard';
 import { ProductCard } from '../../../ui/ProductCard';
@@ -13,7 +12,7 @@ import {
 import { FetchAgencies } from '@/lib/data/data';
 import { agency } from '@/lib/entities';
 
-export async function AgencyProducts () {
+export async function AgencyProducts() {
   const data = await FetchAgencies()
 
   return (
@@ -39,7 +38,7 @@ export async function AgencyProducts () {
             href={'/agency/' + agency.id}
           />
         ))}
-        <ContinueCard action={() => { }} />
+        <ContinueCard />
       </LayoutGrid>
     </div>
   );

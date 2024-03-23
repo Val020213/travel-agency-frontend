@@ -1,3 +1,3 @@
 export function write(data: Record<string, string>) {
-    document.cookie = JSON.stringify(data)
+    document.cookie = 'session=' + (JSON.stringify(data)).toString();
 }

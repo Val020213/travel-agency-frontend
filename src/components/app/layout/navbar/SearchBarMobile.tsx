@@ -1,18 +1,17 @@
 'use client'
 import clsx from 'clsx';
 import { IconSearch } from '@tabler/icons-react';
-import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export const SearchBarMobile = () => {
-  const open = useSearchParams().get('searchBar')
-
+  const [open, setOpen] = useState<boolean>(false)
 
   return (
-    <>
+    <div className='md:hidden'>
       {!open ? (
-        <Link href={open? '' : '?searchBar'}>
+        <button onClick={() => setOpen(!open)}>
           <IconSearch
             stroke={2}
             className={clsx(
@@ -22,9 +21,10 @@ export const SearchBarMobile = () => {
               'bg-orangePinkLeft dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-600 '
             )}
           />
-        </Link>
+        </button>
       ) : (
         <form
+          action={() => { setOpen(!open) }}
           className={clsx(
             'flex flex-row justify-end items-center',
             'rounded-full h-[45] md:h-max pl-2 gap-2 w-full',
@@ -50,6 +50,6 @@ export const SearchBarMobile = () => {
           </button>
         </form>
       )}
-    </>
+    </div>
   );
 };

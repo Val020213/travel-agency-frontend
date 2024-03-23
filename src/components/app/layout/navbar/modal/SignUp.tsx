@@ -17,9 +17,9 @@ const SignUpTrigger = ({ children }: { children: ReactNode }) => {
   const register = searchParams.get('register');
 
   return (
-    <>
+    <Suspense>
       {register && children}
-    </>
+    </Suspense>
   );
 }
 
