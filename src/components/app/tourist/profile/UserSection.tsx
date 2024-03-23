@@ -11,7 +11,7 @@ export const UserSection = () => {
         )}
       >
         <Image
-          src={require('@/ui/assets/profile.png')}
+          src={require('@/assets/profile.png')}
           width={230}
           height={230}
           alt='google'
