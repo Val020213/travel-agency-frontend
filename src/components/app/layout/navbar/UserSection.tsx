@@ -1,29 +1,19 @@
-import Image from 'next/image';
-import { useBreakpoints } from '@/hooks/useBreakpoint';
-import { Login } from './buttons/Login';
+'use client'
 import { Loged } from './buttons/Loged';
-import { Read } from '@/lib/utils/read';
+import { ReadSession } from '@/lib/utils/read';
+import { Login } from './buttons/Login';
+import { Suspense } from 'react';
 
-export const UserSection = () => {
-  const bp = useBreakpoints();
-  const userData = Read()
+export async function UserSection() {
 
-  return userData.username ? (
-    <div>
-      <Loged name={userData.username ?? 'Turista'} />
-    </div>
-  ) : (
-    <div className='flex items-center justify-center relative h-16'>
-      <Image
-        src={require('@/assets/wave.png')}
-        alt=''
-        height={64}
-        width={250}
-        className='hidden md:block absolute top-5 left-4 z-0 w-auto h-auto'
-      />
-      <span className='z-10'>
-        <Login title={!bp.md ? 'Unirse' : 'Unirse a Travelix'} />
-      </span>
-    </div>
-  );
+  const session = await ReadSession();
+  return (
+    <Suspense>
+      {session ? < Loged /> :
+        <div className='flex items-center justify-center relative h-16'>
+          <Login />
+        </div>
+      }
+    </Suspense >
+  )
 };

@@ -1,27 +1,11 @@
-import React, { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import clsx from 'clsx';
 import { Logo, LogoEnterprise } from '@/components/app/layout/navbar/Logo';
 import { SearchBar } from '@/components/app/layout/navbar/SearchBar';
 import { UserSection } from '@/components/app/layout/navbar/UserSection';
 import { Switch } from '@/components/app/layout/navbar/ThemeSwitch';
-import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Categories, EnterpriseCategories } from './Categories';
 import { SearchBarMobile } from './SearchBarMobile';
-import {  usePathname } from 'next/navigation';
-import Link from 'next/link';
-
-function useDesktop(): boolean {
-  const bp = useBreakpoints();
-  return bp.lg;
-}
-function useTablet(): boolean {
-  const bp = useBreakpoints();
-  return bp.md && !bp.lg;
-}
-function useMobile(): boolean {
-  const bp = useBreakpoints();
-  return !bp.md;
-}
 
 const NavbarContainer = ({ children }: { children: ReactNode }) => {
   return (
@@ -47,27 +31,28 @@ export const Navbar = () => {
         <div className='lg:basis-1/4'>
           <Logo />
         </div>
-        <div className={clsx('basis-1/2', { hidden: !useDesktop() })}>
+        <div className={clsx('hidden', 'lg:block lg:basis-1/2')}>
           <SearchBar />
         </div>
         <div className='flex flex-row justify-end gap-1 md:gap-3 lg:basis-1/4'>
-          <UserSection />
-          <Switch />
+          <Suspense>
+            <UserSection />
+            <Switch />
+          </Suspense>
         </div>
       </div>
-      <div className={clsx('w-full p-1', { hidden: !useTablet() })}>
+      <div className={clsx('w-full p-1 hidden md:block lg:hidden')}>
         <SearchBar />
       </div>
       <div className='flex flex-row gap-2 justify-between items-center w-full *:md:gap-16'>
         <Categories />
-        {useMobile() && <SearchBarMobile />}
+        <SearchBarMobile />
       </div>
-    </NavbarContainer>
+    </NavbarContainer >
   );
 };
 
 export const EnterpriseNavbar = () => {
-  const pathname = usePathname();
   return (
     <NavbarContainer>
       <div className='flex flex-row justify-between items-center w-full'>
@@ -84,15 +69,15 @@ export const EnterpriseNavbar = () => {
           </div>
         </div>
         <div className='flex flex-row justify-end gap-1 md:gap-3'>
-          <Link href='/dashboard/profile'>
+          <Suspense>
             <UserSection />
-          </Link>
-          <Switch />
+            <Switch />
+          </Suspense>
         </div>
       </div>
       <div className='sm:hidden'>
         <EnterpriseCategories />
       </div>
-    </NavbarContainer>
+    </NavbarContainer >
   );
 };

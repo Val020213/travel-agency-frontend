@@ -1,17 +1,28 @@
 import Link from 'next/link';
 import clsx from 'clsx';
+import Image from 'next/image';
+import { Suspense } from 'react';
 
-export const Login = ({ title, className }: { title: string, className?: string }) => {
+export async function Login() {
   return (
     <Link
       href='?login=true'
       className={clsx(
-        'text-gray-800 dark:text-gray-50 hover:text-blue-500 font-semibold',
-        'leading-7 text-xl',
-        className
+        'text-gray-800 dark:text-gray-50 hover:text-blue-500 dark:hover:text-blue-500 font-medium',
+        'leading-7 text-xl text-end',
       )}
     >
-      {title}
-    </Link>
+      <Suspense>
+        <Image
+          src={require('@/assets/wave.png')}
+          alt=''
+          height={64}
+          width={250}
+          className='hidden md:block absolute top-5 left-4 z-0 w-auto h-auto'
+        />
+      </Suspense>
+      <span className='hidden md:block'>Unirse a Travelix</span>
+      <span className='md:hidden'>Unirse</span>
+    </Link >
   );
 };

@@ -1,6 +1,8 @@
+'use server'
 
+import { cookies } from "next/headers"
 
-export function Read(): Record<string, string> {
-
-    return {}
+export async function ReadSession(): Promise<string> {
+    const myCookies = cookies().get('session')
+    return myCookies?.value ?? '';
 }
