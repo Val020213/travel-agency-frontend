@@ -1,6 +1,5 @@
 'use client'
 import { useSearchParams } from 'next/navigation';
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { IconX } from '@tabler/icons-react';
@@ -8,11 +7,23 @@ import { useFormState } from 'react-dom';
 import { CreateUserAction } from '@/lib/actions/signUp';
 import { SignUpState } from '@/lib/actions/signUp';
 import { ContinueButton } from './ContinueButton';
-import { FetchSuggestionContries } from '@/lib/data/data';
+import { FetchCountries, FetchSuggestionCoutries, TemporalCountries } from '@/lib/data/data';
 import { othersLinks } from '@/lib/definitions';
-import { useState } from 'react';
+import { ReactNode, Suspense, useEffect, useState } from 'react';
+import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 
-export async function SignUp() {
+const SignUpTrigger = ({ children }: { children: ReactNode }) => {
+  const searchParams = useSearchParams();
+  const register = searchParams.get('register');
+
+  return (
+    <>
+      {register && children}
+    </>
+  );
+}
+
+export const SignUp = () => {
   const initialState = {};
 
   const [state, dispatch] = useFormState<SignUpState, FormData>(
@@ -20,35 +31,24 @@ export async function SignUp() {
     initialState
   );
 
-  const searchParams = useSearchParams();
-  const register = searchParams.get('register');
-  const pathname = usePathname();
-
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-
-  async function UpdateSuggestions(input: string) {
-    const data = await FetchSuggestionContries(input);
-    setSuggestions(data)
-  }
-
   return (
-    register && (
+    <SignUpTrigger>
       <dialog
         className={clsx(
-          'flex flex-col rounded-[32px]',
+          'flex flex-col rounded-3xl',
           'bg-white dark:bg-extends-darker-blue-900',
           'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px]'
         )}
       >
         <form
-          className='flex flex-col gap-4 md:gap-8 w-full *:w-full'
+          className='flex flex-col gap-4 md:gap-8 '
           action={dispatch}
         >
           <div className='flex justify-start items-center flex-row text-gray-500 dark:text-extends-darker-blue-300'>
             <span className='text-lg leading-7 md:text-2xl font-medium w-full text-center'>
               Registrarse
             </span>
-            <Link href={pathname} className='float-right'>
+            <Link href={'?'} className='float-right'>
               <IconX stroke={1.5} className='h-6 w-6' color='currentColor' />
             </Link>
           </div>
@@ -95,22 +95,25 @@ export async function SignUp() {
               }
             </div>
 
-            <div className='flex flex-col text-base leading-6 gap-2 relative'>
+            <div className='flex flex-col text-base leading-6 gap-2'>
               <label
                 className='text-gray-300 dark:text-extends-darker-blue-300'
                 htmlFor='nationality'
               >
                 nacionalidad
               </label>
-              <input
-                required
-                className='md:text-xl border-b border-gray-300  dark:border-gray-400'
-                type='nationality'
-                id='nationality'
-                name='nationality'
-                placeholder='********'
-                onChange={e => UpdateSuggestions(e.target.value)}
-              />
+              <Select name='nationality' className='md:text-xl relative'>
+                <SelectTrigger id="country" className='border-b border-gray-300 dark:border-gray-400'>
+                  <SelectValue placeholder="Seleccione su país" />
+                </SelectTrigger>
+                <SelectContent position="popper" className='fixed pt-1 h-60 md:h-48'>
+                  {TemporalCountries().map((country, index) => (
+                    <SelectItem key={index} value={country}>
+                      {country}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               {
                 state.errors?.nationality && <p className='text-[#e11d48]'>{state.errors.nationality}</p>
               }
@@ -170,6 +173,8 @@ export async function SignUp() {
           </div>
         </form>
       </dialog>
-    )
-  );
+    </SignUpTrigger >
+  )
 };
+
+

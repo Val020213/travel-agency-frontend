@@ -1,6 +1,6 @@
 import { redirect, usePathname } from 'next/navigation';
 import { z } from 'zod';
-import { FetchCountries } from '../data/data';
+import { FetchCountries, TemporalCountries } from '../data/data';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -69,7 +69,7 @@ export async function CreateUserAction(
     };
   }
 
-  const Countries = await FetchCountries();
+  const Countries = TemporalCountries();
 
   if (Countries.findIndex((country) => country === nationality) === -1) {
     const nextState: SignUpState = {

@@ -1,8 +1,29 @@
 import { agency, excursion, touristPackage } from '../entities';
 
-export async function FetchSuggestionContries( name : string ): Promise<string[]> {
+export function TemporalCountries(): string[] {
+  return [
+    'Argentina',
+    'Bolivia',
+    'Brasil',
+    'Cuba',
+    'México',
+    'España',
+    'Chile',
+    'Colombia',
+    'Ecuador',
+    'Guyana',
+    'Paraguay',
+    'Perú',
+    'Surinam',
+    'Uruguay',
+    'Venezuela',
+  ];
+}
+
+
+export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
   const response = await fetch(`https://restcountries.com/v3.1/name/${name}`, {
-    method : 'GET',
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     }

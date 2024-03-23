@@ -10,3 +10,10 @@ input{
   @apply bg-inherit hover:bg-inherit focus:bg-inherit hover:outline-none focus:outline-none;
 }
 
+select{
+  @apply bg-inherit hover:bg-inherit focus:bg-inherit hover:outline-none focus:outline-none;
+}
+
+option{
+  @apply bg-inherit hover:bg-inherit focus:bg-inherit hover:outline-none focus:outline-none ;
+}
