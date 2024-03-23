@@ -1,8 +1,5 @@
-'use client';
 import clsx from 'clsx';
 import { IconSearch } from '@tabler/icons-react';
-
-import { Menu } from '@/components/app/layout/navbar/Menu';
 
 export const SearchBar = () => {
   return (

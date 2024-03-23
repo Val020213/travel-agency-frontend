@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -8,11 +8,11 @@ import { useFormState } from 'react-dom';
 import { CreateUserAction } from '@/lib/actions/signUp';
 import { SignUpState } from '@/lib/actions/signUp';
 import { ContinueButton } from './ContinueButton';
-import { FetchCountries} from '@/lib/data/data';
-import { othersLinks } from '@/lib/data/data';
-import { country } from '@/lib/definitions';
+import { FetchSuggestionContries } from '@/lib/data/data';
+import { othersLinks } from '@/lib/definitions';
+import { useState } from 'react';
 
-export async function SignUp () {
+export async function SignUp() {
   const initialState = {};
 
   const [state, dispatch] = useFormState<SignUpState, FormData>(
@@ -23,8 +23,13 @@ export async function SignUp () {
   const searchParams = useSearchParams();
   const register = searchParams.get('register');
   const pathname = usePathname();
-  
-  const Countries = await FetchCountries();
+
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+
+  async function UpdateSuggestions(input: string) {
+    const data = await FetchSuggestionContries(input);
+    setSuggestions(data)
+  }
 
   return (
     register && (
@@ -59,13 +64,16 @@ export async function SignUp () {
                 nombre de usuario
               </label>
               <input
+                required
                 className='md:text-xl border-b border-gray-300 dark:border-gray-400'
                 type='name'
                 id='username'
                 name='username'
                 placeholder='travelilero123'
-                required
               />
+              {
+                state.errors?.username && <p className='text-[#e11d48]'>{state.errors.username}</p>
+              }
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
@@ -75,34 +83,37 @@ export async function SignUp () {
                 nombre completo
               </label>
               <input
+                required
                 className='md:text-xl border-b border-gray-300 dark:border-gray-400'
-                type='name'
+                type='full name'
                 id='name'
                 name='name'
                 placeholder='Juan de la Torre'
-                required
               />
+              {
+                state.errors?.name && <p className='text-[#e11d48]'>{state.errors.name}</p>
+              }
             </div>
-            <div className='flex flex-col text-base leading-6 gap-2'>
+
+            <div className='flex flex-col text-base leading-6 gap-2 relative'>
               <label
                 className='text-gray-300 dark:text-extends-darker-blue-300'
                 htmlFor='nationality'
               >
                 nacionalidad
               </label>
-              <select
-                className='md:text-xl border-b border-gray-300 dark:border-gray-400'
+              <input
+                required
+                className='md:text-xl border-b border-gray-300  dark:border-gray-400'
+                type='nationality'
                 id='nationality'
                 name='nationality'
-                required
-              >
-                <option className='text-gray-300 dark:text-extends-darker-blue-300' value=''>Selecciona tu nacionalidad</option>
-                {
-                  Countries.map((country: country) => (
-                    <option key={country.id} value={country.id}>{country.name}</option>
-                  ))
-                }
-              </select>
+                placeholder='********'
+                onChange={e => UpdateSuggestions(e.target.value)}
+              />
+              {
+                state.errors?.nationality && <p className='text-[#e11d48]'>{state.errors.nationality}</p>
+              }
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
@@ -112,13 +123,16 @@ export async function SignUp () {
                 contraseña
               </label>
               <input
+                required
                 className='md:text-xl border-b border-gray-300  dark:border-gray-400'
                 type='password'
                 id='password'
                 name='password'
                 placeholder='********'
-                required
               />
+              {
+                state.errors?.password && <p className='text-[#e11d48]'>{state.errors.password}</p>
+              }
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
@@ -128,12 +142,12 @@ export async function SignUp () {
                 confirme su contraseña
               </label>
               <input
+                required
                 className='md:text-xl border-b border-gray-300  dark:border-gray-400'
                 type='password'
                 id='confirmPassword'
                 name='confirmPassword'
                 placeholder='********'
-                required
               />
             </div>
           </div>

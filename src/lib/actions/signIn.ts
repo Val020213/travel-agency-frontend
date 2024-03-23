@@ -38,7 +38,7 @@ export async function ValidateUserAction(
   console.log(prevState);
 
   if (!validatedFields.success) {
-    console.log(validatedFields.error.message)
+
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: validatedFields.error.message,
@@ -72,8 +72,9 @@ export async function ValidateUserAction(
       };
     }
   }
-  console.log('Validated Fields', validatedFields);
+  // console.log('Validated Fields', validatedFields);
   write({ username: username })
+  redirectRole({ user: AdminPatch[username] });
   redirect('?loginSuccess=true');
 }
 
@@ -109,12 +110,7 @@ const AdminPatch: { [key: string]: user } = {
 };
 
 function redirectRole({ user }: { user: user }) {
-  if (user.rol === 'tourist' || user.rol === 'marketing') {
-    redirect('/')
-  }
-
-  else {
+  if (user.rol === 'agent' || user.rol === 'admin') {
     redirect('/dashboad')
   }
-
 }

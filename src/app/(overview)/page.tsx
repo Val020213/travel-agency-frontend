@@ -1,5 +1,3 @@
-'use client';
-
 import { ExcursionProducts } from '@/components/app/tourist/excursions/ExcursionsProducts';
 import { PackageProducts } from '@/components/app/tourist/packages/PackageProducts';
 import { AgencyProducts } from '@/components/app/tourist/agencies/AgencyProducts';

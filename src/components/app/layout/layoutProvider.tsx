@@ -1,14 +1,16 @@
-'use client';
+'use client'
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { EnterpriseNavbar, Navbar } from '@/components/app/layout/navbar/Navbar';
 import { Footer } from '@/components/app/layout/footer/Footer';
 import { ThemeProvider } from 'next-themes';
-import { ReactNode, use } from 'react';
+import { ReactNode } from 'react';
 import { Hero } from '@/components/app/layout/hero/Hero';
 import { SignIn } from '@/components/app/layout/navbar/modal/SignIn';
 import { SignUp } from '@/components/app/layout/navbar/modal/SignUp';
 import clsx from 'clsx';
+import Link from 'next/link';
+
 
 function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -31,16 +33,17 @@ export const Modals = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {modalsParams.some((param) => searchParams.has(param)) && (
-        <div
+        <div 
           className={clsx(
             'z-40 fixed flex flex-col items-center justify-start',
-            'backdrop-brightness-75 overflow-auto py-4',
+            'overflow-auto py-4',
             'w-full h-full'
           )}
         >
+          <Link href={'?'} className='fixed top-0 w-screen h-screen backdrop-brightness-75'></Link>
           <SignIn />
           <SignUp />
-        </div>
+          </div>
       )}
       {children}
     </>

@@ -1,5 +1,4 @@
-'use client';
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import clsx from 'clsx';
 import { Logo, LogoEnterprise } from '@/components/app/layout/navbar/Logo';
 import { SearchBar } from '@/components/app/layout/navbar/SearchBar';
@@ -8,8 +7,7 @@ import { Switch } from '@/components/app/layout/navbar/ThemeSwitch';
 import { useBreakpoints } from '@/hooks/useBreakpoint';
 import { Categories, EnterpriseCategories } from './Categories';
 import { SearchBarMobile } from './SearchBarMobile';
-import { Loged } from './buttons/Loged';
-import { redirect, usePathname } from 'next/navigation';
+import {  usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 function useDesktop(): boolean {

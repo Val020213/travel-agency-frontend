@@ -28,6 +28,7 @@
     "next-client-cookies": "^1.1.0",
     "next-cookies": "^2.0.3",
     "next-themes": "^0.2.1",
+    "node-fetch": "^3.3.2",
     "path": "^0.12.7",
     "react": "^18",
     "react-dom": "^18",

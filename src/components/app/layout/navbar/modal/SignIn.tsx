@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
@@ -7,7 +7,7 @@ import { useFormState } from 'react-dom';
 import { SignInState, ValidateUserAction } from '@/lib/actions/signIn';
 import Link from 'next/link';
 import { ContinueButton } from './ContinueButton';
-import { othersLinks } from '@/lib/data/data';
+import { othersLinks } from '@/lib/definitions';
 
 export const SignIn = () => {
   const initialState = {};
@@ -53,13 +53,16 @@ export const SignIn = () => {
                 nombre de usuario
               </label>
               <input
+                required
                 className='md:text-xl border-b border-gray-300 dark:border-gray-400'
                 type='name'
                 id='username'
                 name='username'
                 placeholder='travelilero123'
-                required
               />
+              {
+                state.errors?.username && <p className='text-[#e11d48]'>{state.errors.username}</p>
+              }
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
@@ -69,13 +72,16 @@ export const SignIn = () => {
                 contraseña
               </label>
               <input
+                required
                 className='md:text-xl border-b border-gray-300  dark:border-gray-400'
                 type='password'
                 id='password'
                 name='password'
                 placeholder='********'
-                required
               />
+              {
+                state.errors?.password && <p className='text-[#e11d48]'>{state.errors.password}</p>
+              }
             </div>
           </div>
           <div className='flex flex-col *:w-full gap-4'>
@@ -95,7 +101,7 @@ export const SignIn = () => {
             </Link>
             <ContinueButton />
           </div>
-          
+
         </form>
       </dialog>
     )

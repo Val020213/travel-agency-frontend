@@ -1,3 +1,4 @@
+'use client'
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '../../../ui/ContinueCard';
 import { ProductCard } from '../../../ui/ProductCard';
@@ -9,18 +10,11 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
-import { useEffect, useState } from 'react';
 import { FetchAgencies } from '@/lib/data/data';
 import { agency } from '@/lib/entities';
 
-export const AgencyProducts = () => {
-  const [data, setData] = useState<agency[]>([]);
-
-  useEffect(() => {
-    FetchAgencies().then((data) => {
-      setData(data);
-    });
-  });
+export async function AgencyProducts () {
+  const data = await FetchAgencies()
 
   return (
     <div className='flex flex-col gap-4'>

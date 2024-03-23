@@ -36,11 +36,6 @@ export async function Search(prevState: SearchState, formData: FormData) {
 }
 
 export async function SearchSubmit(formData: FormData) {
-    //tricks here
-    // const results = await fetch(`/api/search?query=${query}&category=${category}`);
-    // const validatedData = FormSearchSchema.parse(formData);
-    // const { query, category } = validatedData;
     const results = null;
-    // console.log(`Searching ...${query} in ${category}`)
     return { results };
 }

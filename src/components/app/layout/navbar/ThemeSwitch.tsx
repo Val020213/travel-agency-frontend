@@ -1,8 +1,7 @@
-'use client';
+'use client'
 import {
   IconMoonFilled,
   IconSunFilled,
-  IconCircle0Filled,
 } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';

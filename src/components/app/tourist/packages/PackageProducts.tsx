@@ -1,7 +1,7 @@
+'use client'
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '../../../ui/ContinueCard';
 import { ProductCard } from '../../../ui/ProductCard';
-import { useEffect, useState } from 'react';
 
 import {
   Breadcrumb,
@@ -14,14 +14,8 @@ import {
 import { FetchPackages } from '@/lib/data/data';
 import { touristPackage } from '@/lib/entities';
 
-export const PackageProducts = () => {
-  const [data, setData] = useState<touristPackage[]>([]);
-
-  useEffect(() => {
-    FetchPackages().then((data) => {
-      setData(data);
-    });
-  });
+export async function PackageProducts() {
+  const data = await FetchPackages()
 
   return (
     <div className='flex flex-col gap-8'>

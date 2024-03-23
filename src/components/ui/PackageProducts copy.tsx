@@ -1,8 +1,8 @@
+'use client';
 import { LayoutGrid } from '../app/layout/LayoutGrid';
 import { ContinueCard } from './ContinueCard';
 import { ProductCard } from './ProductCard';
 import { seedData } from '@/lib/data/seedData';
-import { useEffect, useState } from 'react';
 
 import {
   Breadcrumb,
@@ -14,13 +14,9 @@ import {
 } from '@/components/ui/breadcrumb';
 import { product } from '@/lib/definitions';
 
-export const CompomenteDePrueba = () => {
+export async function CompomenteDePrueba() {
 
-  const [data, setData] = useState<product[]>([]);
-
-  useEffect(() => {
-    seedData().then((data) => setData(data));
-  }, []);
+  const data : product[] = await seedData()
 
   return (
     <div className='flex flex-col gap-8'>

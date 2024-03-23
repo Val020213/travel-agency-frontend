@@ -2,7 +2,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
-import { categories } from '@/lib/data/data';
+import { categories } from '@/lib/dataComponents';
 import Autoplay from 'embla-carousel-autoplay';
 import {
   Carousel,

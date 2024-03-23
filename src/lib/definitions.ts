@@ -4,7 +4,6 @@ export type category = {
   icon: React.ReactNode;
 };
 
-
 export type product = {
   id: number;
   name: string;
@@ -15,8 +14,12 @@ export type product = {
   category: string;
 };
 
-export type country = {
-  id: number;
-  name: string;
-  iso2: string;
-}
+
+export const othersLinks: Record<string, string> = {
+  profile: '/tourist/profile',
+  dashboardProfile: '/profile',
+  payment: '/tourist/payment',
+  openRegister: '?register=true',
+  openLogin: '?login=true',
+};
+

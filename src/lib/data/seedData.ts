@@ -1,4 +1,3 @@
-'use server';
 import fs from 'fs';
 import path from 'path';
 import { product } from '../definitions';
@@ -19,8 +18,8 @@ export async function seedData(): Promise<product[]> {
     const imageSrc = fileName;
     const description = 'Description for ' + name;
     const category = 'Paquetes';
-    const tag = randomInt(0, 10) > 5 ? undefined : 'alojamiento';
-    const price = randomInt(1000, 10000);
+    const tag = Math.random() > 0.5 ? undefined : 'alojamiento';
+    const price = Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000;
     return {
       id: parseInt(id),
       name: name,

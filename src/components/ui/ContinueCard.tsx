@@ -1,9 +1,21 @@
+'use client'
 import { useState } from 'react';
 import { Airplane } from './tokens/Airplane';
 import { AirplaneHover } from './tokens/AirplaneHover';
 import clsx from 'clsx';
+import { useSearchParams } from 'next/navigation';
 
-export const ContinueCard = ({ action }: { action: () => void }) => {
+export const example = () => {
+  function MyAction() {
+    const current_page = useSearchParams().get('page');
+  }
+
+  return (
+    <ContinueCard action={MyAction} />
+  )
+}
+
+export function ContinueCard ({ action }: { action: () => void }){
   const [hover, setHover] = useState(false);
   return (
     <button

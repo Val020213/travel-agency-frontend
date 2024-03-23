@@ -1,3 +1,4 @@
+'use client'
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '../../../ui/ContinueCard';
 import { ProductCard } from '../../../ui/ProductCard';
@@ -9,18 +10,11 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
-import { useEffect, useState } from 'react';
 import { FetchExcursions } from '@/lib/data/data';
-import { product } from '@/lib/definitions';
 import { excursion } from '@/lib/entities';
 
-export const ExcursionProducts = () => {
-  const [data, setData] = useState<excursion[]>([]);
-  useEffect(() => {
-    FetchExcursions().then((data) => {
-      setData(data);
-    });
-  });
+export async function ExcursionProducts (){
+  const data = await FetchExcursions()
 
   return (
     <div className='flex flex-col gap-8'>
@@ -39,7 +33,7 @@ export const ExcursionProducts = () => {
         {data.map((excursion: excursion) => (
           <ProductCard
             key={excursion.id}
-            title={'Excursion a ' + excursion.arrivalLocation}
+            title={excursion.arrivalLocation}
             description={'Salida desde ' + excursion.departureLocation + ' a las ' + excursion.departureTime + '. Llegada a ' + excursion.arrivalLocation + ' a las ' + excursion.arrivalTime + '.'}
             image={excursion.image}
             href={'/excursion/' + excursion.id}

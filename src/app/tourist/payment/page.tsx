@@ -1,4 +1,3 @@
-'use client';
 import { useSearchParams } from 'next/navigation';
 import { ProgressManager } from '@/components/app/tourist/payment/ProgressManager';
 

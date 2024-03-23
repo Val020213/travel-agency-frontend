@@ -1,24 +1,18 @@
+'use client'
 import clsx from 'clsx';
 import { IconSearch } from '@tabler/icons-react';
-// import { SearchSubmit } from '@/libs/actions';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export const SearchBarMobile = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const open = useSearchParams().get('searchBar')
 
-  function preAction(formData: FormData) {
-    if (formData.get('query') === '') {
-      setOpen(false);
-    } else {
-      setOpen(true);
-      console.log("Searching...")
-    }
-  }
 
   return (
     <>
       {!open ? (
-        <button onClick={() => setOpen(!open)}>
+        <Link href={open? '' : '?searchBar'}>
           <IconSearch
             stroke={2}
             className={clsx(
@@ -28,10 +22,9 @@ export const SearchBarMobile = () => {
               'bg-orangePinkLeft dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-600 '
             )}
           />
-        </button>
+        </Link>
       ) : (
         <form
-          action={preAction}
           className={clsx(
             'flex flex-row justify-end items-center',
             'rounded-full h-[45] md:h-max pl-2 gap-2 w-full',

@@ -1,4 +1,3 @@
-'use client';
 import { IconVip } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { UserSection } from '@/components/app/tourist/profile/UserSection';
