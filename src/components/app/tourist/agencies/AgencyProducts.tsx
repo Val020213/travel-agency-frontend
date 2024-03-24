@@ -13,7 +13,7 @@ import { FetchAgencies } from '@/lib/data/data';
 import { agency } from '@/lib/entities';
 
 export async function AgencyProducts() {
-  const data = await FetchAgencies()
+  const data = await FetchAgencies();
 
   return (
     <div className='flex flex-col gap-4'>
@@ -33,7 +33,13 @@ export async function AgencyProducts() {
           <ProductCard
             key={agency.id}
             title={agency.name}
-            description={'Agencia de viajes ubicada en ' + agency.address + '. Puede localizarnos en ' + agency.email + '.'}
+            description={
+              'Agencia de viajes ubicada en ' +
+              agency.address +
+              '. Puede localizarnos en ' +
+              agency.email +
+              '.'
+            }
             image={agency.image}
             href={'/agency/' + agency.id}
           />
@@ -42,4 +48,4 @@ export async function AgencyProducts() {
       </LayoutGrid>
     </div>
   );
-};
+}

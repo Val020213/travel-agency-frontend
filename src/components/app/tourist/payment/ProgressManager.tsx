@@ -1,4 +1,8 @@
-import { PlaneIcon, CreditCardIcon, TicketIcon } from '@/components/app/tourist/payment/icons/icon';
+import {
+  PlaneIcon,
+  CreditCardIcon,
+  TicketIcon,
+} from '@/components/app/tourist/payment/icons/icon';
 
 export const ProgressManager = ({ step }: { step: number }) => {
   return (

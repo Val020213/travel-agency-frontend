@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -7,21 +7,23 @@ import { useFormState } from 'react-dom';
 import { CreateUserAction } from '@/lib/actions/signUp';
 import { SignUpState } from '@/lib/actions/signUp';
 import { ContinueButton } from './ContinueButton';
-import { FetchCountries, FetchSuggestionCoutries, TemporalCountries } from '@/lib/data/data';
+import { TemporalCountries } from '@/lib/data/data';
 import { othersLinks } from '@/lib/definitions';
-import { ReactNode, Suspense, useEffect, useState } from 'react';
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
+import { ReactNode, Suspense } from 'react';
+import {
+  SelectValue,
+  SelectTrigger,
+  SelectItem,
+  SelectContent,
+  Select,
+} from '@/components/ui/select';
 
 const SignUpTrigger = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams();
   const register = searchParams.get('register');
 
-  return (
-    <Suspense>
-      {register && children}
-    </Suspense>
-  );
-}
+  return <Suspense>{register && children}</Suspense>;
+};
 
 export const SignUp = () => {
   const initialState = {};
@@ -40,10 +42,7 @@ export const SignUp = () => {
           'shadow-2xl px-8 pt-6 pb-12 w-[343px] sm:w-[480px] md:w-[520px]'
         )}
       >
-        <form
-          className='flex flex-col gap-4 md:gap-8 '
-          action={dispatch}
-        >
+        <form className='flex flex-col gap-4 md:gap-8 ' action={dispatch}>
           <div className='flex justify-start items-center flex-row text-gray-500 dark:text-extends-darker-blue-300'>
             <span className='text-lg leading-7 md:text-2xl font-medium w-full text-center'>
               Registrarse
@@ -71,9 +70,9 @@ export const SignUp = () => {
                 name='username'
                 placeholder='travelilero123'
               />
-              {
-                state.errors?.username && <p className='text-[#e11d48]'>{state.errors.username}</p>
-              }
+              {state.errors?.username && (
+                <p className='text-[#e11d48]'>{state.errors.username}</p>
+              )}
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
@@ -90,9 +89,9 @@ export const SignUp = () => {
                 name='name'
                 placeholder='Juan de la Torre'
               />
-              {
-                state.errors?.name && <p className='text-[#e11d48]'>{state.errors.name}</p>
-              }
+              {state.errors?.name && (
+                <p className='text-[#e11d48]'>{state.errors.name}</p>
+              )}
             </div>
 
             <div className='flex flex-col text-base leading-6 gap-2'>
@@ -102,11 +101,17 @@ export const SignUp = () => {
               >
                 nacionalidad
               </label>
-              <Select name='nationality' className='md:text-xl relative'>
-                <SelectTrigger id="country" className='border-b border-gray-300 dark:border-gray-400'>
-                  <SelectValue placeholder="Seleccione su país" />
+              <Select name='nationality'>
+                <SelectTrigger
+                  id='country'
+                  className='border-b border-gray-300 dark:border-gray-400'
+                >
+                  <SelectValue placeholder='Seleccione su país' />
                 </SelectTrigger>
-                <SelectContent position="popper" className='fixed pt-1 h-60 md:h-48'>
+                <SelectContent
+                  position='popper'
+                  className='fixed pt-1 h-60 md:h-48'
+                >
                   {TemporalCountries().map((country, index) => (
                     <SelectItem key={index} value={country}>
                       {country}
@@ -114,9 +119,9 @@ export const SignUp = () => {
                   ))}
                 </SelectContent>
               </Select>
-              {
-                state.errors?.nationality && <p className='text-[#e11d48]'>{state.errors.nationality}</p>
-              }
+              {state.errors?.nationality && (
+                <p className='text-[#e11d48]'>{state.errors.nationality}</p>
+              )}
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
@@ -133,9 +138,9 @@ export const SignUp = () => {
                 name='password'
                 placeholder='********'
               />
-              {
-                state.errors?.password && <p className='text-[#e11d48]'>{state.errors.password}</p>
-              }
+              {state.errors?.password && (
+                <p className='text-[#e11d48]'>{state.errors.password}</p>
+              )}
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
@@ -173,8 +178,6 @@ export const SignUp = () => {
           </div>
         </form>
       </dialog>
-    </SignUpTrigger >
-  )
+    </SignUpTrigger>
+  );
 };
-
-

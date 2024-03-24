@@ -14,7 +14,7 @@ import { FetchPackages } from '@/lib/data/data';
 import { touristPackage } from '@/lib/entities';
 
 export async function PackageProducts() {
-  const data = await FetchPackages()
+  const data = await FetchPackages();
 
   return (
     <div className='flex flex-col gap-8'>
@@ -36,9 +36,7 @@ export async function PackageProducts() {
           <ProductCard
             key={touristPackage.id}
             title={'Paquete turístico de ' + touristPackage.duration + ' días'}
-            description={
-              touristPackage.description
-            }
+            description={touristPackage.description}
             image={touristPackage.image}
             href={'/package/' + touristPackage.id}
           />
@@ -47,4 +45,4 @@ export async function PackageProducts() {
       </LayoutGrid>
     </div>
   );
-};
+}

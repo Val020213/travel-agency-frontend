@@ -16,7 +16,7 @@ const NavbarContainer = ({ children }: { children: ReactNode }) => {
         'bg-white dark:bg-extends-darker-blue-900',
         'bg-opacity-80 bg-blend-color-burn dark:bg-opacity-100 shadow-lg',
         'backdrop-filter backdrop-blur-xl dark:backdrop-blur-lg',
-        'sticky z-10 top-0',
+        'sticky z-10 top-0'
       )}
     >
       {children}
@@ -48,7 +48,7 @@ export const Navbar = () => {
         <Categories />
         <SearchBarMobile />
       </div>
-    </NavbarContainer >
+    </NavbarContainer>
   );
 };
 
@@ -78,6 +78,6 @@ export const EnterpriseNavbar = () => {
       <div className='sm:hidden'>
         <EnterpriseCategories />
       </div>
-    </NavbarContainer >
+    </NavbarContainer>
   );
 };

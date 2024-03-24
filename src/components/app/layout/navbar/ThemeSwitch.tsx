@@ -1,8 +1,5 @@
-'use client'
-import {
-  IconMoonFilled,
-  IconSunFilled,
-} from '@tabler/icons-react';
+'use client';
+import { IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
@@ -50,8 +47,7 @@ const SwitchSkeleton = () => {
           'bg-white dark:bg-extends-darker-blue-900',
           'rounded-full'
         )}
-      >
-      </div>
+      ></div>
     </button>
   );
 };

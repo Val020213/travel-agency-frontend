@@ -13,22 +13,22 @@ export const categories: category[] = [
   {
     name: 'Home',
     href: '/',
-    icon: <IconHome size={ 24 } strokeWidth = { 1.5} />,
+    icon: <IconHome size={24} strokeWidth={1.5} />,
   },
   {
     name: 'Excursiones',
     href: '/tourist/excursions',
-    icon: <IconBus size={ 24 } strokeWidth = { 1.5} />,
+    icon: <IconBus size={24} strokeWidth={1.5} />,
   },
-{
-  name: 'Agencias',
+  {
+    name: 'Agencias',
     href: '/tourist/agencies',
-      icon: <IconPlane size={ 24 } strokeWidth = { 1.5} />,
+    icon: <IconPlane size={24} strokeWidth={1.5} />,
   },
-{
-  name: 'Paquetes',
+  {
+    name: 'Paquetes',
     href: '/tourist/packages',
-      icon: <IconBackpack size={ 24 } strokeWidth = { 1.5} />,
+    icon: <IconBackpack size={24} strokeWidth={1.5} />,
   },
 ];
 
@@ -36,35 +36,35 @@ export const enterpriseCategories: category[] = [
   {
     name: 'Estadísticas',
     href: '/dashboard',
-    icon: <IconReportAnalytics size={ 24} strokeWidth = { 1.5} />,
+    icon: <IconReportAnalytics size={24} strokeWidth={1.5} />,
   },
-{
-  name: 'Crear Oferta',
+  {
+    name: 'Oferta',
     href: '/dashboard/createOffer',
-      icon: <IconSquareRoundedPlus size={ 24 } strokeWidth = { 1.5} />,
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
-{
-  name: 'Crear Excursion',
+  {
+    name: 'Excursion',
     href: '/dashboard/createExcursion',
-      icon: <IconSquareRoundedPlus size={ 24 } strokeWidth = { 1.5} />,
-  }
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
 ];
 
 export const adminCategories: category[] = [
   ...enterpriseCategories,
   {
-    name: 'Crear Usuario',
+    name: 'Usuario',
     href: '/dashboard/createUser',
-    icon: <IconSquareRoundedPlus size={ 24} strokeWidth = { 1.5} />,
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
-{
-  name: 'Crear Facilidad',
+  {
+    name: 'Facilidad',
     href: '/dashboard/createFacility',
-      icon: <IconSquareRoundedPlus size={ 24 } strokeWidth = { 1.5} />,
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
-{
-  name: 'Crear Hotel',
-    href: 'dahboard/createHotel',
-      icon: <IconSquareRoundedPlus size={ 24 } strokeWidth = { 1.5} />,
-  }
-]
+  {
+    name: 'Hotel',
+    href: 'dashboard/createHotel',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
+];

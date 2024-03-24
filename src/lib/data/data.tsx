@@ -1,4 +1,5 @@
 import { agency, excursion, touristPackage } from '../entities';
+import { ReadSession } from '../utils/read';
 
 export function TemporalCountries(): string[] {
   return [
@@ -20,31 +21,29 @@ export function TemporalCountries(): string[] {
   ];
 }
 
-
 export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
   const response = await fetch(`https://restcountries.com/v3.1/name/${name}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-    }
-  })
+    },
+  });
 
   if (!response.ok) {
     // console.log('Failed to charge countries');
-    return []
+    return [];
   }
 
   const data = await response.json();
 
   const suggestions: string[] = data.map((country: any) => {
-    return country.name.common
-  })
+    return country.name.common;
+  });
 
-  return suggestions
+  return suggestions;
 }
 
 export async function FetchCountries(): Promise<string[]> {
-
   const response = await fetch('https://restcountries.com/v3.1/all');
 
   if (!response.ok) {
@@ -55,11 +54,10 @@ export async function FetchCountries(): Promise<string[]> {
   const data = await response.json();
 
   const countries: string[] = data.map((country: any) => {
-    return country.common
+    return country.common;
   });
 
   return countries;
-
 }
 
 export async function FetchExcursions(): Promise<excursion[]> {
@@ -129,9 +127,59 @@ export async function FetchPackages(): Promise<touristPackage[]> {
       excursionID: offer.excursionID ?? 0,
       facilities: [],
       duration: 0,
-
     };
   });
 
   return packageAsProduct;
+}
+
+export async function FetchMarketingAgency(): Promise<agency> {
+  const session = await ReadSession();
+  const currentUserID = JSON.parse(session).id;
+
+  // make fetch to get the agency
+
+  const example: agency = {
+    id: 0,
+    name: 'P.Sherman & Co.',
+    address: 'P.Sherman, 42 Wallaby Way, Sydney',
+    email: 'buscandoANemo@gmail.com',
+    fax: 3312,
+    image:
+      'https://th.bing.com/th/id/R.0e06134a3b0f714887ab0c2d99318643?rik=V33yZBth%2byT3Ww&pid=ImgRaw&r=0',
+  };
+
+  return example;
+}
+
+export async function FetchAgencyNumberOfReservations({
+  agencyID,
+}: {
+  agencyID: number;
+}): Promise<number> {
+  // const response = await fetch('http://
+  return 54;
+}
+
+export async function FetchAgencyTotalAmount({
+  agencyID,
+}: {
+  agencyID: number;
+}): Promise<number> {
+  // const response = await fetch('http://
+  return 321451;
+}
+
+export async function FetchAgencyPrimaryData(
+  agencyID: number
+): Promise<{ reservations: number; totalAmount: number }> {
+  const [reservations, totalAmount] = await Promise.all([
+    FetchAgencyNumberOfReservations({ agencyID: agencyID }),
+    FetchAgencyTotalAmount({ agencyID: agencyID }),
+  ]);
+
+  return {
+    reservations,
+    totalAmount,
+  };
 }

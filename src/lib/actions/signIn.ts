@@ -1,3 +1,5 @@
+'use server'
+
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { user } from '../entities';
@@ -71,8 +73,7 @@ export async function ValidateUserAction(
     }
   }
   write({ username: username })
-  redirect('?')
-  // redirectRole({ user: AdminPatch[username] });
+  redirectRole({ user: AdminPatch[username] });
   // SuccessMsg();
 }
 
@@ -98,21 +99,21 @@ const AdminPatch: { [key: string]: user } = {
   tourist: {
     id: 12345677,
     username: 'Juanqui',
-    webToken: 'Juankitoken',
+    webToken: 'JuanquiiToken',
     rol: 'tourist'
   },
 
   marketing: {
     id: 12345676,
     username: 'marketing',
-    webToken: 'marketingoOken',
+    webToken: 'marketingToken',
     rol: 'marketing'
   },
 
   agent: {
     id: 12345676,
     username: 'AgenteAmarillo',
-    webToken: 'agenteAmarilloTOken',
+    webToken: 'agenteAmarilloToken',
     rol: 'agent'
   }
 

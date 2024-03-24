@@ -1,14 +1,7 @@
 import clsx from 'clsx';
-import { IconMapPin, IconBrandWhatsapp } from '@tabler/icons-react';
-export const AgencyInfo = ({
-  name,
-  address,
-  phone,
-}: {
-  name: string;
-  address: string;
-  phone: string;
-}) => {
+import { IconMapPin, IconMail, IconPrinter } from '@tabler/icons-react';
+import { agency } from '@/lib/entities';
+export const AgencyInfoCard = ({ agency }: { agency: agency }) => {
   return (
     <div
       className={clsx(
@@ -29,7 +22,7 @@ export const AgencyInfo = ({
           'text-gray-900 dark:text-white'
         )}
       >
-        {name}
+        {agency.name}
       </h1>
       <div
         className={clsx(
@@ -48,12 +41,16 @@ export const AgencyInfo = ({
               'sm:hover:text-current sm:hover:dark:text-current'
             )}
           >
-            {address}
+            {agency.address}
           </div>
         </div>
         <div>
-          <IconBrandWhatsapp size={24} stroke={1.5} className='h-6 w-6' />
-          <div className='w-full'>{phone}</div>
+          <IconMail size={24} stroke={1.5} className='h-6 w-6' />
+          <div className='w-full'>{agency.email}</div>
+        </div>
+        <div>
+          <IconPrinter size={24} stroke={1.5} className='h-6 w-6' />
+          <div className='w-full'>{agency.fax}</div>
         </div>
       </div>
     </div>

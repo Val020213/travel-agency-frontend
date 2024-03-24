@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { IconX } from '@tabler/icons-react';
@@ -13,13 +13,8 @@ const SignInTrigger = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams();
   const login = searchParams.get('login');
 
-  return (
-    <Suspense>
-      {login && children}
-    </Suspense>
-  );
-}
-
+  return <Suspense>{login && children}</Suspense>;
+};
 
 export const SignIn = () => {
   const initialState = {};
@@ -27,7 +22,6 @@ export const SignIn = () => {
     ValidateUserAction,
     initialState
   );
-
 
   return (
     <SignInTrigger>
@@ -69,9 +63,9 @@ export const SignIn = () => {
                 name='username'
                 placeholder='travelilero123'
               />
-              {
-                state.errors?.username && <p className='text-[#e11d48]'>{state.errors.username}</p>
-              }
+              {state.errors?.username && (
+                <p className='text-[#e11d48]'>{state.errors.username}</p>
+              )}
             </div>
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
@@ -88,9 +82,9 @@ export const SignIn = () => {
                 name='password'
                 placeholder='********'
               />
-              {
-                state.errors?.password && <p className='text-[#e11d48]'>{state.errors.password}</p>
-              }
+              {state.errors?.password && (
+                <p className='text-[#e11d48]'>{state.errors.password}</p>
+              )}
             </div>
           </div>
           <div className='flex flex-col *:w-full gap-4'>
@@ -110,9 +104,8 @@ export const SignIn = () => {
             </Link>
             <ContinueButton />
           </div>
-
         </form>
       </dialog>
     </SignInTrigger>
-  )
+  );
 };

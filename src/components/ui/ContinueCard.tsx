@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useState } from 'react';
 import { Airplane } from './tokens/Airplane';
 import { AirplaneHover } from './tokens/AirplaneHover';
@@ -10,7 +10,7 @@ export function ContinueCard() {
     <button
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={() => { }}
+      onClick={() => {}}
       className={clsx(
         'rounded-lg shadow-sm',
         'flex flex-col items-center justify-between',
@@ -20,7 +20,7 @@ export function ContinueCard() {
         'bg-[#1E62DA]',
         'hover:drop-shadow-blue',
         'py-2 md:py-4 px-4 md:px-6',
-        'relative',
+        'relative'
       )}
     >
       <div className='text-gray-50 font-semibold text-3xl text-left'>
@@ -32,4 +32,4 @@ export function ContinueCard() {
       <div className='text-gray-50 text-xl font-medium'>Ver más</div>
     </button>
   );
-};
+}

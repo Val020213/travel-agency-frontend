@@ -4,4 +4,4 @@ export const LayoutGrid = ({ children }: any) => {
       {children}
     </section>
   );
-}
+};

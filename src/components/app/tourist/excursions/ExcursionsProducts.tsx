@@ -13,7 +13,7 @@ import { FetchExcursions } from '@/lib/data/data';
 import { excursion } from '@/lib/entities';
 
 export async function ExcursionProducts() {
-  const data = await FetchExcursions()
+  const data = await FetchExcursions();
 
   return (
     <div className='flex flex-col gap-8'>
@@ -33,7 +33,17 @@ export async function ExcursionProducts() {
           <ProductCard
             key={excursion.id}
             title={excursion.arrivalLocation}
-            description={'Salida desde ' + excursion.departureLocation + ' a las ' + excursion.departureTime + '. Llegada a ' + excursion.arrivalLocation + ' a las ' + excursion.arrivalTime + '.'}
+            description={
+              'Salida desde ' +
+              excursion.departureLocation +
+              ' a las ' +
+              excursion.departureTime +
+              '. Llegada a ' +
+              excursion.arrivalLocation +
+              ' a las ' +
+              excursion.arrivalTime +
+              '.'
+            }
             image={excursion.image}
             href={'/excursion/' + excursion.id}
           />
@@ -42,4 +52,4 @@ export async function ExcursionProducts() {
       </LayoutGrid>
     </div>
   );
-};
+}

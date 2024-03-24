@@ -9,7 +9,7 @@ export async function Login() {
       href='?login=true'
       className={clsx(
         'text-gray-800 dark:text-gray-50 hover:text-blue-500 dark:hover:text-blue-500 font-medium',
-        'leading-7 text-xl text-end',
+        'leading-7 text-xl text-end'
       )}
     >
       <Suspense>
@@ -23,6 +23,6 @@ export async function Login() {
       </Suspense>
       <span className='hidden md:block'>Unirse a Travelix</span>
       <span className='md:hidden'>Unirse</span>
-    </Link >
+    </Link>
   );
-};
+}
