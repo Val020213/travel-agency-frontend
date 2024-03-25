@@ -55,3 +55,8 @@ export type touristPackage = entity & offer & visual & {
     description: string;
     duration: number;
 }
+
+export type tourist = entity & {
+    name: string
+    nationality: string;
+}

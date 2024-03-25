@@ -1,4 +1,4 @@
-import { agency, excursion, touristPackage, user } from '../entities';
+import { agency, excursion, tourist, touristPackage, user } from '../entities';
 import { ReadSession } from '../utils/read';
 
 export function TemporalCountries(): string[] {
@@ -194,4 +194,251 @@ export async function FetchAgencyPrimaryData(
     reservations,
     totalAmount,
   };
+}
+
+
+export async function FetchFrecuentlyTourist(agency: number): Promise<tourist[]> {
+  const tourists: tourist[] = [
+    {
+      id: 1,
+      name: "John Doe",
+      nationality: "USA"
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nationality: "Canada"
+    },
+    {
+      id: 3,
+      name: "Carlos Ramirez",
+      nationality: "Mexico"
+    },
+    {
+      id: 4,
+      name: "Maria",
+      nationality: "Argentina"
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      nationality: "USA"
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nationality: "Canada"
+    },
+    {
+      id: 3,
+      name: "Carlos Ramirez",
+      nationality: "Mexico"
+    },
+    {
+      id: 4,
+      name: "Maria",
+      nationality: "Argentina"
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      nationality: "USA"
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nationality: "Canada"
+    },
+    {
+      id: 3,
+      name: "Carlos Ramirez",
+      nationality: "Mexico"
+    },
+    {
+      id: 4,
+      name: "Maria",
+      nationality: "Argentina"
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      nationality: "USA"
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nationality: "Canada"
+    },
+    {
+      id: 3,
+      name: "Carlos Ramirez",
+      nationality: "Mexico"
+    },
+    {
+      id: 4,
+      name: "Maria",
+      nationality: "Argentina"
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      nationality: "USA"
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nationality: "Canada"
+    },
+    {
+      id: 3,
+      name: "Carlos Ramirez",
+      nationality: "Mexico"
+    },
+    {
+      id: 4,
+      name: "Maria",
+      nationality: "Argentina"
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      nationality: "USA"
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nationality: "Canada"
+    },
+    {
+      id: 3,
+      name: "Carlos Ramirez",
+      nationality: "Mexico"
+    },
+    {
+      id: 4,
+      name: "Maria",
+      nationality: "Argentina"
+    },
+    {
+      id: 1,
+      name: "John Doe",
+      nationality: "USA"
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nationality: "Canada"
+    },
+    {
+      id: 3,
+      name: "Carlos Ramirez",
+      nationality: "Mexico"
+    },
+    {
+      id: 4,
+      name: "Maria",
+      nationality: "Argentina"
+    },
+
+  ]
+
+  return tourists
+}
+
+
+export async function FetchExpensivePackages(agencyID: number): Promise<touristPackage[]> {
+  const packages: touristPackage[] = [
+    {
+      id: 1,
+      description: "Paquete 1. Destino Habana - Varadero, No dejes pasar esta oportunidad!",
+      price: 200.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    },
+    {
+      id: 2,
+      description: "Paquete 2, Destino Santiago - Trinidad, No dejes pasar esta oportunidad!",
+      price: 350.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    },
+    {
+      id: 3,
+      description: "Paquete 3, Destino Santiago - Trinidad, No dejes pasar esta oportunidad!",
+      price: 350.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    },
+    {
+      id: 1,
+      description: "Paquete 1. Destino Habana - Varadero, No dejes pasar esta oportunidad!",
+      price: 200.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    },
+    {
+      id: 2,
+      description: "Paquete 2, Destino Santiago - Trinidad, No dejes pasar esta oportunidad!",
+      price: 350.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    },
+    {
+      id: 1,
+      description: "Paquete 1. Destino Habana - Varadero, No dejes pasar esta oportunidad!",
+      price: 200.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    },
+    {
+      id: 2,
+      description: "Paquete 2, Destino Santiago - Trinidad, No dejes pasar esta oportunidad!",
+      price: 350.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    },
+    {
+      id: 1,
+      description: "Paquete 1. Destino Habana - Varadero, No dejes pasar esta oportunidad!",
+      price: 200.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    },
+    {
+      id: 2,
+      description: "Paquete 2, Destino Santiago - Trinidad, No dejes pasar esta oportunidad!",
+      price: 350.00,
+      image: '',
+      agencyID: 1,
+      excursionID: 1,
+      facilities: [],
+      duration: 0
+    }
+  ]
+
+  return packages
 }
