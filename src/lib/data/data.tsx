@@ -1,4 +1,4 @@
-import { agency, excursion, touristPackage } from '../entities';
+import { agency, excursion, touristPackage, user } from '../entities';
 import { ReadSession } from '../utils/read';
 
 export function TemporalCountries(): string[] {
@@ -41,6 +41,18 @@ export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
   });
 
   return suggestions;
+}
+
+export async function FetchUser(): Promise<user | undefined> {
+  const session = await ReadSession()
+  try {
+    const user: user = JSON.parse(session)
+    return user
+  }
+  catch {
+    console.log('Json not parsed')
+  }
+  return undefined
 }
 
 export async function FetchCountries(): Promise<string[]> {

@@ -1,20 +1,32 @@
-'use client';
+import { FetchUser } from '@/lib/data/data';
 import { Loged } from './buttons/Loged';
-import { ReadSession } from '@/lib/utils/read';
 import { Login } from './buttons/Login';
-import { Suspense } from 'react';
+import { useState, useEffect } from 'react';
+import { user } from '@/lib/entities';
 
 export async function UserSection() {
-  const session = await ReadSession();
+  const [user, setUser] = useState<user | undefined>()
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await FetchUser();
+      if (user) {
+        setUser(user)
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
-    <Suspense>
-      {session ? (
-        <Loged />
-      ) : (
-        <div className='flex items-center justify-center relative h-16'>
-          <Login />
-        </div>
-      )}
-    </Suspense>
+    <>
+      {
+        user ? (
+          <Loged name={user.username} />
+        ) : (
+          <div className='flex items-center justify-center relative h-16'>
+            <Login />
+          </div >
+        )
+      }
+    </>
   );
 }

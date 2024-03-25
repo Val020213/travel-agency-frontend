@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode, Suspense } from 'react';
 import clsx from 'clsx';
 import { Logo, LogoEnterprise } from '@/components/app/layout/navbar/Logo';
@@ -7,7 +8,7 @@ import { Switch } from '@/components/app/layout/navbar/ThemeSwitch';
 import { Categories, EnterpriseCategories } from './Categories';
 import { SearchBarMobile } from './SearchBarMobile';
 
-const NavbarContainer = ({ children }: { children: ReactNode }) => {
+export function NavbarContainer({ children }: { children: ReactNode }) {
   return (
     <div
       className={clsx(
@@ -24,7 +25,7 @@ const NavbarContainer = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const Navbar = () => {
+export async function Navbar() {
   return (
     <NavbarContainer>
       <div className='flex flex-row justify-between items-center w-full'>
@@ -52,7 +53,7 @@ export const Navbar = () => {
   );
 };
 
-export const EnterpriseNavbar = () => {
+export async function EnterpriseNavbar() {
   return (
     <NavbarContainer>
       <div className='flex flex-row justify-between items-center w-full'>

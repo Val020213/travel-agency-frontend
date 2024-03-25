@@ -3,16 +3,33 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { othersLinks } from '@/lib/definitions';
 import { DeleteSession } from '@/lib/utils/delete';
-import { Suspense, useState } from 'react';
-import { UserSession } from './UserSession';
+import { useState } from 'react';
+import { IconUserCircle } from '@tabler/icons-react';
 
-export async function Loged() {
+export function Loged({ name }: { name: string }) {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
     <div className='block relative'>
       <button onClick={() => setOpen(!open)}>
-        <UserSession />
+        <div
+          className={clsx(
+            'text-gray-800',
+            'opacity-80',
+            'hover:opacity-100',
+            'flex',
+            'flex-row',
+            'items-center',
+            'gap-1',
+            'dark:text-gray-50',
+            'text-xl',
+            'leading-7',
+            'font-semibold'
+          )}
+        >
+          <span className='hidden sm:block'>{name}</span>
+          <IconUserCircle size={36} stroke={1.5} />
+        </div>
       </button>
       {open && (
         <div

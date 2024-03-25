@@ -1,3 +1,5 @@
-export function write(data: Record<string, string>) {
-    document.cookie = 'session=' + (JSON.stringify(data)).toString();
+import { cookies } from "next/headers";
+
+export async function write(data: Record<string, string>) {
+    await cookies().set('session', (JSON.stringify(data)).toString())
 }

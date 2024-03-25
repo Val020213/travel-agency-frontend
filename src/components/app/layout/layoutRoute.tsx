@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import {
   EnterpriseNavbar,
   Navbar,
@@ -8,7 +8,7 @@ import { Hero } from '@/components/app/layout/hero/Hero';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 
-export function GetLayout({ children }: { children: ReactNode }) {
+export async function GetLayout({ children }: { children: ReactNode }) {
   const currentPath = usePathname();
 
   return (

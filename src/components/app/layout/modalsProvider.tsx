@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import { Suspense, ReactNode } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { SignIn } from '@/components/app/layout/navbar/modal/SignIn';
 import { SignUp } from '@/components/app/layout/navbar/modal/SignUp';
 
-export const Modals = ({ children }: { children: ReactNode }) => {
+export async function Modals({ children }: { children: ReactNode }) {
   return (
     <>
       <Suspense>
