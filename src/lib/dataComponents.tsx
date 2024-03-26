@@ -52,23 +52,23 @@ export const enterpriseCategories: category[] = [
 
 export const adminCategories: category[] = [
   {
+    name: 'Agencias',
+    href: '/admin/agencies',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
+  {
     name: 'Usuario',
     href: '/admin/users',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
   {
+    name: 'Hotel',
+    href: '/admin/hotels',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
+  {
     name: 'Facilidad',
     href: '/admin/facilities',
-    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
-  },
-  {
-    name: 'Hotel',
-    href: 'admin/hotels',
-    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
-  },
-  {
-    name: 'Agencias',
-    href: 'admin/agencies',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
 ];

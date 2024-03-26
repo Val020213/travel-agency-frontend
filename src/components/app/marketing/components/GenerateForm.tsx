@@ -28,7 +28,7 @@ export function GenerateForm({
   formsFields: IFormField[];
 }) {
   return (
-    <>
+    <div className='flex flex-col *:w-full gap-6'>
       {formsFields.map((field, index) => {
         return (
           <div className='flex flex-col text-base leading-6 gap-2' key={index}>
@@ -70,6 +70,6 @@ export function GenerateForm({
           </div>
         );
       })}
-    </>
+    </div>
   );
 }

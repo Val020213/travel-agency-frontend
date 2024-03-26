@@ -96,53 +96,65 @@ export async function FetchExcursions(): Promise<excursion[]> {
 }
 
 export async function FetchAgencies(): Promise<agency[]> {
-  const response = await fetch('http://127.0.0.1:8000/agency/list');
+  try {
+    const response = await fetch('http://127.0.0.1:8000/agency/list');
 
-  if (!response.ok) {
-    // console.log('Failed to fetch products');
-    return [];
+    if (!response.ok) {
+      // console.log('Failed to fetch products');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const agencies: agency[] = data.map((agency: any) => {
+      return {
+        id: agency.id,
+        name: agency.name,
+        description: agency.address,
+        price: 0,
+        image: '',
+      };
+    });
+
+    return agencies;
   }
-
-  const data = await response.json();
-
-  const agencies: agency[] = data.map((agency: any) => {
-    return {
-      id: agency.id,
-      name: agency.name,
-      description: agency.address,
-      price: 0,
-      image: '',
-    };
-  });
-
-  return agencies;
+  catch {
+    console.log('Error')
+    return []
+  }
 }
 
 export async function FetchPackages(): Promise<touristPackage[]> {
-  const response = await fetch('http://127.0.0.1:8000/offer/list');
+  try {
+    const response = await fetch('http://127.0.0.1:8000/offer/list');
 
-  if (!response.ok) {
-    // console.log('Failed to fetch products');
-    return [];
+    if (!response.ok) {
+      // console.log('Failed to fetch products');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const packageAsProduct: touristPackage[] = data.map((offer: any) => {
+      return {
+        id: offer.id,
+        name: offer.name,
+        description: offer.description,
+        price: offer.price,
+        image: '',
+        agencyID: offer.agencyID ?? 0,
+        excursionID: offer.excursionID ?? 0,
+        facilities: [],
+        duration: 0,
+      };
+    });
+
+    return packageAsProduct;
   }
-
-  const data = await response.json();
-
-  const packageAsProduct: touristPackage[] = data.map((offer: any) => {
-    return {
-      id: offer.id,
-      name: offer.name,
-      description: offer.description,
-      price: offer.price,
-      image: '',
-      agencyID: offer.agencyID ?? 0,
-      excursionID: offer.excursionID ?? 0,
-      facilities: [],
-      duration: 0,
-    };
-  });
-
-  return packageAsProduct;
+  catch {
+    console.log('Error')
+    return []
+  }
 }
 
 export async function FetchMarketingAgency(): Promise<agency> {
