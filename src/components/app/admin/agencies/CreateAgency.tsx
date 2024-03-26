@@ -39,7 +39,7 @@ export async function CreateAgency() {
 
   return (
     <section>
-      <h2 className="text-2xl font-semibold text-gray-900">Creando Agencia</h2>
+      <h2 className="text-2xl font-semibold">Creando Agencia</h2>
       <form
         action={dispatch}
         className="flex flex-col gap-4 md:gap-8 lg:gap-16"

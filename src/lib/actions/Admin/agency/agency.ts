@@ -1,9 +1,9 @@
 "use server";
-
+import { unstable_noStore as noStore } from 'next/cache';
+ 
 import { z } from "zod";
 import { redirect } from "next/navigation";
-import { error } from "console";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
+import { revalidatePath } from "next/cache";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -101,11 +101,13 @@ export async function UpdateAgencyAction(
   prevState: AgencyFormState,
   formData: FormData
 ) {
+  noStore();
   // no validation needed
-  const name = formData.get("name") as string | null;
-  const fax = formData.get("fax") as string | null;
-  const address = formData.get("address") as string | null;
-  const email = formData.get("email") as string | null;
+  const name = formData.get("name") ;
+  const fax = formData.get("fax") ;
+  const address = formData.get("address") ;
+  const email = formData.get("email") ;
+  const imagen = formData.get("imagen") ;
 
   if (name === null && fax === null && address === null && email === null) {
     const status: AgencyFormState = {
@@ -116,26 +118,48 @@ export async function UpdateAgencyAction(
   }
 
   const data = {
-    name: name,
-    fax: fax,
-    address: address,
-    email: email,
+    id: id,
+    name: name == '' ? undefined : name,
+    fax_number: fax == '' ? undefined : fax,
+    address: address == '' ? undefined : address,
+    photo_url: imagen == '' ? undefined : imagen,
+    email: email == '' ? undefined : email,
   };
+  console.log(JSON.stringify(data))
+  try{
+    const response =  await fetch('http://127.0.0.1:8000/agency/update', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+    },
+      body: JSON.stringify(data),
+    })
 
-  // hacer la petición a la API
+    if(!response.ok)
+    {
+      return {
+        message: response.statusText,
+      }
+    }
+  }
+  catch {
+    console.log("Database Connection Error")
+  }
 
   redirect("/admin/agencies");
 }
 
 export async function DeleteAgency(id: number): Promise<void> {
   try{
-  const response = await fetch(`http://127.0.0.1:8000/agency/delete/${id}`)
+    const response = await fetch(`http://127.0.0.1:8000/agency/delete/${id}`)
     if(!response.ok)
     {
       console.log(response.statusText)
+      return
     }
+    revalidatePath('/admin/agencies')
 }
-  catch{
-    console.log("DataBase connnection Error")
+  catch {
+    console.log("Database Connection Error")
   }
 }

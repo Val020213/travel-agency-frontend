@@ -1,5 +1,6 @@
 import { agency, excursion, tourist, touristPackage, user } from '../entities';
 import { ReadSession } from '../actions/session/read';
+import { number } from 'zod';
 
 export function TemporalCountries(): string[] {
   return [
@@ -100,6 +101,35 @@ function validateImagePath ( image : string) {
     return image
   }
   return require("@/assets/defaultImage.png")
+}
+
+export async function GetAgencyByID(id : number) : Promise<agency> {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/agency/get/${id}`)
+    if(!response.ok)
+    {
+      console.log(response.statusText)
+      return {} as agency
+    }
+
+    const data = await response.json()
+
+    const agencyData : agency = {
+      name : data.name,
+      address : data.address,
+      email : data.email,
+      fax : data.fax_number,
+      id : data.id,
+      image : validateImagePath(data.photo_url)
+    }
+
+    return agencyData
+  }
+  catch{
+    console.log('DataBase Connection Error')
+  }
+
+  return {} as agency
 }
 
 export async function FetchAgencies(): Promise<agency[]> {
