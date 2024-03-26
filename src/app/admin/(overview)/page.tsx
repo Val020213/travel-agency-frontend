@@ -1,8 +1,8 @@
-import { AgencyInfoMarketing } from '@/components/app/dashboard/overview/AgencyInfoMarketing';
+import { AgencyInfoMarketing } from '@/components/app/marketing/overview/AgencyInfoMarketing';
 import { FetchMarketingAgency } from '@/lib/data/data';
-import { AgencyPrimaryData } from '@/components/app/dashboard/overview/AgencyPrimaryData';
-import { FrequentlyTouristTable } from '@/components/app/dashboard/overview/FrequentlyTouristTable';
-import { ExpensivePackages } from '@/components/app/dashboard/overview/ExpensivePackages';
+import { AgencyPrimaryData } from '@/components/app/marketing/overview/AgencyPrimaryData';
+import { FrequentlyTouristTable } from '@/components/app/marketing/overview/FrequentlyTouristTable';
+import { ExpensivePackages } from '@/components/app/marketing/overview/ExpensivePackages';
 
 export default async function Page() {
   const agency = await FetchMarketingAgency();

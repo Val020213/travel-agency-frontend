@@ -5,7 +5,7 @@ import { Logo, LogoEnterprise } from '@/components/app/layout/navbar/Logo';
 import { SearchBar } from '@/components/app/layout/navbar/SearchBar';
 import { UserSection } from '@/components/app/layout/navbar/UserSection';
 import { Switch } from '@/components/app/layout/navbar/ThemeSwitch';
-import { Categories, EnterpriseCategories } from './Categories';
+import { Categories, EnterpriseCategories, AdminCategories } from './Categories';
 import { SearchBarMobile } from './SearchBarMobile';
 
 export function NavbarContainer({ children }: { children: ReactNode }) {
@@ -38,8 +38,8 @@ export async function Navbar() {
         <div className='flex flex-row justify-end gap-1 md:gap-3 lg:basis-1/4'>
           <Suspense>
             <UserSection />
-            <Switch />
           </Suspense>
+          <Switch />
         </div>
       </div>
       <div className={clsx('w-full p-1 hidden md:block lg:hidden')}>
@@ -53,7 +53,8 @@ export async function Navbar() {
   );
 };
 
-export async function EnterpriseNavbar() {
+
+export async function AdministrativeNavbarConstructor({ categoriesComponent }: { categoriesComponent: ReactNode }) {
   return (
     <NavbarContainer>
       <div className='flex flex-row justify-between items-center w-full'>
@@ -66,19 +67,27 @@ export async function EnterpriseNavbar() {
               '*:gap-2'
             )}
           >
-            <EnterpriseCategories />
+            {categoriesComponent}
           </div>
         </div>
         <div className='flex flex-row justify-end gap-1 md:gap-3'>
           <Suspense>
             <UserSection />
-            <Switch />
           </Suspense>
+          <Switch />
         </div>
       </div>
       <div className='sm:hidden'>
-        <EnterpriseCategories />
+        {categoriesComponent}
       </div>
     </NavbarContainer>
-  );
+  )
+}
+
+export async function EnterpriseNavbar() {
+  return <AdministrativeNavbarConstructor categoriesComponent={<EnterpriseCategories />} />;
 };
+
+export async function AdminNavbar() {
+  return <AdministrativeNavbarConstructor categoriesComponent={<AdminCategories />} />;
+}

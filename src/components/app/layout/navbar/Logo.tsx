@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export const Logo = () => {
   return (
@@ -22,9 +23,10 @@ export const Logo = () => {
 };
 
 export const LogoEnterprise = () => {
+  const currentPath = usePathname();
   return (
     <Link
-      href={'/dashboard'}
+      href={currentPath.includes('/admin') ? '/admin' : '/marketing'}
       className='flex flex-row items-center justify-start min-w-6'
     >
       <Image

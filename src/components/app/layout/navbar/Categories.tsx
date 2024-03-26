@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { category } from '@/lib/definitions';
-import { categories, enterpriseCategories } from '@/lib/dataComponents';
+import { adminCategories, categories, enterpriseCategories } from '@/lib/dataComponents';
 
 const CategoriesFactory = ({
   categories,
@@ -47,15 +47,23 @@ export const Categories = () => {
   return <CategoriesFactory categories={categories} triggerCls={Trigger} />;
 };
 
-export const EnterpriseCategories = () => {
-  function Trigger(href: string) {
-    const currentPath = usePathname();
-    return currentPath === href
-      ? 'text-orange-500'
-      : 'text-gray-500 dark:text-gray-300';
-  }
 
+function Trigger(href: string) {
+  const currentPath = usePathname();
+  return currentPath === href
+    ? 'text-orange-500'
+    : 'text-gray-500 dark:text-gray-300';
+}
+
+export const EnterpriseCategories = () => {
   return (
     <CategoriesFactory categories={enterpriseCategories} triggerCls={Trigger} />
   );
 };
+
+
+export const AdminCategories = () => {
+  return (
+    <CategoriesFactory categories={adminCategories} triggerCls={Trigger} />
+  );
+}

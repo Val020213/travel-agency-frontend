@@ -35,36 +35,40 @@ export const categories: category[] = [
 export const enterpriseCategories: category[] = [
   {
     name: 'Estadísticas',
-    href: '/dashboard',
+    href: '/marketing',
     icon: <IconReportAnalytics size={24} strokeWidth={1.5} />,
   },
   {
     name: 'Oferta',
-    href: '/dashboard/createOffer',
+    href: '/marketing/createOffer',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
   {
     name: 'Excursion',
-    href: '/dashboard/createExcursion',
+    href: '/marketing/createExcursion',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
 ];
 
 export const adminCategories: category[] = [
-  ...enterpriseCategories,
   {
     name: 'Usuario',
-    href: '/dashboard/createUser',
+    href: '/admin/users',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
   {
     name: 'Facilidad',
-    href: '/dashboard/createFacility',
+    href: '/admin/facilities',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
   {
     name: 'Hotel',
-    href: 'dashboard/createHotel',
+    href: 'admin/hotels',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
+  {
+    name: 'Agencias',
+    href: 'admin/agencies',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
 ];

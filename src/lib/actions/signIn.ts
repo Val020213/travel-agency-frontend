@@ -2,7 +2,7 @@
 
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
-import { user } from '../entities';
+import { rol, user } from '../entities';
 import { write } from '../utils/write';
 
 const FormSchema = z.object({
@@ -92,14 +92,14 @@ const AdminPatch: { [key: string]: user } = {
   admin: {
     id: 12345678,
     username: 'admin',
-    webToken: 'admin',
+    webToken: 'adminToken',
     rol: 'admin'
   },
 
   tourist: {
     id: 12345677,
-    username: 'Juanqui',
-    webToken: 'JuanquiiToken',
+    username: 'tourist',
+    webToken: 'touristToken',
     rol: 'tourist'
   },
 
@@ -112,15 +112,20 @@ const AdminPatch: { [key: string]: user } = {
 
   agent: {
     id: 12345676,
-    username: 'AgenteAmarillo',
-    webToken: 'agenteAmarilloToken',
+    username: 'agent',
+    webToken: 'agentToken',
     rol: 'agent'
   }
 
 };
 
+const MapperRolAddress: Record<rol, string> = {
+  'admin': '/admin',
+  'marketing': '/marketing',
+  'agent': '/',
+  'tourist': '/',
+}
+
 function redirectRole({ user }: { user: user }) {
-  if (user.rol === 'agent' || user.rol === 'admin') {
-    redirect('/dashboard')
-  }
+  return redirect(MapperRolAddress[user.rol]) ?? redirect('/');
 }

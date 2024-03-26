@@ -17,7 +17,7 @@ export type product = {
 
 export const othersLinks: Record<string, string> = {
   profile: '/tourist/profile',
-  dashboardProfile: '/profile',
+  marketingProfile: '/profile',
   payment: '/tourist/payment',
   openRegister: '?register=true',
   openLogin: '?login=true',
