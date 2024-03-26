@@ -1,5 +1,5 @@
 import { agency, excursion, tourist, touristPackage, user } from '../entities';
-import { ReadSession } from '../utils/read';
+import { ReadSession } from '../actions/session/read';
 
 export function TemporalCountries(): string[] {
   return [

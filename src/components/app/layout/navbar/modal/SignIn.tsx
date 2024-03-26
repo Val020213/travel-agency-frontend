@@ -3,7 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import { IconX } from '@tabler/icons-react';
 import { useFormState } from 'react-dom';
-import { SignInState, ValidateUserAction } from '@/lib/actions/signIn';
+import { SignInState, ValidateUserAction } from '@/lib/actions/authentication/signIn';
 import Link from 'next/link';
 import { ContinueButton } from './ContinueButton';
 import { othersLinks } from '@/lib/definitions';

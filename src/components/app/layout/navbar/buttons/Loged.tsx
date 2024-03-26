@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { othersLinks } from '@/lib/definitions';
-import { DeleteSession } from '@/lib/utils/delete';
+import { DeleteSession } from '@/lib/actions/session/delete';
 import { useState } from 'react';
 import { IconUserCircle } from '@tabler/icons-react';
 

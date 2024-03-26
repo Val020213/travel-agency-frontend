@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useFormStatus } from 'react-dom';
 
-export const ContinueButton = () => {
+export const ContinueButton = ({ text }: { text?: string }) => {
   const pending = useFormStatus().pending;
   return (
     <button
@@ -16,7 +16,7 @@ export const ContinueButton = () => {
         }
       )}
     >
-      Continuar
+      {text || 'Continuar'}
     </button>
   );
 };

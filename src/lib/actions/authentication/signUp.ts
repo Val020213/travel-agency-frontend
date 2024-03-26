@@ -1,7 +1,7 @@
 'use server';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
-import { TemporalCountries } from '../data/data';
+import { TemporalCountries } from '../../data/data';
 
 const FormSchema = z.object({
   id: z.string(),

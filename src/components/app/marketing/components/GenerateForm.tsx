@@ -6,23 +6,23 @@ import {
   SelectValue,
 } from '@radix-ui/react-select';
 
-type IFormField = {
+export type IFormField = {
   name: string;
 };
 
-type IFormInput = IFormField & {
+export type IFormInput = IFormField & {
   placeholder: string;
 };
 
-type IOption = IFormField & {
+export type IOption = IFormField & {
   id: string;
 };
 
-type IFormSelect = IFormField & {
+export type IFormSelect = IFormField & {
   options: IOption[];
 };
 
-export function GenerateFormFields({
+export function GenerateForm({
   formsFields,
 }: {
   formsFields: IFormField[];
@@ -53,7 +53,7 @@ export function GenerateFormFields({
                   id={field.name}
                   className='border-b border-gray-300 dark:border-gray-400'
                 >
-                  <SelectValue placeholder='Seleccione su país' />
+                  <SelectValue placeholder={field.name} />
                 </SelectTrigger>
                 <SelectContent
                   position='popper'

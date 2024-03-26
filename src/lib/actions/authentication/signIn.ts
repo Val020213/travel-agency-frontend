@@ -2,8 +2,8 @@
 
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
-import { rol, user } from '../entities';
-import { write } from '../utils/write';
+import { rol, user } from '../../entities';
+import { write } from '../session/write';
 
 const FormSchema = z.object({
   id: z.string(),
