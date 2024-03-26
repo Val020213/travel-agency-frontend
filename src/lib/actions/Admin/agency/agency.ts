@@ -128,5 +128,14 @@ export async function UpdateAgencyAction(
 }
 
 export async function DeleteAgency(id: number): Promise<void> {
-  // delete agency
+  try{
+  const response = await fetch(`http://127.0.0.1:8000/agency/delete/${id}`)
+    if(!response.ok)
+    {
+      console.log(response.statusText)
+    }
+}
+  catch{
+    console.log("DataBase connnection Error")
+  }
 }
