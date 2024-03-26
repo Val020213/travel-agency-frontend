@@ -64,7 +64,6 @@ export async function CreateAgencyAction(
 
 const { name, fax, address, email, image } = validatedFields.data;
 const data = {
-    id : 0,
     name: name,
     address: address,
     fax_number: fax,
