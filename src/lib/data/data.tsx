@@ -95,6 +95,13 @@ export async function FetchExcursions(): Promise<excursion[]> {
   return excursionsAsProduct;
 }
 
+function validateImagePath ( image : string) {
+  if(image.startsWith("https://")){
+    return image
+  }
+  return require("@/assets/defaultImage.png")
+}
+
 export async function FetchAgencies(): Promise<agency[]> {
   try {
     const response = await fetch('http://127.0.0.1:8000/agency/list');
@@ -109,10 +116,11 @@ export async function FetchAgencies(): Promise<agency[]> {
     const agencies: agency[] = data.map((agency: any) => {
       return {
         id: agency.id,
-        name: agency.name,
-        description: agency.address,
-        price: 0,
-        image: '',
+        name : agency.name,
+        address: agency.address,
+        fax : agency.fax_number,
+        email: agency.email,
+        image: validateImagePath(agency.photo_url)
       };
     });
 
@@ -126,7 +134,7 @@ export async function FetchAgencies(): Promise<agency[]> {
 
 export async function FetchPackages(): Promise<touristPackage[]> {
   try {
-    const response = await fetch('http://127.0.0.1:8000/offer/list');
+    const response = await fetch('http://127.0.0.1:8000/package/list');
 
     if (!response.ok) {
       // console.log('Failed to fetch products');

@@ -14,7 +14,7 @@ import { FetchPackages } from '@/lib/data/data';
 import { touristPackage } from '@/lib/entities';
 
 export async function PackageProducts() {
-  const data = await FetchPackages();
+  const data : touristPackage[] = await FetchPackages();
 
   return (
     <div className='flex flex-col gap-8'>

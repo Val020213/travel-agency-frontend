@@ -13,7 +13,7 @@ import { FetchAgencies } from '@/lib/data/data';
 import { agency } from '@/lib/entities';
 
 export async function AgencyProducts() {
-  const data = await FetchAgencies();
+  const data : agency[] = await FetchAgencies();
 
   return (
     <div className='flex flex-col gap-4'>

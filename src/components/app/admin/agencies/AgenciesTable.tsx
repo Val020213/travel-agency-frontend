@@ -1,5 +1,5 @@
 import { Delete } from "@/components/ui/Delete";
-import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeleteAgency } from "@/lib/actions/Admin/agency/agency";
 import { FetchAgencies } from "@/lib/data/data";
 import { agency } from "@/lib/entities";
@@ -26,17 +26,17 @@ export async function AgenciesTable() {
                     {
                         agencies.map((agency) => (
                             <TableRow key={agency.id}>
-                                <TableHead>#{agency.fax}</TableHead>
-                                <TableHead>{agency.name}</TableHead>
-                                <TableHead>{agency.address}</TableHead>
-                                <TableHead>{agency.email}</TableHead>
-                                <TableHead>
+                                <TableCell>#{agency.fax}</TableCell>
+                                <TableCell>{agency.name}</TableCell>
+                                <TableCell>{agency.address}</TableCell>
+                                <TableCell>{agency.email}</TableCell>
+                                <TableCell className="flex flex-row gap-1">
                                     <Link href={`/admin/agencies/${agency.id}/edit`}>
                                         <IconEdit size={24} />
                                         <span className="sr-only">Edit</span>
                                     </Link>
                                     <Delete serverAction={DeleteAgency} id={agency.id} />
-                                </TableHead>
+                                </TableCell>
                             </TableRow>
                         ))
                     }

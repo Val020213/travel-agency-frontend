@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Tag } from './tokens/Tag';
 import clsx from 'clsx';
+import { Suspense } from 'react';
 
 type Props = {
   title: string;
@@ -45,7 +46,7 @@ export const ProductCard = ({
       />
       <div className='flex flex-col gap-2 p-4'>
         <div className='flex flex-wrap items-center justify-between gap-1'>
-          <h3 className='font-semibold text-xl line-clamp-1'>{title}</h3>
+          <h3 className='font-semibold text-xl line-clamp-2'>{title}</h3>
           {tag && <Tag text={tag} className='h-8' />}
         </div>
         <p className='text-sm text-gray-500 dark:text-gray-400 line-clamp-3'>
