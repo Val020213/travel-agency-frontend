@@ -1,6 +1,8 @@
 import { agency, excursion, tourist, touristPackage, user } from '../entities';
 import { ReadSession } from '../actions/session/read';
+
 import { number } from 'zod';
+import { AgencyFormState } from '../actions/Admin/agency/agency';
 
 export function TemporalCountries(): string[] {
   return [
@@ -161,6 +163,83 @@ export async function FetchAgencies(): Promise<agency[]> {
     return []
   }
 }
+
+const ITEMS_PER_PAGE = 6;
+
+export async function FetchFilteredAgencies(
+ query: string,
+ currentPage: number,
+): Promise<agency[]> {
+ try {
+    const response = await fetch('http://127.0.0.1:8000/agency/list');
+
+    if (!response.ok) {
+      console.error('Failed to fetch agencies');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const filteredAgencies = data.filter((agency: any) => {
+      return (
+        agency.name.toLowerCase().includes(query.toLowerCase()) ||
+        agency.address.toLowerCase().includes(query.toLowerCase()) ||
+        agency.email.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+    const paginatedAgencies = filteredAgencies.slice(offset, offset + ITEMS_PER_PAGE);
+
+    const agencies: agency[] = paginatedAgencies.map((agency: any) => {
+      return {
+        id: agency.id,
+        name: agency.name,
+        address: agency.address,
+        fax: agency.fax_number,
+        email: agency.email,
+        image: validateImagePath(agency.photo_url),
+      };
+    });
+
+    return agencies;
+ } catch (error) {
+    console.error('Network Error:', error);
+    throw new Error('Failed to fetch agencies.');
+ }
+}
+
+export async function FetchAgenciesPages(query: string): Promise<number> {
+ try {
+    const response = await fetch('http://127.0.0.1:8000/agency/list');
+
+    if (!response.ok) {
+      console.error('Failed to fetch agencies');
+      return 0;
+    }
+
+    const data = await response.json();
+
+    // Filtrar las agencias basadas en el query again...
+    const filteredAgencies = data.filter((agency: any) => {
+      return (
+        agency.name.toLowerCase().includes(query.toLowerCase()) ||
+        agency.address.toLowerCase().includes(query.toLowerCase()) ||
+        agency.email.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    // Calcular el número total de páginas
+    const totalPages = Math.ceil(filteredAgencies.length / ITEMS_PER_PAGE);
+
+    return totalPages;
+ } catch (error) {
+    console.error('Network Error:', error);
+    throw new Error('Failed to fetch total number of agencies.');
+ }
+}
+
 
 export async function FetchPackages(): Promise<touristPackage[]> {
   try {

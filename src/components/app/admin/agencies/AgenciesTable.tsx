@@ -1,13 +1,20 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeleteAgency } from "@/lib/actions/Admin/agency/agency";
 import { FetchAgencies } from "@/lib/data/data";
+import { FetchFilteredAgencies } from "@/lib/data/data";
 import { agency } from "@/lib/entities";
 import { IconEdit } from "@tabler/icons-react";
 import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
 
-export async function AgenciesTable() {
-    const agencies: agency[] = await FetchAgencies();
+export async function AgenciesTable({
+  query,
+  currentPage,
+}: {
+  query: string;
+  currentPage: number;
+}) {
+    const agencies: agency[] = await FetchFilteredAgencies(query, currentPage);
 
     function DeleteAction(id: number)
     {
