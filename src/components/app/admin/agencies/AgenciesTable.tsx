@@ -1,6 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeleteAgency } from "@/lib/actions/Admin/agency/agency";
-import { FetchAgencies } from "@/lib/data/data";
 import { FetchFilteredAgencies } from "@/lib/data/data";
 import { agency } from "@/lib/entities";
 import { IconEdit } from "@tabler/icons-react";

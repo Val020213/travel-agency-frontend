@@ -1,8 +1,9 @@
-import { agency, excursion, tourist, touristPackage, user } from '../entities';
+import { agency, excursion, tourist, touristPackage, user, hotel } from '../entities';
 import { ReadSession } from '../actions/session/read';
 
 import { number } from 'zod';
 import { AgencyFormState } from '../actions/Admin/agency/agency';
+import { unstable_noStore } from 'next/cache';
 
 export function TemporalCountries(): string[] {
   return [
@@ -170,6 +171,7 @@ export async function FetchFilteredAgencies(
  query: string,
  currentPage: number,
 ): Promise<agency[]> {
+  unstable_noStore();
  try {
     const response = await fetch('http://127.0.0.1:8000/agency/list');
 
@@ -240,8 +242,87 @@ export async function FetchAgenciesPages(query: string): Promise<number> {
  }
 }
 
+export async function FetchHotels(
+ query: string,
+ currentPage: number,
+): Promise<hotel[]> {
+ try {
+    const response = await fetch('http://127.0.0.1:8000/hotel/list');
+
+    if (!response.ok) {
+      console.error('Failed to fetch hotels');
+      return [];
+    }
+
+    const data = await response.json();
+
+    // Filtrar los hoteles basados en el query
+    const filteredHotels = data.filter((hotel: any) => {
+      return (
+        hotel.name.toLowerCase().includes(query.toLowerCase()) ||
+        hotel.address.toLowerCase().includes(query.toLowerCase()) ||
+        hotel.category.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    // Calcular el offset basado en la página actual
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+    // Paginar los resultados filtrados
+    const paginatedHotels = filteredHotels.slice(offset, offset + ITEMS_PER_PAGE);
+
+    // Mapear los datos para devolver el formato esperado
+    const hotels: hotel[] = paginatedHotels.map((hotel: any) => {
+      return {
+        id: hotel.id,
+        name: hotel.name,
+        address: hotel.address,
+        category: hotel.category,
+      };
+    });
+
+    return hotels;
+ } catch (error) {
+    console.error('Network Error:', error);
+    throw new Error('Failed to fetch hotels.');
+ }
+}
+
+
+export async function FetchHotelsPages(query: string): Promise<number> {
+ try {
+    const response = await fetch('http://127.0.0.1:8000/hotel/list');
+
+    if (!response.ok) {
+      console.error('Failed to fetch hotels');
+      return 0;
+    }
+
+    const data = await response.json();
+
+    // Filtrar los hoteles basados en el query
+    const filteredHotels = data.filter((hotel: any) => {
+      return (
+        hotel.name.toLowerCase().includes(query.toLowerCase()) ||
+        hotel.address.toLowerCase().includes(query.toLowerCase()) ||
+        hotel.category.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    // Calcular el número total de páginas
+    const totalPages = Math.ceil(filteredHotels.length / ITEMS_PER_PAGE);
+
+    return totalPages;
+ } catch (error) {
+    console.error('Network Error:', error);
+    throw new Error('Failed to fetch total number of hotels.');
+ }
+}
+
+
 
 export async function FetchPackages(): Promise<touristPackage[]> {
+  unstable_noStore();
   try {
     const response = await fetch('http://127.0.0.1:8000/package/list');
 

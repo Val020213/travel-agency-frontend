@@ -1,17 +1,22 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { DeleteAgency } from "@/lib/actions/Admin/agency/agency";
-import { FetchAgencies } from "@/lib/data/data";
-import { agency } from "@/lib/entities";
+import { DeleteHotel } from "@/lib/actions/Admin/hotel/hotel";
+import { FetchHotels } from "@/lib/data/data";
+import { hotel } from "@/lib/entities";
 import { IconEdit } from "@tabler/icons-react";
 import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
 
-export async function HotelsTable() {
-    const agencies: agency[] = await FetchAgencies();
+export async function HotelsTable({
+ query,
+ currentPage,
+}: {
+ query: string;
+ currentPage: number;
+}) {
+    const hotels: hotel[] = await FetchHotels(query, currentPage);
 
-    function DeleteAction(id: number)
-    {
-        return DeleteAgency.bind(null, id)
+    function DeleteAction(id: number) {
+        return DeleteHotel.bind(null, id);
     }
     
     return (
@@ -20,27 +25,25 @@ export async function HotelsTable() {
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Fax</TableHead>
                         <TableHead>Nombre</TableHead>
                         <TableHead>Dirección</TableHead>
-                        <TableHead>Correo</TableHead>
+                        <TableHead>Categoría</TableHead>
                         <TableHead>Acciones</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {
-                        agencies.map((agency) => (
-                            <TableRow key={agency.id}>
-                                <TableCell>#{agency.fax}</TableCell>
-                                <TableCell>{agency.name}</TableCell>
-                                <TableCell>{agency.address}</TableCell>
-                                <TableCell>{agency.email}</TableCell>
+                        hotels.map((hotel) => (
+                            <TableRow key={hotel.id}>
+                                <TableCell>{hotel.name}</TableCell>
+                                <TableCell>{hotel.address}</TableCell>
+                                <TableCell>{hotel.category}</TableCell>
                                 <TableCell className="flex flex-row gap-1">
-                                    <Link href={`/admin/agencies/${agency.id}/edit`}>
+                                    <Link href={`/admin/hotels/${hotel.id}/edit`}>
                                         <IconEdit size={24} stroke={1.5} />
                                         <span className="sr-only">Edit</span>
                                     </Link>
-                                    <form action={DeleteAction(agency.id)}>
+                                    <form action={DeleteAction(hotel.id)}>
                                         <button type='submit'>
                                             <IconTrash size={24} stroke={1.5}/>
                                         </button>
@@ -54,4 +57,3 @@ export async function HotelsTable() {
         </section>
     );
 }
-
