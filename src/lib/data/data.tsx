@@ -242,6 +242,7 @@ export async function FetchAgenciesPages(query: string): Promise<number> {
  }
 }
 
+//! Aqui deberia filtered cambiar despues de ser necesario
 export async function FetchHotels(
  query: string,
  currentPage: number,
@@ -256,7 +257,6 @@ export async function FetchHotels(
 
     const data = await response.json();
 
-    // Filtrar los hoteles basados en el query
     const filteredHotels = data.filter((hotel: any) => {
       return (
         hotel.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -265,13 +265,10 @@ export async function FetchHotels(
       );
     });
 
-    // Calcular el offset basado en la página actual
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
-    // Paginar los resultados filtrados
     const paginatedHotels = filteredHotels.slice(offset, offset + ITEMS_PER_PAGE);
 
-    // Mapear los datos para devolver el formato esperado
     const hotels: hotel[] = paginatedHotels.map((hotel: any) => {
       return {
         id: hotel.id,
@@ -318,6 +315,86 @@ export async function FetchHotelsPages(query: string): Promise<number> {
     throw new Error('Failed to fetch total number of hotels.');
  }
 }
+
+
+export async function FetchFilteredExcursions(query: string, currentPage: number): Promise<excursion[]> {
+ try {
+    const response = await fetch('http://127.0.0.1:8000/excursion/list');
+
+    if (!response.ok) {
+      console.error('Failed to fetch excursions');
+      return [];
+    }
+
+    const data = await response.json();
+
+    // Filtrar las excursiones basadas en el query
+    const filteredExcursions = data.filter((excursion: any) => {
+      return (
+        excursion.departure_place.toLowerCase().includes(query.toLowerCase()) ||
+        excursion.arrival_place.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    // Calcular el offset basado en la página actual
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+    // Paginar los resultados filtrados
+    const paginatedExcursions = filteredExcursions.slice(offset, offset + ITEMS_PER_PAGE);
+
+    // Mapear los datos para devolver el formato esperado
+    const excursions: excursion[] = paginatedExcursions.map((excursion: any) => {
+      return {
+        id: excursion.id,
+        departure_day: excursion.departure_day,
+        departure_hour: excursion.departure_hour,
+        departure_place: excursion.departure_place,
+        arrival_day: excursion.arrival_day,
+        arrival_hour: excursion.arrival_hour,
+        arrival_place: excursion.arrival_place,
+        price: excursion.price,
+        photo_url: excursion.photo_url,
+      };
+    });
+
+    return excursions;
+ } catch (error) {
+    console.error('Network Error:', error);
+    throw new Error('Failed to fetch excursions.');
+ }
+}
+
+
+
+export async function FetchExcursionsPages(query: string): Promise<number> {
+ try {
+    const response = await fetch('http://127.0.0.1:8000/excursion/list');
+
+    if (!response.ok) {
+      console.error('Failed to fetch excursions');
+      return 0;
+    }
+
+    const data = await response.json();
+
+    // Filtrar las excursiones basadas en el query
+    const filteredExcursions = data.filter((excursion: any) => {
+      return (
+        excursion.departure_place.toLowerCase().includes(query.toLowerCase()) ||
+        excursion.arrival_place.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    // Calcular el número total de páginas
+    const totalPages = Math.ceil(filteredExcursions.length / ITEMS_PER_PAGE);
+
+    return totalPages;
+ } catch (error) {
+    console.error('Network Error:', error);
+    throw new Error('Failed to fetch total number of excursions.');
+ }
+}
+
 
 
 
