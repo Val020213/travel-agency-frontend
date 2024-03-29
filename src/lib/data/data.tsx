@@ -286,8 +286,9 @@ export async function FetchHotelsPages(query: string): Promise<number> {
     return totalPages;
  } catch (error) {
     console.error('Network Error:', error);
-    throw new Error('Failed to fetch total number of hotels.');
- }
+    throw new Error('Failed to fetch total number of hotels.')
+  }
+  // return 0;
 }
 
 
@@ -361,6 +362,43 @@ export async function FetchExcursionsPages(query: string): Promise<number> {
     console.error('Network Error:', error);
     throw new Error('Failed to fetch total number of excursions.');
  }
+//  return[];
+}
+
+export async function FetchUsers(
+ query: string,
+ currentPage: number,
+): Promise<user[]> {
+ try {
+    const response = await fetch(`http://127.0.0.1:8000/user/list?search=${query}&page=${currentPage}`);
+
+    if (!response.ok) {
+      console.error('Failed to fetch users');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const filteredUsers = data.filter((user: any) => {
+      return user.username.toLowerCase().includes(query.toLowerCase());
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedUsers = filteredUsers.slice(offset, offset + ITEMS_PER_PAGE);
+
+    const users: user[] = paginatedUsers.map((user: any) => {
+      return {
+        id: user.id,
+        username: user.username,
+      };
+    });
+
+    return users;
+ } catch (error) {
+    console.error('Network Error:', error);
+    // throw new Error('Failed to fetch users.');
+ }
+ return[];
 }
 
 
