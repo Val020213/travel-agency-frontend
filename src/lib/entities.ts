@@ -20,8 +20,8 @@ export type offer = entity & {
 export type excursion = entity & offer & visual & {
     departureLocation: string;
     arrivalLocation: string;
-    departureDate: Date;
-    arrivalDate: Date;
+    departureDate: string;
+    arrivalDate: string;
     departureTime: string;
     arrivalTime: string;
     hotelID?: number;

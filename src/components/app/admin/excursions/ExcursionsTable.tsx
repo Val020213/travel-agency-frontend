@@ -5,7 +5,8 @@ import { excursion } from "@/lib/entities";
 import { IconEdit } from "@tabler/icons-react";
 import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
-import { log } from "console";
+import moment from "moment";
+
 
 export async function ExcursionsTable({
  query,
@@ -26,6 +27,7 @@ export async function ExcursionsTable({
             <Table>
                 <TableHeader>
                     <TableRow>
+                        {/* considerar poner aqui tambien la fecha arreglar despues */}
                         <TableHead>Día de Salida</TableHead>
                         <TableHead>Hora de Salida</TableHead>
                         <TableHead>Lugar de Salida</TableHead>
@@ -40,12 +42,10 @@ export async function ExcursionsTable({
                     {
                         excursions.map((excursion) => (
                             <TableRow key={excursion.id}>
-                                {/* <TableCell>{"bungandanga"}</TableCell> */}
-                                <TableCell>{excursion.departureDate.toString()}</TableCell>
+                                <TableCell>{excursion.departureDate}</TableCell>
                                 <TableCell>{excursion.departureTime}</TableCell>
                                 <TableCell>{excursion.departureLocation}</TableCell>
                                 <TableCell>{excursion.arrivalDate.toString()}</TableCell>
-                                {/* <TableCell>{"bungandanga2"}</TableCell> */}
                                 <TableCell>{excursion.arrivalTime}</TableCell>
                                 <TableCell>{excursion.arrivalLocation}</TableCell>
                                 <TableCell>{excursion.price}</TableCell>
