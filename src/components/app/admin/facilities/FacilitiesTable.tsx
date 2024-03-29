@@ -1,41 +1,41 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { DeleteUser } from "@/lib/actions/Admin/user/user";
-import { FetchUsers } from "@/lib/data/data";
-import { user } from "@/lib/entities";
+import { DeleteFacility } from "@/lib/actions/Admin/facility/facility";
+import { FetchFacilities } from "@/lib/data/data";
+import { facility } from "@/lib/entities";
 import { IconEdit } from "@tabler/icons-react";
 import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
 
-export async function UsersTable({
- query,
- currentPage,
+export async function FacilitiesTable({
+    query,
+    currentPage,
 }: {
- query: string;
- currentPage: number;
+    query: string;
+    currentPage: number;
 }) {
-    const users: user[] = await FetchUsers(query, currentPage);
+    const facilities: facility[] = await FetchFacilities(query, currentPage);
 
     function DeleteAction(id: number) {
-        return DeleteUser.bind(null, id);
+        return DeleteFacility.bind(null, id);
     }
-    
+
     return (
         <section>
-            <h2 className='text-2xl font-semibold'>Usuarios en Travelix</h2>
+            <h2 className='text-2xl font-semibold'>Facilidades en Travelix</h2>
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Nombre de Usuario</TableHead>
+                        <TableHead>Descripción</TableHead>
                         <TableHead>Acciones</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {
-                        users.map((user) => (
-                            <TableRow key={user.id}>
-                                <TableCell>{user.username}</TableCell>
+                        facilities.map((facility) => (
+                            <TableRow key={facility.id}>
+                                <TableCell>{facility.description}</TableCell>
                                 <TableCell className="flex flex-row gap-1">
-                                    <form action={DeleteAction(user.id)}>
+                                    <form action={DeleteAction(facility.id)}>
                                         <button type='submit'>
                                             <IconTrash size={24} stroke={1.5}/>
                                         </button>

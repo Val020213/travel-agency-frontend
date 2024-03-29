@@ -1,4 +1,4 @@
-import { agency, excursion, tourist, touristPackage, user, hotel } from '../entities';
+import { agency, excursion, tourist, touristPackage, user, hotel, facility} from '../entities';
 import { ReadSession } from '../actions/session/read';
 import { unstable_noStore } from 'next/cache';
 
@@ -519,6 +519,77 @@ export async function FetchUsersPages(query: string): Promise<number> {
   return 0;
 }
 
+export async function FetchFacilities(
+    query: string,
+    currentPage: number,
+): Promise<facility[]> {
+    try {
+        const queryParams = new URLSearchParams({
+            skip: "0",
+            limit: "1000"
+        });
+        const response = await fetch(`http://127.0.0.1:8000/facility/list?${queryParams.toString()}`);
+
+        if (!response.ok) {
+            console.error('Failed to fetch facilities');
+            return [];
+        }
+
+        const data = await response.json();
+
+        // Filtrar facilidades basadas en la consulta
+        const filteredFacilities = data.filter((facility: any) => {
+            return facility.description.toLowerCase().includes(query.toLowerCase());
+        });
+
+        const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+        const paginatedFacilities = filteredFacilities.slice(offset, offset + ITEMS_PER_PAGE);
+
+        const facilities: facility[] = paginatedFacilities.map((facility: any) => {
+            return {
+                id: facility.id,
+                description: facility.description,
+            };
+        });
+
+        return facilities;
+    } catch (error) {
+        console.error('Error de red:', error);
+        // throw new Error('Error al obtener las facilidades.');
+    }
+    return [];
+}
+
+export async function FetchFacilitiesPages(query: string): Promise<number> {
+    try {
+        const queryParams = new URLSearchParams({
+            skip: "0",
+            limit: "1000"
+        });
+        const response = await fetch(`http://127.0.0.1:8000/facility/list?${queryParams.toString()}`);
+
+        if (!response.ok) {
+            console.error('Failed to fetch facilities');
+            return 0;
+        }
+
+        const data = await response.json();
+
+        // Filtrar facilidades basadas en la consulta
+        const filteredFacilities = data.filter((facility: any) => {
+            return facility.description.toLowerCase().includes(query.toLowerCase());
+        });
+
+        // Calcular el número total de páginas
+        const totalPages = Math.ceil(filteredFacilities.length / ITEMS_PER_PAGE);
+
+        return totalPages;
+    } catch (error) {
+        console.error('Error de red:', error);
+        // throw new Error('Error al obtener el número total de páginas de las facilidades.');
+    }
+    return 0;
+}
 
 
 
