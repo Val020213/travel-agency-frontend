@@ -1,10 +1,11 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeleteExcursion } from "@/lib/actions/Admin/excursion/excursion";
-import { FetchFilteredExcursions } from "@/lib/data/data";
+import { FetchExcursions } from "@/lib/data/data";
 import { excursion } from "@/lib/entities";
 import { IconEdit } from "@tabler/icons-react";
 import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
+import { log } from "console";
 
 export async function ExcursionsTable({
  query,
@@ -13,8 +14,8 @@ export async function ExcursionsTable({
  query: string;
  currentPage: number;
 }) {
-    const excursions: excursion[] = await FetchFilteredExcursions(query, currentPage);
-
+    const excursions: excursion[] = await FetchExcursions(query, currentPage);
+    console.log(excursions);
     function DeleteAction(id: number) {
         return DeleteExcursion.bind(null, id);
     }
@@ -39,10 +40,12 @@ export async function ExcursionsTable({
                     {
                         excursions.map((excursion) => (
                             <TableRow key={excursion.id}>
-                                <TableCell>{excursion.departureDate.toLocaleDateString()}</TableCell>
+                                {/* <TableCell>{"bungandanga"}</TableCell> */}
+                                <TableCell>{excursion.departureDate.toString()}</TableCell>
                                 <TableCell>{excursion.departureTime}</TableCell>
                                 <TableCell>{excursion.departureLocation}</TableCell>
-                                <TableCell>{excursion.arrivalDate.toLocaleDateString()}</TableCell>
+                                <TableCell>{excursion.arrivalDate.toString()}</TableCell>
+                                {/* <TableCell>{"bungandanga2"}</TableCell> */}
                                 <TableCell>{excursion.arrivalTime}</TableCell>
                                 <TableCell>{excursion.arrivalLocation}</TableCell>
                                 <TableCell>{excursion.price}</TableCell>

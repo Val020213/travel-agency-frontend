@@ -71,4 +71,9 @@ export const adminCategories: category[] = [
     href: '/admin/facilities',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
+  {
+    name: 'Excursiones',
+    href: '/admin/excursions',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
 ];
