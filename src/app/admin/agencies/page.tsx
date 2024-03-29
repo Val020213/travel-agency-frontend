@@ -14,14 +14,14 @@ export default async function Page({
     page?: string;
   };
 })  {
-     const query = searchParams?.query || '';
+    const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await FetchAgenciesPages(query);
  
     return (
         <section className="flex flex-col gap-4 md:gap-12 lg:gap-16">
             <Search placeholder="Buscar Agencias..." />
-            <Suspense fallback={<div>Cargando Agencias ...</div>}>
+            <Suspense key={query + currentPage} fallback={<div>Cargando Agencias ...</div>}>
                 <AgenciesTable query={query} currentPage={currentPage}/>
             </Suspense>
             <div className="mt-5 flex w-full justify-center">

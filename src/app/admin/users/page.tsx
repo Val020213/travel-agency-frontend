@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Suspense } from "react";
 import Search from "@/components/ui/admin/searchBar";
-import { FetchUsers } from "@/lib/data/data";
+import { FetchUsersPages } from "@/lib/data/data";
 import Pagination from "@/components/ui/admin/pagination";
 
 export default async function Page({
@@ -16,7 +16,7 @@ export default async function Page({
 }) {
      const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
-    const totalPages = (await FetchUsers(query, currentPage)).length / 10; //paginacion manual  
+    const totalPages = await FetchUsersPages(query); 
  
     return (
         <section className="flex flex-col gap-4 md:gap-12 lg:gap-16">

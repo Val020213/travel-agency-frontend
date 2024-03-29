@@ -140,26 +140,29 @@ export async function FetchAgencies(): Promise<agency[]> {
   }
 }
 
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 10;
 
 export async function FetchFilteredAgencies(
  query: string,
  currentPage: number,
 ): Promise<agency[]> {
   unstable_noStore();
- try {
-    const response = await fetch('http://127.0.0.1:8000/agency/list');
+  try {
+   const queryParams = new URLSearchParams({
+    skip: "0", 
+    limit: "1000" 
+    });
+    const response = await fetch(`http://127.0.0.1:8000/agency/list?${queryParams.toString()}`);
 
     if (!response.ok) {
       console.error('Failed to fetch agencies');
       return [];
     }
-
     const data = await response.json();
 
     const filteredAgencies = data.filter((agency: any) => {
       return (
-        agency.name.toLowerCase().includes(query.toLowerCase()) ||
+        agency.name.toLowerCase().includes(query.toLowerCase()) || 
         agency.address.toLowerCase().includes(query.toLowerCase()) ||
         agency.email.toLowerCase().includes(query.toLowerCase())
       );
@@ -182,13 +185,18 @@ export async function FetchFilteredAgencies(
     return agencies;
  } catch (error) {
     console.error('Network Error:', error);
-    throw new Error('Failed to fetch agencies.');
+    // throw new Error('Failed to fetch agencies.');
  }
+ return []
 }
 
 export async function FetchAgenciesPages(query: string): Promise<number> {
  try {
-    const response = await fetch('http://127.0.0.1:8000/agency/list');
+   const queryParams = new URLSearchParams({
+    skip: "0", 
+    limit: "1000" 
+    });
+    const response = await fetch(`http://127.0.0.1:8000/agency/list?${queryParams.toString()}`);
 
     if (!response.ok) {
       console.error('Failed to fetch agencies');
@@ -222,7 +230,13 @@ export async function FetchHotels(
  currentPage: number,
 ): Promise<hotel[]> {
  try {
-    const response = await fetch('http://127.0.0.1:8000/hotel/list');
+
+   const queryParams = new URLSearchParams({
+    skip: "0", 
+    limit: "1000" 
+    });
+    const response = await fetch(`http://127.0.0.1:8000/hotel/list?${queryParams.toString()}`);
+
 
     if (!response.ok) {
       console.error('Failed to fetch hotels');
@@ -234,8 +248,7 @@ export async function FetchHotels(
     const filteredHotels = data.filter((hotel: any) => {
       return (
         hotel.name.toLowerCase().includes(query.toLowerCase()) ||
-        hotel.address.toLowerCase().includes(query.toLowerCase()) ||
-        hotel.category.toLowerCase().includes(query.toLowerCase())
+        hotel.address.toLowerCase().includes(query.toLowerCase())
       );
     });
 
@@ -254,14 +267,19 @@ export async function FetchHotels(
     return hotels;
  } catch (error) {
     console.error('Network Error:', error);
-    throw new Error('Failed to fetch hotels.');
+    // throw new Error('Failed to fetch hotels.');
  }
+ return []
 }
 
 
 export async function FetchHotelsPages(query: string): Promise<number> {
  try {
-    const response = await fetch('http://127.0.0.1:8000/hotel/list');
+   const queryParams = new URLSearchParams({
+    skip: "0", 
+    limit: "1000" 
+    });
+    const response = await fetch(`http://127.0.0.1:8000/hotel/list?${queryParams.toString()}`);
 
     if (!response.ok) {
       console.error('Failed to fetch hotels');
@@ -273,8 +291,8 @@ export async function FetchHotelsPages(query: string): Promise<number> {
     const filteredHotels = data.filter((hotel: any) => {
       return (
         hotel.name.toLowerCase().includes(query.toLowerCase()) ||
-        hotel.address.toLowerCase().includes(query.toLowerCase()) ||
-        hotel.category.toLowerCase().includes(query.toLowerCase())
+        hotel.address.toLowerCase().includes(query.toLowerCase())
+       
       );
     });
 
@@ -283,9 +301,9 @@ export async function FetchHotelsPages(query: string): Promise<number> {
     return totalPages;
  } catch (error) {
     console.error('Network Error:', error);
-    throw new Error('Failed to fetch total number of hotels.')
+    // throw new Error('Failed to fetch total number of hotels.')
   }
-  // return 0;
+  return 0;
 }
 
 export async function GetHotelByID(id: number): Promise<hotel> {
@@ -318,7 +336,13 @@ export async function GetHotelByID(id: number): Promise<hotel> {
 
 export async function FetchExcursions(query: string, currentPage: number): Promise<excursion[]> {
  try {
-    const response = await fetch('http://127.0.0.1:8000/excursion/list');
+   
+   const queryParams = new URLSearchParams({
+    skip: "0", 
+    limit: "1000" 
+    });
+    const response = await fetch(`http://127.0.0.1:8000/excursion/list?${queryParams.toString()}`);
+
     
     if (!response.ok) {
       console.error('Failed to fetch excursions');
@@ -361,7 +385,12 @@ export async function FetchExcursions(query: string, currentPage: number): Promi
 
 export async function FetchExcursionsPages(query: string): Promise<number> {
  try {
-    const response = await fetch('http://127.0.0.1:8000/excursion/list');
+   const queryParams = new URLSearchParams({
+    skip: "0", 
+    limit: "1000" 
+    });
+    const response = await fetch(`http://127.0.0.1:8000/excursion/list?${queryParams.toString()}`);
+
 
     if (!response.ok) {
       console.error('Failed to fetch excursions');
@@ -384,9 +413,39 @@ export async function FetchExcursionsPages(query: string): Promise<number> {
     return totalPages;
  } catch (error) {
     console.error('Network Error:', error);
-    throw new Error('Failed to fetch total number of excursions.');
+    // throw new Error('Failed to fetch total number of excursions.');
  }
-//  return[];
+ return 0;
+}
+
+export async function GetExcursionByID(id: number): Promise<excursion> {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/excursion/get/${id}`);
+    if (!response.ok) {
+      console.log(response.statusText);
+      return {} as excursion;
+    }
+
+    const data = await response.json();
+
+      const excursionData: excursion = {
+        id: data.id,
+        departureDate: data.departure_day,
+        departureTime: data.departure_hour,
+        departureLocation: data.departure_place,
+        arrivalDate: data.arrival_day,
+        arrivalTime: data.arrival_hour,
+        arrivalLocation: data.arrival_place,
+        price: data.price,
+        image: data.image
+    };
+
+    return excursionData;
+  } catch (error) {
+    console.log('Database Connection Error:', error);
+  }
+
+  return {} as excursion;
 }
 
 export async function FetchUsers(
@@ -394,7 +453,11 @@ export async function FetchUsers(
  currentPage: number,
 ): Promise<user[]> {
  try {
-    const response = await fetch(`http://127.0.0.1:8000/user/list?search=${query}&page=${currentPage}`);
+   const queryParams = new URLSearchParams({
+    skip: "0", 
+    limit: "1000" 
+    });
+    const response = await fetch(`http://127.0.0.1:8000/tourist/list?${queryParams.toString()}`);
 
     if (!response.ok) {
       console.error('Failed to fetch users');
@@ -423,6 +486,37 @@ export async function FetchUsers(
     // throw new Error('Failed to fetch users.');
  }
  return[];
+}
+
+export async function FetchUsersPages(query: string): Promise<number> {
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
+    });
+    const response = await fetch(`http://127.0.0.1:8000/tourist/list?${queryParams.toString()}`);
+
+    if (!response.ok) {
+      console.error('Failed to fetch tourists');
+      return 0;
+    }
+
+    const data = await response.json();
+
+    // Filter tourists based on the query
+    const filteredTourists = data.filter((tourist: any) => {
+      return tourist.username.toLowerCase().includes(query.toLowerCase());
+    });
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(filteredTourists.length / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.error('Network Error:', error);
+    // throw new Error('Failed to fetch total number of tourists.');
+  }
+  return 0;
 }
 
 

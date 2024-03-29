@@ -84,7 +84,7 @@ export async function CreateHotelAction(
       errors: {},
     };
  }
-
+ revalidatePath("/admin/hotels")
  redirect("/admin/hotels");
 }
 
@@ -118,7 +118,7 @@ export async function UpdateHotelAction(
   };
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/hotel/update', {
+    const response = await fetch('http://127.0.0.1:8000/hotel/update', { //todo arreglar cuando se actualice el back
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -141,13 +141,14 @@ export async function UpdateHotelAction(
 export async function DeleteHotel(id: number): Promise<void> {
 
  try {
-    const response = await fetch(`http://127.0.0.1:8000/hotel/delete/${id}`);
+    const response = await fetch(`http://127.0.0.1:8000/hotel/delete${id}`);
 
     if (!response.ok) {
-      console.error(`Error al eliminar el hotel: ${response.statusText}`);
+      console.error(`Error al eliminar el hotel ahora : ${response.statusText}`);
       return;
     }
 
+    revalidatePath('/admin/hotels')
  } catch (error) {
     console.error("Error de conexión a la base de datos:", error);
  }
