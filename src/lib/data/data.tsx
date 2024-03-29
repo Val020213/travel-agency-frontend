@@ -1,8 +1,5 @@
 import { agency, excursion, tourist, touristPackage, user, hotel } from '../entities';
 import { ReadSession } from '../actions/session/read';
-
-import { number } from 'zod';
-import { AgencyFormState } from '../actions/Admin/agency/agency';
 import { unstable_noStore } from 'next/cache';
 
 export function TemporalCountries(): string[] {
@@ -290,6 +287,33 @@ export async function FetchHotelsPages(query: string): Promise<number> {
   }
   // return 0;
 }
+
+export async function GetHotelByID(id: number): Promise<hotel> {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/hotel/get/${id}`);
+    if (!response.ok) {
+      console.log(response.statusText);
+      return {} as hotel;
+    }
+
+    const data = await response.json();
+
+    const hotelData: hotel = {
+      name: data.name,
+      address: data.address,
+      category: data.category,
+      image: validateImagePath(data.photo_url),
+      id: data.id,
+    };
+
+    return hotelData;
+  } catch (error) {
+    console.log('Database Connection Error:', error);
+  }
+
+  return {} as hotel;
+}
+
 
 
 export async function FetchExcursions(query: string, currentPage: number): Promise<excursion[]> {
