@@ -118,7 +118,7 @@ export async function UpdateHotelAction(
   };
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/hotel/update', { //todo arreglar cuando se actualice el back
+    const response = await fetch('http://127.0.0.1:8000/hotel/update', { 
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

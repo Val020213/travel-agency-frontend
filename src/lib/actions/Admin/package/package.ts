@@ -89,8 +89,51 @@ export async function UpdatePackageAction(
  prevState: PackageFormState,
  formData: FormData
 ) {
- // Similar to CreatePackageAction, but for updating
- // Make sure to adjust the endpoint and data structure as needed
+ const validatedFields = PackageSchema.safeParse({
+    price: parseInt(formData.get("price") as string, 10),
+    description: formData.get("description") as string,
+    duration: parseInt(formData.get("duration") as string, 10),
+    agency_id: parseInt(formData.get("agency_id") as string, 10),
+    extended_excursion_id: parseInt(formData.get("extended_excursion_id") as string,10),
+    photo_url: formData.get("photo_url") as string,
+ });
+
+ if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: validatedFields.error.message,
+    };
+ }
+
+ const { price, description, duration, agency_id, extended_excursion_id, photo_url } = validatedFields.data;
+ const data = {
+    price,
+    description,
+    duration,
+    agency_id,
+    extended_excursion_id,
+    photo_url,
+ };
+
+ try {
+    const response = await fetch('http://127.0.0.1:8000/packages/update', { 
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      return {
+        message: response.statusText,
+      };
+    }
+  } catch (error) {
+    console.log("Database Connection Error:", error);
+  }
+
+  redirect("/admin/packages");
 }
 
 export async function DeletePackage(id: number): Promise<void> {
