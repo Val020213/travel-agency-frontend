@@ -89,7 +89,7 @@ export const SignIn = () => {
           </div>
           <div className='flex flex-col *:w-full gap-4'>
             <div>
-              {state.errors && (
+              {state.message && (
                 <p className='text-[#e11d48]'>{state.message}</p>
               )}
             </div>

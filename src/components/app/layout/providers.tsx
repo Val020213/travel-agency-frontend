@@ -1,5 +1,4 @@
 'use client';
-import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from 'next-themes';
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -9,7 +8,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
       themes={['light', 'dark']}
       attribute='class'
     >
-      <Toaster />
       {children}
     </ThemeProvider>
   );

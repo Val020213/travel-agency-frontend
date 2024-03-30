@@ -105,7 +105,7 @@ export async function CreateUserAction(
     if (!resp.ok) {
       return {
         errors: {},
-        message: 'Error Response from Server. Failed to Create User.',
+        message: resp.statusText,
       };
     }
   } catch (error) {
@@ -114,5 +114,5 @@ export async function CreateUserAction(
       message: 'Database Connection error.',
     };
   }
-  redirect('?');
+  redirect('?toast=true&message=registerSuccess');
 }

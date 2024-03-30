@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { rol, user } from '../../entities';
 import { write } from '../session/write';
+import { FetchUser } from '@/lib/data/data';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -26,12 +27,18 @@ export type SignInState = {
   };
 };
 
+export type LoginResponse = {
+  token: string;
+  rol: rol;
+};
+
+
 const ValidateUser = FormSchema.omit({ id: true, date: true });
 
 export async function ValidateUserAction(
   prevState: SignInState,
   formData: FormData
-) {
+) : Promise<SignInState> {
   const validatedFields = ValidateUser.safeParse({
     username: formData.get('username') as string,
     password: formData.get('password') as string,
@@ -48,11 +55,14 @@ export async function ValidateUserAction(
   const data = {
     username: username,
     password: password,
+    grant_type: 'password',
+    scope: null,
+    client_id: null,
+    client_secret: null
   };
-  console.log('hleoo')
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/token', {
+    const response = await fetch('http://127.0.0.1:8000/fake_token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,29 +72,32 @@ export async function ValidateUserAction(
 
     if (!response.ok) {
       return {
-        message: 'Failed to create user, Bad Request',
+        message: response.statusText,
       };
     }
-    console.log('holaaaa')
-    const { token, _, rol } = await response.json();
-    write({ username: username, token: token, rol: rol })
-    const redirectRole = addrRole(rol)
-    redirect(redirectRole + '?toast=true&message=loginSuccess')
+    const responseData = await response.json()
+    const token = responseData.access_token;
+    const rol = responseData.role;
 
+    write({ username: username, token: token, rol: rol })
+    
   } catch (error) {
     console.log(error)
+    return {
+      errors:{},
+      message: 'Error DBConnection'
+    }
   }
+  const userRol = (await FetchUser())?.rol;
+  console.log(userRol ?? 'no se recibio un rol')
+  redirect(MapperRolAddress[userRol ?? 'tourist']);
 }
 
 
 
-const MapperRolAddress: Record<rol, string> = {
+const MapperRolAddress: Record<string, string> = {
   admin: '/admin',
   marketing: '/marketing',
   agent: '/',
   tourist: '/',
 };
-
-function addrRole(rol: rol) {
-  return MapperRolAddress[rol] ?? '/'
-}

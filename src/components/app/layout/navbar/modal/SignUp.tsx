@@ -116,6 +116,46 @@ export const SignUp = () => {
             <div className='flex flex-col text-base leading-6 gap-2'>
               <label
                 className='text-gray-300 dark:text-extends-darker-blue-300'
+                htmlFor='name'
+              >
+                número de teléfono
+              </label>
+              <input
+                required
+                className='md:text-xl border-b border-gray-300 dark:border-gray-400'
+                type='phone'
+                id='phone'
+                name='phone'
+                placeholder='+537851254'
+              />
+              {state.errors?.phone && (
+                <p className='text-[#e11d48]'>{state.errors.phone}</p>
+              )}
+            </div>
+
+            <div className='flex flex-col text-base leading-6 gap-2'>
+              <label
+                className='text-gray-300 dark:text-extends-darker-blue-300'
+                htmlFor='name'
+              >
+                email
+              </label>
+              <input
+                required
+                className='md:text-xl border-b border-gray-300 dark:border-gray-400'
+                type='email'
+                id='email'
+                name='email'
+                placeholder='travelero@gmail.com'
+              />
+              {state.errors?.email && (
+                <p className='text-[#e11d48]'>{state.errors.email}</p>
+              )}
+            </div>
+
+            <div className='flex flex-col text-base leading-6 gap-2'>
+              <label
+                className='text-gray-300 dark:text-extends-darker-blue-300'
                 htmlFor='nationality'
               >
                 nacionalidad
