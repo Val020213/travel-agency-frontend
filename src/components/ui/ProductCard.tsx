@@ -39,7 +39,7 @@ export const ProductCard = ({
         height={600}
         width={800}
         quality={100}
-        src={image}
+        src={image?? require('@/assets/defaultImage.png')}
         style={{
           aspectRatio: '800/600',
         }}

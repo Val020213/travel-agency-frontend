@@ -36,19 +36,20 @@ export async function ValidateUserAction(
     username: formData.get('username') as string,
     password: formData.get('password') as string,
   });
-
+  
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: validatedFields.error.message,
     };
   }
-
+  
   const { username, password } = validatedFields.data;
   const data = {
     username: username,
     password: password,
   };
+  console.log('hleoo')
 
   try {
     const response = await fetch('http://127.0.0.1:8000/token', {
@@ -64,18 +65,15 @@ export async function ValidateUserAction(
         message: 'Failed to create user, Bad Request',
       };
     }
-
-    const { token, _ , rol } = await response.json();
-    write({username:username, token: token, rol:rol})
+    console.log('holaaaa')
+    const { token, _, rol } = await response.json();
+    write({ username: username, token: token, rol: rol })
     const redirectRole = addrRole(rol)
     redirect(redirectRole + '?toast=true&message=loginSuccess')
-    
-  } catch (error) {
-    return {
-      message: 'Failed to create user, DataBase Error Connection',
-    };
-  }
 
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 
@@ -87,6 +85,6 @@ const MapperRolAddress: Record<rol, string> = {
   tourist: '/',
 };
 
-function addrRole(rol : rol) {
+function addrRole(rol: rol) {
   return MapperRolAddress[rol] ?? '/'
 }
