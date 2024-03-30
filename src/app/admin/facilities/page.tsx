@@ -28,7 +28,7 @@ export default async function Page({
                 <Pagination totalPages={totalPages} />
             </div>
             <Link href="/admin/facilities/create">
-                <Button variant='outline'><p>Crear una nueva Facilidad</p></Button>
+                <Button variant='outline'><p>Crear una nueva Facilidad en <span className="text-orange-500">Travelix</span></p></Button>
             </Link>
             <div className="flex flex-col gap-4">
                 <h2 className='text-2xl font-semibold'>Facilidades</h2>
