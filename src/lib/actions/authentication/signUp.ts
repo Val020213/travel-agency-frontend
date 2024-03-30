@@ -1,7 +1,6 @@
 'use server';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
-import { TemporalCountries } from '../../data/data';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -70,18 +69,6 @@ export async function CreateUserAction(
     };
   }
 
-  const Countries = TemporalCountries();
-
-  if (Countries.findIndex((country) => country === nationality) === -1) {
-    const nextState: SignUpState = {
-      errors: {
-        nationality: ['Invalid Nationality']
-      },
-      message: 'Invalid Fields. User not Create'
-    }
-    return nextState
-
-  }
   // POST /tourist/create, http://127.0.0.1:8000/tourist/create
 
   const data = {

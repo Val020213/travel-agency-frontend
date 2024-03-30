@@ -40,12 +40,12 @@ export const enterpriseCategories: category[] = [
   },
   {
     name: 'Oferta',
-    href: '/marketing/createOffer',
+    href: '/marketing/offer',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
   {
     name: 'Excursion',
-    href: '/marketing/createExcursion',
+    href: '/marketing/excursion',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
 ];

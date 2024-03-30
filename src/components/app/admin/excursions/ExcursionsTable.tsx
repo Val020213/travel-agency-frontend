@@ -16,7 +16,6 @@ export async function ExcursionsTable({
  currentPage: number;
 }) {
     const excursions: excursion[] = await FetchExcursions(query, currentPage);
-    console.log(excursions);
     function DeleteAction(id: number) {
         return DeleteExcursion.bind(null, id);
     }

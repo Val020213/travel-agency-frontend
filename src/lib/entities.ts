@@ -1,23 +1,26 @@
 export type entity = {
-    id: number;
-}
+  id: number;
+};
 
 export type visual = {
-    image: string;
-}
+  image: string;
+};
 
-export type agency = entity & visual & {
+export type agency = entity &
+  visual & {
     name: string;
     address: string;
     email: string;
     fax: number;
-}
+  };
 
 export type offer = entity & {
-    price: number;
-}
+  price: number;
+};
 
-export type excursion = entity & offer & visual & {
+export type excursion = entity &
+  offer &
+  visual & {
     departureLocation: string;
     arrivalLocation: string;
     departureDate: string;
@@ -25,38 +28,68 @@ export type excursion = entity & offer & visual & {
     departureTime: string;
     arrivalTime: string;
     hotelID?: number;
-}
+  };
 
-export type hotel = entity & visual & {
+export type hotel = entity &
+  visual & {
     name: string;
     address: string;
     category: number;
-}
-
+  };
 
 export type facility = entity & {
-    description: string;
-}
+  description: string;
+};
 
 export type rol = 'admin' | 'tourist' | 'marketing' | 'agent';
 
 export type user = entity & {
-    username: string;
-    // password: string;
-    // email: string;
-    webToken: string;
-    rol: rol;
-}
+  username: string;
+  // password: string;
+  // email: string;
+  webToken: string;
+  rol: rol;
+};
 
-export type touristPackage = entity & offer & visual & {
+export type touristPackage = entity &
+  offer &
+  visual & {
     agencyID: number;
     excursionID: number;
     facilities: facility[];
     description: string;
     duration: number;
-}
+  };
 
 export type tourist = entity & {
-    name: string
-    nationality: string;
+  name: string;
+  nationality: string;
+};
+
+export type loginTokenPost = {
+  accessToken: string;
+  tokenType: string;
+  role: rol;
+};
+
+
+
+export type Date = {
+  departureDay : string
+  // ... others
+}
+
+export type reservation =  {
+  touristID : number
+  date : Date
+}
+
+export type excursionReservation = {
+  excursionID : number
+  reservation : reservation
+}
+
+export type touristPackageReservation = {
+  touristPackageID : number
+  reservation : reservation
 }

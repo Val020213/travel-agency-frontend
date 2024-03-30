@@ -125,7 +125,7 @@ export async function UpdateAgencyAction(
     photo_url: imagen == '' ? undefined : imagen,
     email: email == '' ? undefined : email,
   };
-  console.log(JSON.stringify(data))
+
   try{
     const response =  await fetch('http://127.0.0.1:8000/agency/update', {
       method: 'POST',

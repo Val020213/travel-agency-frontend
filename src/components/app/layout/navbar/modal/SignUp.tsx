@@ -7,7 +7,6 @@ import { useFormState } from 'react-dom';
 import { CreateUserAction } from '@/lib/actions/authentication/signUp';
 import { SignUpState } from '@/lib/actions/authentication/signUp';
 import { ContinueButton } from './ContinueButton';
-import { TemporalCountries } from '@/lib/data/data';
 import { othersLinks } from '@/lib/definitions';
 import { ReactNode, Suspense } from 'react';
 import {
@@ -17,6 +16,26 @@ import {
   SelectContent,
   Select,
 } from '@/components/ui/select';
+
+const TemporalCountries = () => {
+  return [
+    'Argentina',
+    'Bolivia',
+    'Brasil',
+    'Cuba',
+    'México',
+    'España',
+    'Chile',
+    'Colombia',
+    'Ecuador',
+    'Guyana',
+    'Paraguay',
+    'Perú',
+    'Surinam',
+    'Uruguay',
+    'Venezuela',
+  ];
+};
 
 const SignUpTrigger = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams();

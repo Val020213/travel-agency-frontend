@@ -13,7 +13,7 @@ import { FetchExcursions } from '@/lib/data/data';
 import { excursion } from '@/lib/entities';
 
 export async function ExcursionProducts() {
-  const data = await FetchExcursions();
+  const data = await FetchExcursions('', 1);
 
   return (
     <div className='flex flex-col gap-8'>

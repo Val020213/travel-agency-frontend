@@ -1,4 +1,3 @@
-'use client'
 import { ReactNode, Suspense } from 'react';
 import clsx from 'clsx';
 import { Logo, LogoEnterprise } from '@/components/app/layout/navbar/Logo';

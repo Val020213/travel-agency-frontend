@@ -1,26 +1,8 @@
-import { agency, excursion, tourist, touristPackage, user, hotel, facility} from '../entities';
+'use server'
+import { agency, excursion, tourist, touristPackage, user, hotel } from '../entities';
 import { ReadSession } from '../actions/session/read';
 import { unstable_noStore } from 'next/cache';
-
-export function TemporalCountries(): string[] {
-  return [
-    'Argentina',
-    'Bolivia',
-    'Brasil',
-    'Cuba',
-    'México',
-    'España',
-    'Chile',
-    'Colombia',
-    'Ecuador',
-    'Guyana',
-    'Paraguay',
-    'Perú',
-    'Surinam',
-    'Uruguay',
-    'Venezuela',
-  ];
-}
+import { facility } from '../entities';
 
 export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
   const response = await fetch(`https://restcountries.com/v3.1/name/${name}`, {
@@ -51,7 +33,7 @@ export async function FetchUser(): Promise<user | undefined> {
     return user
   }
   catch {
-    console.log('Json not parsed')
+    // console.log('Json not parsed')
   }
   return undefined
 }
@@ -78,7 +60,8 @@ function validateImagePath ( image : string) {
   if(image.startsWith("https://")){
     return image
   }
-  return require("@/assets/defaultImage.png")
+  const defaultImage : string = require('@/assets/defaultImage.png')
+  return defaultImage
 }
 
 export async function GetAgencyByID(id : number) : Promise<agency> {
