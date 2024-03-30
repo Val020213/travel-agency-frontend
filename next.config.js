@@ -1,8 +1,11 @@
 module.exports = {
   images: {
-    remotePatterns: [{
-      hostname: 'th.bing.com',
-    }],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
   // REMOTE-PATTERNS: images-domains
 
