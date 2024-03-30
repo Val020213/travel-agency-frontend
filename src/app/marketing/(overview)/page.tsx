@@ -1,5 +1,5 @@
 import { AgencyInfoMarketing } from '@/components/app/marketing/overview/AgencyInfoMarketing';
-import { FetchMarketingAgency } from '@/lib/data/data';
+import { FetchMarketingAgency } from '@/lib/actions/marketing/marketing';
 import { AgencyPrimaryData } from '@/components/app/marketing/overview/AgencyPrimaryData';
 import { FrequentlyTouristTable } from '@/components/app/marketing/overview/FrequentlyTouristTable';
 import { ExpensivePackages } from '@/components/app/marketing/overview/ExpensivePackages';

@@ -1,9 +1,9 @@
 import { agency } from '@/lib/entities';
-import { FetchAgencyPrimaryData } from '@/lib/data/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { FetchAgencyPrimaryData } from '@/lib/actions/marketing/marketing';
 
 export async function AgencyPrimaryData({ agency }: { agency: agency }) {
-  const data = await FetchAgencyPrimaryData(agency.id);
+  const data = (agency.id);
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
       <Card className='bg-white dark:bg-extends-darker-blue-900'>

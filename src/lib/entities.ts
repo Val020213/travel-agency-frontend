@@ -41,13 +41,19 @@ export type facility = entity & {
   description: string;
 };
 
-export type rol = 'admin' | 'tourist' | 'marketing' | 'agent';
+export type rol = "admin" | "tourist" | "marketing" | "agent";
 
 export type user = entity & {
   username: string;
   token: string;
   rol: rol;
 };
+
+export type agent = entity & {
+  username: string,
+  token: string,
+  rol: rol
+}
 
 export type touristPackage = entity &
   offer &
@@ -70,24 +76,22 @@ export type loginTokenPost = {
   role: rol;
 };
 
-
-
 export type Date = {
-  departureDay : string
+  departureDay: string;
   // ... others
-}
+};
 
-export type reservation =  {
-  touristID : number
-  date : Date
-}
+export type reservation = {
+  touristID: number;
+  date: Date;
+};
 
 export type excursionReservation = {
-  excursionID : number
-  reservation : reservation
-}
+  excursionID: number;
+  reservation: reservation;
+};
 
 export type touristPackageReservation = {
-  touristPackageID : number
-  reservation : reservation
-}
+  touristPackageID: number;
+  reservation: reservation;
+};

@@ -1,5 +1,5 @@
 import { Table, TableHeader, TableHead, TableRow, TableBody, TableCell } from "@/components/ui/table";
-import { FetchFrecuentlyTourist } from "@/lib/data/data";
+import { FetchFrecuentlyTourist } from "@/lib/actions/marketing/marketing";
 import { tourist } from "@/lib/entities";
 import clsx from "clsx";
 import { randomInt } from "crypto";
@@ -7,7 +7,7 @@ import { randomInt } from "crypto";
 
 export async function FrequentlyTouristTable({ agencyID }: { agencyID: number }) {
 
-    const tourist: tourist[] = await FetchFrecuentlyTourist(agencyID)
+    const tourist: tourist[] = await FetchFrecuentlyTourist()
 
     return (
         <section>

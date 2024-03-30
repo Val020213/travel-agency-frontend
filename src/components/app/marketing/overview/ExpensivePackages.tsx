@@ -1,8 +1,8 @@
 import { Table, TableBody, TableCell, TableHeader, TableHead, TableRow } from "@/components/ui/table"
-import { FetchExpensivePackages } from "@/lib/data/data"
+import { FetchExpensivePackages } from "@/lib/actions/marketing/marketing"
 import { touristPackage } from "@/lib/entities"
 export async function ExpensivePackages({ agencyID }: { agencyID: number }) {
-    const expensivePackages: touristPackage[] = await FetchExpensivePackages(agencyID)
+    const expensivePackages: touristPackage[] = await FetchExpensivePackages()
 
     return (
         <section>

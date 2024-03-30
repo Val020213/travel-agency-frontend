@@ -39,13 +39,13 @@ export const enterpriseCategories: category[] = [
     icon: <IconReportAnalytics size={24} strokeWidth={1.5} />,
   },
   {
-    name: 'Oferta',
-    href: '/marketing/offer',
+    name: 'Paquetes',
+    href: '/marketing/packages',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
   {
-    name: 'Excursion',
-    href: '/marketing/excursion',
+    name: 'Agentes',
+    href: '/marketing/agents',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
 ];
