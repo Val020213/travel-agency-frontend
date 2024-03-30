@@ -76,4 +76,17 @@ export const adminCategories: category[] = [
     href: '/admin/excursions',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
+
+  {
+    name: 'Paquetes',
+    href: '/admin/packages',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
+
+  {
+    name: 'Estadísticas',
+    href: '/admin/statistics',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
+
 ];
