@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
@@ -38,7 +38,6 @@ export async function ValidateUserAction(
   });
 
   if (!validatedFields.success) {
-
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: validatedFields.error.message,
@@ -51,81 +50,43 @@ export async function ValidateUserAction(
     password: password,
   };
 
-  if (!(username in AdminPatch)) {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/tourist/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  try {
+    const response = await fetch('http://127.0.0.1:8000/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
-      if (!response.ok) {
-        return {
-          message: 'Failed to create user, Bad Request',
-        };
-      }
-    } catch (error) {
+    if (!response.ok) {
       return {
-        message: 'Failed to create user, DataBase Error Connection',
+        message: 'Failed to create user, Bad Request',
       };
     }
+
+    const { token, _ , rol } = await response.json();
+    write({username:username, token: token, rol:rol})
+    const redirectRole = addrRole(rol)
+    redirect(redirectRole + '?toast=true&message=loginSuccess')
+    
+  } catch (error) {
+    return {
+      message: 'Failed to create user, DataBase Error Connection',
+    };
   }
-  write({ username: username })
-  redirectRole({ user: AdminPatch[username] });
-  // SuccessMsg();
+
 }
 
-// function SuccessMsg() {
-//   const { toast } = useToast();
-//   toast({
-//     title: 'Bienvenido',
-//     description: 'Hay nuevas ofertas esperando por ti',
-//     status: 'success',
-//     duration: 9000,
-//     isClosable: true,
-//   });
-// }
 
-const AdminPatch: { [key: string]: user } = {
-  admin: {
-    id: 12345678,
-    username: 'admin',
-    webToken: 'adminToken',
-    rol: 'admin'
-  },
-
-  tourist: {
-    id: 12345677,
-    username: 'tourist',
-    webToken: 'touristToken',
-    rol: 'tourist'
-  },
-
-  marketing: {
-    id: 12345676,
-    username: 'marketing',
-    webToken: 'marketingToken',
-    rol: 'marketing'
-  },
-
-  agent: {
-    id: 12345676,
-    username: 'agent',
-    webToken: 'agentToken',
-    rol: 'agent'
-  }
-
-};
 
 const MapperRolAddress: Record<rol, string> = {
-  'admin': '/admin',
-  'marketing': '/marketing',
-  'agent': '/',
-  'tourist': '/',
-}
+  admin: '/admin',
+  marketing: '/marketing',
+  agent: '/',
+  tourist: '/',
+};
 
-function redirectRole({ user }: { user: user }) {
-  return redirect(MapperRolAddress[user.rol]) ?? redirect('/');
+function addrRole(rol : rol) {
+  return MapperRolAddress[rol] ?? '/'
 }

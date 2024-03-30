@@ -12,6 +12,11 @@ const FormSchema = z.object({
     invalid_type_error: 'invalid_type_error',
     required_error: 'Introduzca su nombre completo',
   }),
+  email: z.string().email(),
+  phone: z.string({
+    invalid_type_error: 'invalid type error',
+    required_error: 'Introduzca su telefono',
+  }),
   nationality: z.string({
     invalid_type_error: 'Seleccione su nacionalidad',
     required_error: 'Selecione su nacionalidad',
@@ -24,7 +29,7 @@ const FormSchema = z.object({
     invalid_type_error: 'Confirme su contraseña',
     required_error: 'Confirme su contraseña',
   }),
-  date: z.string(),
+  rol: z.any(),
 });
 
 export type SignUpState = {
@@ -33,12 +38,14 @@ export type SignUpState = {
     username?: string[];
     name?: string[];
     nationality?: string[];
+    email?: string[];
+    phone?: string[];
     password?: string[];
     confirmPassword?: string[];
   };
 };
 
-const CreateUser = FormSchema.omit({ id: true, date: true });
+const CreateUser = FormSchema.omit({ id: true });
 
 export async function CreateUserAction(
   prevState: SignUpState,
@@ -50,6 +57,8 @@ export async function CreateUserAction(
     nationality: formData.get('nationality') as string,
     password: formData.get('password') as string,
     confirmPassword: formData.get('confirmPassword') as string,
+    phone: formData.get('phone') as string,
+    email: formData.get('email') as string,
   });
 
   if (!validatedFields.success) {
@@ -59,8 +68,15 @@ export async function CreateUserAction(
     };
   }
 
-  const { username, name, nationality, password, confirmPassword } =
-    validatedFields.data;
+  const {
+    username,
+    name,
+    nationality,
+    password,
+    confirmPassword,
+    phone,
+    email,
+  } = validatedFields.data;
 
   if (password !== confirmPassword) {
     return {
@@ -69,15 +85,14 @@ export async function CreateUserAction(
     };
   }
 
-  // POST /tourist/create, http://127.0.0.1:8000/tourist/create
-
   const data = {
     username: username,
     name: name,
     nationality: nationality,
     password: password,
+    phone: phone,
+    email: email,
   };
-
 
   try {
     const resp = await fetch('http://127.0.0.1:8000/tourist/create', {
@@ -99,5 +114,5 @@ export async function CreateUserAction(
       message: 'Database Connection error.',
     };
   }
-  redirect('?')
+  redirect('?');
 }

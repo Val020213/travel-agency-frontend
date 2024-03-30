@@ -5,7 +5,6 @@ import { excursion } from "@/lib/entities";
 import { IconEdit } from "@tabler/icons-react";
 import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
-import moment from "moment";
 
 
 export async function ExcursionsTable({

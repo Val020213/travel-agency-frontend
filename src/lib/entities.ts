@@ -45,9 +45,7 @@ export type rol = 'admin' | 'tourist' | 'marketing' | 'agent';
 
 export type user = entity & {
   username: string;
-  // password: string;
-  // email: string;
-  webToken: string;
+  token: string;
   rol: rol;
 };
 
