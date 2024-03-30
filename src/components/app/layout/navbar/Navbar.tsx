@@ -77,7 +77,7 @@ export async function AdministrativeNavbarConstructor({ categoriesComponent }: {
           <Switch />
         </div>
       </div>
-      <div className='sm:hidden'>
+      <div className='overflow-x-auto sm:hidden'>
         {categoriesComponent}
       </div>
     </NavbarContainer>
@@ -89,5 +89,20 @@ export async function EnterpriseNavbar() {
 };
 
 export async function AdminNavbar() {
-  return <AdministrativeNavbarConstructor categoriesComponent={<AdminCategories />} />;
+  return (
+    <NavbarContainer>
+      <div className='flex flex-row justify-between items-center w-full'>
+        <div className='flex flex-row items-center justify-start gap-8'>
+          <LogoEnterprise />
+        </div>
+        <div className='flex flex-row justify-end gap-1 md:gap-3'>
+          <Suspense>
+            <UserSection />
+          </Suspense>
+          <Switch />
+        </div>
+      </div>
+        <AdminCategories />
+    </NavbarContainer>
+  );
 }
