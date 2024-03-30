@@ -1,6 +1,3 @@
-import { LayoutGrid } from '../../layout/LayoutGrid';
-import { ContinueCard } from '../../../ui/ContinueCard';
-import { ProductCard } from '../../../ui/ProductCard';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,8 +6,11 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
+import { ProductCard } from '@/components/ui/ProductCard';
 import { FetchExcursions } from '@/lib/data/data';
 import { excursion } from '@/lib/entities';
+import { LayoutGrid } from '../../layout/LayoutGrid';
+import { ContinueCard } from '@/components/ui/ContinueCard';
 
 export async function ExcursionProducts() {
   const data = await FetchExcursions('', 1);
@@ -45,7 +45,7 @@ export async function ExcursionProducts() {
               '.'
             }
             image={excursion.image}
-            href={'/excursion/' + excursion.id}
+            href={'/tourist/payment/' + excursion.id + '?type=excursion'}
           />
         ))}
         <ContinueCard />

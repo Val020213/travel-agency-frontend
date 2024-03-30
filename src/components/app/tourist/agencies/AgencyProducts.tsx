@@ -1,6 +1,4 @@
-import { LayoutGrid } from '../../layout/LayoutGrid';
-import { ContinueCard } from '../../../ui/ContinueCard';
-import { ProductCard } from '../../../ui/ProductCard';
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,8 +7,11 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
+import { ContinueCard } from '@/components/ui/ContinueCard';
 import { FetchAgencies } from '@/lib/data/data';
 import { agency } from '@/lib/entities';
+import { LayoutGrid } from '../../layout/LayoutGrid';
+import { ProductCard } from '@/components/ui/ProductCard';
 
 export async function AgencyProducts() {
   const data : agency[] = await FetchAgencies();

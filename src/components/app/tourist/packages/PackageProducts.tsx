@@ -1,7 +1,3 @@
-import { LayoutGrid } from '../../layout/LayoutGrid';
-import { ContinueCard } from '../../../ui/ContinueCard';
-import { ProductCard } from '../../../ui/ProductCard';
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,9 +8,12 @@ import {
 } from '@/components/ui/breadcrumb';
 import { FetchPackages } from '@/lib/data/data';
 import { touristPackage } from '@/lib/entities';
+import { LayoutGrid } from '../../layout/LayoutGrid';
+import { ProductCard } from '@/components/ui/ProductCard';
+import { ContinueCard } from '@/components/ui/ContinueCard';
 
 export async function PackageProducts() {
-  const data : touristPackage[] = await FetchPackages();
+  const data : touristPackage[] = await FetchPackages('',1);
 
   return (
     <div className='flex flex-col gap-8'>
@@ -38,7 +37,7 @@ export async function PackageProducts() {
             title={'Paquete turístico de ' + touristPackage.duration + ' días'}
             description={touristPackage.description}
             image={touristPackage.image}
-            href={'/package/' + touristPackage.id}
+            href={'/tourist/payment/' + touristPackage.id + '?type=package'}
           />
         ))}
         <ContinueCard />

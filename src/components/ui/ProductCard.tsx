@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Tag } from './tokens/Tag';
 import clsx from 'clsx';
-import { Suspense } from 'react';
 
 type Props = {
   title: string;

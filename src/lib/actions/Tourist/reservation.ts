@@ -17,10 +17,11 @@ export async function CreateExcursionReservation() {
     
 }
 
-export async function CreatTouristPackageReservation() {
+export async function CreateTouristPackageReservation() {
     
 }
 
 async function CreateReservation() {
     
 }
+
