@@ -354,6 +354,7 @@ export async function FetchExcursions(query: string, currentPage: number): Promi
         arrivalTime: excursion.arrival_hour,
         arrivalLocation: excursion.arrival_place,
         price: excursion.price,
+        image: excursion.photo_url
       };
     });
 
@@ -574,41 +575,86 @@ export async function FetchFacilitiesPages(query: string): Promise<number> {
     return 0;
 }
 
+export async function FetchPackages(
+    query: string,
+    currentPage: number,
+): Promise<any[]> {
+    try {
+        const queryParams = new URLSearchParams({
+            skip: "0",
+            limit: "1000"
+        });
+        const response = await fetch(`http://127.0.0.1:8000/package/list?${queryParams.toString()}`);
 
+        if (!response.ok) {
+            console.error('Failed to fetch packages');
+            return [];
+        }
 
-export async function FetchPackages(): Promise<touristPackage[]> {
-  unstable_noStore();
-  try {
-    const response = await fetch('http://127.0.0.1:8000/package/list');
+        const data = await response.json();
 
-    if (!response.ok) {
-      // console.log('Failed to fetch products');
-      return [];
+        // Filtrar paquetes basados en la consulta
+        const filteredPackages = data.filter((touristPackage: any) => {
+            return touristPackage.description.toLowerCase().includes(query.toLowerCase());
+            // return touristPackage.description.toLowerCase().includes(query.toLowerCase());
+            // return touristPackage.description.toLowerCase().includes(query.toLowerCase());
+        });
+
+        const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+        const paginatedPackages = filteredPackages.slice(offset, offset + ITEMS_PER_PAGE);
+        console.log(paginatedPackages);
+
+        const packages = paginatedPackages.map((touristPackage: any) => {
+            return {
+                id: touristPackage.id,
+                price:  touristPackage.price,
+                description: touristPackage.description,
+                duration: touristPackage.duration,
+                agency_id: touristPackage.agency_id,
+                extended_excursion_id: touristPackage.extended_excursion_id,
+                photo_url: touristPackage.photo_url,
+            };
+        });
+
+        return packages;
+    } catch (error) {
+        console.error('Error de red:', error);
+        // throw new Error('Error al obtener los paquetes.');
     }
-
-    const data = await response.json();
-
-    const packageAsProduct: touristPackage[] = data.map((offer: any) => {
-      return {
-        id: offer.id,
-        name: offer.name,
-        description: offer.description,
-        price: offer.price,
-        image: '',
-        agencyID: offer.agencyID ?? 0,
-        excursionID: offer.excursionID ?? 0,
-        facilities: [],
-        duration: 0,
-      };
-    });
-
-    return packageAsProduct;
-  }
-  catch {
-    console.log('Error')
-    return []
-  }
+    return [];
 }
+
+export async function FetchPackagesPages(query: string): Promise<number> {
+    try {
+        const queryParams = new URLSearchParams({
+            skip: "0",
+            limit: "1000"
+        });
+        const response = await fetch(`http://127.0.0.1:8000/package/list?${queryParams.toString()}`);
+
+        if (!response.ok) {
+            console.error('Failed to fetch packages');
+            return 0;
+        }
+
+        const data = await response.json();
+
+        // Filtrar paquetes basados en la consulta
+        const filteredPackages = data.filter((packagetouristPackage: any) => {
+            return packagetouristPackage.description.toLowerCase().includes(query.toLowerCase());
+        });
+
+        // Calcular el número total de páginas
+        const totalPages = Math.ceil(filteredPackages.length / ITEMS_PER_PAGE);
+
+        return totalPages;
+    } catch (error) {
+        console.error('Error de red:', error);
+        // throw new Error('Error al obtener el número total de páginas de los paquetes.');
+    }
+    return 0;
+}
+
 
 export async function FetchMarketingAgency(): Promise<agency> {
   const session = await ReadSession();

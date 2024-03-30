@@ -33,6 +33,7 @@ export async function ExcursionsTable({
                         <TableHead>Hora de Llegada</TableHead>
                         <TableHead>Lugar de Llegada</TableHead>
                         <TableHead>Precio</TableHead>
+                        <TableHead>Photo URL</TableHead> 
                         <TableHead>Acciones</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -47,6 +48,7 @@ export async function ExcursionsTable({
                                 <TableCell>{excursion.arrivalTime}</TableCell>
                                 <TableCell>{excursion.arrivalLocation}</TableCell>
                                 <TableCell>{excursion.price}</TableCell>
+                                <TableCell>{excursion.image}</TableCell>
                                 <TableCell className="flex flex-row gap-1">
                                     <Link href={`/admin/excursions/${excursion.id}/edit`}>
                                         <IconEdit size={24} stroke={1.5} />

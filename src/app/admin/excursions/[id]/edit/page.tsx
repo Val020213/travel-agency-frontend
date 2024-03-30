@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 departureTime={excursionData.departureTime}
                 arrivalTime={excursionData.arrivalTime}
                 hotelID={excursionData.hotelID}
-                // price={excursionData.price}
+                price={excursionData.price}
                 id={excursionData.id}
             />
         </section>
