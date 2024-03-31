@@ -591,7 +591,6 @@ export async function FetchPackages(
     }
     
     const data = await response.json();
-    console.log('\n\n\n\n\n\n\n\n\n\n' + data + '\n\n\n\n\n\n\n\n\n\n')
 
     // Filtrar paquetes basados en la consulta
     const filteredPackages = data.filter((touristPackage: any) => {
