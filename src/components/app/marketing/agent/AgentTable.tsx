@@ -1,43 +1,39 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { DeleteUser } from "@/lib/actions/Admin/user/user";
-import { FetchUsers } from "@/lib/data/data";
-import { user } from "@/lib/entities";
+import { FetchAgentsInAgency } from "@/lib/actions/marketing/marketing";
+import { DeleteAgent } from "@/lib/actions/marketing/agent/agent";
+import { agent } from "@/lib/entities";
 import { IconTrash } from "@tabler/icons-react";
 
-export async function UsersTable({
+export async function AgentTable({
  query,
  currentPage,
 }: {
  query: string;
  currentPage: number;
 }) {
-    const users: user[] = await FetchUsers(query, currentPage);
+    const agents: agent[] = await FetchAgentsInAgency(); 
 
     function DeleteAction(id: number) {
-        return DeleteUser.bind(null, id);
+        return DeleteAgent.bind(null, id);
     }
     
     return (
         <section>
-            <h2 className='text-2xl font-semibold'>Usuarios en Travelix</h2>
+            <h2 className='text-2xl font-semibold'>Agentes en la agencia</h2>
             <Table>
                 <TableHeader>
                     <TableRow>
                         <TableHead>Nombre de Usuario</TableHead>
-                        <TableHead>Rol</TableHead>
-                        <TableHead>Agencia</TableHead>
                         <TableHead>Acciones</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {
-                        users.map((user) => (
-                            <TableRow key={user.id}>
-                                <TableCell>{user.username}</TableCell>
-                                <TableCell>{user.rol}</TableCell>
-                                <TableCell>{user.agencyName}</TableCell>
+                        agents.map((agents) => (
+                            <TableRow key={agents.id}>
+                                <TableCell>{agents.username}</TableCell>
                                 <TableCell className="flex flex-row gap-1">
-                                    <form action={DeleteAction(user.id)}>
+                                    <form action={DeleteAction(agents.id)}>
                                         <button type='submit'>
                                             <IconTrash size={24} stroke={1.5}/>
                                         </button>

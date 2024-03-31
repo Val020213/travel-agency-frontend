@@ -1,6 +1,7 @@
 import { GetAgencyByID } from "@/lib/data/data";
 import { ReadSession } from "../session/read";
-import { agency, tourist, touristPackage } from "@/lib/entities";
+import { agency, agent, tourist, touristPackage } from "@/lib/entities";
+import { Primitive } from "zod";
 
 const session = await ReadSession();
 // const currentUserID = JSON.parse(session).id;
@@ -102,11 +103,29 @@ export async function FetchExpensivePackages(): Promise<touristPackage[]> {
         agencyID: item.agency_id,
         price: item.price
       }});
-      console.log("\n\n\n\n\n\n" + expensivePackages[0].price);
+      // console.log("\n\n\n\n\n\n" + expensivePackages[0].price);
       return expensivePackages;
     }
   } catch (e) {
     console.log(e);
   }
   return [];
+}
+
+export async function FetchAgentsInAgency(): Promise<agent[]> {
+  try{
+    const response = await fetch(`http://127.0.0.1:8000/user/list/4`); //consulta aqui
+    if (response.ok) {
+      const data = await response.json();
+      const agents : agent[] = data.map((item: any) => {return {
+        id: item.id,
+        username: item.username,
+      }});
+      return agents;
+    }
+  }
+  catch (e){
+    console.log(e)
+  }
+  return []
 }

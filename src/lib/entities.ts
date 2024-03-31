@@ -47,6 +47,8 @@ export type user = entity & {
   username: string;
   token: string;
   rol: rol;
+  agencyID: number,
+  agencyName: string
 };
 
 export type agent = entity & {

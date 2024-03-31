@@ -1,3 +1,6 @@
+import { CreateAgent } from "@/components/app/marketing/agent/CreateAgent";
 export default function Page() {
-  return <p>Crear agentes</p>;
+  return(
+    <CreateAgent/>
+  )
 }

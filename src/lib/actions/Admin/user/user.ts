@@ -64,7 +64,7 @@ export async function CreateUserAction(
     phone: formData.get("phone") as string,
     email: formData.get("email") as string,
     role: formData.get("role") as string,
-    agency_id: formData.get("agency_id") as string,
+    agency_id: formData.get("agency_id"),
     password: formData.get("password") as string,
   });
 
@@ -89,7 +89,7 @@ export async function CreateUserAction(
   };
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/user/create/agent/any", {
+    const response = await fetch("http://127.0.0.1:8000/user/create/agent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,8 +98,9 @@ export async function CreateUserAction(
     });
 
     if (!response.ok) {
+      const text = await response.text();
       return {
-        message: response.statusText,
+        message: text,
         errors: {},
       };
     }
@@ -131,4 +132,69 @@ export async function DeleteUser(id: number): Promise<void> {
  }
  revalidatePath("/admin/users")
 }
+
+// export async function CreateAgentAction(
+//  prevState: AgentFormState,
+//  formData: FormData
+// ): Promise<AgentFormState> {
+//  // Asegúrate de que AgentSchema valide los campos específicos para un agente
+//  const validatedFields = AgentSchema.safeParse({
+//     username: formData.get("username") as string,
+//     name: formData.get("name") as string,
+//     phone: formData.get("phone") as string,
+//     email: formData.get("email") as string,
+//     role: formData.get("role") as string,
+//     agency_id: formData.get("agency_id"),
+//     password: formData.get("password") as string,
+//  });
+
+//  if (!validatedFields.success) {
+//     return {
+//       errors: validatedFields.error.flatten().fieldErrors,
+//       message: validatedFields.error.message,
+//     };
+//  }
+
+//  const { username, name, phone, email, role, agency_id, password } =
+//     validatedFields.data;
+
+//  const data = {
+//     username: username,
+//     name: name,
+//     phone: phone,
+//     email: email,
+//     role: role,
+//     agency_id: agency_id,
+//     password: password,
+//     // Aquí puedes incluir campos específicos del agente si los hay
+//  };
+
+//  try {
+//     const response = await fetch("http://127.0.0.1:8000/agent/create", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(data),
+//     });
+
+//     if (!response.ok) {
+//       const text = await response.text();
+//       return {
+//         message: text,
+//         errors: {},
+//       };
+//     }
+//  } catch (error) {
+//     console.error(error);
+//  }
+  
+//  revalidatePath("/admin/agents");
+//  redirect("/admin/agents");
+//  return {
+//     message: "Error al crear el agente",
+//     errors: {},
+//  };
+// }
+
 
