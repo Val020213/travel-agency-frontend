@@ -46,3 +46,10 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+
+export function db(...items: any) {
+  console.log('\n\n\n\n\n================================================================')
+  console.log(items)
+  console.log('================================================================\n\n\n\n\n')
+}

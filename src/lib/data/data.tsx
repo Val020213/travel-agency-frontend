@@ -9,6 +9,7 @@ import {
 import { ReadSession } from '../actions/session/read';
 import { facility } from '../entities';
 import { unstable_noStore as noStore } from 'next/cache';
+import { db } from '../utils';
 
 export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
   noStore();
@@ -37,12 +38,38 @@ export async function FetchUser(): Promise<user | undefined> {
   noStore();
   const session = await ReadSession();
   try {
-    const user: user = JSON.parse(session);
+    const user: any = JSON.parse(session);
     return user;
   } catch {
     // console.log('Json not parsed')
   }
   return undefined;
+}
+
+export async function GetTouristByID(
+  userID: number
+): Promise<tourist | undefined> {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/tourist/get/${userID}`);
+
+    if (response.ok) {
+      const data = await response.json();
+
+      const tourist = {
+        id: data.id,
+        username: data.username,
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        rol: data.role,
+        nationality: data.nationality,
+      };
+
+      return tourist;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function FetchCountries(): Promise<string[]> {
@@ -182,7 +209,10 @@ export async function FetchFilteredAgencies(
   return [];
 }
 
-export async function FetchAgenciesPages(query: string, ITEMS_PER_PAGE:number = 10): Promise<number> {
+export async function FetchAgenciesPages(
+  query: string,
+  ITEMS_PER_PAGE: number = 10
+): Promise<number> {
   noStore();
   try {
     const queryParams = new URLSearchParams({
@@ -271,7 +301,10 @@ export async function FetchHotels(
   return [];
 }
 
-export async function FetchHotelsPages(query: string, ITEMS_PER_PAGE: number = 10): Promise<number> {
+export async function FetchHotelsPages(
+  query: string,
+  ITEMS_PER_PAGE: number = 10
+): Promise<number> {
   noStore();
   try {
     const queryParams = new URLSearchParams({
@@ -391,7 +424,10 @@ export async function FetchExcursions(
   return [];
 }
 
-export async function FetchExcursionsPages(query: string , ITEMS_PER_PAGE: number = 10): Promise<number> {
+export async function FetchExcursionsPages(
+  query: string,
+  ITEMS_PER_PAGE: number = 10
+): Promise<number> {
   noStore();
   try {
     const queryParams = new URLSearchParams({
@@ -450,7 +486,6 @@ export async function GetExcursionByID(id: number): Promise<excursion> {
       price: data.price,
       image: validateImagePath(data.image),
     };
-    console.log('dta', excursionData);
     return excursionData;
   } catch (error) {
     console.log('Database Connection Error:', error);
@@ -504,7 +539,10 @@ export async function FetchUsers(
   return [];
 }
 
-export async function FetchUsersPages(query: string,  ITEMS_PER_PAGE: number = 10): Promise<number> {
+export async function FetchUsersPages(
+  query: string,
+  ITEMS_PER_PAGE: number = 10
+): Promise<number> {
   noStore();
   try {
     const queryParams = new URLSearchParams({
@@ -586,7 +624,10 @@ export async function FetchFacilities(
   return [];
 }
 
-export async function FetchFacilitiesPages(query: string,  ITEMS_PER_PAGE: number = 10): Promise<number> {
+export async function FetchFacilitiesPages(
+  query: string,
+  ITEMS_PER_PAGE: number = 10
+): Promise<number> {
   noStore();
   try {
     const queryParams = new URLSearchParams({
@@ -674,7 +715,10 @@ export async function FetchPackages(
   return [];
 }
 
-export async function FetchPackagesPages(query: string,  ITEMS_PER_PAGE: number = 10): Promise<number> {
+export async function FetchPackagesPages(
+  query: string,
+  ITEMS_PER_PAGE: number = 10
+): Promise<number> {
   noStore();
   try {
     const queryParams = new URLSearchParams({
@@ -778,11 +822,13 @@ export async function GetFacilitiesByPackageId(
   packageID: number
 ): Promise<facility[]> {
   try {
+    db(packageID)
     const response = await fetch(
       `http://127.0.0.1:8000/facility/package_facilities/${packageID}`
     );
     if (!response.ok) {
-      console.log(response.statusText);
+      const text = await response.text();
+      console.log(text);
       return [];
     }
 
@@ -794,8 +840,7 @@ export async function GetFacilitiesByPackageId(
         description: facility.description,
       };
     });
-    return facilities
-    
+    return facilities;
   } catch (error) {
     console.log(error);
   }

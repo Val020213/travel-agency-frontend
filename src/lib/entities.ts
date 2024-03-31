@@ -69,6 +69,9 @@ export type touristPackage = entity &
 
 export type tourist = entity & {
   name: string;
+  username : string
+  phone : string;
+  email : string;
   nationality: string;
 };
 

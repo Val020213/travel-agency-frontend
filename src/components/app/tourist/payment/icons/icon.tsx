@@ -1,6 +1,8 @@
 import React from 'react';
 import { IconPlane, IconTicket, IconCreditCard } from '@tabler/icons-react';
 import clsx from 'clsx';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 export const PlaneIcon = ({
   isActive = false,
@@ -10,7 +12,7 @@ export const PlaneIcon = ({
   props?: React.SVGProps<SVGSVGElement>;
 }) => {
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <Link href={isActive? '?step=1' : ''} className={clsx('flex flex-col justify-center items-center', {'cursor-pointer' : isActive})} >
       <IconPlane
         {...props}
         size={24}
@@ -25,7 +27,7 @@ export const PlaneIcon = ({
           }
         )}
       />
-    </div>
+    </Link>
   );
 };
 
@@ -37,7 +39,7 @@ export const TicketIcon = ({
   props?: React.SVGProps<SVGSVGElement>;
 }) => {
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <Link href={isActive? '?step=2' : ''} className={clsx('flex flex-col justify-center items-center', {'cursor-pointer' : isActive})} >
       <IconTicket
         {...props}
         size={24}
@@ -52,7 +54,7 @@ export const TicketIcon = ({
           }
         )}
       />
-    </div>
+    </Link>
   );
 };
 
@@ -64,7 +66,7 @@ export const CreditCardIcon = ({
   props?: React.SVGProps<SVGSVGElement>;
 }) => {
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <Link href={isActive? '?step=3' : ''} className={clsx('flex flex-col justify-center items-center', {'cursor-pointer' : isActive})} >
       <IconCreditCard
         {...props}
         size={24}
@@ -79,7 +81,7 @@ export const CreditCardIcon = ({
           }
         )}
       />
-    </div>
+    </Link>
   );
 };
 

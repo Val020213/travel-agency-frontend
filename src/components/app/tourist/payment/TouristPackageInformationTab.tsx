@@ -117,7 +117,7 @@ export async function TouristPackageInformationTab({ id }: { id: number }) {
                 Facilidades
               </h2>
               {facilities.map((facility, index) => (
-                <div key={index} className='flex flex-row gap-2'>
+                <div key={index} className='w-fit rounded-full dark:text-white p-2 bg-blue-50 shadow-md dark:bg-blue-500'>
                   <p>{facility.description}</p>
                 </div>
               ))}
