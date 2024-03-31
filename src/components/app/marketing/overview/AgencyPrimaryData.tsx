@@ -1,9 +1,12 @@
 import { agency } from '@/lib/entities';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FetchAgencyPrimaryData } from '@/lib/actions/marketing/marketing';
+import { FetchAgencyNumberOfReservations, FetchAgencyTotalAmount } from '@/lib/actions/marketing/marketing';
 
 export async function AgencyPrimaryData({ agency }: { agency: agency }) {
   const data = (agency.id);
+  const reservations = await FetchAgencyNumberOfReservations();
+  const totalAmount = await FetchAgencyTotalAmount();
+  console.log(reservations, totalAmount)
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
       <Card className='bg-white dark:bg-extends-darker-blue-900'>
@@ -11,7 +14,7 @@ export async function AgencyPrimaryData({ agency }: { agency: agency }) {
           <CardTitle>Total de Reservaciones hechas</CardTitle>
         </CardHeader>
         <CardContent className='text-center'>
-          <p className='text-5xl font-bold'>54</p>
+          <p className='text-5xl font-bold'>{reservations}</p>
         </CardContent>
       </Card>
       <Card className='bg-white dark:bg-extends-darker-blue-900'>
@@ -19,7 +22,7 @@ export async function AgencyPrimaryData({ agency }: { agency: agency }) {
           <CardTitle>Importe total de las Reservaciones</CardTitle>
         </CardHeader>
         <CardContent className='text-center'>
-          <p className='text-5xl font-bold'>31,212.00</p>
+          <p className='text-5xl font-bold'>{totalAmount}</p>
           <p className='text-sm font-medium'>CUP</p>
         </CardContent>
       </Card>

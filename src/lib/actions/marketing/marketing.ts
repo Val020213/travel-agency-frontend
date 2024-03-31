@@ -6,21 +6,40 @@ const session = await ReadSession();
 // const currentUserID = JSON.parse(session).id;
 
 export async function FetchMarketingAgency(): Promise<agency> {
-  const agencia = GetAgencyByID(4); //current IDuserID
+  const agencia = GetAgencyByID(1); //current IDuserID
   return agencia;
 }
 
 export async function FetchAgencyNumberOfReservations(): Promise<number> {
-  const response = await fetch(
-    `http://127.0.0.1:8000/statistics/agencies-balance${4}`
-  );
-  console.log("\n hellllllo " + response);
-  return 54;
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000/agency/agency-balance/1`
+    );
+    if (response.ok) {
+      const data = await response.json();
+      const balance = data.map((item: any) => item.reservation_total);
+      return balance;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  return 0;
 }
 
 export async function FetchAgencyTotalAmount(): Promise<number> {
-  // const response = await fetch('http://
-  return 321451;
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000/agency/agency-balance/1`
+    );
+    if (response.ok) {
+      const data = await response.json();
+      const balance = data.map((item: any) => item.reservation_total);
+      return balance;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  return 0;
 }
 
 export async function FetchAgencyPrimaryData(
