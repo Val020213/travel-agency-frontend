@@ -4,6 +4,7 @@ import { UserSection } from '@/components/app/tourist/profile/UserSection';
 import { ReservationSection } from '../../../components/app/tourist/profile/ReservationSection';
 import { Tag } from '@/components/ui/tokens/Tag';
 
+
 export default function Page() {
   const isAgencyTourist = true; // TODO: get from user data
 

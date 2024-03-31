@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { IconMapPin, IconMail, IconPrinter } from '@tabler/icons-react';
 import { agency } from '@/lib/entities';
-export const AgencyInfoCard = ({ agency }: { agency: agency }) => {
+export const AgencyInfoCard = ({ agency, className}: { agency: agency, className?: string }) => {
   return (
     <div
       className={clsx(
@@ -12,7 +12,8 @@ export const AgencyInfoCard = ({ agency }: { agency: agency }) => {
         'shadow-xl',
         'bg-white dark:bg-extends-darker-blue-900',
         'gap-1 p-6 pb-8 md:gap-9 md:p-9 md:pb-12',
-        'w-[300px] md:w-[700px]'
+        'w-[300px] md:w-[700px]',
+        className
       )}
     >
       <h1

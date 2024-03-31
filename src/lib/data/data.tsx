@@ -217,7 +217,6 @@ export async function FetchHotels(
 ): Promise<hotel[]> {
   noStore()
   try {
-
     const queryParams = new URLSearchParams({
       skip: "0",
       limit: "1000"
@@ -254,7 +253,6 @@ export async function FetchHotels(
     return hotels;
   } catch (error) {
     console.error('Network Error:', error);
-    // throw new Error('Failed to fetch hotels.');
   }
   return []
 }
@@ -619,7 +617,7 @@ export async function FetchPackages(
     const paginatedPackages = filteredPackages.slice(offset, offset + ITEMS_PER_PAGE);
 
     const packages = paginatedPackages.map((touristPackage: any) => {
-      console.log(touristPackage)
+
       return {
         id: touristPackage.id,
         price: touristPackage.price,
@@ -733,3 +731,27 @@ export async function GetHotelsByExcursionID(excursionID : number) : Promise<hot
   }
   return[]
 }
+
+export async function GetFacilitiesByPackageId(packageID : number) : Promise<facility[]>{
+  try{
+    const response = await fetch(`http://127.0.0.1:8000/facility/package_facilities/${packageID}`)
+    if(!response.ok){
+      console.log(response.statusText)
+      return []
+    }
+
+    const data = await response.json()
+
+    const facilities = data.map((facility : any) => {
+      return {
+        id : facility.id,
+        description : facility.description
+      }
+    })
+  }
+  catch(error){
+    console.log(error)
+  }
+  return []
+}
+
