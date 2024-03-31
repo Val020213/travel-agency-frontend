@@ -439,7 +439,7 @@ export async function FetchUsers(
       skip: "0",
       limit: "1000"
     });
-    const response = await fetch(`http://127.0.0.1:8000/tourist/list?${queryParams.toString()}`);
+    const response = await fetch(`http://127.0.0.1:8000/user/list?${queryParams.toString()}`);
 
     if (!response.ok) {
       console.error('Failed to fetch users');
@@ -459,6 +459,7 @@ export async function FetchUsers(
       return {
         id: user.id,
         username: user.username,
+        rol: user.role
       };
     });
 

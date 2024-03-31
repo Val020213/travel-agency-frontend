@@ -24,6 +24,7 @@ export async function UsersTable({
                 <TableHeader>
                     <TableRow>
                         <TableHead>Nombre de Usuario</TableHead>
+                        <TableHead>Rol</TableHead>
                         <TableHead>Acciones</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -32,6 +33,7 @@ export async function UsersTable({
                         users.map((user) => (
                             <TableRow key={user.id}>
                                 <TableCell>{user.username}</TableCell>
+                                <TableCell>{user.rol}</TableCell>
                                 <TableCell className="flex flex-row gap-1">
                                     <form action={DeleteAction(user.id)}>
                                         <button type='submit'>

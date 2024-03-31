@@ -1,6 +1,7 @@
 "use server"
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -56,7 +57,7 @@ const UserSchema = FormSchema.omit({ id: true });
 export async function CreateUserAction(
   prevState: UserFormState,
   formData: FormData
-) {
+): Promise<UserFormState> {
   const validatedFields = UserSchema.safeParse({
     username: formData.get("username") as string,
     name: formData.get("name") as string,
@@ -104,20 +105,21 @@ export async function CreateUserAction(
     }
   } catch (error) {
     console.error(error);
-    return {
-      message: "Error al crear el usuario",
-      errors: {},
-    };
   }
-
+  
   revalidatePath("/admin/users");
+  redirect("/admin/users");
+  return {
+    message: "Error al crear el usuario",
+    errors: {},
+  };
 }
 
 
 
 export async function DeleteUser(id: number): Promise<void> {
  try {
-    const response = await fetch(`http://127.0.0.1:8000/tourist/delete/${id}`);
+    const response = await fetch(`http://127.0.0.1:8000/user/delete/${id}`);
 
     if (!response.ok) {
       console.log(response.statusText);
