@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Tag } from './tokens/Tag';
 import clsx from 'clsx';
 
+
 type Props = {
   title: string;
   image: string;
@@ -38,7 +39,7 @@ export const ProductCard = ({
         height={600}
         width={800}
         quality={100}
-        src={image?? require('@/assets/defaultImage.png')}
+        src={image}
         style={{
           aspectRatio: '800/600',
         }}

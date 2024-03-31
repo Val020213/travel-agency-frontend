@@ -1,9 +1,7 @@
-'use server'
 import { agency, excursion, tourist, touristPackage, user, hotel } from '../entities';
 import { ReadSession } from '../actions/session/read';
 import { unstable_noStore } from 'next/cache';
 import { facility } from '../entities';
-import { number } from 'zod';
 
 export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
   const response = await fetch(`https://restcountries.com/v3.1/name/${name}`, {
@@ -57,37 +55,36 @@ export async function FetchCountries(): Promise<string[]> {
 }
 
 
-function validateImagePath ( image : string) {
-  if(image.startsWith("https://")){
+export function validateImagePath(image: string) {
+  if (image.startsWith("https://")) {
     return image
   }
-  const defaultImage : string = require('@/assets/defaultImage.png')
+  const defaultImage: string = require('@/assets/defaultImage.png')
   return defaultImage
 }
 
-export async function GetAgencyByID(id : number) : Promise<agency> {
+export async function GetAgencyByID(id: number): Promise<agency> {
   try {
     const response = await fetch(`http://127.0.0.1:8000/agency/get/${id}`)
-    if(!response.ok)
-    {
+    if (!response.ok) {
       console.log(response.statusText)
       return {} as agency
     }
 
     const data = await response.json()
 
-    const agencyData : agency = {
-      name : data.name,
-      address : data.address,
-      email : data.email,
-      fax : data.fax_number,
-      id : data.id,
-      image : validateImagePath(data.photo_url)
+    const agencyData: agency = {
+      name: data.name,
+      address: data.address,
+      email: data.email,
+      fax: data.fax_number,
+      id: data.id,
+      image: validateImagePath(data.photo_url)
     }
 
     return agencyData
   }
-  catch{
+  catch {
     console.log('DataBase Connection Error')
   }
 
@@ -108,9 +105,9 @@ export async function FetchAgencies(): Promise<agency[]> {
     const agencies: agency[] = data.map((agency: any) => {
       return {
         id: agency.id,
-        name : agency.name,
+        name: agency.name,
         address: agency.address,
-        fax : agency.fax_number,
+        fax: agency.fax_number,
         email: agency.email,
         image: validateImagePath(agency.photo_url)
       };
@@ -127,14 +124,14 @@ export async function FetchAgencies(): Promise<agency[]> {
 const ITEMS_PER_PAGE = 10;
 
 export async function FetchFilteredAgencies(
- query: string,
- currentPage: number,
+  query: string,
+  currentPage: number,
 ): Promise<agency[]> {
-  unstable_noStore();
+
   try {
-   const queryParams = new URLSearchParams({
-    skip: "0", 
-    limit: "1000" 
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
     });
     const response = await fetch(`http://127.0.0.1:8000/agency/list?${queryParams.toString()}`);
 
@@ -146,7 +143,7 @@ export async function FetchFilteredAgencies(
 
     const filteredAgencies = data.filter((agency: any) => {
       return (
-        agency.name.toLowerCase().includes(query.toLowerCase()) || 
+        agency.name.toLowerCase().includes(query.toLowerCase()) ||
         agency.address.toLowerCase().includes(query.toLowerCase()) ||
         agency.email.toLowerCase().includes(query.toLowerCase())
       );
@@ -167,18 +164,18 @@ export async function FetchFilteredAgencies(
     });
 
     return agencies;
- } catch (error) {
+  } catch (error) {
     console.error('Network Error:', error);
     // throw new Error('Failed to fetch agencies.');
- }
- return []
+  }
+  return []
 }
 
 export async function FetchAgenciesPages(query: string): Promise<number> {
- try {
-   const queryParams = new URLSearchParams({
-    skip: "0", 
-    limit: "1000" 
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
     });
     const response = await fetch(`http://127.0.0.1:8000/agency/list?${queryParams.toString()}`);
 
@@ -202,22 +199,22 @@ export async function FetchAgenciesPages(query: string): Promise<number> {
     const totalPages = Math.ceil(filteredAgencies.length / ITEMS_PER_PAGE);
 
     return totalPages;
- } catch (error) {
+  } catch (error) {
     console.error('Network Error:', error);
     throw new Error('Failed to fetch total number of agencies.');
- }
+  }
 }
 
 //! Aqui deberia filtered cambiar despues de ser necesario
 export async function FetchHotels(
- query: string,
- currentPage: number,
+  query: string,
+  currentPage: number,
 ): Promise<hotel[]> {
- try {
+  try {
 
-   const queryParams = new URLSearchParams({
-    skip: "0", 
-    limit: "1000" 
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
     });
     const response = await fetch(`http://127.0.0.1:8000/hotel/list?${queryParams.toString()}`);
 
@@ -249,19 +246,19 @@ export async function FetchHotels(
     });
 
     return hotels;
- } catch (error) {
+  } catch (error) {
     console.error('Network Error:', error);
     // throw new Error('Failed to fetch hotels.');
- }
- return []
+  }
+  return []
 }
 
 
 export async function FetchHotelsPages(query: string): Promise<number> {
- try {
-   const queryParams = new URLSearchParams({
-    skip: "0", 
-    limit: "1000" 
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
     });
     const response = await fetch(`http://127.0.0.1:8000/hotel/list?${queryParams.toString()}`);
 
@@ -276,14 +273,14 @@ export async function FetchHotelsPages(query: string): Promise<number> {
       return (
         hotel.name.toLowerCase().includes(query.toLowerCase()) ||
         hotel.address.toLowerCase().includes(query.toLowerCase())
-       
+
       );
     });
 
     const totalPages = Math.ceil(filteredHotels.length / ITEMS_PER_PAGE);
 
     return totalPages;
- } catch (error) {
+  } catch (error) {
     console.error('Network Error:', error);
     // throw new Error('Failed to fetch total number of hotels.')
   }
@@ -319,22 +316,22 @@ export async function GetHotelByID(id: number): Promise<hotel> {
 
 
 export async function FetchExcursions(query: string, currentPage: number): Promise<excursion[]> {
- try {
-   
-   const queryParams = new URLSearchParams({
-    skip: "0", 
-    limit: "1000" 
+  try {
+
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
     });
     const response = await fetch(`http://127.0.0.1:8000/excursion/list?${queryParams.toString()}`);
 
-    
+
     if (!response.ok) {
       console.error('Failed to fetch excursions');
       return [];
     }
 
     const data = await response.json();
-    
+
     const filteredExcursions = data.filter((excursion: any) => {
       return (
         excursion.departure_place.toLowerCase().includes(query.toLowerCase()) ||
@@ -344,7 +341,7 @@ export async function FetchExcursions(query: string, currentPage: number): Promi
 
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
     const paginatedExcursions = filteredExcursions.slice(offset, offset + ITEMS_PER_PAGE);
-    
+
     const excursions: excursion[] = paginatedExcursions.map((excursion: any) => {
       return {
         id: excursion.id,
@@ -355,24 +352,24 @@ export async function FetchExcursions(query: string, currentPage: number): Promi
         arrivalTime: excursion.arrival_hour,
         arrivalLocation: excursion.arrival_place,
         price: excursion.price,
-        image: excursion.photo_url
+        image: validateImagePath(excursion.photo_url)
       };
     });
 
     return excursions;
- } catch (error) {
+  } catch (error) {
     console.error('Network Error:', error);
- }
- return [];
+  }
+  return [];
 }
 
 
 
 export async function FetchExcursionsPages(query: string): Promise<number> {
- try {
-   const queryParams = new URLSearchParams({
-    skip: "0", 
-    limit: "1000" 
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
     });
     const response = await fetch(`http://127.0.0.1:8000/excursion/list?${queryParams.toString()}`);
 
@@ -396,11 +393,11 @@ export async function FetchExcursionsPages(query: string): Promise<number> {
     const totalPages = Math.ceil(filteredExcursions.length / ITEMS_PER_PAGE);
 
     return totalPages;
- } catch (error) {
+  } catch (error) {
     console.error('Network Error:', error);
     // throw new Error('Failed to fetch total number of excursions.');
- }
- return 0;
+  }
+  return 0;
 }
 
 export async function GetExcursionByID(id: number): Promise<excursion> {
@@ -413,16 +410,16 @@ export async function GetExcursionByID(id: number): Promise<excursion> {
 
     const data = await response.json();
 
-      const excursionData: excursion = {
-        id: data.id,
-        departureDate: data.departure_day,
-        departureTime: data.departure_hour,
-        departureLocation: data.departure_place,
-        arrivalDate: data.arrival_day,
-        arrivalTime: data.arrival_hour,
-        arrivalLocation: data.arrival_place,
-        price: data.price,
-        image: data.image
+    const excursionData: excursion = {
+      id: data.id,
+      departureDate: data.departure_day,
+      departureTime: data.departure_hour,
+      departureLocation: data.departure_place,
+      arrivalDate: data.arrival_day,
+      arrivalTime: data.arrival_hour,
+      arrivalLocation: data.arrival_place,
+      price: data.price,
+      image: validateImagePath(data.image)
     };
 
     return excursionData;
@@ -434,13 +431,13 @@ export async function GetExcursionByID(id: number): Promise<excursion> {
 }
 
 export async function FetchUsers(
- query: string,
- currentPage: number,
+  query: string,
+  currentPage: number,
 ): Promise<user[]> {
- try {
-   const queryParams = new URLSearchParams({
-    skip: "0", 
-    limit: "1000" 
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
     });
     const response = await fetch(`http://127.0.0.1:8000/tourist/list?${queryParams.toString()}`);
 
@@ -466,11 +463,11 @@ export async function FetchUsers(
     });
 
     return users;
- } catch (error) {
+  } catch (error) {
     console.error('Network Error:', error);
     // throw new Error('Failed to fetch users.');
- }
- return[];
+  }
+  return [];
 }
 
 export async function FetchUsersPages(query: string): Promise<number> {
@@ -505,155 +502,210 @@ export async function FetchUsersPages(query: string): Promise<number> {
 }
 
 export async function FetchFacilities(
-    query: string,
-    currentPage: number,
+  query: string,
+  currentPage: number,
 ): Promise<facility[]> {
-    try {
-        const queryParams = new URLSearchParams({
-            skip: "0",
-            limit: "1000"
-        });
-        const response = await fetch(`http://127.0.0.1:8000/facility/list?${queryParams.toString()}`);
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
+    });
+    const response = await fetch(`http://127.0.0.1:8000/facility/list?${queryParams.toString()}`);
 
-        if (!response.ok) {
-            console.error('Failed to fetch facilities');
-            return [];
-        }
-
-        const data = await response.json();
-
-        // Filtrar facilidades basadas en la consulta
-        const filteredFacilities = data.filter((facility: any) => {
-            return facility.description.toLowerCase().includes(query.toLowerCase());
-        });
-
-        const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-        const paginatedFacilities = filteredFacilities.slice(offset, offset + ITEMS_PER_PAGE);
-
-        const facilities: facility[] = paginatedFacilities.map((facility: any) => {
-            return {
-                id: facility.id,
-                description: facility.description,
-            };
-        });
-
-        return facilities;
-    } catch (error) {
-        console.error('Error de red:', error);
-        // throw new Error('Error al obtener las facilidades.');
+    if (!response.ok) {
+      console.error('Failed to fetch facilities');
+      return [];
     }
-    return [];
+
+    const data = await response.json();
+
+    // Filtrar facilidades basadas en la consulta
+    const filteredFacilities = data.filter((facility: any) => {
+      return facility.description.toLowerCase().includes(query.toLowerCase());
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedFacilities = filteredFacilities.slice(offset, offset + ITEMS_PER_PAGE);
+
+    const facilities: facility[] = paginatedFacilities.map((facility: any) => {
+      return {
+        id: facility.id,
+        description: facility.description,
+      };
+    });
+
+    return facilities;
+  } catch (error) {
+    console.error('Error de red:', error);
+    // throw new Error('Error al obtener las facilidades.');
+  }
+  return [];
 }
 
 export async function FetchFacilitiesPages(query: string): Promise<number> {
-    try {
-        const queryParams = new URLSearchParams({
-            skip: "0",
-            limit: "1000"
-        });
-        const response = await fetch(`http://127.0.0.1:8000/facility/list?${queryParams.toString()}`);
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
+    });
+    const response = await fetch(`http://127.0.0.1:8000/facility/list?${queryParams.toString()}`);
 
-        if (!response.ok) {
-            console.error('Failed to fetch facilities');
-            return 0;
-        }
-
-        const data = await response.json();
-
-        // Filtrar facilidades basadas en la consulta
-        const filteredFacilities = data.filter((facility: any) => {
-            return facility.description.toLowerCase().includes(query.toLowerCase());
-        });
-
-        // Calcular el número total de páginas
-        const totalPages = Math.ceil(filteredFacilities.length / ITEMS_PER_PAGE);
-
-        return totalPages;
-    } catch (error) {
-        console.error('Error de red:', error);
-        // throw new Error('Error al obtener el número total de páginas de las facilidades.');
+    if (!response.ok) {
+      console.error('Failed to fetch facilities');
+      return 0;
     }
-    return 0;
+
+    const data = await response.json();
+
+    // Filtrar facilidades basadas en la consulta
+    const filteredFacilities = data.filter((facility: any) => {
+      return facility.description.toLowerCase().includes(query.toLowerCase());
+    });
+
+    // Calcular el número total de páginas
+    const totalPages = Math.ceil(filteredFacilities.length / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.error('Error de red:', error);
+    // throw new Error('Error al obtener el número total de páginas de las facilidades.');
+  }
+  return 0;
 }
 
 export async function FetchPackages(
-    query: string,
-    currentPage: number,
+  query: string,
+  currentPage: number,
 ): Promise<any[]> {
-    try {
-        const queryParams = new URLSearchParams({
-            skip: "0",
-            limit: "1000"
-        });
-        const response = await fetch(`http://127.0.0.1:8000/package/list?${queryParams.toString()}`);
-
-        if (!response.ok) {
-            console.error('Failed to fetch packages');
-            return [];
-        }
-
-        const data = await response.json();
-
-        // Filtrar paquetes basados en la consulta
-        const filteredPackages = data.filter((touristPackage: any) => {
-            return touristPackage.description.toLowerCase().includes(query.toLowerCase());
-            // return touristPackage.description.toLowerCase().includes(query.toLowerCase());
-            // return touristPackage.description.toLowerCase().includes(query.toLowerCase());
-        });
-
-        const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-        const paginatedPackages = filteredPackages.slice(offset, offset + ITEMS_PER_PAGE);
-        console.log(paginatedPackages);
-
-        const packages = paginatedPackages.map((touristPackage: any) => {
-            return {
-                id: touristPackage.id,
-                price:  touristPackage.price,
-                description: touristPackage.description,
-                duration: touristPackage.duration,
-                agency_id: touristPackage.agency_id,
-                extended_excursion_id: touristPackage.extended_excursion_id,
-                photo_url: touristPackage.photo_url,
-            };
-        });
-
-        return packages;
-    } catch (error) {
-        console.error('Error de red:', error);
-        // throw new Error('Error al obtener los paquetes.');
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
+    });
+    const response = await fetch(`http://127.0.0.1:8000/package/list?skip=0&limit=10`);
+    
+    
+    if (!response.ok) {
+      return [];
     }
-    return [];
+    
+    const data = await response.json();
+    console.log('\n\n\n\n\n\n\n\n\nn\n' + 'No fue bien :(' + response.json + '\n\n\n\n\n\n\nn\n\n\n')
+
+    // Filtrar paquetes basados en la consulta
+    const filteredPackages = data.filter((touristPackage: any) => {
+      return touristPackage.description.toLowerCase().includes(query.toLowerCase());
+      // return touristPackage.description.toLowerCase().includes(query.toLowerCase());
+      // return touristPackage.description.toLowerCase().includes(query.toLowerCase());
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedPackages = filteredPackages.slice(offset, offset + ITEMS_PER_PAGE);
+
+    const packages = paginatedPackages.map((touristPackage: any) => {
+      return {
+        id: touristPackage.id,
+        price: touristPackage.price,
+        description: touristPackage.description,
+        duration: touristPackage.duration,
+        agencyID: touristPackage.agency_id,
+        excursionID: touristPackage.extended_excursion_id,
+        image: validateImagePath(touristPackage.photo_url),
+      };
+    });
+
+    return packages;
+  } catch (error) {
+    console.error('Error de red:', error);
+    // throw new Error('Error al obtener los paquetes.');
+  }
+  return [];
 }
 
 export async function FetchPackagesPages(query: string): Promise<number> {
-    try {
-        const queryParams = new URLSearchParams({
-            skip: "0",
-            limit: "1000"
-        });
-        const response = await fetch(`http://127.0.0.1:8000/package/list?${queryParams.toString()}`);
+  try {
+    const queryParams = new URLSearchParams({
+      skip: "0",
+      limit: "1000"
+    });
+    const response = await fetch(`http://127.0.0.1:8000/package/list?${queryParams.toString()}`);
 
-        if (!response.ok) {
-            console.error('Failed to fetch packages');
-            return 0;
-        }
-
-        const data = await response.json();
-
-        // Filtrar paquetes basados en la consulta
-        const filteredPackages = data.filter((packagetouristPackage: any) => {
-            return packagetouristPackage.description.toLowerCase().includes(query.toLowerCase());
-        });
-
-        // Calcular el número total de páginas
-        const totalPages = Math.ceil(filteredPackages.length / ITEMS_PER_PAGE);
-
-        return totalPages;
-    } catch (error) {
-        console.error('Error de red:', error);
-        // throw new Error('Error al obtener el número total de páginas de los paquetes.');
+    if (!response.ok) {
+      console.error('Failed to fetch packages');
+      return 0;
     }
-    return 0;
+
+    const data = await response.json();
+
+    // Filtrar paquetes basados en la consulta
+    const filteredPackages = data.filter((packagetouristPackage: any) => {
+      return packagetouristPackage.description.toLowerCase().includes(query.toLowerCase());
+    });
+
+    // Calcular el número total de páginas
+    const totalPages = Math.ceil(filteredPackages.length / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.error('Error de red:', error);
+    // throw new Error('Error al obtener el número total de páginas de los paquetes.');
+  }
+  return 0;
 }
 
 
+
+export async function FetchPackagesByID(packageID: number) {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/package/get/${packageID}`)
+
+    if (!response.ok) {
+      console.log(response.statusText)
+      return 
+    }
+
+    const data = await response.json()
+
+    const touristPackage = {
+      id: data.id,
+      price: data.price,
+      description: data.description,
+      duration: data.duration,
+      agency_id: data.agency_id,
+      extended_excursion_id: data.extended_excursion_id,
+      image: validateImagePath(data.photo_url),
+    }
+
+    return touristPackage
+  }
+  catch (error) {
+    console.log(error)
+  }
+
+  return
+}
+
+export async function FetchExcursionByID(excursionID : number) : Promise<excursion | undefined> {
+    try{
+      const response = await fetch(`http://127.0.0.1:8000/excursion/get/${excursionID}`)
+      const data = await response.json()
+
+      const excursion : excursion = {
+        id : data.id,
+        departureDate : data.departure_day,
+        departureTime : data.departure_hour,
+        departureLocation : data.departure_place,
+        arrivalDate : data.arrival_day,
+        arrivalTime : data.arrival_hour,
+        arrivalLocation : data.arrival_place,
+        price : data.price,
+        image : validateImagePath(data.photo_url)
+      }
+
+      return excursion
+    }
+    catch(error){
+      console.log(error)
+    }
+    return 
+}
