@@ -1,8 +1,10 @@
 import { agency, excursion, tourist, touristPackage, user, hotel } from '../entities';
 import { ReadSession } from '../actions/session/read';
 import { facility } from '../entities';
-
+import { unstable_noStore as noStore } from 'next/cache';
+ 
 export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
+  noStore()
   const response = await fetch(`https://restcountries.com/v3.1/name/${name}`, {
     method: 'GET',
     headers: {
@@ -25,6 +27,7 @@ export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
 }
 
 export async function FetchUser(): Promise<user | undefined> {
+  noStore()
   const session = await ReadSession()
   try {
     const user: user = JSON.parse(session)
@@ -63,6 +66,7 @@ export function validateImagePath(image: string) {
 }
 
 export async function GetAgencyByID(id: number): Promise<agency> {
+  noStore()
   try {
     const response = await fetch(`http://127.0.0.1:8000/agency/get/${id}`)
     if (!response.ok) {
@@ -91,6 +95,7 @@ export async function GetAgencyByID(id: number): Promise<agency> {
 }
 
 export async function FetchAgencies(): Promise<agency[]> {
+  noStore()
   try {
     const response = await fetch('http://127.0.0.1:8000/agency/list');
 
@@ -126,7 +131,7 @@ export async function FetchFilteredAgencies(
   query: string,
   currentPage: number,
 ): Promise<agency[]> {
-
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -171,6 +176,7 @@ export async function FetchFilteredAgencies(
 }
 
 export async function FetchAgenciesPages(query: string): Promise<number> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -209,6 +215,7 @@ export async function FetchHotels(
   query: string,
   currentPage: number,
 ): Promise<hotel[]> {
+  noStore()
   try {
 
     const queryParams = new URLSearchParams({
@@ -254,6 +261,7 @@ export async function FetchHotels(
 
 
 export async function FetchHotelsPages(query: string): Promise<number> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -287,6 +295,7 @@ export async function FetchHotelsPages(query: string): Promise<number> {
 }
 
 export async function GetHotelByID(id: number): Promise<hotel> {
+  noStore()
   try {
     const response = await fetch(`http://127.0.0.1:8000/hotel/get/${id}`);
     if (!response.ok) {
@@ -315,6 +324,7 @@ export async function GetHotelByID(id: number): Promise<hotel> {
 
 
 export async function FetchExcursions(query: string, currentPage: number): Promise<excursion[]> {
+  noStore()
   try {
 
     const queryParams = new URLSearchParams({
@@ -365,6 +375,7 @@ export async function FetchExcursions(query: string, currentPage: number): Promi
 
 
 export async function FetchExcursionsPages(query: string): Promise<number> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -400,6 +411,7 @@ export async function FetchExcursionsPages(query: string): Promise<number> {
 }
 
 export async function GetExcursionByID(id: number): Promise<excursion> {
+  noStore()
   try {
     const response = await fetch(`http://127.0.0.1:8000/excursion/get/${id}`);
     console.log(id)
@@ -433,6 +445,7 @@ export async function FetchUsers(
   query: string,
   currentPage: number,
 ): Promise<user[]> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -471,6 +484,7 @@ export async function FetchUsers(
 }
 
 export async function FetchUsersPages(query: string): Promise<number> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -505,6 +519,7 @@ export async function FetchFacilities(
   query: string,
   currentPage: number,
 ): Promise<facility[]> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -543,6 +558,7 @@ export async function FetchFacilities(
 }
 
 export async function FetchFacilitiesPages(query: string): Promise<number> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -577,6 +593,7 @@ export async function FetchPackages(
   query: string,
   currentPage: number,
 ): Promise<touristPackage[]> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -623,6 +640,7 @@ export async function FetchPackages(
 }
 
 export async function FetchPackagesPages(query: string): Promise<number> {
+  noStore()
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
@@ -656,6 +674,7 @@ export async function FetchPackagesPages(query: string): Promise<number> {
 
 
 export async function GetPackagesByID(packageID: number) {
+  noStore()
   try {
     const response = await fetch(`http://127.0.0.1:8000/package/get/${packageID}`)
 
@@ -686,6 +705,7 @@ export async function GetPackagesByID(packageID: number) {
 }
 
 export async function GetHotelsByExcursionID(excursionID : number) : Promise<hotel[]> {
+  noStore()
   try{
     const response = await fetch(`http://127.0.0.1:8000/hotel/excursion_hotels/${excursionID}`)
 
