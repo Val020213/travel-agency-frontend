@@ -100,7 +100,7 @@ export async function UpdateAgencyAction(
   id: number,
   prevState: AgencyFormState,
   formData: FormData
-) {
+) : Promise<AgencyFormState|undefined>{
   noStore();
   // no validation needed
   const name = formData.get("name") ;

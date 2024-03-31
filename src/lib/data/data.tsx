@@ -1,6 +1,5 @@
 import { agency, excursion, tourist, touristPackage, user, hotel } from '../entities';
 import { ReadSession } from '../actions/session/read';
-import { unstable_noStore } from 'next/cache';
 import { facility } from '../entities';
 
 export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
@@ -655,7 +654,7 @@ export async function FetchPackagesPages(query: string): Promise<number> {
 
 
 
-export async function FetchPackagesByID(packageID: number) {
+export async function GetPackagesByID(packageID: number) {
   try {
     const response = await fetch(`http://127.0.0.1:8000/package/get/${packageID}`)
 
@@ -685,27 +684,31 @@ export async function FetchPackagesByID(packageID: number) {
   return
 }
 
-export async function FetchExcursionByID(excursionID : number) : Promise<excursion | undefined> {
-    try{
-      const response = await fetch(`http://127.0.0.1:8000/excursion/get/${excursionID}`)
-      const data = await response.json()
+export async function GetHotelsByExcursionID(excursionID : number) : Promise<hotel[]> {
+  try{
+    const response = await fetch('')
 
-      const excursion : excursion = {
-        id : data.id,
-        departureDate : data.departure_day,
-        departureTime : data.departure_hour,
-        departureLocation : data.departure_place,
-        arrivalDate : data.arrival_day,
-        arrivalTime : data.arrival_hour,
-        arrivalLocation : data.arrival_place,
-        price : data.price,
-        image : validateImagePath(data.photo_url)
+    if(!response.ok){
+      console.log(response.statusText)
+      return []
+    }
+
+    const data = await response.json()
+    const hotels = data.map((hotel : any) =>
+    {
+      return {
+        id : hotel.id,
+        name : hotel.name,
+        address : hotel.address,
+        category : hotel.category,
+        image : hotel.photo_url
       }
+    })
 
-      return excursion
-    }
-    catch(error){
-      console.log(error)
-    }
-    return 
+    return hotels
+  }
+  catch(error){
+    console.log(error)
+  }
+  return[]
 }

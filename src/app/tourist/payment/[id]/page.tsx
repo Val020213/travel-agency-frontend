@@ -2,23 +2,21 @@
 import { useSearchParams } from 'next/navigation';
 import { ProgressManager } from '@/components/app/tourist/payment/ProgressManager';
 import { CreateExcursionReservation, CreateTouristPackageReservation } from '@/lib/actions/Tourist/reservation';
-import { FetchExcursionByID, FetchPackagesByID } from '@/lib/data/data';
+import { InformationAction } from '@/components/app/tourist/payment/InformationTab';
 
 function PaymentAction(type : string) {
   return type === 'excursion' ? CreateExcursionReservation : CreateTouristPackageReservation
 }
 
-function InformationAction({type, id} : {type : string, id : number}){
-  return type === 'excursion' ? <ExcusionInformationTab id={id}/>  : <TouristPackageInformationTab id={id} />
-}
+
 
 export default function Page({ params }: { params: { id: string } }) {
   const searchParams = useSearchParams();
-  const typeAction = searchParams.get('type') ?? ''
+  const typeAction = searchParams.get('type') ?? 'excursion'
   const step  = searchParams.get('step') ?? '0'
   
   return (
-    <section>
+    <section className='flex flex-col gap-24'>
       <ProgressManager step={parseInt(step)} />
       <form action={PaymentAction(typeAction)}>
         <div>
@@ -29,19 +27,4 @@ export default function Page({ params }: { params: { id: string } }) {
   )
 }
 
-async function ExcusionInformationTab(id: number) {
-  const excursion  = await FetchExcursionByID(id)
-  console.log(excursion)
-  return{
-    excursion
-  }
-}
-
-async function TouristPackageInformationTab(id: number) {
-  const touristPackage = await FetchPackagesByID(id)
-  console.log(touristPackage)
-  return{
-    touristPackage
-  }
-}
 

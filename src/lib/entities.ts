@@ -27,21 +27,21 @@ export type excursion = entity &
     arrivalDate: string;
     departureTime: string;
     arrivalTime: string;
-    hotelID?: number;
-  };
+    hotels?: hotel[];
+};
 
 export type hotel = entity &
   visual & {
     name: string;
     address: string;
     category: number;
-  };
+};
 
 export type facility = entity & {
   description: string;
 };
 
-export type rol = "admin" | "tourist" | "marketing" | "agent";
+export type rol = 'admin' | 'tourist' | 'marketing' | 'agent';
 
 export type user = entity & {
   username: string;
@@ -50,10 +50,10 @@ export type user = entity & {
 };
 
 export type agent = entity & {
-  username: string,
-  token: string,
-  rol: rol
-}
+  username: string;
+  token: string;
+  rol: rol;
+};
 
 export type touristPackage = entity &
   offer &
