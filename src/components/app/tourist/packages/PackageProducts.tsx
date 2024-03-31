@@ -36,7 +36,7 @@ export async function PackageProducts() {
             title={'Paquete turístico de ' + touristPackage.duration + ' días'}
             description={touristPackage.description}
             image={touristPackage.image}
-            href={'/tourist/payment/' + touristPackage.id + '?type=package'}
+            href={'/tourist/payment/package/' + touristPackage.id }
           />
         ))}
         <ContinueCard />

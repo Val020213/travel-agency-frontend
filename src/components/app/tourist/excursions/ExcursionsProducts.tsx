@@ -45,7 +45,7 @@ export async function ExcursionProducts() {
               '.'
             }
             image={excursion.image}
-            href={'/tourist/payment/' + excursion.id + '?type=excursion'}
+            href={'/tourist/payment/excursion/' + excursion.id + '?type=excursion'}
           />
         ))}
         <ContinueCard />

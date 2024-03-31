@@ -1,6 +1,15 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+
+export function FixDateFormate(date: string) {
+  return date.split('T')[0];
+}
+
+export function FixTimeFormate(time: string) {
+  return time.split('.')[0];
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
