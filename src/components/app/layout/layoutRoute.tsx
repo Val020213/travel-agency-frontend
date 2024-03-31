@@ -4,7 +4,7 @@ import {
   EnterpriseNavbar,
   Navbar,
 } from '@/components/app/layout/navbar/Navbar';
-import { AdminFooter, Footer } from '@/components/app/layout/footer/Footer';
+import {  Footer } from '@/components/app/layout/footer/Footer';
 import { Hero } from '@/components/app/layout/hero/Hero';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';

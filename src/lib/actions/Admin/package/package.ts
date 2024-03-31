@@ -12,6 +12,7 @@ const PackageSchema = z.object({
   agency_id: z.number(),
   extended_excursion_id: z.number(),
   photo_url: z.string(),
+  facilities: z.array(z.string()).nullable(),
 });
 
 export type PackageFormState = {
@@ -26,6 +27,33 @@ export type PackageFormState = {
   };
 };
 
+export async function AddFacilitiesToPackageID(
+  facilityID: number,
+  packageID: number
+) {
+  try {
+    const data = { facility_id: facilityID, package_id: packageID };
+
+    const response = await fetch(
+      'http://127.0.0.1:8000/package_facility/create',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (!response.ok) {
+      const text = await response.text();
+      return text;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function CreatePackageAction(
   prevState: PackageFormState,
   formData: FormData
@@ -39,6 +67,7 @@ export async function CreatePackageAction(
       formData.get('extended_excursion_id') as string,
       10
     ),
+    facilities: formData.getAll('facility'),
     photo_url: formData.get('photo_url') as string,
   });
 
@@ -56,7 +85,9 @@ export async function CreatePackageAction(
     agency_id,
     extended_excursion_id,
     photo_url,
+    facilities,
   } = validatedFields.data;
+
   const data = {
     price,
     description,
@@ -82,13 +113,20 @@ export async function CreatePackageAction(
         errors: {},
       };
     }
-    revalidatePath('/admin/packages');
-    redirect('/admin/packages');
+    const dataResponse = await response.json();
+    const packageID = dataResponse
+
+    await facilities?.forEach((facility) => {
+      AddFacilitiesToPackageID(Number(facility), packageID);
+    });
+
+    revalidatePath('/admin/packages/');
   } catch (error) {
     console.log(error);
   }
+  redirect('/admin/packages/');
   return {
-    message: 'Error al crear el paquete',
+    message: 'Se creo el paquete, pero no las facilidades',
     errors: {},
   };
 }

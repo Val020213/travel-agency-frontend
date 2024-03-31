@@ -7,7 +7,7 @@ import {
   CreatePackageAction,
   PackageFormState,
 } from '@/lib/actions/Admin/package/package';
-import { MultiSelectorHotel } from './MultiSelectorHotel';
+import { MultiSelectorFacilities } from './MultiSelectorFacilities';
 
 export function CreatePackage() {
   const initialState = {};
@@ -53,7 +53,7 @@ export function CreatePackage() {
       >
         <GenerateForm formsFields={formsFields} />
         <div className='w-screen'>
-        <MultiSelectorHotel />
+          <MultiSelectorFacilities />
         </div>
         <div className='flex flex-row justify-between items-center *:min-w-96'>
           <div className='flex flex-row justify-start items-start'>

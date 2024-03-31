@@ -39,33 +39,37 @@ export async function PackagesTable({
     <section>
       <h2 className='text-2xl font-semibold'>Paquetes en Travelix</h2>
       <Table>
-        <TableHead>
+        <TableHeader>
           <TableRow>
-            <TableHeader>Id</TableHeader>
-            <TableHeader>Agencia</TableHeader>
-            <TableHeader>Excursión</TableHeader>
-            <TableHeader>Descripción</TableHeader>
-            <TableHeader>Precio</TableHeader>
-            <TableHeader>Acciones</TableHeader>
+            <TableHead>Id</TableHead>
+            <TableHead>Agencia</TableHead>
+            <TableHead>Excursión</TableHead>
+            <TableHead>Descripción</TableHead>
+            <TableHead>Precio</TableHead>
+            <TableHead>Acciones</TableHead>
           </TableRow>
-          <TableBody>
-            {packages.map((p) => (
-              <TableRow key={p.id}>
-                <TableCell>#{p.id}</TableCell>
-                <TableCell>{p.agencyID}</TableCell>
-                <TableCell>{p.excursionID}</TableCell>
-                <TableCell>{p.description}</TableCell>
-                <TableCell>{p.price}</TableCell>
-                <TableCell>
-                  <Link href={`/admin/packages/edit/${p.id}`}>
-                      <IconEdit size={20} />                    
-                  </Link>
-                  <IconTrash size={20} onClick={DeleteAction(p.id)} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </TableHead>
+        </TableHeader>
+        <TableBody>
+          {packages.map((p) => (
+            <TableRow key={p.id}>
+              <TableCell>#{p.id}</TableCell>
+              <TableCell>{p.agencyID}</TableCell>
+              <TableCell>{p.excursionID}</TableCell>
+              <TableCell>{p.description}</TableCell>
+              <TableCell>{p.price}</TableCell>
+              <TableCell className='flex flex-row gap-1'>
+                <Link href={`/admin/packages/edit/${p.id}`}>
+                  <IconEdit size={24} stroke={1.5} />
+                </Link>
+                <form action={DeleteAction(p.id)}>
+                  <button type='submit'>
+                    <IconTrash size={24} stroke={1.5} />
+                  </button>
+                </form>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
     </section>
   );

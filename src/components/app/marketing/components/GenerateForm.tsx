@@ -73,3 +73,23 @@ export function GenerateForm({
     </div>
   );
 }
+
+export const Example = () =>
+{
+  const formsFields = [
+    {
+      name: 'Name',
+      placeholder: 'Enter your name',
+    },
+    {
+      name: 'Country',
+      options: [
+        { id: '1', name: 'USA' },
+        { id: '2', name: 'Canada' },
+        { id: '3', name: 'Mexico' },
+      ],
+    },
+  ];
+
+  return <GenerateForm formsFields={formsFields} />;
+}
