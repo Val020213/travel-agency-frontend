@@ -55,7 +55,7 @@ export async function FetchCountries(): Promise<string[]> {
 
 
 export function validateImagePath(image: string) {
-  if (image.startsWith("https://")) {
+  if (image && image.startsWith("https://")) {
     return image
   }
   const defaultImage: string = require('@/assets/defaultImage.png')
@@ -402,13 +402,13 @@ export async function FetchExcursionsPages(query: string): Promise<number> {
 export async function GetExcursionByID(id: number): Promise<excursion> {
   try {
     const response = await fetch(`http://127.0.0.1:8000/excursion/get/${id}`);
+    console.log(id)
     if (!response.ok) {
-      console.log(response.statusText);
-      return {} as excursion;
+      console.log('response',response.statusText);
     }
 
     const data = await response.json();
-
+  
     const excursionData: excursion = {
       id: data.id,
       departureDate: data.departure_day,
@@ -420,7 +420,7 @@ export async function GetExcursionByID(id: number): Promise<excursion> {
       price: data.price,
       image: validateImagePath(data.image)
     };
-
+    console.log('dta', excursionData)
     return excursionData;
   } catch (error) {
     console.log('Database Connection Error:', error);
@@ -602,6 +602,7 @@ export async function FetchPackages(
     const paginatedPackages = filteredPackages.slice(offset, offset + ITEMS_PER_PAGE);
 
     const packages = paginatedPackages.map((touristPackage: any) => {
+      console.log(touristPackage)
       return {
         id: touristPackage.id,
         price: touristPackage.price,
@@ -686,7 +687,7 @@ export async function GetPackagesByID(packageID: number) {
 
 export async function GetHotelsByExcursionID(excursionID : number) : Promise<hotel[]> {
   try{
-    const response = await fetch('')
+    const response = await fetch(`http://127.0.0.1:8000/hotel/excursion_hotels/${excursionID}`)
 
     if(!response.ok){
       console.log(response.statusText)

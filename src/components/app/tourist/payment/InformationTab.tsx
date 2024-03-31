@@ -27,6 +27,7 @@ async function TouristPackageInformationTab({ id }: { id: number }) {
     const extendedExcursion = await GetExcursionByID(
         touristPackage?.extended_excursion_id
     );
+    console.log('\n\n\n\n\n\n' + extendedExcursion.id + '\n\n\n\n\n\n')
     const hotels = await GetHotelsByExcursionID(extendedExcursion.id);
 
     return (
@@ -34,12 +35,14 @@ async function TouristPackageInformationTab({ id }: { id: number }) {
             <Image
                 alt='product image'
                 quality={100}
+                width={600}
+                height={600}
                 className='rounded-2xl w-screen h-[600px]'
                 src={touristPackage?.image ?? require('@/assets/defaultImage.png')}
             />
             <div className='flex flex-col gap-4 text-2xl'>
                 <div className='flex flex-col gap-2 '>
-                    <p>Descripción</p>
+                    <p className='text-3xl'>Descripción</p>
                     <p className='text-gray-500 dark:text-gray-300'>
                         {touristPackage?.description}
                     </p>
@@ -57,15 +60,17 @@ async function TouristPackageInformationTab({ id }: { id: number }) {
                         {touristPackage?.duration} días
                     </p>
                 </div>
-                <h2 className='text-2xl'>Hoteles asosiados</h2>
+                <h2 className='text-3xl'>Hoteles asociados</h2>
                 <Carousel className='w-full max-w-xs'>
                     <CarouselContent>
                         {hotels.map((hotel, index) => (
                             <CarouselItem key={index}>
                                 <div>
                                     <Image
-                                        src={hotel.image}
+                                        src={hotel.image ?? require('@/assets/defaultImage.png')}
                                         alt='foto del hotel'
+                                        width={600}
+                                        height={600}
                                         quality={100}
                                         className='rounded-2xl w-screen h-[600px]'
                                     />
@@ -86,6 +91,8 @@ async function TouristPackageInformationTab({ id }: { id: number }) {
                     src={extendedExcursion.image}
                     alt='foto del hotel'
                     quality={100}
+                    height={600}
+                    width={600}
                     className='rounded-2xl w-screen h-[600px]'
                 />
 
