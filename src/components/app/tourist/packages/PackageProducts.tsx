@@ -13,7 +13,7 @@ import { ProductCard } from '@/components/ui/ProductCard';
 import { ContinueCard } from '@/components/ui/ContinueCard';
 
 export async function PackageProducts() {
-  const data : touristPackage[] = await FetchPackages('',0);
+  const data : touristPackage[] = await FetchPackages('',0, 100000);
   return (
     <div className='flex flex-col gap-8'>
       <Breadcrumb>
