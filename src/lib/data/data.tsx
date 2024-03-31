@@ -128,7 +128,7 @@ export async function GetAgencyByID(id: number): Promise<agency> {
 export async function FetchAgencies(): Promise<agency[]> {
   noStore();
   try {
-    const response = await fetch('http://127.0.0.1:8000/agency/list');
+    const response = await fetch('http://127.0.0.1:8000/agency/list?skip=0&limit=10000000');
 
     if (!response.ok) {
       // console.log('Failed to fetch products');

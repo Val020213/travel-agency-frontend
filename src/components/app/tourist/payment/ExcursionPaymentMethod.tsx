@@ -1,3 +1,0 @@
-export async function ExcursiónPayment() {
-    
-}

@@ -8,6 +8,9 @@ export default async function ReservationTravelInput() {
       <h2 className='text-3xl text-gray-800 dark:text-extends-darker-blue-200'>
         Datos de las reservaciones
       </h2>
+      <select name='touristID' className='w-1/2 p-2 border border-gray-300 dark:border-gray-400 rounded-md hidden'>
+        <option value={user?.id}></option>
+      </select>
       <UserInfoCard userID={user?.id} />
     </div>
   );

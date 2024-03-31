@@ -7,7 +7,7 @@ import {
 import Image from 'next/image';
 
 import { IconCalendar, IconMapPin2 } from '@tabler/icons-react';
-import { AgencyInfoCard } from '../agencies/AgencyInfoCard';
+import { AgencyInfoCard } from '../../agencies/AgencyInfoCard';
 import { facility } from '@/lib/entities';
 import { FixDateFormate, FixTimeFormate } from '@/lib/utils';
 import { HotelInformation } from './HotelInformation';

@@ -1,10 +1,10 @@
 import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
   SelectValue,
-} from '@radix-ui/react-select';
+  SelectTrigger,
+  SelectItem,
+  SelectContent,
+  Select,
+} from '@/components/ui/select';
 
 export type IFormField = {
   name: string;
@@ -19,6 +19,7 @@ export type IOption = IFormField & {
 };
 
 export type IFormSelect = IFormField & {
+  title: string;
   options: IOption[];
 };
 
@@ -47,17 +48,17 @@ export function GenerateForm({
                 placeholder={(field as IFormInput).placeholder}
               />
             )}
-            {'options' in field && (
+            {'options' in field && 'title' in field && (
               <Select name={field.name}>
                 <SelectTrigger
                   id={field.name}
                   className='border-b border-gray-300 dark:border-gray-400'
                 >
-                  <SelectValue placeholder={field.name} />
+                  <SelectValue placeholder={field.title as string} />
                 </SelectTrigger>
                 <SelectContent
                   position='popper'
-                  className='fixed pt-1 h-60 md:h-48'
+                  className='fixed w-max gap-px overflow-scroll p-4 mt-1 h-60 md:h-48 bg-white shadow-md dark:bg-extends-darker-blue-900'
                 >
                   {(field as IFormSelect).options.map((option, index) => (
                     <SelectItem key={index} value={option.id}>
@@ -74,8 +75,7 @@ export function GenerateForm({
   );
 }
 
-export const Example = () =>
-{
+export const Example = () => {
   const formsFields = [
     {
       name: 'Name',

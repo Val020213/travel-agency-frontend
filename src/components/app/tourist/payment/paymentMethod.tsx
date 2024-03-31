@@ -32,7 +32,7 @@ export async function PaymentMethod({
                         >
                             Tarjeta de Crédito
                         </label>
-                        <input className='md:text-xl border-b border-gray-300 dark:border-gray-400' />
+                        <input required className='md:text-xl border-b border-gray-300 dark:border-gray-400' />
                     </div>
                 </div>
             </div>
