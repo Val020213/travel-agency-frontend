@@ -576,21 +576,21 @@ export async function FetchFacilitiesPages(query: string): Promise<number> {
 export async function FetchPackages(
   query: string,
   currentPage: number,
-): Promise<any[]> {
+): Promise<touristPackage[]> {
   try {
     const queryParams = new URLSearchParams({
       skip: "0",
       limit: "1000"
     });
-    const response = await fetch(`http://127.0.0.1:8000/package/list?skip=0&limit=10`);
-    
+    const response = await fetch(`http://127.0.0.1:8000/package/list`);
+    console.log("\n\n\n\n\n" + response + "\n\n\n\n\n") 
     
     if (!response.ok) {
       return [];
     }
     
     const data = await response.json();
-    console.log('\n\n\n\n\n\n\n\n\nn\n' + 'No fue bien :(' + response.json + '\n\n\n\n\n\n\nn\n\n\n')
+    console.log('\n\n\n\n\n\n\n\n\n\n' + data + '\n\n\n\n\n\n\n\n\n\n')
 
     // Filtrar paquetes basados en la consulta
     const filteredPackages = data.filter((touristPackage: any) => {

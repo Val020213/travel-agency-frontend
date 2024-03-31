@@ -2,8 +2,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { DeleteUser } from "@/lib/actions/Admin/user/user";
 import { FetchUsers } from "@/lib/data/data";
 import { user } from "@/lib/entities";
-import { IconEdit } from "@tabler/icons-react";
-import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
 
 export async function UsersTable({

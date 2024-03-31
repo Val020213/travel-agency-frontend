@@ -64,7 +64,6 @@ export async function CreateFacilityAction(
     };
   }
   revalidatePath("/admin/facilities")
-  redirect("/admin/facilities");
 }
 
 export async function DeleteFacility(id: number): Promise<void> {

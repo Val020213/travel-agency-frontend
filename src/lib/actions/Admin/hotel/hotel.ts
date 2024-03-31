@@ -85,7 +85,6 @@ export async function CreateHotelAction(
     };
  }
  revalidatePath("/admin/hotels")
- redirect("/admin/hotels");
 }
 
 
@@ -135,7 +134,7 @@ export async function UpdateHotelAction(
     console.log("Database Connection Error:", error);
   }
 
-  redirect("/admin/hotels");
+  revalidatePath("/admin/hotels")
 }
 
 export async function DeleteHotel(id: number): Promise<void> {

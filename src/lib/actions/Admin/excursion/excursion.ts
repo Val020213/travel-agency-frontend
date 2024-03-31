@@ -108,7 +108,7 @@ export async function CreateExcursionAction(
     };
   }
 
-  redirect("/admin/excursions");
+  revalidatePath("/admin/excursions");
 }
 
 export async function UpdateExcursionAction(
@@ -163,7 +163,7 @@ export async function UpdateExcursionAction(
     console.log("Database Connection Error", error);
   }
 
-  redirect("/admin/excursions");
+  revalidatePath("/admin/excursions");
 }
 
 export async function DeleteExcursion(id: number): Promise<void> {

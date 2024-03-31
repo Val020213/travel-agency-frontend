@@ -2,7 +2,6 @@
 import { unstable_noStore as noStore } from 'next/cache';
  
 import { z } from "zod";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 
@@ -81,7 +80,7 @@ export async function CreatePackageAction(
     };
  }
 
- redirect("/admin/packages");
+ revalidatePath("/admin/packages");
 }
 
 export async function UpdatePackageAction(
@@ -133,7 +132,7 @@ export async function UpdatePackageAction(
     console.log("Database Connection Error:", error);
   }
 
-  redirect("/admin/packages");
+  revalidatePath("/admin/packages");
 }
 
 export async function DeletePackage(id: number): Promise<void> {

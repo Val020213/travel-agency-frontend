@@ -93,7 +93,7 @@ try {
     };
 }
 
-redirect("/admin/agencies");
+revalidatePath("/admin/agencies");
 }
 
 export async function UpdateAgencyAction(
@@ -146,7 +146,7 @@ export async function UpdateAgencyAction(
     console.log("Database Connection Error")
   }
 
-  redirect("/admin/agencies");
+  revalidatePath("/admin/agencies");
 }
 
 export async function DeleteAgency(id: number): Promise<void> {
