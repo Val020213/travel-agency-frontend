@@ -13,10 +13,8 @@ export async function ExpensivePackages({ agencyID }: { agencyID: number }) {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Id</TableHead>
                             <TableHead>Descripcion</TableHead>
                             <TableHead>Duración</TableHead>
-                            <TableHead>Facilidades</TableHead>
                             <TableHead>Precio</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -24,10 +22,8 @@ export async function ExpensivePackages({ agencyID }: { agencyID: number }) {
                         {
                             expensivePackages.map((touristPackage) => (
                                 <TableRow key={touristPackage.id}>
-                                    <TableCell>{touristPackage.id}</TableCell>
                                     <TableCell>{touristPackage.description}</TableCell>
                                     <TableCell>{touristPackage.duration}</TableCell>
-                                    <TableCell>{touristPackage.facilities.map(facility => facility.description).join(', ')}</TableCell>
                                     <TableCell>{touristPackage.price}</TableCell>
                                 </TableRow>
                             ))
