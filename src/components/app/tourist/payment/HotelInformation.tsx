@@ -36,7 +36,7 @@ export async function HotelInformation({ id }: { id: number }) {
                 height={600}
                 className='rounded-2xl w-[1200px] h-[600px]'
               />
-              <p className='text-2xl font-medium'>Hotel {hotel.name}</p>
+              <p className='text-2xl font-medium'>{hotel.name}</p>
               <div className='flex flex-col gap-2 text-gray-500 dark:text-extends-darker-blue-300'>
                 <p className='flex flex-row gap-1'>
                   {Array.from({ length: hotel.category as number }).map(

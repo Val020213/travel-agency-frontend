@@ -13,7 +13,7 @@ import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '@/components/ui/ContinueCard';
 
 export async function ExcursionProducts() {
-  const data = await FetchExcursions('', 1);
+  const data = await FetchExcursions('', 0);
 
   return (
     <div className='flex flex-col gap-8'>
