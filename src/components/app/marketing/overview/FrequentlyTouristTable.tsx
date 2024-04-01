@@ -1,6 +1,7 @@
 import { Table, TableHeader, TableHead, TableRow, TableBody, TableCell } from "@/components/ui/table";
 import { FetchFrecuentlyTourist } from "@/lib/actions/marketing/marketing";
 import { tourist } from "@/lib/entities";
+import ExcelExport from "./statistics";
 import clsx from "clsx";
 import { randomInt } from "crypto";
 
@@ -17,7 +18,7 @@ export async function FrequentlyTouristTable({ agencyID }: { agencyID: number })
                     <TableHeader>
                         <TableRow>
                             <TableHead>Nombre de usuario</TableHead>
-                            <TableHead>Nacionalidad</TableHead>
+                            <TableHead>Dirección electrónica</TableHead>
                             <TableHead>Cantidad de Reservaciones Hechas</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -25,12 +26,13 @@ export async function FrequentlyTouristTable({ agencyID }: { agencyID: number })
                         {tourist.map((tourist) => (
                             <TableRow key={tourist.id}>
                                 <TableCell>{tourist.name}</TableCell>
-                                <TableCell>{tourist.nationality}</TableCell>
-                                <TableCell>{randomInt(1, 6000)}</TableCell>
+                                <TableCell>{tourist.email}</TableCell>
+                                <TableCell>{tourist.reservationTotal}</TableCell>
                             </TableRow>))
                         }
                     </TableBody>
                 </Table>
+            <ExcelExport endpoint="http://127.0.0.1:8000/agency/most_frecuent_tourists/4?export=excel" title="most frecuent tourists"/>
             </div>
         </section >
     )

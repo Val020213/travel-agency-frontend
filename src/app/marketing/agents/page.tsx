@@ -6,6 +6,7 @@ import Search from "@/components/ui/admin/searchBar";
 import { FetchUsersPages } from "@/lib/data/data";
 import Pagination from "@/components/ui/admin/pagination";
 import { AgentTable } from "@/components/app/marketing/agent/AgentTable";
+import { FetchTotalAgentsInAgency } from "@/lib/actions/marketing/marketing";
 
 export default async function Page({
  searchParams,
@@ -17,7 +18,7 @@ export default async function Page({
 }) {
      const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
-    const totalPages = await FetchUsersPages(query); 
+    const totalPages = await FetchTotalAgentsInAgency(); 
  
     return (
         <section className="flex flex-col gap-4 md:gap-12 lg:gap-16">

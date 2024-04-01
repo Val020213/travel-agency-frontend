@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableHeader, TableHead, TableRow } from "@/components/ui/table"
 import { FetchExpensivePackages } from "@/lib/actions/marketing/marketing"
 import { touristPackage } from "@/lib/entities"
+import ExcelExport from "./statistics"
 export async function ExpensivePackages({ agencyID }: { agencyID: number }) {
     const expensivePackages: touristPackage[] = await FetchExpensivePackages()
 
@@ -31,6 +32,11 @@ export async function ExpensivePackages({ agencyID }: { agencyID: number }) {
                     </TableBody>
                 </Table>
             </div>
+            <h2 className='text-2xl font-semibold mt-8 mb-4'>
+                Cantidad total de paquetes: {expensivePackages.length}
+            </h2>
+            <ExcelExport endpoint="http://127.0.0.1:8000/agency/packages_above_average/4?export=excel" title=" packages above average in agency"/> 
+            {/* <ExcelExport endpoint="http://127.0.0.1:8000/statistics/packages-above-average?export=excel" title="packages above average"/> */}
         </section >
     )
 }

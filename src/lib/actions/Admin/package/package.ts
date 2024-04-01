@@ -195,12 +195,13 @@ export async function UpdatePackageAction(
 
 export async function DeletePackage(id: number): Promise<void> {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/package/delete/${id}`);
+    const response = await fetch(`http://127.0.0.1:8000/package/delete${id}`);
     if (!response.ok) {
       console.log(response.statusText);
       return;
     }
     revalidatePath('/admin/packages');
+    revalidatePath('/marketing/packages')
   } catch {
     console.log('Database Connection Error');
   }

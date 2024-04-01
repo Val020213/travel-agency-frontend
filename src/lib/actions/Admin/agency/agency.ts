@@ -94,6 +94,7 @@ try {
 }
 
 revalidatePath("/admin/agencies");
+redirect("/admin/agencies")
 }
 
 export async function UpdateAgencyAction(

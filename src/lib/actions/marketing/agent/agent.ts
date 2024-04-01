@@ -2,8 +2,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { FetchUser } from "@/lib/data/data";
-import { ReadSession } from "../../session/read";
+import { unstable_noStore as noStore } from 'next/cache';
 
 const AgentFormSchema = z.object({
  id: z.string(),
@@ -77,11 +76,12 @@ export async function CreateAgentAction(
     username: username,
     phone: phone,
     email: email,
-    agency_id: 4,
+    agency_id: 40,
     password: password,
  };
 
  try {
+   noStore();
     const response = await fetch(`http://127.0.0.1:8000/user/create/agent/${data.agency_id}`, {
       method: "POST",
       headers: {
@@ -111,6 +111,7 @@ export async function CreateAgentAction(
 
 export async function DeleteAgent(id: number): Promise<void> {
  try {
+   noStore();
     const response = await fetch(`http://127.0.0.1:8000/user/delete/${id}`);
 
     if (!response.ok) {

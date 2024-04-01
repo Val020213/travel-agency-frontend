@@ -49,6 +49,11 @@ export const enterpriseCategories: category[] = [
     href: '/marketing/agents',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
+  {
+    name: 'Excursiones Extendidas',
+    href: '/marketing/extended',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
 ];
 
 export const agentCategories: category[] = [
