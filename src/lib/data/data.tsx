@@ -144,6 +144,40 @@ export async function GetAgencyByID(id: number): Promise<agency> {
 
   return {} as agency;
 }
+// http://127.0.0.1:8000/excursion/list_related_agencies/{excursion_id}
+
+export async function GetAgencyByExcursionID(excursionID: number): Promise<agency[]> {
+  noStore();
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/excursion/list_related_agencies/${excursionID}`)
+
+    if (!response.ok) {
+      console.log(response.statusText);
+      return [];
+    }
+
+    const data = await response.json()
+
+    const agencies: agency[] = data.map((agency: any) => {
+      return {
+        id: agency.id,
+        name: agency.name,
+        address: agency.address,
+        fax: agency.fax_number,
+        email: agency.email,
+        image: agency.photo_url,
+      };
+    });
+
+    return agencies
+
+  }
+  catch (error) {
+    console.log(error)
+  }
+
+  return []
+}
 
 export async function FetchAgencies(
   skip: number = 0,

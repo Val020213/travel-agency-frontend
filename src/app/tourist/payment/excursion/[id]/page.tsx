@@ -10,7 +10,6 @@ import { ExtendedInputReservation } from '@/components/app/tourist/payment/touri
 import { PackagePayment } from '@/components/app/tourist/payment/touristPackage/PackagePaymentMethod';
 import {
   CreateTouristExcursionReservation,
-  CreateTouristPackageReservation,
   TouristReservationState,
 } from '@/lib/actions/Tourist/reservation';
 import clsx from 'clsx';
@@ -43,7 +42,7 @@ export default function Page({ params }: { params: { id: string } }) {
       )}
       <form action={dispatch}>
         <div className={clsx({ hidden: step != 2 })}>
-          <ReservationTravelInput />
+          <ReservationTravelInput excursionID={Number(params.id)} />
           <ExtendedInputReservation />
           <div className='flex flex-row py-8 justify-end'>
             <div className='w-1/4'>

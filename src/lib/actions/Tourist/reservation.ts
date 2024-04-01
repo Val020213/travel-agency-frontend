@@ -6,7 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { FetchUser } from '@/lib/data/data';
 import { use } from 'react';
 
-const CreateReservationSchema = z.object({
+
+const CreateReservationSchemaBasic = z.object({
   touristID: z.string({
     invalid_type_error: 'id invalido de turista',
     required_error: 'Introduce un turista',
@@ -39,7 +40,7 @@ export async function CreateTouristPackageReservation(
   prevState: TouristReservationState,
   formData: FormData
 ): Promise<TouristReservationState> {
-  const validatedFields = CreateReservationSchema.safeParse({
+  const validatedFields = CreateReservationSchemaBasic.safeParse({
     touristID: formData.get('touristID'),
     amountOfPeople: formData.get('amountOfPeople'),
     airline: formData.get('airline'),
@@ -93,12 +94,35 @@ export async function CreateTouristPackageReservation(
 
   const user = await FetchUser();
   user?.rol === 'agent' ? redirect('/agent') : redirect('/');
-  
+
   return {
     message: 'Reserva creada exitosamente',
     errors: {},
   };
 }
+
+
+const CreateReservationSchema = z.object({
+  touristID: z.string({
+    invalid_type_error: 'id invalido de turista',
+    required_error: 'Introduce un turista',
+  }),
+  amountOfPeople: z.string({
+    invalid_type_error: 'cantidad de personas invalida',
+    required_error: 'Introduce una cantidad de personas',
+  }),
+  airline: z
+    .string({
+      invalid_type_error: 'aerolinea invalida',
+      required_error: 'Introduce una aereolinea',
+    })
+    .min(1, {
+      message: 'Parece que ha ocurrido un error, escoge una aerolinea valida',
+    }),
+  agency_id: z.string().nullable(),
+});
+
+
 
 export async function CreateTouristExcursionReservation(
   excursionID: number,
@@ -109,6 +133,7 @@ export async function CreateTouristExcursionReservation(
     touristID: formData.get('touristID'),
     amountOfPeople: formData.get('amountOfPeople'),
     airline: formData.get('airline'),
+    agency_id: formData.get('agency_id'),
   });
 
   if (!validatedFields.success) {
@@ -118,13 +143,15 @@ export async function CreateTouristExcursionReservation(
     };
   }
 
-  const { touristID, amountOfPeople, airline } = validatedFields.data;
+  const { touristID, amountOfPeople, airline, agency_id } =
+    validatedFields.data;
 
   const data = {
     excursion_id: excursionID,
     tourist_id: touristID,
     amount_of_people: amountOfPeople,
     air_line: airline,
+    agency_id: agency_id,
     reservation_date: new Date().getDate(),
   };
 
