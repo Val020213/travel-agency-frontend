@@ -13,16 +13,18 @@ import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ProductCard } from '@/components/ui/ProductCard';
 import { ContinueCard } from '@/components/ui/ContinueCard';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function AgencyPackageProducts({agency_id} : {agency_id : number}) {
   const [limit, setLimit] = useState<number>(10)
   const [data, setData] = useState<touristPackage[]>([])
-
+  const currentPathname = usePathname();
   useEffect(() => {
     FetchPackagesByAgency(agency_id,'', 1, limit).then((packages: touristPackage[]) => {
       setData(packages);
     });
   },[agency_id, limit])
+  const redir = currentPathname.startsWith('/agent') ? '/agent/payment/package/' : '/tourist/payment/package/'
 
   return (
     <div className='flex flex-col gap-8'>
@@ -46,7 +48,7 @@ export function AgencyPackageProducts({agency_id} : {agency_id : number}) {
             title={'Paquete turístico de ' + touristPackage.duration + ' días'}
             description={touristPackage.description}
             image={touristPackage.image}
-            href={'/agent/payment/package/' + touristPackage.id}
+            href={redir + touristPackage.id}
           />
         ))}
         <ContinueCard onClick={() => {setLimit(limit + 10)}} />

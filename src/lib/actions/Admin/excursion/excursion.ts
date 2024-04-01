@@ -1,38 +1,39 @@
-"use server";
+'use server';
 
-import { unstable_noStore as noStore } from 'next/cache'; 
-import { z } from "zod";
-import { revalidatePath } from "next/cache";
+import { unstable_noStore as noStore } from 'next/cache';
+import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 const FormSchema = z.object({
   id: z.string(),
   departureLocation: z.string({
-    invalid_type_error: "invalid_type_error",
-    required_error: "Introduce un lugar de salida",
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduce un lugar de salida',
   }),
   arrivalLocation: z.string({
-    invalid_type_error: "invalid_type_error",
-    required_error: "Introduce un lugar de llegada",
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduce un lugar de llegada',
   }),
   departureDate: z.string({
-    invalid_type_error: "invalid_type_error",
-    required_error: "Introduce una fecha de salida",
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduce una fecha de salida',
   }),
   arrivalDate: z.string({
-    invalid_type_error: "invalid_type_error",
-    required_error: "Introduce una fecha de llegada",
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduce una fecha de llegada',
   }),
   departureTime: z.string({
-    invalid_type_error: "invalid_type_error",
-    required_error: "Introduce una hora de salida",
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduce una hora de salida',
   }),
   arrivalTime: z.string({
-    invalid_type_error: "invalid_type_error",
-    required_error: "Introduce una hora de llegada",
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduce una hora de llegada',
   }),
-  hotelID: z.string({
-    invalid_type_error: "invalid_type_error",
-    required_error: "Introduce el ID del hotel",
+  price: z.string({
+    invalid_type_error: 'invalid_type_error',
+    required_error: 'Introduce un precio',
   }),
 });
 
@@ -56,13 +57,22 @@ export async function CreateExcursionAction(
   formData: FormData
 ) {
   const validatedFields = ExcursionSchema.safeParse({
-    departureLocation: formData.get("departureLocation") as string,
-    arrivalLocation: formData.get("arrivalLocation") as string,
-    departureDate: formData.get("departureDate") as string,
-    arrivalDate: formData.get("arrivalDate") as string,
-    departureTime: formData.get("departureTime") as string,
-    arrivalTime: formData.get("arrivalTime") as string,
-    hotelID: formData.get("hotelID") as string,
+    departureLocation: formData.get('departureLocation') as string,
+    arrivalLocation: formData.get('arrivalLocation') as string,
+    departureDate: formData.get('departureDate') as string,
+    arrivalDate: formData.get('arrivalDate') as string,
+    departureTime: formData.get('departureTime') as string,
+    arrivalTime: formData.get('arrivalTime') as string,
+    price: formData.get('price') as string,
+  });
+
+  const hotels = formData.getAll('hotel');
+  const associated_hotels = hotels.map((hotelID) => {
+    return {
+      hotel_id: hotelID,
+      arrival_date: new Date().toISOString(),
+      departure_date: new Date().toISOString(),
+    };
   });
 
   if (!validatedFields.success) {
@@ -72,42 +82,63 @@ export async function CreateExcursionAction(
     };
   }
 
-  const { departureLocation, arrivalLocation, departureDate, arrivalDate, departureTime, arrivalTime, hotelID } = validatedFields.data;
-
-  const data = {
+  const {
     departureLocation,
     arrivalLocation,
     departureDate,
     arrivalDate,
     departureTime,
     arrivalTime,
-    hotelID,
+    price,
+  } = validatedFields.data;
+
+  const data = {
+    departure_place: departureLocation,
+    arrival_place: arrivalLocation,
+    departure_day: departureDate,
+    arrival_day: arrivalDate,
+    departure_hour: departureTime,
+    arrival_hour: arrivalTime,
+    price: price,
+  };
+
+  const extended_data = {
+    extended_excursion_create: data,
+    associated_hotels: associated_hotels,
   };
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/excursion/create", {
-        method: "POST",
+    const response = await fetch(
+      associated_hotels.length < 1
+        ? 'http://127.0.0.1:8000/excursion/create'
+        : 'http://127.0.0.1:8000/extended_excursion/create',
+      {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
-    });
+        body: JSON.stringify(
+          associated_hotels.length < 1 ? data : extended_data
+        ),
+      }
+    );
 
     if (!response.ok) {
-        return {
-            message: response.statusText,
-            errors: {},
-        };
+      return {
+        message: response.statusText,
+        errors: {},
+      };
     }
   } catch (error) {
     console.log(error);
     return {
-        message: "Error al crear la excursión",
-        errors: {},
+      message: 'Error al crear la excursión',
+      errors: {},
     };
   }
 
-  revalidatePath("/admin/excursions");
+  revalidatePath('/admin/excursions');
+  redirect('/admin/excursions');
 }
 
 export async function UpdateExcursionAction(
@@ -117,17 +148,25 @@ export async function UpdateExcursionAction(
 ) {
   noStore();
 
-  const departureLocation = formData.get("departureLocation") ;
-  const arrivalLocation = formData.get("arrivalLocation") ;
-  const departureDate = formData.get("departureDate") ;
-  const arrivalDate = formData.get("arrivalDate") ;
-  const departureTime = formData.get("departureTime") ;
-  const arrivalTime = formData.get("arrivalTime") ;
-  const hotelID = formData.get("hotelID") ;
+  const departureLocation = formData.get('departureLocation');
+  const arrivalLocation = formData.get('arrivalLocation');
+  const departureDate = formData.get('departureDate');
+  const arrivalDate = formData.get('arrivalDate');
+  const departureTime = formData.get('departureTime');
+  const arrivalTime = formData.get('arrivalTime');
+  const price = formData.get('price');
 
-  if (departureLocation === null && arrivalLocation === null && departureDate === null && arrivalDate === null && departureTime === null && arrivalTime === null && hotelID === null) {
+  if (
+    departureLocation === null &&
+    arrivalLocation === null &&
+    departureDate === null &&
+    arrivalDate === null &&
+    departureTime === null &&
+    arrivalTime === null &&
+    price === null
+  ) {
     const status: ExcursionFormState = {
-      message: "No se han hecho cambios en la excursión",
+      message: 'No se han hecho cambios en la excursión',
       errors: {},
     };
     return status;
@@ -135,46 +174,48 @@ export async function UpdateExcursionAction(
 
   const data = {
     id,
-    departureLocation: departureLocation == '' ? undefined : departureLocation,
-    arrivalLocation: arrivalLocation == '' ? undefined : arrivalLocation,
-    departureDate: departureDate == '' ? undefined : departureDate,
-    arrivalDate: arrivalDate == '' ? undefined : arrivalDate,
-    departureTime: departureTime == '' ? undefined : departureTime,
-    arrivalTime: arrivalTime == '' ? undefined : arrivalTime,
-    hotelID: hotelID == '' ? undefined : hotelID,
+    departure_place: departureLocation == '' ? undefined : departureLocation,
+    arrival_place: arrivalLocation == '' ? undefined : arrivalLocation,
+    departure_day: departureDate == '' ? undefined : departureDate,
+    arrival_day: arrivalDate == '' ? undefined : arrivalDate,
+    departure_hour: departureTime == '' ? undefined : departureTime,
+    arrival_hour: arrivalTime == '' ? undefined : arrivalTime,
+    price: price == '' ? undefined : price,
   };
 
   try {
     const response = await fetch('http://127.0.0.1:8000/excursion/update', {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
 
-    if(!response.ok) {
+    if (!response.ok) {
       return {
         message: response.statusText,
       };
     }
   } catch (error) {
-    console.log("Database Connection Error", error);
+    console.log('Database Connection Error', error);
   }
 
-  revalidatePath("/admin/excursions");
+  revalidatePath('/admin/excursions');
+  redirect('/admin/excursions');
 }
 
 export async function DeleteExcursion(id: number): Promise<void> {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/excursion/delete/${id}`);
+    const response = await fetch(
+      `http://127.0.0.1:8000/excursion/delete/${id}`
+    );
     if (!response.ok) {
       console.log(response.statusText);
       return;
     }
     revalidatePath('/admin/excursions');
   } catch (error) {
-    console.log("Database Connection Error", error);
+    console.log('Database Connection Error', error);
   }
 }
-

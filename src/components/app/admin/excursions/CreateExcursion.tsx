@@ -5,6 +5,7 @@ import { ExcursionFormState } from "@/lib/actions/Admin/excursion/excursion";
 import { IFormInput } from "../../marketing/components/GenerateForm";
 import { GenerateForm } from "../../marketing/components/GenerateForm";
 import { ContinueButton } from "../../layout/navbar/modal/ContinueButton";
+import { MultiSelectorHotel } from "./MultiSelectorHotel";
 
 export async function CreateExcursion() {
   const initialState = {};
@@ -40,8 +41,8 @@ export async function CreateExcursion() {
       placeholder: "Hora de llegada",
     },
     {
-      name: "hotelID",
-      placeholder: "ID del hotel",
+      name: "price",
+      placeholder: "Precio",
     },
   ];
 
@@ -53,6 +54,7 @@ export async function CreateExcursion() {
         className="flex flex-col gap-4 md:gap-8 lg:gap-16"
       >
         <GenerateForm formsFields={formsFields} />
+            <MultiSelectorHotel/>
         <div className="flex flex-row justify-between items-center *:min-w-96">
           <div className="flex flex-row justify-start items-start">
             {state.message && (

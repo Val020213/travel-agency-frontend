@@ -8,6 +8,8 @@ import {
   PackageFormState,
 } from '@/lib/actions/Admin/package/package';
 import { MultiSelectorFacilities } from './MultiSelectorFacilities';
+import { Selectors } from './Selectors';
+import { Suspense } from 'react';
 
 export function CreatePackage() {
   const initialState = {};
@@ -34,14 +36,6 @@ export function CreatePackage() {
       name: 'duration',
       placeholder: 'Duración',
     },
-    {
-      name: 'agency_id',
-      placeholder: 'ID de la Agencia',
-    },
-    {
-      name: 'extended_excursion_id',
-      placeholder: 'ID de la Excursión Extendida',
-    },
   ];
 
   return (
@@ -54,6 +48,7 @@ export function CreatePackage() {
         <GenerateForm formsFields={formsFields} />
         <div className='w-screen'>
           <MultiSelectorFacilities />
+          <Selectors />
         </div>
         <div className='flex flex-row justify-between items-center *:min-w-96'>
           <div className='flex flex-row justify-start items-start'>
