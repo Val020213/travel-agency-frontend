@@ -11,6 +11,7 @@ import { AgencyInfoCard } from '../../agencies/AgencyInfoCard';
 import { facility } from '@/lib/entities';
 import { FixDateFormate, FixTimeFormate } from '@/lib/utils';
 import { HotelInformation } from './HotelInformation';
+import { Tag } from '@/components/ui/tokens/Tag';
 
 export async function TouristPackageInformationTab({ id }: { id: number }) {
   const touristPackage = await GetPackagesByID(id);
@@ -116,11 +117,11 @@ export async function TouristPackageInformationTab({ id }: { id: number }) {
               <h2 className='text-3xl text-gray-800 dark:text-extends-darker-blue-200'>
                 Facilidades
               </h2>
+              <div className='flex flex-wrap gap-3 w-1/3'>
               {facilities.map((facility, index) => (
-                <div key={index} className='w-fit rounded-full dark:text-white p-2 bg-blue-50 shadow-md dark:bg-blue-500'>
-                  <p>{facility.description}</p>
-                </div>
+                <Tag key={index} text={facility.description} />
               ))}
+              </div>
             </div>
           )}
         </div>
