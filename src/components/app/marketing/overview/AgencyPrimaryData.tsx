@@ -1,7 +1,7 @@
 import { agency } from '@/lib/entities';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FetchAgencyNumberOfReservations, FetchAgencyTotalAmount } from '@/lib/actions/marketing/marketing';
-
+import ExcelExport from './statistics';
 export async function AgencyPrimaryData({ agency }: { agency: agency }) {
   const data = (agency.id);
   const reservations = await FetchAgencyNumberOfReservations();
@@ -26,6 +26,7 @@ export async function AgencyPrimaryData({ agency }: { agency: agency }) {
           <p className='text-sm font-medium'>CUP</p>
         </CardContent>
       </Card>
+      <ExcelExport endpoint="http://127.0.0.1:8000/agency/agency-balance/4?export=excel" title ="agency balance"/>
     </div>
   );
 }

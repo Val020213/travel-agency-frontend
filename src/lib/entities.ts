@@ -74,6 +74,8 @@ export type tourist = entity & {
   phone : string;
   email : string;
   nationality: string;
+  email: string,
+  reservationTotal?: string
 };
 
 export type loginTokenPost = {
