@@ -10,7 +10,7 @@ import {
 } from '../../../marketing/components/GenerateForm';
 
 
-export function ExtendedInputPackages() {
+export function ExtendedInputReservation() {
   return (
     <div className='flex flex-col gap-4 py-16 relative'>
       <AmountOfPeople />

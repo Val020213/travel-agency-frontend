@@ -18,6 +18,11 @@ import Image from 'next/image';
 
 export async function HotelInformation({ id }: { id: number }) {
   const hotels = await GetHotelsByExcursionID(id);
+
+  if (!hotels || hotels.length < 1) {
+    return
+  }
+
   return (
     <div className='flex flex-col gap-4'>
       <h2 className='text-3xl'>Hoteles asociados</h2>

@@ -1,19 +1,10 @@
 'use server';
 
-import { date, z } from 'zod';
+import { z } from 'zod';
 import { redirect } from 'next/navigation';
-import { excursionReservation } from '../../entities';
-import { touristPackageReservation } from '../../entities';
 import { revalidatePath } from 'next/cache';
-import { db } from '@/lib/utils';
 
-type ExcursionReservationFormState = {};
-
-type TouristPackageReservationFormState = {};
-
-export async function CreateExcursionReservation() {}
-
-const CreateTouristPackageSchema = z.object({
+const CreateReservationSchema = z.object({
   touristID: z.string({
     invalid_type_error: 'id invalido de turista',
     required_error: 'Introduce un turista',
@@ -22,15 +13,17 @@ const CreateTouristPackageSchema = z.object({
     invalid_type_error: 'cantidad de personas invalida',
     required_error: 'Introduce una cantidad de personas',
   }),
-  airline: z.string({
-    invalid_type_error: 'aerolinea invalida',
-    required_error: 'Introduce una aereolinea',
-  }).min(1, {
-    message: 'Parece que ha ocurrido un error, escoge una aerolinea valida',
-  })
+  airline: z
+    .string({
+      invalid_type_error: 'aerolinea invalida',
+      required_error: 'Introduce una aereolinea',
+    })
+    .min(1, {
+      message: 'Parece que ha ocurrido un error, escoge una aerolinea valida',
+    }),
 });
 
-export type TouristPackageState = {
+export type TouristReservationState = {
   message?: string;
   errors?: {
     touristID?: string[];
@@ -41,12 +34,10 @@ export type TouristPackageState = {
 
 export async function CreateTouristPackageReservation(
   packageID: number,
-  prevState: TouristPackageState,
+  prevState: TouristReservationState,
   formData: FormData
-): Promise<TouristPackageState> {
-
-
-  const validatedFields = CreateTouristPackageSchema.safeParse({
+): Promise<TouristReservationState> {
+  const validatedFields = CreateReservationSchema.safeParse({
     touristID: formData.get('touristID'),
     amountOfPeople: formData.get('amountOfPeople'),
     airline: formData.get('airline'),
@@ -105,54 +96,15 @@ export async function CreateTouristPackageReservation(
   };
 }
 
-const FormSchema = z.object({
-  id: z.string(),
-  image: z.string(),
-  name: z.string({
-    invalid_type_error: 'invalid_type_error',
-    required_error: 'Introduce un nombre para la agencia',
-  }),
-  fax: z.string({
-    invalid_type_error: 'invalid_type_error',
-    required_error: 'Introduce un número de fax',
-  }),
-  address: z.string({
-    invalid_type_error: 'invalid_type_error',
-    required_error: 'Introduce una dirección',
-  }),
-  email: z
-    .string({
-      invalid_type_error: 'invalid_type_error',
-      required_error: 'Introduce un correo electrónico',
-    })
-    .email({
-      message: 'Introduce un correo electrónico válido',
-    }),
-});
-
-export type AgencyFormState = {
-  message?: string;
-  errors?: {
-    image?: string[];
-    name?: string[];
-    fax?: string[];
-    address?: string[];
-    email?: string[];
-  };
-};
-
-const AgencySchema = FormSchema.omit({ id: true });
-
-export async function CreateAgencyAction(
-  prevState: AgencyFormState,
+export async function CreateTouristExcursionReservation(
+  excursionID: number,
+  prevState: TouristReservationState,
   formData: FormData
-) {
-  const validatedFields = AgencySchema.safeParse({
-    name: formData.get('name') as string,
-    fax: formData.get('fax') as string,
-    address: formData.get('address') as string,
-    email: formData.get('email') as string,
-    image: formData.get('image') as string,
+): Promise<TouristReservationState> {
+  const validatedFields = CreateReservationSchema.safeParse({
+    touristID: formData.get('touristID'),
+    amountOfPeople: formData.get('amountOfPeople'),
+    airline: formData.get('airline'),
   });
 
   if (!validatedFields.success) {
@@ -162,36 +114,48 @@ export async function CreateAgencyAction(
     };
   }
 
-  const { name, fax, address, email, image } = validatedFields.data;
+  const { touristID, amountOfPeople, airline } = validatedFields.data;
+
   const data = {
-    name: name,
-    address: address,
-    fax_number: fax,
-    email: email,
-    photo_url: image,
+    excursion_id: excursionID,
+    tourist_id: touristID,
+    amount_of_people: amountOfPeople,
+    air_line: airline,
+    reservation_date: new Date().getDate(),
   };
+
   try {
-    const response = await fetch('http://127.0.0.1:8000/agency/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      'http://127.0.0.1:8000/excursion_reservation/create',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    );
 
     if (!response.ok) {
+      const text = await response.text();
       return {
-        message: response.statusText,
+        message: text,
         errors: {},
       };
     }
+
+    revalidatePath('/');
   } catch (error) {
     console.log(error);
     return {
-      message: 'Error al crear la agencia',
+      message: 'Error al crear la reserva',
       errors: {},
     };
   }
 
-  revalidatePath('/admin/agencies');
+  redirect('/');
+  return {
+    message: 'Reserva creada exitosamente',
+    errors: {},
+  };
 }

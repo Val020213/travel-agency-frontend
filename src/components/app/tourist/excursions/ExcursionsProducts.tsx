@@ -54,7 +54,7 @@ export function ExcursionProducts() {
               '.'
             }
             image={excursion.image}
-            href={'/tourist/payment/excursion/' + excursion.id + '?type=excursion'}
+            href={'/tourist/payment/excursion/' + excursion.id }
           />
         ))}
          <ContinueCard onClick={() => {setLimit(limit + 10)}} />

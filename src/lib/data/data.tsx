@@ -89,14 +89,6 @@ export async function FetchCountries(): Promise<string[]> {
   return countries;
 }
 
-export function validateImagePath(image: string) {
-  if (image && image.startsWith('https://')) {
-    return image;
-  }
-  const defaultImage: string = require('@/assets/defaultImage.png');
-  return defaultImage;
-}
-
 export async function GetAgencyByID(id: number): Promise<agency> {
   noStore();
   try {
@@ -114,7 +106,7 @@ export async function GetAgencyByID(id: number): Promise<agency> {
       email: data.email,
       fax: data.fax_number,
       id: data.id,
-      image: validateImagePath(data.photo_url),
+      image: data.photo_url,
     };
 
     return agencyData;
@@ -125,10 +117,15 @@ export async function GetAgencyByID(id: number): Promise<agency> {
   return {} as agency;
 }
 
-export async function FetchAgencies(skip : number = 0, limit: number = 10000): Promise<agency[]> {
+export async function FetchAgencies(
+  skip: number = 0,
+  limit: number = 10000
+): Promise<agency[]> {
   noStore();
   try {
-    const response = await fetch(`http://127.0.0.1:8000/agency/list?skip=${skip}&limit=${limit}`);
+    const response = await fetch(
+      `http://127.0.0.1:8000/agency/list?skip=${skip}&limit=${limit}`
+    );
 
     if (!response.ok) {
       // console.log('Failed to fetch products');
@@ -144,7 +141,7 @@ export async function FetchAgencies(skip : number = 0, limit: number = 10000): P
         address: agency.address,
         fax: agency.fax_number,
         email: agency.email,
-        image: validateImagePath(agency.photo_url),
+        image: agency.photo_url,
       };
     });
 
@@ -197,7 +194,7 @@ export async function FetchFilteredAgencies(
         address: agency.address,
         fax: agency.fax_number,
         email: agency.email,
-        image: validateImagePath(agency.photo_url),
+        image: agency.photo_url,
       };
     });
 
@@ -354,7 +351,7 @@ export async function GetHotelByID(id: number): Promise<hotel> {
       name: data.name,
       address: data.address,
       category: data.category,
-      image: validateImagePath(data.photo_url),
+      image: data.photo_url,
       id: data.id,
     };
 
@@ -412,7 +409,7 @@ export async function FetchExcursions(
           arrivalTime: excursion.arrival_hour,
           arrivalLocation: excursion.arrival_place,
           price: excursion.price,
-          image: validateImagePath(excursion.photo_url),
+          image: excursion.photo_url,
         };
       }
     );
@@ -484,7 +481,7 @@ export async function GetExcursionByID(id: number): Promise<excursion> {
       arrivalTime: data.arrival_hour,
       arrivalLocation: data.arrival_place,
       price: data.price,
-      image: validateImagePath(data.image),
+      image: data.photo_url,
     };
     return excursionData;
   } catch (error) {
@@ -661,7 +658,6 @@ export async function FetchFacilitiesPages(
   return 0;
 }
 
-
 export async function FetchPackages(
   query: string,
   currentPage: number,
@@ -669,8 +665,9 @@ export async function FetchPackages(
 ): Promise<touristPackage[]> {
   noStore();
   try {
-
-    const response = await fetch(`http://127.0.0.1:8000/package/list?limit=${ITEMS_PER_PAGE}&skip=0`);
+    const response = await fetch(
+      `http://127.0.0.1:8000/package/list?limit=${ITEMS_PER_PAGE}&skip=0`
+    );
 
     if (!response.ok) {
       return [];
@@ -701,7 +698,7 @@ export async function FetchPackages(
         duration: touristPackage.duration,
         agencyID: touristPackage.agency_id,
         excursionID: touristPackage.extended_excursion_id,
-        image: validateImagePath(touristPackage.photo_url),
+        image: touristPackage.photo_url,
       };
     });
 
@@ -773,7 +770,7 @@ export async function GetPackagesByID(packageID: number) {
       duration: data.duration,
       agency_id: data.agency_id,
       extended_excursion_id: data.extended_excursion_id,
-      image: validateImagePath(data.photo_url),
+      image: data.photo_url,
     };
 
     return touristPackage;
@@ -820,7 +817,7 @@ export async function GetFacilitiesByPackageId(
   packageID: number
 ): Promise<facility[]> {
   try {
-    db(packageID)
+    db(packageID);
     const response = await fetch(
       `http://127.0.0.1:8000/facility/package_facilities/${packageID}`
     );
