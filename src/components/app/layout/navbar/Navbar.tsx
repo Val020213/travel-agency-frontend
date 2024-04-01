@@ -4,7 +4,7 @@ import { Logo, LogoEnterprise } from '@/components/app/layout/navbar/Logo';
 import { SearchBar } from '@/components/app/layout/navbar/SearchBar';
 import { UserSection } from '@/components/app/layout/navbar/UserSection';
 import { Switch } from '@/components/app/layout/navbar/ThemeSwitch';
-import { Categories, EnterpriseCategories, AdminCategories } from './Categories';
+import { Categories, EnterpriseCategories, AdminCategories, AgentCategories } from './Categories';
 import { SearchBarMobile } from './SearchBarMobile';
 
 export function NavbarContainer({ children }: { children: ReactNode }) {
@@ -81,6 +81,10 @@ export async function AdministrativeNavbarConstructor({ categoriesComponent }: {
       </div>
     </NavbarContainer>
   )
+}
+
+export async function AgentNavbar() {
+  return <AdministrativeNavbarConstructor categoriesComponent={<AgentCategories />} />;
 }
 
 export async function EnterpriseNavbar() {

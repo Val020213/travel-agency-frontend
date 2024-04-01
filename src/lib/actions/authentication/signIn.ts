@@ -97,6 +97,6 @@ export async function ValidateUserAction(
 const MapperRolAddress: Record<string, string> = {
   admin: '/admin',
   marketing: '/marketing',
-  agent: '/',
+  agent: '/agent',
   tourist: '/',
 };

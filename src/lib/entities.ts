@@ -55,6 +55,7 @@ export type agent = entity & {
   username: string;
   token: string;
   rol: rol;
+  agencyID: number;
 };
 
 export type touristPackage = entity &

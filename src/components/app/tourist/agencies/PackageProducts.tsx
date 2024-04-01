@@ -46,7 +46,7 @@ export function AgencyPackageProducts({agency_id} : {agency_id : number}) {
             title={'Paquete turístico de ' + touristPackage.duration + ' días'}
             description={touristPackage.description}
             image={touristPackage.image}
-            href={'/tourist/payment/package/' + touristPackage.id}
+            href={'/agent/payment/package/' + touristPackage.id}
           />
         ))}
         <ContinueCard onClick={() => {setLimit(limit + 10)}} />

@@ -5,6 +5,7 @@ import {
   IconBackpack,
   IconReportAnalytics,
   IconSquareRoundedPlus,
+  IconPlaneInflight,
 } from '@tabler/icons-react';
 
 import { category } from './definitions';
@@ -49,6 +50,14 @@ export const enterpriseCategories: category[] = [
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
 ];
+
+export const agentCategories: category[] = [
+  {
+    name: 'Agencia',
+    href: '/agent',
+    icon: <IconPlaneInflight size={24} strokeWidth={1.5} />,
+  }
+]
 
 export const adminCategories: category[] = [
   {

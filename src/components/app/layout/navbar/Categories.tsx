@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { category } from '@/lib/definitions';
-import { adminCategories, categories, enterpriseCategories } from '@/lib/dataComponents';
+import { adminCategories, agentCategories, categories, enterpriseCategories } from '@/lib/dataComponents';
 
 const CategoriesFactory = ({
   categories,
@@ -61,6 +61,9 @@ export const EnterpriseCategories = () => {
   );
 };
 
+export const AgentCategories = () => {
+  return <CategoriesFactory categories={agentCategories} triggerCls={Trigger} />;
+}
 
 export const AdminCategories = () => {
   return (

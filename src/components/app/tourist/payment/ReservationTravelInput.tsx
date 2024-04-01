@@ -1,8 +1,9 @@
-import { FetchUser } from '@/lib/data/data';
+import { FetchTourists, FetchUser, FetchUsers } from '@/lib/data/data';
 import { UserInfoCard } from './UserInfoCard';
 
 export default async function ReservationTravelInput() {
   const user = await FetchUser();
+  const tourists = await FetchTourists();
   return (
     <div className='flex flex-col gap-16'>
       <h2 className='text-3xl text-gray-800 dark:text-extends-darker-blue-200'>
@@ -15,3 +16,4 @@ export default async function ReservationTravelInput() {
     </div>
   );
 }
+

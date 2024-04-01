@@ -54,7 +54,7 @@ export function AgencyExcursionProducts({ agency_id }: { agency_id: number }) {
               '.'
             }
             image={excursion.image}
-            href={'/tourist/payment/excursion/' + excursion.id}
+            href={'/agent/payment/excursion/' + excursion.id}
           />
         ))}
         <ContinueCard onClick={() => { setLimit(limit + 10) }} />

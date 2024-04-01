@@ -1,15 +1,3 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@radix-ui/react-select';
-import {
-  GenerateForm,
-} from '../../../marketing/components/GenerateForm';
-
-
 export function ExtendedInputReservation() {
   return (
     <div className='flex flex-col gap-4 py-16 relative'>
@@ -80,23 +68,4 @@ export const AmountOfPeople = () => {
       </select>
     </div>
   );
-};
-
-export const Example = () => {
-  const formsFields = [
-    {
-      name: 'Name',
-      placeholder: 'Enter your name',
-    },
-    {
-      name: 'Country',
-      options: [
-        { id: '1', name: 'USA' },
-        { id: '2', name: 'Canada' },
-        { id: '3', name: 'Mexico' },
-      ],
-    },
-  ];
-
-  return <GenerateForm formsFields={formsFields} />;
 };

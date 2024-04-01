@@ -1,6 +1,7 @@
 'use client';
 import {
   AdminNavbar,
+  AgentNavbar,
   EnterpriseNavbar,
   Navbar,
 } from '@/components/app/layout/navbar/Navbar';
@@ -13,11 +14,14 @@ export async function GetLayout({ children }: { children: ReactNode }) {
   const currentPath = usePathname();
 
   function Resolve({ children }: { children: ReactNode }) {
-    if (currentPath.includes('/admin')) {
+    if (currentPath.startsWith('/admin')) {
       return <AdministrativeLayout>{children}</AdministrativeLayout>;
-    } else if (currentPath.includes('/marketing')) {
+    } else if (currentPath.startsWith('/marketing')) {
       return <EnterpriseLayout>{children}</EnterpriseLayout>;
-    } else if (currentPath.includes('/')) {
+    } else if (currentPath.startsWith('/agent')) {
+      return <AgentLayout>{children}</AgentLayout>;
+    }
+    else {
       return <MainLayout>{children}</MainLayout>;
     }
   }
@@ -50,6 +54,19 @@ function EnterpriseLayout({ children }: { children: ReactNode }) {
       <Footer />
     </div>
   );
+}
+
+function AgentLayout({ children }: { children: ReactNode }) {
+  return (
+    <div>
+      <AgentNavbar />
+      <div className='container flex flex-col py-4 sm:py-6 lg:py-16 min-h-dvh mx-auto'>
+        {children}
+      </div>
+      <Footer />
+    </div>
+  );
+
 }
 
 function AdministrativeLayout({ children }: { children: ReactNode }) {

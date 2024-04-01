@@ -5,6 +5,7 @@ import {
   touristPackage,
   user,
   hotel,
+  agent,
 } from '../entities';
 import { ReadSession } from '../actions/session/read';
 import { facility } from '../entities';
@@ -32,6 +33,33 @@ export async function FetchSuggestionCoutries(name: string): Promise<string[]> {
   });
 
   return suggestions;
+}
+
+export async function GetAgentByUserID(
+  userID: number
+): Promise<agent | undefined> {
+  noStore();
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/user/get/${userID}`);
+
+    if (!response.ok) {
+      console.log(response.statusText);
+      return;
+    }
+
+    const data = await response.json();
+    db('data', data);
+    const agentSchema = {
+      id: data.id,
+      username: data.username,
+      token: data.token,
+      rol: data.role,
+      agencyID: data.agency_id,
+    };
+    return agentSchema;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function FetchUser(): Promise<user | undefined> {
@@ -602,6 +630,38 @@ export async function GetExcursionByID(id: number): Promise<excursion> {
   }
 
   return {} as excursion;
+}
+
+export async function FetchTourists(): Promise<tourist[]> {
+  noStore();
+  try {
+    const response = await fetch('http://127.0.0.1:8000/tourist/list');
+
+    if (!response.ok) {
+      console.error('Failed to fetch tourists');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const tourists: tourist[] = data.map((tourist: any) => {
+      return {
+        id: tourist.id,
+        name: tourist.name,
+        username: tourist.username,
+        phone: tourist.phone,
+        email: tourist.email,
+        nationality: tourist.nationality,
+        rol: tourist.role,
+      };
+    });
+
+    return tourists;
+  } catch (error) {
+    console.error('Network Error:', error);
+  }
+
+  return [];
 }
 
 export async function FetchUsers(
