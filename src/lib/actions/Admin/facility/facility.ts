@@ -63,7 +63,8 @@ export async function CreateFacilityAction(
       errors: {},
     };
   }
-  revalidatePath("/admin/facilities")
+  revalidatePath("/admin/facilities");
+  redirect("/admin/facilities");
 }
 
 export async function DeleteFacility(id: number): Promise<void> {
@@ -74,7 +75,8 @@ export async function DeleteFacility(id: number): Promise<void> {
             console.log(response.statusText);
             return;
         }
-  revalidatePath("/admin/facilities")
+  revalidatePath("/admin/facilities");
+  redirect("/admin/facilities");
     } catch {
         console.log("Error de conexión con la base de datos");
     }
