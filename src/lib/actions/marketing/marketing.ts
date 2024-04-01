@@ -2,8 +2,7 @@ import { GetAgencyByID } from "@/lib/data/data";
 import { ReadSession } from "../session/read";
 import { agency, agent, tourist, touristPackage, excursion } from "@/lib/entities";
 import { unstable_noStore as noStore } from "next/cache";
-import { validateImagePath } from "@/lib/data/data";
-import { Primitive } from "zod";
+import { db } from "@/lib/utils";
 
 const session = await ReadSession();
 // const currentUserID = JSON.parse(session).id;
@@ -186,7 +185,7 @@ export async function FetchPackagesInAgency(
         description: touristPackage.description,
         duration: touristPackage.duration,
         excursionID: touristPackage.extended_excursion_id,
-        image: validateImagePath(touristPackage.photo_url),
+        image: (touristPackage.photo_url),
       };
     });
 
@@ -283,7 +282,7 @@ export async function FetchExtendedExcursions(
           arrivalTime: excursion.arrival_hour,
           arrivalLocation: excursion.arrival_place,
           price: excursion.price,
-          image: validateImagePath(excursion.photo_url),
+          image: excursion.photo_url,
         };
       }
     );
@@ -337,3 +336,5 @@ export async function FetchExtendedExcursionsPages(
   }
   return 0;
 }
+
+

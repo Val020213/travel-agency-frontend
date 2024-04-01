@@ -13,6 +13,7 @@ import { excursion } from '@/lib/entities';
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '@/components/ui/ContinueCard';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function AgencyExcursionProducts({ agency_id }: { agency_id: number }) {
   const [limit, setLimit] = useState<number>(10)
@@ -23,7 +24,8 @@ export function AgencyExcursionProducts({ agency_id }: { agency_id: number }) {
       setData(excursion);
     });
   },[agency_id, limit])
-
+  const currentPathname = usePathname();
+  const redir = currentPathname.startsWith('/agent') ? '/agent/payment/excursion/' : '/tourist/payment/excursion/'
   return (
     <div className='flex flex-col gap-8'>
       <Breadcrumb>
@@ -54,7 +56,7 @@ export function AgencyExcursionProducts({ agency_id }: { agency_id: number }) {
               '.'
             }
             image={excursion.image}
-            href={'/agent/payment/excursion/' + excursion.id}
+            href={redir + excursion.id}
           />
         ))}
         <ContinueCard onClick={() => { setLimit(limit + 10) }} />

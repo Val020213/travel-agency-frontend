@@ -146,17 +146,21 @@ export async function GetAgencyByID(id: number): Promise<agency> {
 }
 // http://127.0.0.1:8000/excursion/list_related_agencies/{excursion_id}
 
-export async function GetAgencyByExcursionID(excursionID: number): Promise<agency[]> {
+export async function GetAgencyByExcursionID(
+  excursionID: number
+): Promise<agency[]> {
   noStore();
   try {
-    const response = await fetch(`http://127.0.0.1:8000/excursion/list_related_agencies/${excursionID}`)
+    const response = await fetch(
+      `http://127.0.0.1:8000/excursion/list_related_agencies/${excursionID}`
+    );
 
     if (!response.ok) {
       console.log(response.statusText);
       return [];
     }
 
-    const data = await response.json()
+    const data = await response.json();
 
     const agencies: agency[] = data.map((agency: any) => {
       return {
@@ -169,15 +173,14 @@ export async function GetAgencyByExcursionID(excursionID: number): Promise<agenc
       };
     });
 
-    return agencies
-
-  }
-  catch (error) {
-    console.log(error)
+    return agencies;
+  } catch (error) {
+    console.log(error);
   }
 
-  return []
+  return [];
 }
+
 
 export async function FetchAgencies(
   skip: number = 0,
@@ -208,6 +211,48 @@ export async function FetchAgencies(
     });
 
     return agencies;
+  } catch {
+    console.log('Error');
+    return [];
+  }
+}
+
+
+
+export async function FetchExtended(
+  skip: number = 0,
+  limit: number = 10000
+): Promise<excursion[]> {
+  noStore();
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000/extended_excursion/list`
+    );
+
+    if (!response.ok) {
+      // console.log('Failed to fetch products');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const excursions: excursion[] = data.map(
+      (excursion: any) => {
+        return {
+          id: excursion.id,
+          departureDate: excursion.departure_day,
+          departureTime: excursion.departure_hour,
+          departureLocation: excursion.departure_place,
+          arrivalDate: excursion.arrival_day,
+          arrivalTime: excursion.arrival_hour,
+          arrivalLocation: excursion.arrival_place,
+          price: excursion.price,
+          image: excursion.photo_url,
+        };
+      }
+    );
+
+    return excursions;
   } catch {
     console.log('Error');
     return [];
@@ -1101,4 +1146,3 @@ export async function GetFacilitiesByPackageId(
   }
   return [];
 }
-
