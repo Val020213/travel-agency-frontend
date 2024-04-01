@@ -23,32 +23,30 @@ const rolAddress = {
 export async function middleware(request: NextRequest) {
   const user = await FetchUser();
   const url = request.nextUrl;
-  if (request.nextUrl.pathname.startsWith('/tourist')) {
-    if (touristAuthRequirePages.some((page) => request.nextUrl.pathname.startsWith(page))) {
-      if (!user)
-        url.pathname = '/';
-        return NextResponse.redirect(url);
-      } else {
-        url.pathname = rolAddress[user?.rol ?? 'null'];
-        return NextResponse.redirect(url);
-      }
+  
+  if(user?.rol  !== 'tourist' && (request.nextUrl.pathname.startsWith('/tourist/profile') || request.nextUrl.pathname.startsWith('/tourist/payment')))
+    {
+      url.pathname = '/'
+      return Response.redirect(url)
     }
   
-  const allowedRoles = {
-    '/agent': 'agent',
-    '/marketing': 'marketing',
-    '/admin': 'admin',
-  };
-
-  for (const [path, role] of Object.entries(allowedRoles)) {
-    if (request.nextUrl.pathname.startsWith(path)) {
-      if (!user) {
-        url.pathname = '/';
-        return NextResponse.redirect(url); // Replace Response with NextResponse
-      } else if (user?.rol !== role) {
-        url.basePath = rolAddress[user.rol] ?? '/';
-        return NextResponse.redirect(url); // Replace Response with NextResponse
-      }
+    if(user?.rol  !== 'agent' && (request.nextUrl.pathname.startsWith('/agent')))
+    {
+      url.pathname = rolAddress[user?.rol ?? 'null'] ?? '/'
+      return Response.redirect(url)
     }
-  }
+
+    if(user?.rol  !== 'marketing' && (request.nextUrl.pathname.startsWith('/marketing')))
+    {
+      url.pathname = rolAddress[user?.rol ?? 'null'] ?? '/'
+      return Response.redirect(url)
+    }
+
+    if(user?.rol  !== 'admin' && (request.nextUrl.pathname.startsWith('/admin')))
+    {
+      url.pathname = rolAddress[user?.rol ?? 'null'] ?? '/'
+      return Response.redirect(url)
+    }
+
+
 }
