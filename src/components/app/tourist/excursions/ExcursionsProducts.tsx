@@ -1,3 +1,4 @@
+'use client'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,9 +12,17 @@ import { FetchExcursions } from '@/lib/data/data';
 import { excursion } from '@/lib/entities';
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '@/components/ui/ContinueCard';
+import { useEffect, useState } from 'react';
 
-export async function ExcursionProducts() {
-  const data = await FetchExcursions('', 1, 1000000);
+export function ExcursionProducts() {
+  const [limit, setLimit] = useState<number>(10)
+  const [data, setData] = useState<excursion[]>([])
+
+  useEffect(() => {
+    FetchExcursions('', 1, limit).then((excursion: excursion[]) => {
+      setData(excursion);
+    });
+  },)
 
   return (
     <div className='flex flex-col gap-8'>
@@ -48,7 +57,7 @@ export async function ExcursionProducts() {
             href={'/tourist/payment/excursion/' + excursion.id + '?type=excursion'}
           />
         ))}
-        <ContinueCard />
+         <ContinueCard onClick={() => {setLimit(limit + 10)}} />
       </LayoutGrid>
     </div>
   );

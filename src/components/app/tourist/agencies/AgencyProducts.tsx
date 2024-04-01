@@ -1,4 +1,4 @@
-
+'use client'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,9 +12,17 @@ import { FetchAgencies } from '@/lib/data/data';
 import { agency } from '@/lib/entities';
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ProductCard } from '@/components/ui/ProductCard';
+import { useEffect, useState } from 'react';
 
-export async function AgencyProducts() {
-  const data : agency[] = await FetchAgencies();
+export function AgencyProducts() {
+  const [limit, setLimit] = useState<number>(10)
+  const [data, setData] = useState<agency[]>([])
+
+  useEffect(() => {
+    FetchAgencies( 1, limit).then((excursion: agency[]) => {
+      setData(excursion);
+    });
+  },)
 
   return (
     <div className='flex flex-col gap-4'>
@@ -45,7 +53,7 @@ export async function AgencyProducts() {
             href={'/agency/' + agency.id}
           />
         ))}
-        <ContinueCard />
+        <ContinueCard onClick={() => {setLimit(limit + 10)}} />
       </LayoutGrid>
     </div>
   );

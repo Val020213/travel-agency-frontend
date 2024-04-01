@@ -4,13 +4,13 @@ import { Airplane } from './tokens/Airplane';
 import { AirplaneHover } from './tokens/AirplaneHover';
 import clsx from 'clsx';
 
-export function ContinueCard() {
+export function ContinueCard({onClick} : {onClick : () => void}) {
   const [hover, setHover] = useState(false);
   return (
     <button
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={() => {}}
+      onClick={onClick}
       className={clsx(
         'rounded-lg shadow-sm',
         'flex flex-col items-center justify-between',
