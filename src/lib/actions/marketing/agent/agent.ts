@@ -3,6 +3,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from 'next/cache';
+import { FetchUser, GetAgentByUserID } from "@/lib/data/data";
 
 const AgentFormSchema = z.object({
  id: z.string(),
@@ -66,23 +67,25 @@ export async function CreateAgentAction(
     };
  }
 
- const { name, username, phone, email, password } =
+ const { name, username, phone, email, password} =
     validatedFields.data;
+ 
+ const user = await FetchUser()
+ const agent = await GetAgentByUserID(user?.id ?? 0)
 
-//  const user = await ReadSession();
-//  const agencyID = user.
  const data = {
     name: name,
     username: username,
     phone: phone,
     email: email,
-    agency_id: 40,
     password: password,
+    agency_id: agent?.agencyID,
+    role: "agent"
  };
 
  try {
    noStore();
-    const response = await fetch(`http://127.0.0.1:8000/user/create/agent/${data.agency_id}`, {
+    const response = await fetch(`http://127.0.0.1:8000/user/create/agent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

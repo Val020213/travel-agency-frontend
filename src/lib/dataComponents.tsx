@@ -40,6 +40,11 @@ export const enterpriseCategories: category[] = [
     icon: <IconReportAnalytics size={24} strokeWidth={1.5} />,
   },
   {
+    name: 'Fines de Semana Extendidos',
+    href: '/marketing/extended',
+    icon: <IconReportAnalytics size={24} strokeWidth={1.5} />,
+  },
+  {
     name: 'Paquetes',
     href: '/marketing/packages',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
@@ -47,11 +52,6 @@ export const enterpriseCategories: category[] = [
   {
     name: 'Agentes',
     href: '/marketing/agents',
-    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
-  },
-  {
-    name: 'Excursiones Extendidas',
-    href: '/marketing/extended',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
 ];

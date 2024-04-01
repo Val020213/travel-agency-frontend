@@ -3,6 +3,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { parse } from "path";
+import { FetchUser, GetAgencyByID, GetAgentByUserID } from "@/lib/data/data";
 
 const PackageSchemaInAgencie = z.object({
   price: z.number(),
@@ -85,11 +86,13 @@ export async function CreatePackageActionInAgencie(
     facilities,
   } = validatedFields.data;
 
+  const user = await FetchUser()
+  const agent = await GetAgentByUserID(user?.id ?? 0)
   const data = {
     price: price,
     description: description,
     duration: duration,
-    agency_id: 40,
+    agency_id: agent?.agencyID,
     extended_excursion_id: extended_excursion_id,
     photo_url: photo_url,
   };
