@@ -1,21 +1,25 @@
-import { GetAgencyByID } from "@/lib/data/data";
-import { ReadSession } from "../session/read";
+import { FetchUser, GetAgencyByID, GetAgentByUserID } from "@/lib/data/data";
 import { agency, agent, tourist, touristPackage, excursion } from "@/lib/entities";
 import { unstable_noStore as noStore } from "next/cache";
-import { db } from "@/lib/utils";
 
-const session = await ReadSession();
-// const currentUserID = JSON.parse(session).id;
+export async function FetchUserAgencyID(): Promise<number> {
+  const user = await FetchUser();
+  const agent = await GetAgentByUserID(user?.id ?? 0);
+  return agent?.agencyID ?? 0;
+}
+
 
 export async function FetchMarketingAgency(): Promise<agency> {
-  const agencia = GetAgencyByID(40); //current IDuserID
+  const agencyID = await FetchUserAgencyID() 
+  const agencia = GetAgencyByID(agencyID); //current IDuserID
   return agencia;
 }
 
 export async function FetchAgencyNumberOfReservations(): Promise<number> {
   try {
+    const agencyID = await FetchUserAgencyID() 
     const response = await fetch(
-      `http://127.0.0.1:8000/agency/agency-balance/40`
+      `http://127.0.0.1:8000/agency/agency-balance/${agencyID}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -30,8 +34,9 @@ export async function FetchAgencyNumberOfReservations(): Promise<number> {
 
 export async function FetchAgencyTotalAmount(): Promise<number> {
   try {
+    const agencyID = await FetchUserAgencyID() 
     const response = await fetch(
-      `http://127.0.0.1:8000/agency/agency-balance/40`
+      `http://127.0.0.1:8000/agency/agency-balance/${agencyID}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -60,8 +65,9 @@ export async function FetchAgencyPrimaryData(
 
 export async function FetchFrecuentlyTourist(): Promise<tourist[]> {
   try {
+    const agencyID = await FetchUserAgencyID() 
     const response = await fetch(
-      `http://127.0.0.1:8000/agency/most_frecuent_tourists/10` //cuando es cero da error
+      `http://127.0.0.1:8000/agency/most_frecuent_tourists/${agencyID}` //cuando es cero da error
     );
     if (response.ok) {
       const data = await response.json();
@@ -82,8 +88,9 @@ export async function FetchFrecuentlyTourist(): Promise<tourist[]> {
 
 export async function FetchExpensivePackages(): Promise<touristPackage[]> {
   try {
+    const agencyID = await FetchUserAgencyID()
     const response = await fetch(
-      `http://127.0.0.1:8000/agency/packages_above_average/40`
+      `http://127.0.0.1:8000/agency/packages_above_average/${agencyID}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -108,7 +115,8 @@ export async function FetchExpensivePackages(): Promise<touristPackage[]> {
 
 export async function FetchAgentsInAgency(): Promise<agent[]> {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/user/list/40`); //consulta aqui
+    const agencyID = await FetchUserAgencyID()
+    const response = await fetch(`http://127.0.0.1:8000/user/list/${agencyID}`); //consulta aqui
     if (response.ok) {
       const data = await response.json();
       const agents: agent[] = data.map((item: any) => {
@@ -127,7 +135,8 @@ export async function FetchAgentsInAgency(): Promise<agent[]> {
 
 export async function FetchTotalAgentsInAgency(): Promise<number> {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/user/list/40`); //!consulta aqui
+    const agencyID = await FetchUserAgencyID() 
+    const response = await fetch(`http://127.0.0.1:8000/user/list/${agencyID}`); //!consulta aqui
     if (response.ok) {
       const data = await response.json();
       const agents: agent[] = data.map((item: any) => {
@@ -155,8 +164,9 @@ export async function FetchPackagesInAgency(
       skip: "0",
       limit: "1000",
     });
+    const agencyID = await FetchUserAgencyID() 
     const response = await fetch(
-      `http://127.0.0.1:8000/package/list_by_agency/40`
+      `http://127.0.0.1:8000/package/list_by_agency/${agencyID}`
     ); //!cambiar
 
     if (!response.ok) {
@@ -207,8 +217,9 @@ export async function FetchPackagesPagesInAgencies(
       skip: "0",
       limit: "1000",
     });
+    const agencyID = await FetchUserAgencyID() 
     const response = await fetch(
-      `http://127.0.0.1:8000/package/list_by_agency/40` //! cambiar
+      `http://127.0.0.1:8000/package/list_by_agency/${agencyID}` //! cambiar
     );
 
     if (!response.ok) {
@@ -247,8 +258,9 @@ export async function FetchExtendedExcursions(
       skip: '0',
       limit: '1000',
     });
+    const agencyID = await FetchUserAgencyID() 
     const response = await fetch(
-      `http://127.0.0.1:8000/agency_excursion/get_weekend_excursions/4`
+      `http://127.0.0.1:8000/agency_excursion/get_weekend_excursions/${agencyID}`
     );
 
     if (!response.ok) {
@@ -305,8 +317,9 @@ export async function FetchExtendedExcursionsPages(
       skip: '0',
       limit: '1000',
     });
+    const agencyID = await FetchUserAgencyID() 
     const response = await fetch(
-      `http://127.0.0.1:8000/agency_excursion/get_weekend_excursions/4`
+      `http://127.0.0.1:8000/agency_excursion/get_weekend_excursions/${agencyID}`
     );
 
     if (!response.ok) {
