@@ -8,7 +8,7 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { ProductCard } from '@/components/ui/ProductCard';
-import { FetchExcursions, FetchExcursionsReservable } from '@/lib/data/data';
+import { FetchExcursionsReservable } from '@/lib/data/data';
 import { excursion } from '@/lib/entities';
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '@/components/ui/ContinueCard';

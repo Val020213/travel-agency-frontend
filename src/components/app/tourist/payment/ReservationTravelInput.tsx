@@ -13,7 +13,12 @@ export default async function ReservationTravelInput() {
       {user?.rol === 'agent' ? (
         <SelectUser />
       ) : (
+        <>
+        <select key={'touristID'} name='touristID' className='hidden'>
+          <option value={user?.id}></option>
+        </select>
         <UserInfoCard userID={user?.id} />
+        </>
       )}
     </div>
   );
