@@ -3,6 +3,8 @@
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import { FetchUser } from '@/lib/data/data';
+import { use } from 'react';
 
 const CreateReservationSchema = z.object({
   touristID: z.string({
@@ -89,7 +91,9 @@ export async function CreateTouristPackageReservation(
     };
   }
 
-  redirect('/');
+  const user = await FetchUser();
+  user?.rol === 'agent' ? redirect('/agent') : redirect('/');
+  
   return {
     message: 'Reserva creada exitosamente',
     errors: {},
@@ -153,7 +157,8 @@ export async function CreateTouristExcursionReservation(
     };
   }
 
-  redirect('/');
+  const user = await FetchUser();
+  user?.rol === 'agent' ? redirect('/agent') : redirect('/');
   return {
     message: 'Reserva creada exitosamente',
     errors: {},

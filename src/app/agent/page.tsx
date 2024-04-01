@@ -1,6 +1,5 @@
 import { AgencyOffersPage } from "@/components/app/tourist/agencies/agencyOffersPage";
 import { FetchUser, GetAgentByUserID } from "@/lib/data/data";
-import { db } from "@/lib/utils";
 import { Suspense } from "react";
 
 export default async function Page() {

@@ -48,7 +48,7 @@ export async function GetAgentByUserID(
     }
 
     const data = await response.json();
-    db('data', data);
+
     const agentSchema = {
       id: data.id,
       username: data.username,
