@@ -1,7 +1,16 @@
 import Image from 'next/image';
 import clsx from 'clsx';
+import { FetchUser, GetTouristByID } from '@/lib/data/data';
 
-export const UserSection = () => {
+export async function UserSection(){
+  const user = await FetchUser();
+  
+  if(!user){
+    return
+  }
+
+  const tourist = await GetTouristByID(user?.id);
+
   return (
     <div className='flex flex-col md:flex-row gap-8 md:gap-6 lg:gap-8 w-full'>
       <div
@@ -30,7 +39,7 @@ export const UserSection = () => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='name'
-            // placeholder={userData.name}
+            placeholder={tourist?.name}
             disabled
           />
         </div>
@@ -42,7 +51,7 @@ export const UserSection = () => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='username'
-            // placeholder={userData.username}
+            placeholder={tourist?.username}
             disabled
           />
         </div>
@@ -54,7 +63,7 @@ export const UserSection = () => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='nacionality'
-            // placeholder={userData.nationality}
+            placeholder={tourist?.nationality}
             disabled
           />
         </div>
@@ -71,7 +80,7 @@ export const UserSection = () => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='email'
-            // placeholder={userData.email}
+            placeholder={tourist?.email}
             disabled
           />
         </div>
@@ -95,7 +104,7 @@ export const UserSection = () => {
             className='md:text-xl border-b border-gray-300  dark:border-gray-400'
             type='text'
             id='telefono'
-            // placeholder={userData.telefono}
+            placeholder={tourist?.phone}
             disabled
           />
         </div>
