@@ -3,7 +3,7 @@ import { PackageProducts } from '@/components/app/tourist/packages/PackageProduc
 import { AgencyProducts } from '@/components/app/tourist/agencies/AgencyProducts';
 import { Suspense } from 'react';
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className='flex flex-col gap-8 md:gap-16 lg-gap-24 py-4'>
  
