@@ -8,21 +8,21 @@ import {
   BreadcrumbPage,
 } from '@/components/ui/breadcrumb';
 import { ProductCard } from '@/components/ui/ProductCard';
-import { FetchExcursions, FetchExcursionsReservable } from '@/lib/data/data';
+import { FetchExcursionsReservableByAgency } from '@/lib/data/data';
 import { excursion } from '@/lib/entities';
 import { LayoutGrid } from '../../layout/LayoutGrid';
 import { ContinueCard } from '@/components/ui/ContinueCard';
 import { useEffect, useState } from 'react';
 
-export function ExcursionProducts() {
+export function AgencyExcursionProducts({ agency_id }: { agency_id: number }) {
   const [limit, setLimit] = useState<number>(10)
   const [data, setData] = useState<excursion[]>([])
 
   useEffect(() => {
-    FetchExcursionsReservable('', 1, limit).then((excursion: excursion[]) => {
+    FetchExcursionsReservableByAgency(agency_id, '', 1, limit).then((excursion: excursion[]) => {
       setData(excursion);
     });
-  },)
+  },[agency_id, limit])
 
   return (
     <div className='flex flex-col gap-8'>
@@ -54,10 +54,10 @@ export function ExcursionProducts() {
               '.'
             }
             image={excursion.image}
-            href={'/tourist/payment/excursion/' + excursion.id }
+            href={'/tourist/payment/excursion/' + excursion.id}
           />
         ))}
-         <ContinueCard onClick={() => {setLimit(limit + 10)}} />
+        <ContinueCard onClick={() => { setLimit(limit + 10) }} />
       </LayoutGrid>
     </div>
   );

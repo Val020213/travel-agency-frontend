@@ -421,6 +421,119 @@ export async function FetchExcursions(
   return [];
 }
 
+export async function FetchExcursionsReservable(
+  query: string,
+  currentPage: number,
+  ITEMS_PER_PAGE: number = 10
+): Promise<excursion[]> {
+  noStore();
+  try {
+    const queryParams = new URLSearchParams({
+      skip: '0',
+      limit: '1000',
+    });
+    const response = await fetch(
+      `http://127.0.0.1:8000/excursion/list_reservable?${queryParams.toString()}`
+    );
+
+    if (!response.ok) {
+      console.error('Failed to fetch excursions');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const filteredExcursions = data.filter((excursion: any) => {
+      return (
+        excursion.departure_place.toLowerCase().includes(query.toLowerCase()) ||
+        excursion.arrival_place.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedExcursions = filteredExcursions.slice(
+      offset,
+      offset + ITEMS_PER_PAGE
+    );
+
+    const excursions: excursion[] = paginatedExcursions.map(
+      (excursion: any) => {
+        return {
+          id: excursion.id,
+          departureDate: excursion.departure_day,
+          departureTime: excursion.departure_hour,
+          departureLocation: excursion.departure_place,
+          arrivalDate: excursion.arrival_day,
+          arrivalTime: excursion.arrival_hour,
+          arrivalLocation: excursion.arrival_place,
+          price: excursion.price,
+          image: excursion.photo_url,
+        };
+      }
+    );
+
+    return excursions;
+  } catch (error) {
+    console.error('Network Error:', error);
+  }
+  return [];
+}
+
+export async function FetchExcursionsReservableByAgency(
+  agency_id: number,
+  query: string,
+  currentPage: number,
+  ITEMS_PER_PAGE: number = 10
+): Promise<excursion[]> {
+  noStore();
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000/excursion/list_reservable/${agency_id}`
+    );
+
+    if (!response.ok) {
+      console.error('Failed to fetch excursions');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const filteredExcursions = data.filter((excursion: any) => {
+      return (
+        excursion.departure_place.toLowerCase().includes(query.toLowerCase()) ||
+        excursion.arrival_place.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedExcursions = filteredExcursions.slice(
+      offset,
+      offset + ITEMS_PER_PAGE
+    );
+
+    const excursions: excursion[] = paginatedExcursions.map(
+      (excursion: any) => {
+        return {
+          id: excursion.id,
+          departureDate: excursion.departure_day,
+          departureTime: excursion.departure_hour,
+          departureLocation: excursion.departure_place,
+          arrivalDate: excursion.arrival_day,
+          arrivalTime: excursion.arrival_hour,
+          arrivalLocation: excursion.arrival_place,
+          price: excursion.price,
+          image: excursion.photo_url,
+        };
+      }
+    );
+
+    return excursions;
+  } catch (error) {
+    console.error('Network Error:', error);
+  }
+  return [];
+}
+
 export async function FetchExcursionsPages(
   query: string,
   ITEMS_PER_PAGE: number = 10
@@ -667,6 +780,59 @@ export async function FetchPackages(
   try {
     const response = await fetch(
       `http://127.0.0.1:8000/package/list?limit=${ITEMS_PER_PAGE}&skip=0`
+    );
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const data = await response.json();
+
+    // Filtrar paquetes basados en la consulta
+    const filteredPackages = data.filter((touristPackage: any) => {
+      return touristPackage.description
+        .toLowerCase()
+        .includes(query.toLowerCase());
+      // return touristPackage.description.toLowerCase().includes(query.toLowerCase());
+      // return touristPackage.description.toLowerCase().includes(query.toLowerCase());
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedPackages = filteredPackages.slice(
+      offset,
+      offset + ITEMS_PER_PAGE
+    );
+
+    const packages = paginatedPackages.map((touristPackage: any) => {
+      return {
+        id: touristPackage.id,
+        price: touristPackage.price,
+        description: touristPackage.description,
+        duration: touristPackage.duration,
+        agencyID: touristPackage.agency_id,
+        excursionID: touristPackage.extended_excursion_id,
+        image: touristPackage.photo_url,
+      };
+    });
+
+    return packages;
+  } catch (error) {
+    console.error('Error de red:', error);
+    // throw new Error('Error al obtener los paquetes.');
+  }
+  return [];
+}
+
+export async function FetchPackagesByAgency(
+  agency_id: number,
+  query: string,
+  currentPage: number,
+  ITEMS_PER_PAGE: number = 10
+): Promise<touristPackage[]> {
+  noStore();
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000/package/list_by_agency/${agency_id}`
     );
 
     if (!response.ok) {

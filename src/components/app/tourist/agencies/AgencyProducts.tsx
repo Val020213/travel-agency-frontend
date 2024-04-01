@@ -50,7 +50,7 @@ export function AgencyProducts() {
               '.'
             }
             image={agency.image}
-            href={'/agency/' + agency.id}
+            href={'/tourist/agencies/' + agency.id}
           />
         ))}
         <ContinueCard onClick={() => {setLimit(limit + 10)}} />
