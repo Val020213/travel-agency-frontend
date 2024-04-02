@@ -28,26 +28,26 @@ export async function Navbar() {
   return (
     <NavbarContainer>
       <div className='flex flex-row justify-between items-center w-full'>
-        <div className='lg:basis-1/4'>
+        <div className='flex flex-row items-center justify-start gap-8'>
           <Logo />
+          <div
+            className={clsx(
+              'hidden lg:flex sm:flex-row justify-start items-center pl-8',
+              'border-l-2 py-2 border-gray-300 dark:border-extends-darker-blue-300',
+              '*:gap-2'
+            )}
+          >
+            <Categories />
+          </div>
         </div>
-        <div className={clsx('hidden', 'lg:block lg:basis-1/2')}>
-          <SearchBar />
-        </div>
-        <div className='flex flex-row justify-end gap-1 md:gap-3 lg:basis-1/4'>
+        <div className='flex flex-row justify-end gap-1 md:gap-3'>
           <Suspense>
             <UserSection />
           </Suspense>
           <Switch />
         </div>
       </div>
-      <div className={clsx('w-full p-1 hidden md:block lg:hidden')}>
-        <SearchBar />
-      </div>
-      <div className='flex flex-row gap-2 justify-between items-center w-full *:md:gap-16'>
-        <Categories />
-        <SearchBarMobile />
-      </div>
+        <Categories className={'lg:hidden'} />
     </NavbarContainer>
   );
 };

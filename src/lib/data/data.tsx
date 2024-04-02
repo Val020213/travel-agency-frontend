@@ -7,6 +7,7 @@ import {
   hotel,
   agent,
   excursionReservation,
+  touristType,
 } from '../entities';
 import { ReadSession } from '../actions/session/read';
 import { facility } from '../entities';
@@ -182,61 +183,62 @@ export async function GetAgencyByExcursionID(
   return [];
 }
 
-export async function FetchExcursionsReservationsByTourist(tourist_id: number): Promise<excursionReservation[]> {
+export async function FetchExcursionsReservationsByTourist(
+  tourist_id: number
+): Promise<excursionReservation[]> {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/tourist/list_excursion_reservations/${tourist_id}`)
+    const response = await fetch(
+      `http://127.0.0.1:8000/tourist/list_excursion_reservations/${tourist_id}`
+    );
 
     if (response.ok) {
-      const data = await response.json()
- 
-      const excursions: excursionReservation[] = data.map(
-        (excursion: any) => {
-          return {
-            excursionID : excursion.excursion_id,
-            agencyID : excursion.agency_id,
-            airline : excursion.air_line,
-            AmountOfPeople : excursion.amount_of_people,
-            touristID : excursion.tourist_id,
-            date : excursion.reservation_date
-          };
-        }
-      );
-      return excursions
-    }
-  }
-  catch (error) {
-    console.log(error)
-  }
+      const data = await response.json();
 
-  return []
-}
-
-
-export async function FetchPackagesReservationsByTourist(tourist_id: number): Promise<excursionReservation[]> {
-  try {
-    const response = await fetch(`http://127.0.0.1:8000/tourist/list_package_reservations/${tourist_id}`)
-
-    if (response.ok) {
-      const data = await response.json()
-      const resevatePackages: excursionReservation[] = data.map((p: any) => {
-
+      const excursions: excursionReservation[] = data.map((excursion: any) => {
         return {
-          excursionID : p.excursion_id,
-          date : p.reservation_date,
-          amountOfPeople : p.amount_of_people,
-          airline : p.air_line,
-        }
-      })
-      return resevatePackages
+          excursionID: excursion.excursion_id,
+          agencyID: excursion.agency_id,
+          airline: excursion.air_line,
+          AmountOfPeople: excursion.amount_of_people,
+          touristID: excursion.tourist_id,
+          date: excursion.reservation_date,
+        };
+      });
+      return excursions;
     }
-  }
-  catch (error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
 
-  return []
+  return [];
 }
 
+export async function FetchPackagesReservationsByTourist(
+  tourist_id: number
+): Promise<excursionReservation[]> {
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000/tourist/list_package_reservations/${tourist_id}`
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      const resevatePackages: excursionReservation[] = data.map((p: any) => {
+        return {
+          excursionID: p.excursion_id,
+          date: p.reservation_date,
+          amountOfPeople: p.amount_of_people,
+          airline: p.air_line,
+        };
+      });
+      return resevatePackages;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return [];
+}
 
 export async function FetchAgencies(
   skip: number = 0,
@@ -273,8 +275,6 @@ export async function FetchAgencies(
   }
 }
 
-
-
 export async function FetchExtended(
   skip: number = 0,
   limit: number = 10000
@@ -292,21 +292,19 @@ export async function FetchExtended(
 
     const data = await response.json();
 
-    const excursions: excursion[] = data.map(
-      (excursion: any) => {
-        return {
-          id: excursion.id,
-          departureDate: excursion.departure_day,
-          departureTime: excursion.departure_hour,
-          departureLocation: excursion.departure_place,
-          arrivalDate: excursion.arrival_day,
-          arrivalTime: excursion.arrival_hour,
-          arrivalLocation: excursion.arrival_place,
-          price: excursion.price,
-          image: excursion.photo_url,
-        };
-      }
-    );
+    const excursions: excursion[] = data.map((excursion: any) => {
+      return {
+        id: excursion.id,
+        departureDate: excursion.departure_day,
+        departureTime: excursion.departure_hour,
+        departureLocation: excursion.departure_place,
+        arrivalDate: excursion.arrival_day,
+        arrivalTime: excursion.arrival_hour,
+        arrivalLocation: excursion.arrival_place,
+        price: excursion.price,
+        image: excursion.photo_url,
+      };
+    });
 
     return excursions;
   } catch {
@@ -842,6 +840,88 @@ export async function FetchUsers(
     // throw new Error('Failed to fetch users.');
   }
   return [];
+}
+
+export async function FetchTouristType(
+  query: string,
+  currentPage: number,
+  ITEMS_PER_PAGE: number = 10
+): Promise<touristType[]> {
+  noStore();
+  try {
+    const queryParams = new URLSearchParams({
+      skip: '0',
+      limit: '1000',
+    });
+    const response = await fetch(
+      `http://127.0.0.1:8000/tourist_type/list?${queryParams.toString()}`
+    );
+
+    if (!response.ok) {
+      console.error('Failed to fetch users');
+      return [];
+    }
+
+    const data = await response.json();
+
+    const filteredUsers = data.filter((tourist_type: any) => {
+      return tourist_type.name.toLowerCase().includes(query.toLowerCase());
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedUsers = filteredUsers.slice(offset, offset + ITEMS_PER_PAGE);
+
+    const touristTypes: touristType[] = paginatedUsers.map(
+      (tourist_type: any) => {
+        return {
+          id: tourist_type.id,
+          name: tourist_type.name,
+        };
+      }
+    );
+    return touristTypes;
+  } catch (error) {
+    console.error('Network Error:', error);
+    // throw new Error('Failed to fetch users.');
+  }
+  return [];
+}
+
+export async function FetchTouristTypePage(
+  query: string,
+  ITEMS_PER_PAGE: number = 10
+): Promise<number> {
+  noStore();
+  try {
+    const queryParams = new URLSearchParams({
+      skip: '0',
+      limit: '1000',
+    });
+    const response = await fetch(
+      `http://127.0.0.1:8000/tourist_type/list?${queryParams.toString()}`
+    );
+
+    if (!response.ok) {
+      console.error('Failed to fetch tourists');
+      return 0;
+    }
+
+    const data = await response.json();
+
+    // Filter tourists based on the query
+    const filteredTourists = data.filter((tourist_type: any) => {
+      return tourist_type.name.toLowerCase().includes(query.toLowerCase());
+    });
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(filteredTourists.length / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.error('Network Error:', error);
+    // throw new Error('Failed to fetch total number of tourists.');
+  }
+  return 0;
 }
 
 export async function FetchUsersPages(

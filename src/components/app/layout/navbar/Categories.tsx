@@ -8,15 +8,17 @@ import { adminCategories, agentCategories, categories, enterpriseCategories } fr
 const CategoriesFactory = ({
   categories,
   triggerCls,
+  className,
 }: {
   categories: category[];
   triggerCls: (href: string) => string;
+  className?: string;
 }) => {
   return (
     <div
       className={clsx(
         'flex flex-row flex-1 min-w-6 w-full justify-start md:justify-center items-center gap-4 md:gap-8',
-        'overflow-x-auto'
+        'overflow-x-auto', className
       )}
     >
       {categories.map((category, index) => (
@@ -36,7 +38,7 @@ const CategoriesFactory = ({
   );
 };
 
-export const Categories = () => {
+export const Categories = ({className} : {className?:string}) => {
   function Trigger(href: string) {
     const currentPath = usePathname();
     return currentPath === href
@@ -44,7 +46,7 @@ export const Categories = () => {
       : 'text-gray-500 dark:text-gray-300 opacity-80 hover:opacity-100';
   }
 
-  return <CategoriesFactory categories={categories} triggerCls={Trigger} />;
+  return <CategoriesFactory categories={categories} triggerCls={Trigger} className={className}/>;
 };
 
 

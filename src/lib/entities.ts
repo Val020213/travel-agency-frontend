@@ -102,4 +102,6 @@ export type touristPackageReservation = reservation & {
   touristPackageID: number;
 };
 
-
+export type touristType = entity & {
+  name : string
+}

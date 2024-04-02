@@ -22,7 +22,7 @@ export function AgencyProducts() {
     FetchAgencies( 1, limit).then((excursion: agency[]) => {
       setData(excursion);
     });
-  },)
+  },[limit])
 
   return (
     <div className='flex flex-col gap-4'>

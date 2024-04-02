@@ -21,8 +21,8 @@ export function ExcursionProducts() {
   useEffect(() => {
     FetchExcursionsReservable('', 1, limit).then((excursion: excursion[]) => {
       setData(excursion);
-    });
-  },)
+    },);
+  },[limit])
 
   return (
     <div className='flex flex-col gap-8'>
