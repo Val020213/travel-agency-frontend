@@ -28,7 +28,7 @@ export default async function Page({
                 <Pagination totalPages={totalPages} />
             </div>
             <Link href="/admin/touristType/create">
-                <Button variant='outline'><p>Crear un nuevo tipo de turista<span className="text-orange-500">Travelix</span></p></Button>
+                <Button variant='outline'><p>Crear un nuevo tipo de turista en <span className="text-orange-500">Travelix</span></p></Button>
             </Link>
             <div className="flex flex-col gap-4">
                 <h2 className='text-2xl font-semibold'>Tipos de Turista en Travelix</h2>

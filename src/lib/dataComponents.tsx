@@ -100,4 +100,9 @@ export const adminCategories: category[] = [
     href: '/admin/packages',
     icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
   },
+  {
+    name: 'Tipos de Turistas',
+    href: '/admin/touristType',
+    icon: <IconSquareRoundedPlus size={24} strokeWidth={1.5} />,
+  },
 ];
