@@ -15,7 +15,6 @@ export async function ReservationSection() {
 
   const packagesReservations = await FetchPackagesReservationsByTourist(tourist.id)
   const excursionReservations = await FetchExcursionsReservationsByTourist(tourist.id)
-  db(packagesReservations)
   const isAgencyTourist = packagesReservations.length >= 1
   return (
     <div className='flex flex-col justify-start item-start gap-6'>

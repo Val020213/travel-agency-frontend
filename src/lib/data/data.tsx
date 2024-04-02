@@ -76,6 +76,29 @@ export async function FetchUser(): Promise<user | undefined> {
   return undefined;
 }
 
+
+export async function GetTouristTypeByID(touristID : number) : Promise<touristType[]>{
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/tourist/list_tourist_types/${touristID}`);
+    if (!response.ok) {
+      console.log(response.statusText);
+      return [];
+    }
+    const data = await response.json();
+    const touristTypes: touristType[] = data.map((touristType: any) => {
+      return {
+        id: touristType.id,
+        name: touristType.name,
+      };
+    });
+    return touristTypes;
+  }
+  catch (error) {
+    console.log(error);
+  }
+  return [];
+}
+
 export async function GetTouristByID(
   userID: number
 ): Promise<tourist | undefined> {
