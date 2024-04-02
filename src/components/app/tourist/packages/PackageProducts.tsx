@@ -22,7 +22,7 @@ export function PackageProducts() {
     FetchPackages('', 1, limit).then((packages: touristPackage[]) => {
       setData(packages);
     });
-  },)
+  },[limit])
 
   return (
     <div className='flex flex-col gap-8'>
