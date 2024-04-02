@@ -1,6 +1,7 @@
 import { EditHotel } from "@/components/app/admin/hotels/EditHotel";
 import { GetHotelByID } from "@/lib/data/data";
 import { hotel } from "@/lib/entities";
+import { fixPath } from "@/lib/utils";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const id = params.id;
@@ -13,7 +14,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 name={hotel.name}
                 address={hotel.address}
                 category={hotel.category}
-                photoUrl={hotel.image}
+                photoUrl={fixPath(hotel.image)}
                 id={hotel.id}
             />
         </section>

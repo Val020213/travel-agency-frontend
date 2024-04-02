@@ -7,6 +7,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { GetHotelsByExcursionID } from '@/lib/data/data';
+import { fixPath } from '@/lib/utils';
 
 import {
   IconMapPin,
@@ -32,8 +33,7 @@ export async function HotelInformation({ id }: { id: number }) {
             <CarouselItem key={index} className='flex flex-col gap-3'>
               <Image
                 src={
-                  hotel.image ??
-                  require('@/assets/defaultImage.png')
+                  fixPath(hotel.image)
                 }
                 alt='hotel image'
                 quality={100}

@@ -63,7 +63,6 @@ export type touristPackage = entity &
   visual & {
     agencyID: number;
     excursionID: number;
-    facilities: facility[];
     description: string;
     duration: number;
   };
@@ -72,7 +71,6 @@ export type tourist = entity & {
   name: string;
   username : string
   phone : string;
-  email : string;
   nationality: string;
   email: string,
   reservationTotal?: string
@@ -91,15 +89,17 @@ export type Date = {
 
 export type reservation = {
   touristID: number;
-  date: Date;
+  airline : string;
+  amountOfPeople : number;
+  date: string;
 };
-
-export type excursionReservation = {
+      
+export type excursionReservation = reservation & {
   excursionID: number;
-  reservation: reservation;
 };
 
-export type touristPackageReservation = {
+export type touristPackageReservation = reservation & {
   touristPackageID: number;
-  reservation: reservation;
 };
+
+
