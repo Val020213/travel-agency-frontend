@@ -5,6 +5,7 @@ import {
 } from "@/lib/actions/Admin/excursion/excursion";
 import { useFormState } from "react-dom";
 import { ContinueButton } from "../../layout/navbar/modal/ContinueButton";
+import { MultiSelectorHotel } from "./MultiSelectorHotel";
 
 export async function EditExcursion({
   departureLocation,
@@ -98,7 +99,7 @@ export async function EditExcursion({
         </label>
         <input
           className="md:text-xl border-b border-gray-300 dark:border-gray-400"
-          type="text"
+          type="time"
           name="departureTime"
           placeholder={departureTime}
         />
@@ -112,28 +113,12 @@ export async function EditExcursion({
         </label>
         <input
           className="md:text-xl border-b border-gray-300 dark:border-gray-400"
-          type="text"
+          type="time"
           name="arrivalTime"
           placeholder={arrivalTime}
         />
       </div>
       
-        <div className="flex flex-col text-base leading-6 gap-2">
-          <label
-            className="text-gray-300 dark:text-extends-darker-blue-300"
-            htmlFor="hotelID"
-          >
-            ID del hotel
-          </label>
-          <input
-            className="md:text-xl border-b border-gray-300 dark:border-gray-400"
-            type="text"
-            name="hotelID"
-            placeholder={String(hotelID)}
-          />
-        </div>
-
-       
         <div className="flex flex-col text-base leading-6 gap-2">
           <label
             className="text-gray-300 dark:text-extends-darker-blue-300"
@@ -149,6 +134,7 @@ export async function EditExcursion({
           />
         </div>
       
+        {/* <MultiSelectorHotel /> */}
 
       <div className="flex flex-row justify-between items-center *:min-w-96">
         <div className="flex flex-row justify-start items-start">
