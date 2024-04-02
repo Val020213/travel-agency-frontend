@@ -4,6 +4,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { fixFormatDate } from '@/lib/utils';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -67,11 +68,14 @@ export async function CreateExcursionAction(
   });
 
   const hotels = formData.getAll('hotel');
-  const associated_hotels = hotels.map((hotelID) => {
+  const dates = formData.getAll('dateHotel1');
+  const dates2 = formData.getAll('dateHotel2');
+
+  const associated_hotels = hotels.map((hotelID, index) => {
     return {
       hotel_id: hotelID,
-      arrival_date: new Date().toISOString(),
-      departure_date: new Date().toISOString(),
+      arrival_date: fixFormatDate(dates[index].toString()),
+      departure_date: fixFormatDate(dates2[index].toString()),
     };
   });
 
@@ -124,8 +128,9 @@ export async function CreateExcursionAction(
     );
 
     if (!response.ok) {
+      const text = await response.text();
       return {
-        message: response.statusText,
+        message: text,
         errors: {},
       };
     }

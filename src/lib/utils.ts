@@ -61,3 +61,8 @@ export function fixPath(path?:string){
   const defaultPAth = require('@/assets/defaultImage.png')
   return defaultPAth
 }
+
+export function fixFormatDate(date: string){
+  'dd:mm:yyyy -> yyyy:mm:dd'
+  return date.split(':').reverse().join(':')
+}

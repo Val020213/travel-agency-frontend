@@ -12,6 +12,7 @@ export type IFormField = {
 
 export type IFormInput = IFormField & {
   placeholder: string;
+  type?: string;
 };
 
 export type IOption = IFormField & {
@@ -43,7 +44,7 @@ export function GenerateForm({
               <input
                 required
                 className='md:text-xl border-b border-gray-300 dark:border-gray-400'
-                type='text'
+                type={(field as IFormInput).type || 'text'}
                 name={field.name}
                 placeholder={(field as IFormInput).placeholder}
               />

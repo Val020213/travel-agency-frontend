@@ -6,9 +6,11 @@ import { ReactNode, useState } from 'react';
 export function Menu({
   placeholder,
   children,
+  className,
 }: {
   placeholder: string;
   children: ReactNode;
+  className?: string;
 }) {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -41,10 +43,11 @@ export function Menu({
           'border',
           'border-gray-200 dark:border-extends-darker-blue-950',
           'p-2',
-          'w-full',
+          'w-auto',
           {
             hidden: !open,
-          }
+          },
+          className
         )}
       >
         {children}
