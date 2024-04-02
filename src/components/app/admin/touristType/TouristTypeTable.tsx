@@ -38,6 +38,7 @@ export async function TouristTypeTable({
         <TableBody>
           {touristType.map((tt) => (
             <TableRow key={tt.id}>
+              <TableCell>#{tt.id}</TableCell>
               <TableCell>{tt.name}</TableCell>
               <TableCell className='flex flex-row gap-1'>
                 <form action={DeleteAction(tt.id)}>
