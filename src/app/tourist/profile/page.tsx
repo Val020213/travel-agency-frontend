@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import { UserSection } from '@/components/app/tourist/profile/UserSection';
 import { ReservationSection } from '../../../components/app/tourist/profile/ReservationSection';
+import { TouristTypeSection } from '@/components/app/tourist/profile/TouristTypeSection';
+import { Suspense } from 'react';
 export default function Page() {
 
   return (
@@ -15,8 +17,11 @@ export default function Page() {
       >
         Cuenta de usuario
       </div>
-      <UserSection />
-      <ReservationSection />
+      <Suspense>
+        <UserSection />
+        <TouristTypeSection />
+        <ReservationSection />
+      </Suspense>
     </div>
   );
 }

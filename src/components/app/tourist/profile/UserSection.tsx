@@ -4,13 +4,13 @@ import { FetchUser, GetTouristByID } from '@/lib/data/data';
 
 export async function UserSection(){
   const user = await FetchUser();
-  
   if(!user){
     return
   }
-
+  
   const tourist = await GetTouristByID(user?.id);
-
+  
+  
   return (
     <div className='flex flex-col md:flex-row gap-8 md:gap-6 lg:gap-8 w-full'>
       <div
