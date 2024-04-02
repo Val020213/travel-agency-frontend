@@ -6,6 +6,7 @@ import {
   user,
   hotel,
   agent,
+  excursionReservation,
 } from '../entities';
 import { ReadSession } from '../actions/session/read';
 import { facility } from '../entities';
@@ -179,6 +180,61 @@ export async function GetAgencyByExcursionID(
   }
 
   return [];
+}
+
+export async function FetchExcursionsReservationsByTourist(tourist_id: number): Promise<excursionReservation[]> {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/tourist/list_excursion_reservations/${tourist_id}`)
+
+    if (response.ok) {
+      const data = await response.json()
+ 
+      const excursions: excursionReservation[] = data.map(
+        (excursion: any) => {
+          return {
+            excursionID : excursion.excursion_id,
+            agencyID : excursion.agency_id,
+            airline : excursion.air_line,
+            AmountOfPeople : excursion.amount_of_people,
+            touristID : excursion.tourist_id,
+            date : excursion.reservation_date
+          };
+        }
+      );
+      return excursions
+    }
+  }
+  catch (error) {
+    console.log(error)
+  }
+
+  return []
+}
+
+
+export async function FetchPackagesReservationsByTourist(tourist_id: number): Promise<excursionReservation[]> {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/tourist/list_package_reservations/${tourist_id}`)
+
+    if (response.ok) {
+      const data = await response.json()
+      const resevatePackages: excursionReservation[] = data.map((p: any) => {
+
+        return {
+          excursionID : p.excursion_id,
+          date : p.reservation_date,
+          amountOfPeople : p.amount_of_people,
+          airline : p.air_line,
+        }
+      })
+      return resevatePackages
+    }
+  }
+  catch (error) {
+    console.log(error)
+  }
+
+  return []
 }
 
 

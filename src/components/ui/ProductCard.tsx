@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Tag } from './tokens/Tag';
 import clsx from 'clsx';
+import { fixPath } from '@/lib/utils';
 
 
 type Props = {
@@ -39,7 +40,7 @@ export const ProductCard = ({
         height={600}
         width={800}
         quality={100}
-        src={image ?? require('@/assets/defaultImage.png')}
+        src={fixPath(image)}
         style={{
           aspectRatio: '800/600',
         }}

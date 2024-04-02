@@ -1,7 +1,7 @@
 'use client';
 import { GetExcursionByID } from '@/lib/data/data';
 import { excursion } from '@/lib/entities';
-import { db, FixDateFormate, FixTimeFormate } from '@/lib/utils';
+import { db, FixDateFormate, fixPath, FixTimeFormate } from '@/lib/utils';
 import { IconCalendar, IconMapPin2 } from '@tabler/icons-react';
 import Image from 'next/image';
 import { HotelInformation } from './touristPackage/HotelInformation';
@@ -17,7 +17,7 @@ export async function ExcusionInformationTab({ id }: { id: number }) {
       </h2>
       <Image
         src={
-          excursion.image ?? require('@/assets/defaultImage.png')
+          fixPath(excursion.image)
         }
         alt='foto de la excursion'
         quality={100}

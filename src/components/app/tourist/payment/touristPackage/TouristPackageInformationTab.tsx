@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { IconCalendar, IconMapPin2 } from '@tabler/icons-react';
 import { AgencyInfoCard } from '../../agencies/AgencyInfoCard';
 import { facility } from '@/lib/entities';
-import { FixDateFormate, FixTimeFormate } from '@/lib/utils';
+import { FixDateFormate, fixPath, FixTimeFormate } from '@/lib/utils';
 import { HotelInformation } from './HotelInformation';
 import { Tag } from '@/components/ui/tokens/Tag';
 
@@ -37,7 +37,7 @@ export async function TouristPackageInformationTab({ id }: { id: number }) {
             width={600}
             height={600}
             className='rounded-2xl w-[1200px] h-[600px]'
-            src={touristPackage?.image ?? require('@/assets/defaultImage.png')}
+            src={fixPath(touristPackage?.image)}
           />
           <div className='flex flex-col gap-2'>
             <div className='flex flex-col gap-2'>
@@ -67,7 +67,7 @@ export async function TouristPackageInformationTab({ id }: { id: number }) {
             </h2>
             <Image
               src={
-                extendedExcursion.image ?? require('@/assets/defaultImage.png')
+                fixPath(extendedExcursion.image)
               }
               alt='foto del hotel'
               quality={100}

@@ -53,3 +53,11 @@ export function db(...items: any) {
   console.log(items)
   console.log('================================================================\n\n\n\n\n')
 }
+
+export function fixPath(path?:string){
+  if(path && path !== '' && path.startsWith('https://')){
+    return path
+  }
+  const defaultPAth = require('@/assets/defaultImage.png')
+  return defaultPAth
+}
