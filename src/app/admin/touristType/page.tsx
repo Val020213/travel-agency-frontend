@@ -1,10 +1,10 @@
-import { UsersTable } from "@/components/app/admin/users/UsersTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Suspense } from "react";
 import Search from "@/components/ui/admin/searchBar";
 import { FetchTouristTypePage } from "@/lib/data/data";
 import Pagination from "@/components/ui/admin/pagination";
+import { TouristTypeTable } from "@/components/app/admin/touristType/TouristTypeTable";
 
 export default async function Page({
  searchParams,
@@ -22,7 +22,7 @@ export default async function Page({
         <section className="flex flex-col gap-4 md:gap-12 lg:gap-16">
             <Search placeholder="Buscar tipo de turista..." />
             <Suspense fallback={<div>Cargando Tipo de Turistas ...</div>}>
-                <UsersTable query={query} currentPage={currentPage}/>
+                <TouristTypeTable query={query} currentPage={currentPage}/>
             </Suspense>
             <div className="mt-5 flex w-full justify-center">
                 <Pagination totalPages={totalPages} />

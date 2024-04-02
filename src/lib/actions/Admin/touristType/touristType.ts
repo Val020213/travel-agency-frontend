@@ -2,6 +2,7 @@
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { touristType } from '@/lib/entities';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -20,6 +21,33 @@ export type UserFormState = {
 
 const UserSchema = FormSchema.omit({ id: true });
 
+export async function ValidateTouristTypeNoRepeat(
+  name: string
+): Promise<boolean> {
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000/tourist_type/list?skip=0&limit=1000`
+    );
+
+    if (!response.ok) {
+      console.log(response.statusText);
+      return false;
+    }
+
+    const data = await response.json();
+    const touristTypes: touristType[] = data.map((touristType: any) => ({
+      name: touristType.name,
+    }));
+    const touristType = touristTypes.find(
+      (tt: touristType) => tt.name === name
+    );
+    return touristType === undefined;
+  } catch {
+    console.log('Database Connection Error');
+  }
+  return false;
+}
+
 export async function CreateTouristTypeAction(
   prevState: UserFormState,
   formData: FormData
@@ -36,6 +64,15 @@ export async function CreateTouristTypeAction(
   }
 
   const { name } = validatedFields.data;
+
+  const isValid = await ValidateTouristTypeNoRepeat(name);
+
+  if (!isValid) {
+    return {
+      message: 'El tipo de turista ya existe',
+      errors: {},
+    };
+  }
 
   const data = {
     name: name,

@@ -1,9 +1,9 @@
-import { CreateUser } from "@/components/app/admin/users/CreateUser";
+import { CreateTouristType } from "@/components/app/admin/touristType/CreateTouristType";
 
 export default function Page() {
     return (
         <section>
-            <CreateUser />
+            <CreateTouristType />
         </section>
     );
 }
