@@ -23,8 +23,8 @@ export async function FetchAgencyNumberOfReservations(): Promise<number> {
     );
     if (response.ok) {
       const data = await response.json();
-      const balance = data.map((item: any) => item.reservation_total);
-      return balance;
+      const total = data.map((item: any) => item.reservation_count);
+      return total;
     }
   } catch (e) {
     console.log(e);
